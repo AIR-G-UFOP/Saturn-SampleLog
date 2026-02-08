@@ -13,7 +13,6 @@ class User:
     def addUser(self, f_name, s_name, org, phone, email):
         self.first_name = f_name
         self.surname = s_name
-        self.org = org
         self.phone = phone
         self.email = email
         # Need to generate a unique key for each user
