@@ -81,7 +81,6 @@ class Ui_MainWindow(object):
 "Content App */\n"
 "#contentTopBg{    \n"
 "    background-color: rgb(33, 37, 43);\n"
-"    border-top-radius: 5px;\n"
 "}\n"
 "#contentBottom{\n"
 "    border-top: 3px solid rgb(44, 49, 58);\n"
@@ -107,7 +106,7 @@ class Ui_MainWindow(object):
 "Button */\n"
 "#content .QPushButton {\n"
 "    background-position: left center;\n"
-"   background-repeat: no-repeat;\n"
+"    background-repeat: no-repeat;\n"
 "    border-radius: 5px;    \n"
 "    background-color: rgb(52, 59, 72);\n"
 "    text-align: left;\n"
@@ -277,6 +276,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.btn_newAnalysis)
         self.btn_newReduction = QtWidgets.QPushButton(self.content)
         self.btn_newReduction.setMinimumSize(QtCore.QSize(0, 50))
+        self.btn_newReduction.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap(":/icons/icons/cil-analysis.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_newReduction.setIcon(icon5)

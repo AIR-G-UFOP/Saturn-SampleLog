@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>UserWindow</class>
+ <widget class="QMainWindow" name="UserWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>443</width>
-    <height>477</height>
+    <width>395</width>
+    <height>449</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -67,13 +67,11 @@ Left Menu */
 	background-position: centered;
 	background-repeat: no-repeat;
 }
-#titleLeftApp { font: 63 12pt &quot;AbrilTitlingNarrowW04-Bold&quot;; }
-#titleLeftDescription { font: 8pt &quot;AbrilTitlingNarrowW04-Bold&quot;; color:rgb(255, 85, 85); }
-
-/* Title Menu */
 #titleRightInfo { 
-	padding-left: 10px; 
-}
+	padding-left: 10px;
+	font: 10pt &quot;AbrilTitlingNarrowW04-Bold&quot;;
+ }
+
 #titleLeftApp { font: 63 12pt &quot;AbrilTitlingNarrowW04-Bold&quot;; }
 #titleLeftDescription { font: 8pt &quot;AbrilTitlingNarrowW04-Bold&quot;; color:rgb(255, 85, 85); }
 
@@ -109,23 +107,53 @@ Content App */
 /* /////////////////////////////////////////////////////////////////////////////////////////////////
 Button */
 #content .QPushButton {
-	background-position: left center;
-	background-repeat: no-repeat;
 	border-radius: 5px;	
-	background-color: rgb(52, 59, 72);
-	text-align: left;
-	padding-left: 20px;
+	background-color:#50FA7B;
+	color: rgb(33, 37, 43);
 }
 #content .QPushButton:hover {
-	/*background-color: rgb(43, 50, 61)*/
-	background-color: rgb(57, 65, 80);
 	border: 2px solid rgb(61, 70, 86);
 }
-#content .QPushButton:pressed {	
-	background-color: rgb(35, 40, 49);
-	border: 2px solid rgb(43, 50, 61);
+#content .QPushButton:pressed {
+	border: 2px solid #50FA7B;
 }
-</string>
+
+/*LineEdit */
+#content .QLineEdit {
+	background-color: rgb(52, 59, 72);
+	border-radius: 5px;
+	padding-left: 5px;
+	selection-color: rgb(255, 255, 255);
+	selection-background-color: rgb(255, 121, 198);
+	color: #ffb86c;
+}
+#content .QLineEdit:hover {
+	border: 2px solid rgb(64, 71, 88);
+}
+#content .QLineEdit:focus {
+	border: 2px solid rgb(91, 101, 124);
+}
+
+/*TextEdit */
+#content .QTextEdit {
+	background-color: rgb(52, 59, 72);
+	border-radius: 5px;
+	padding-left: 5px;
+	selection-color: rgb(255, 255, 255);
+	selection-background-color: rgb(255, 121, 198);
+	color: #ffb86c;
+}
+#content .QTextEdit:hover {
+	border: 2px solid rgb(64, 71, 88);
+}
+#content .QTextEdit:focus {
+	border: 2px solid rgb(91, 101, 124);
+}
+
+/*QLabel */
+#content .QLabel {
+	color: rgb(113, 126, 149);
+}</string>
    </property>
    <layout class="QVBoxLayout" name="shadow">
     <property name="spacing">
@@ -193,10 +221,16 @@ Button */
           </property>
           <item>
            <widget class="QFrame" name="contentTopBg">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>50</height>
+              <height>30</height>
              </size>
             </property>
             <property name="frameShape">
@@ -216,7 +250,7 @@ Button */
               <number>0</number>
              </property>
              <property name="rightMargin">
-              <number>10</number>
+              <number>0</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
@@ -240,7 +274,7 @@ Button */
                  <number>0</number>
                 </property>
                 <property name="leftMargin">
-                 <number>10</number>
+                 <number>0</number>
                 </property>
                 <property name="topMargin">
                  <number>0</number>
@@ -255,14 +289,14 @@ Button */
                  <widget class="QFrame" name="topLogoInfo">
                   <property name="minimumSize">
                    <size>
-                    <width>42</width>
-                    <height>42</height>
+                    <width>45</width>
+                    <height>30</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>42</width>
-                    <height>42</height>
+                    <width>45</width>
+                    <height>30</height>
                    </size>
                   </property>
                   <property name="frameShape">
@@ -271,34 +305,45 @@ Button */
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <widget class="QFrame" name="topLogo">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>42</width>
-                     <height>42</height>
-                    </rect>
+                  <layout class="QHBoxLayout" name="horizontalLayout_8">
+                   <property name="spacing">
+                    <number>0</number>
                    </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>42</width>
-                     <height>42</height>
-                    </size>
+                   <property name="leftMargin">
+                    <number>0</number>
                    </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>42</width>
-                     <height>42</height>
-                    </size>
+                   <property name="topMargin">
+                    <number>0</number>
                    </property>
-                   <property name="frameShape">
-                    <enum>QFrame::NoFrame</enum>
+                   <property name="rightMargin">
+                    <number>0</number>
                    </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
+                   <property name="bottomMargin">
+                    <number>0</number>
                    </property>
-                  </widget>
+                   <item>
+                    <widget class="QFrame" name="topLogo">
+                     <property name="minimumSize">
+                      <size>
+                       <width>45</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>45</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Raised</enum>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                 <item>
@@ -309,44 +354,42 @@ Button */
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <widget class="QLabel" name="titleLeftApp">
-                   <property name="geometry">
-                    <rect>
-                     <x>10</x>
-                     <y>8</y>
-                     <width>137</width>
-                     <height>21</height>
-                    </rect>
+                  <layout class="QHBoxLayout" name="horizontalLayout_6">
+                   <property name="spacing">
+                    <number>0</number>
                    </property>
-                   <property name="font">
-                    <font>
-                     <family>AbrilTitlingNarrowW04-Bold</family>
-                     <pointsize>12</pointsize>
-                     <weight>7</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
+                   <property name="leftMargin">
+                    <number>0</number>
                    </property>
-                   <property name="frameShape">
-                    <enum>QFrame::NoFrame</enum>
+                   <property name="topMargin">
+                    <number>0</number>
                    </property>
-                   <property name="text">
-                    <string>SATURN</string>
+                   <property name="rightMargin">
+                    <number>0</number>
                    </property>
-                  </widget>
-                  <widget class="QLabel" name="titleLeftDescription">
-                   <property name="geometry">
-                    <rect>
-                     <x>10</x>
-                     <y>27</y>
-                     <width>91</width>
-                     <height>16</height>
-                    </rect>
+                   <property name="bottomMargin">
+                    <number>0</number>
                    </property>
-                   <property name="text">
-                    <string>Sample Log</string>
-                   </property>
-                  </widget>
+                   <item>
+                    <widget class="QLabel" name="titleRightInfo">
+                     <property name="font">
+                      <font>
+                       <family>AbrilTitlingNarrowW04-Bold</family>
+                       <pointsize>10</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
+                     </property>
+                     <property name="text">
+                      <string>Log new User</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
@@ -363,7 +406,13 @@ Button */
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>50</height>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
                 </size>
                </property>
                <property name="frameShape">
@@ -399,7 +448,7 @@ Button */
                   <property name="maximumSize">
                    <size>
                     <width>35</width>
-                    <height>28</height>
+                    <height>16777215</height>
                    </size>
                   </property>
                   <property name="cursor">
@@ -428,7 +477,7 @@ Button */
                <property name="maximumSize">
                 <size>
                  <width>35</width>
-                 <height>28</height>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="cursor">
@@ -478,92 +527,199 @@ Button */
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout">
+               <layout class="QVBoxLayout" name="verticalLayout_10">
                 <item>
-                 <widget class="QPushButton" name="btn_newUser">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="text">
-                   <string>Log new User</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../resources/resources.qrc">
-                    <normaloff>:/icons/icons/cil-user-a.png</normaloff>:/icons/icons/cil-user-a.png</iconset>
-                  </property>
-                 </widget>
+                 <layout class="QHBoxLayout" name="horizontalLayout_7">
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_2">
+                    <property name="spacing">
+                     <number>2</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="label">
+                      <property name="minimumSize">
+                       <size>
+                        <width>90</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true"/>
+                      </property>
+                      <property name="text">
+                       <string>First name</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="lineEdit_name">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>30</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_9">
+                    <property name="spacing">
+                     <number>2</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="label_2">
+                      <property name="minimumSize">
+                       <size>
+                        <width>90</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Surname</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="lineEdit_surname">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>30</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="btn_newSample">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>50</height>
-                   </size>
+                 <layout class="QVBoxLayout" name="verticalLayout_8">
+                  <property name="spacing">
+                   <number>2</number>
                   </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="text">
-                   <string>Log new Sample</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../resources/resources.qrc">
-                    <normaloff>:/icons/icons/cil-sample.png</normaloff>:/icons/icons/cil-sample.png</iconset>
-                  </property>
-                 </widget>
+                  <item>
+                   <widget class="QLabel" name="label_3">
+                    <property name="minimumSize">
+                     <size>
+                      <width>90</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Organisation</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_org">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="btn_newAnalysis">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>50</height>
-                   </size>
+                 <layout class="QVBoxLayout" name="verticalLayout_6">
+                  <property name="spacing">
+                   <number>2</number>
                   </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="text">
-                   <string>Log new Analysis</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../resources/resources.qrc">
-                    <normaloff>:/icons/icons/cil-troubleshoot.png</normaloff>:/icons/icons/cil-troubleshoot.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>16</width>
-                    <height>16</height>
-                   </size>
-                  </property>
-                 </widget>
+                  <item>
+                   <widget class="QLabel" name="label_4">
+                    <property name="minimumSize">
+                     <size>
+                      <width>90</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Email</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_email">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="btn_newReduction">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>50</height>
-                   </size>
+                 <layout class="QVBoxLayout" name="verticalLayout_4">
+                  <property name="spacing">
+                   <number>2</number>
                   </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
+                  <item>
+                   <widget class="QLabel" name="label_5">
+                    <property name="minimumSize">
+                     <size>
+                      <width>90</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Phone number</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_phone">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_7">
+                  <property name="spacing">
+                   <number>2</number>
                   </property>
-                  <property name="text">
-                   <string>Log new Data Reduction</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../resources/resources.qrc">
-                    <normaloff>:/icons/icons/cil-analysis.png</normaloff>:/icons/icons/cil-analysis.png</iconset>
-                  </property>
-                 </widget>
+                  <item>
+                   <widget class="QLabel" name="label_6">
+                    <property name="minimumSize">
+                     <size>
+                      <width>90</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Address</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QTextEdit" name="textEdit_address">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                 <item>
                  <spacer name="verticalSpacer">
@@ -579,88 +735,20 @@ Button */
                  </spacer>
                 </item>
                 <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <layout class="QHBoxLayout" name="horizontalLayout_12">
                   <item>
-                   <widget class="QPushButton" name="btn_UserList">
+                   <widget class="QPushButton" name="btn_loguser">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>50</height>
+                      <height>30</height>
                      </size>
                     </property>
                     <property name="cursor">
                      <cursorShape>PointingHandCursor</cursorShape>
                     </property>
                     <property name="text">
-                     <string>Open User list</string>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../resources/resources.qrc">
-                      <normaloff>:/icons/icons/cil-groups.png</normaloff>:/icons/icons/cil-groups.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="btn_sampleList">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>50</height>
-                     </size>
-                    </property>
-                    <property name="cursor">
-                     <cursorShape>PointingHandCursor</cursorShape>
-                    </property>
-                    <property name="text">
-                     <string>Open Sample list</string>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../resources/resources.qrc">
-                      <normaloff>:/icons/icons/cil-sample.png</normaloff>:/icons/icons/cil-sample.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_7">
-                  <item>
-                   <widget class="QPushButton" name="btn_analysisList">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>50</height>
-                     </size>
-                    </property>
-                    <property name="cursor">
-                     <cursorShape>PointingHandCursor</cursorShape>
-                    </property>
-                    <property name="text">
-                     <string>Open Analysis list</string>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../resources/resources.qrc">
-                      <normaloff>:/icons/icons/cil-troubleshoot.png</normaloff>:/icons/icons/cil-troubleshoot.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="btn_reductionList">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>50</height>
-                     </size>
-                    </property>
-                    <property name="cursor">
-                     <cursorShape>PointingHandCursor</cursorShape>
-                    </property>
-                    <property name="text">
-                     <string>Open Data Reduction list</string>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../resources/resources.qrc">
-                      <normaloff>:/icons/icons/cil-analysis.png</normaloff>:/icons/icons/cil-analysis.png</iconset>
+                     <string>Log User</string>
                     </property>
                    </widget>
                   </item>
@@ -674,7 +762,7 @@ Button */
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>40</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -713,6 +801,18 @@ Button */
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
+                  <layout class="QVBoxLayout" name="verticalLayout">
+                   <item>
+                    <widget class="QLabel" name="label_status">
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                 <item alignment="Qt::AlignBottom">
