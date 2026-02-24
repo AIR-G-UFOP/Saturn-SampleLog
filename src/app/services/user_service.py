@@ -1,25 +1,31 @@
 import sys
 import os
+from sqlalchemy.exc import SQLAlchemyError
+from ..db.models import DbUser
+from ..db.session import SessionLocal
 
 
 class UserService:
-    def __init__(self):
-        self.first_name = str
-        self.surname = str
-        self.org = str
-        self.phone = str
-        self.email = str
-        self.address = str
 
     def addUser(self, user_info):
-        self.first_name = user_info.get("name", "")
-        self.surname = user_info.get("surname", "")
-        self.org = user_info.get("organisation", "")
-        self.phone = user_info.get("phone", "")
-        self.email = user_info.get("email", "")
-        self.address = user_info.get("address", "")
-
-        # save user to database
+        session = SessionLocal()
+        try:
+            new_user = DbUser(
+                first_name = user_info["first_name"],
+                surname = user_info["surname"],
+                org = user_info["org"],
+                phone = user_info["phone"],
+                email = user_info["email"],
+                address = user_info["address"])
+            session.add(new_user)
+            session.commit()
+            return "User added successfully."
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error adding user: {str(e)}", file=sys.stderr)
+            return "Error adding user. Please try again."
+        finally:
+            session.close()
 
     def deleteUser(self, key):
         # Test key

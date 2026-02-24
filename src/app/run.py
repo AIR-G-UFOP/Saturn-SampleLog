@@ -4,6 +4,14 @@ from src.app.services.user_service import UserService
 from src.app.services.sample_service import SampleService
 from src.app.services.analysis_service import AnalysisService
 from src.app.services.reduction_service import ReductionService
+import sys
+import traceback
+
+
+def excepthook(type_, value, tb):
+    traceback.print_exception(type_, value, tb)
+
+sys.excepthook = excepthook
 
 
 def start_app():

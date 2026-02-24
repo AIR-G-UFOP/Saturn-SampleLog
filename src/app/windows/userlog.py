@@ -61,16 +61,19 @@ class UserWindow(QtWidgets.QMainWindow):
         if not self.validate_fields():
             return
         user_info = {
-            "name": self.ui.name.text(),
+            "first_name": self.ui.name.text(),
             "surname": self.ui.surname.text(),
-            "organisation": self.ui.org.text(),
+            "org": self.ui.org.text(),
             "email": self.ui.email.text(),
             "phone": self.ui.phone.text(),
             "address": self.ui.address.toPlainText()
         }
-        self.userService.addUser(user_info)
-        self.reset_fields()
-        self.status_message("User information logged successfully.")
+        try:
+            result = self.userService.addUser(user_info)
+            self.reset_fields()
+            self.status_message(result)
+        except Exception as e:
+            self.status_message(e)
 
     @staticmethod
     def highlight_invalid_field(field):

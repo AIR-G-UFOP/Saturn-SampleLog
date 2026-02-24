@@ -34,8 +34,9 @@ class DbUser(Base):
     org = Column(String, nullable=False)
     phone = Column(String, nullable=False)
     email = Column(String, nullable=False)
+    address = Column(String, nullable=False)
 
-    samples = relationship('DbSamples', back_populates='users', cascade='all, delete-orphan')
+    samples = relationship('DbSample', back_populates='users', cascade='all, delete-orphan')
 
 
 class DbSample(Base):
@@ -50,7 +51,11 @@ class DbSample(Base):
     status = Column(String, nullable=False)
 
     users = relationship('DbUser', back_populates='samples')
-    analyses = relationship('DbAnalysis', back_populates='samples')
+    analyses = relationship(
+        'DbAnalysis',
+        secondary='sample_analysis',
+        back_populates='samples'
+    )
 
 
 class DbAnalysis(Base):
@@ -64,8 +69,13 @@ class DbAnalysis(Base):
     file_name = Column(String, nullable=False)
     status = Column(String, nullable=False)
 
-    samples = relationship('DbSample', back_populates='analyses')
-    reductions = relationship('DbAnalyses', back_populates='analyses', cascade='all, delete-orphan')
+    samples = relationship(
+        'DbSample',
+        secondary='sample_analysis',
+        back_populates='analyses'
+    )
+    reduction = relationship('DbReduction', back_populates='analysis', uselist=False,
+                              cascade='all, delete-orphan')
 
 
 class DbReduction(Base):
@@ -79,4 +89,5 @@ class DbReduction(Base):
     file_id = Column(String, nullable=False)
     status = Column(String, nullable=False)
     analysis_id = Column(Integer, ForeignKey('analyses.id'), unique=True, nullable=False)
+    analysis = relationship('DbAnalysis', back_populates='reduction')
 
