@@ -1,5 +1,5 @@
 from app.db.session import SessionLocal
-from app.db.models import DbUser, DbSample, DbAnalysis, DbReduction
+from app.db.models import DbUser
 
 session = SessionLocal()
 users = session.query(DbUser).all()

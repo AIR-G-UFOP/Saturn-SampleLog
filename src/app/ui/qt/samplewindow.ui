@@ -705,7 +705,7 @@ QComboBox QAbstractItemView {
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="date">
+                     <widget class="QDateEdit" name="date">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -870,7 +870,7 @@ QComboBox QAbstractItemView {
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btn_loguser">
+                   <widget class="QPushButton" name="btn_logSanple">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>

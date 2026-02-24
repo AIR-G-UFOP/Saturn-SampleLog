@@ -22,7 +22,7 @@ class UserWindow(QtWidgets.QMainWindow):
 
         self.userService = user_service
 
-        self.ui.btn_loguser.clicked.connect(self.emit_user_information)
+        self.ui.btn_loguser.clicked.connect(self.register_user_information)
         self.ui.btn_cancel.clicked.connect(lambda: self.close())
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
 
@@ -37,27 +37,19 @@ class UserWindow(QtWidgets.QMainWindow):
         message = False
         required_fields = [self.ui.name, self.ui.surname, self.ui.org, self.ui.email, self.ui.phone, self.ui.address]
         for field in required_fields:
-            if isinstance(field, QtWidgets.QLineEdit):
-                if not field.text().strip():
-                    self.highlight_invalid_field(field)
-                    valid = False
-                    message = True
-                else:
-                    self.clear_highlight_field(field)
+            text = field.text().strip() if isinstance(field, QtWidgets.QLineEdit) else field.toPlainText().strip()
+            if not text:
+                self.highlight_invalid_field(field)
+                valid = False
+                message = True
             else:
-                if not field.toPlainText().strip():
-                    self.highlight_invalid_field(field)
-                    valid = False
-                    message = True
-                else:
-                    self.clear_highlight_field(field)
-
+                self.clear_highlight_field(field)
         if message:
             self.status_message("Please fill in all required fields.")
 
         return valid
 
-    def emit_user_information(self):
+    def register_user_information(self):
         if not self.validate_fields():
             return
         user_info = {

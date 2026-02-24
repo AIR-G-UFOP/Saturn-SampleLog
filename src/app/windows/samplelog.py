@@ -12,7 +12,7 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 class SampleWindow(QtWidgets.QMainWindow):
-    def __init__(self, sample_service):
+    def __init__(self, sample_service, user_service):
         super(SampleWindow, self).__init__()
 
         self.ui = Ui_SampleWindow()
@@ -21,12 +21,89 @@ class SampleWindow(QtWidgets.QMainWindow):
         UIFunctions.uiDefinitions(self)
 
         self.sampleService = sample_service
+        self.userService = user_service
 
         self.ui.btn_cancel.clicked.connect(lambda: self.close())
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
+        self.ui.btn_logSanple.clicked.connect(self.register_sample_information)
+
+        self.load_users()
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
+
+    def load_users(self):
+        users = self.userService.getAllUsers()
+        self.ui.userName.clear()
+        self.ui.userName.addItem("Select User", None)
+        for user in users:
+            user_name = f"{user.first_name} {user.surname}"
+            self.ui.userName.addItem(user_name, user.id)
+
+    def validate_fields(self):
+        valid = True
+        message = False
+        if self.ui.userName.currentText() == "Select User":
+            self.highlight_invalid_field(self.ui.userName)
+            valid = False
+            message = True
+        else:
+            self.clear_highlight_field(self.ui.userName)
+        required_fields = [self.ui.sampleName, self.ui.sampleDescription]
+        if self.ui.prepYes.isChecked():
+            required_fields.append(self.ui.instructions)
+        for field in required_fields:
+            text = field.text().strip() if isinstance(field, QtWidgets.QLineEdit) else field.toPlainText().strip()
+            if not text:
+                self.highlight_invalid_field(field)
+                valid = False
+                message = True
+            else:
+                self.clear_highlight_field(field)
+
+        if message:
+            self.status_message("Please fill in all required fields.")
+
+        return valid
+
+    def register_sample_information(self):
+        if not self.validate_fields():
+            return
+        sample_info = {
+            "name": self.ui.sampleName.text(),
+            "description": self.ui.sampleDescription.toPlainText(),
+            "user_id": self.ui.userName.currentData(),
+            "date": self.ui.date.date().toPyDate(),
+            "preparation": self.ui.prepYes.isChecked(),
+            "comment": self.ui.instructions.text(),
+            "status": "Logged"
+        }
+        try:
+            result = self.sampleService.addSample(sample_info)
+            self.reset_fields()
+            self.status_message(result)
+        except Exception as e:
+            self.status_message(e)
+
+    def reset_fields(self):
+        self.ui.sampleName.clear()
+        self.ui.sampleDescription.clear()
+        self.ui.userName.clear()
+        self.ui.date.clear()
+        self.ui.prepYes.setChecked(False)
+        self.ui.instructions.clear()
+
+    def status_message(self, message):
+        QtCore.QTimer.singleShot(0, lambda: self.ui.label_status.setText(message))
+        QtCore.QTimer.singleShot(5000, lambda: self.ui.label_status.setText(""))
+
+    @staticmethod
+    def highlight_invalid_field(field):
+        field.setStyleSheet("border: 1px solid #FF5555;")
+
+    @staticmethod
+    def clear_highlight_field(field):
+        field.setStyleSheet("")

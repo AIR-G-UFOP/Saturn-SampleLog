@@ -2,31 +2,33 @@ import sys
 import os
 from datetime import date
 from ..services.user_service import UserService
+from sqlalchemy.exc import SQLAlchemyError
+from ..db.models import DbSample
+from ..db.session import SessionLocal
 
 
 class SampleService:
-    def __init__(self):
-        self.name = str
-        self.description = str
-        self.status = str
-        self.date = date
-        self.preparation = bool
-        self.preparation_comment = str
 
-    def addSample(self, name, descript, status, add_date, prep, prep_comment, user):
-        if isinstance(user, UserService):
-            self.name = name
-            self.description = descript
-            self.status = status
-            self.date = add_date
-            self.preparation = prep
-            self.preparation_comment = prep_comment
-            # user here
-            # Need to generate a unique key for each sample
-            # save sample to database
-        else:
-            raise Exception(f'Invalid User: {user}')
-            # call an "add user?"
+    def addSample(self, sample_info):
+        session = SessionLocal()
+        try:
+            new_sample = DbSample(
+                name=sample_info["name"],
+                description=sample_info["description"],
+                user_id=sample_info["user_id"],
+                date=sample_info["date"],
+                preparation=sample_info["preparation"],
+                comment=sample_info["comment"],
+                status=sample_info["status"])
+            session.add(new_sample)
+            session.commit()
+            return "Sample added successfully."
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error adding Sample: {str(e)}", file=sys.stderr)
+            return "Error adding Sample. Please try again."
+        finally:
+            session.close()
 
     def deleteSample(self, key):
         # test key

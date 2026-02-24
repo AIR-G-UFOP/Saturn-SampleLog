@@ -40,3 +40,14 @@ class UserService:
         self.phone = phone
         self.email = email
         # edit user
+
+    def getAllUsers(self):
+        session = SessionLocal()
+        try:
+            users = session.query(DbUser).all()
+            return users
+        except SQLAlchemyError as e:
+            print(f"Error retrieving users: {str(e)}", file=sys.stderr)
+            return []
+        finally:
+            session.close()

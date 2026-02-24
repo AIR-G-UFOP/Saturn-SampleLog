@@ -57,7 +57,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.userLog.show()
 
     def open_sample_log(self):
-        self.sampleLog = SampleWindow(self.sampleService)
+        self.sampleLog = SampleWindow(self.sampleService, self.userService)
         self.sampleLog.show()
 
     def open_analysis_log(self):
