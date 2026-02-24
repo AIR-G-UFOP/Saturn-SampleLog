@@ -1,10 +1,10 @@
 import sys
 import os
 from datetime import date
-from user_service import User
+from ..services.user_service import UserService
 
 
-class Sample:
+class SampleService:
     def __init__(self):
         self.name = str
         self.description = str
@@ -14,7 +14,7 @@ class Sample:
         self.preparation_comment = str
 
     def addSample(self, name, descript, status, add_date, prep, prep_comment, user):
-        if isinstance(user, User):
+        if isinstance(user, UserService):
             self.name = name
             self.description = descript
             self.status = status
@@ -35,7 +35,7 @@ class Sample:
 
     def editSample(self, key, name, descript, status, add_date, prep, prep_comment, user):
         # test key
-        if isinstance(user, User):
+        if isinstance(user, UserService):
             self.name = name
             self.description = descript
             self.status = status

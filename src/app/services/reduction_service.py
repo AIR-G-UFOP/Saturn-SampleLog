@@ -1,10 +1,10 @@
 import sys
 import os
 from datetime import date
-from analysis_service import Analysis
+from ..services.analysis_service import AnalysisService
 
 
-class Reduction:
+class ReductionService:
     def __init__(self):
         self.software = str
         self.software_version = str
@@ -14,7 +14,7 @@ class Reduction:
         self.file_id = str
 
     def addReduction(self, software, version, handler, red_date, notes, file_id, analysis):
-        if isinstance(analysis, Analysis):
+        if isinstance(analysis, AnalysisService):
             self.software = software
             self.software_version = version
             self.handler = handler
@@ -34,7 +34,7 @@ class Reduction:
 
     def editReduction(self, key, software, version, handler, red_date, notes, file_id, analysis):
         # test key
-        if isinstance(analysis, Analysis):
+        if isinstance(analysis, AnalysisService):
             self.software = software
             self.software_version = version
             self.handler = handler

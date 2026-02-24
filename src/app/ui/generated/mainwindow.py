@@ -361,4 +361,4 @@ class Ui_MainWindow(object):
         self.btn_sampleList.setText(_translate("MainWindow", "Open Sample list"))
         self.btn_analysisList.setText(_translate("MainWindow", "Open Analysis list"))
         self.btn_reductionList.setText(_translate("MainWindow", "Open Data Reduction list"))
-from ..generated import resources
+from ..resources import resources

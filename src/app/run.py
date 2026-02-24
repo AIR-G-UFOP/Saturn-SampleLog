@@ -1,11 +1,18 @@
 from PyQt5.QtWidgets import QApplication
-from src.app.windows.main_window import MainWindow
+from src.app.windows.mainwindow import MainWindow
+from src.app.services.user_service import UserService
+from src.app.services.sample_service import SampleService
+from src.app.services.analysis_service import AnalysisService
+from src.app.services.reduction_service import ReductionService
 
 
 def start_app():
-    print("run.py is being executed")
+    user_service = UserService()
+    sample_service = SampleService()
+    analysis_service = AnalysisService()
+    reduction_service = ReductionService()
     app = QApplication([])
-    window = MainWindow()
+    window = MainWindow(user_service, sample_service, analysis_service, reduction_service)
     window.show()
     app.exec()
 

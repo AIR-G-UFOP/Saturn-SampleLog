@@ -1,10 +1,10 @@
 import sys
 import os
 from datetime import date
-from sample_service import Sample
+from ..services.sample_service import SampleService
 
 
-class Analysis:
+class AnalysisService:
     def __init__(self):
         self.method = str
         self.equipment = str
@@ -23,11 +23,11 @@ class Analysis:
         self.date = anal_date
         self.status = status
         self.file_id = file_id
-        if isinstance(samples, Sample):
+        if isinstance(samples, SampleService):
             self.samples.append(samples)
         elif isinstance(samples, list):
             for entry in samples:
-                if not isinstance(entry, Sample):
+                if not isinstance(entry, SampleService):
                     raise Exception(f'Invalid sample: {entry}')
                     # Add "add sample?"
             self.samples = samples
