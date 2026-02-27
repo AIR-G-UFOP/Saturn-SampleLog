@@ -50,3 +50,14 @@ class SampleService:
             raise Exception('Sample should have an User')
             # call an "add user?"
         # Edit sample
+
+    def getAllSamples(self):
+        session = SessionLocal()
+        try:
+            samples = session.query(DbSample).all()
+            return samples
+        except SQLAlchemyError as e:
+            print(f"Error retrieving samples: {str(e)}", file=sys.stderr)
+            return []
+        finally:
+            session.close()

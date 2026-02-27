@@ -86,7 +86,8 @@ class SampleWindow(QtWidgets.QMainWindow):
             self.reset_fields()
             self.status_message(result)
         except Exception as e:
-            self.status_message(e)
+            self.status_message('Something went wrong. See logs for details.')
+            raise
 
     def reset_fields(self):
         self.ui.sampleName.clear()
