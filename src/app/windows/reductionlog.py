@@ -38,7 +38,7 @@ class ReductionWindow(QtWidgets.QMainWindow):
     def load_analysis(self):
         analyses = self.analysisService.getAllAnalyses()
         self.ui.analysis.clear()
-        self.ui.analysis.addItem("Select User", None)
+        self.ui.analysis.addItem("Select Analysis", None)
         for anal in analyses:
             analysis_name = f"{anal.method}-{anal.date.strftime('%Y-%m-%d')}"
             self.ui.analysis.addItem(analysis_name, anal.id)
@@ -89,7 +89,8 @@ class ReductionWindow(QtWidgets.QMainWindow):
             "date": self.ui.date.date().toPyDate(),
             "notes": self.ui.notes_2.toPlainText(),
             "file_id": self.ui.fileName.text(),
-            "analysis_id": self.ui.analysis.currentData()
+            "analysis_id": self.ui.analysis.currentData(),
+            "status": "Logged"
         }
         try:
             result = self.reductionService.addReduction(reduction_info)

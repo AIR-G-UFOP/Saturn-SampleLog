@@ -19,7 +19,8 @@ class ReductionService:
                 date=reduction_info['date'],
                 notes=reduction_info['notes'],
                 file_id=reduction_info['file_id'],
-                analysis_id=reduction_info['analysis_id']
+                analysis_id=reduction_info['analysis_id'],
+                status=reduction_info['status']
             )
             session.add(reduction)
             session.commit()
