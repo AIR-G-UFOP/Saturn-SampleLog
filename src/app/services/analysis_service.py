@@ -32,30 +32,21 @@ class AnalysisService:
         finally:
             session.close()
 
-    def deleteAnalysis(self, key):
+    def deleteAnalysis(self):
         # check key
         # delete analysis
         pass
 
-    def editAnalysis(self, key, method, equip, conditions, operator, anal_date, status, id_auto, file_id, samples):
-        # check key
-        self.method = method
-        self.equipment = equip
-        self.conditions = conditions
-        self.operator = operator
-        self.date = anal_date
-        self.status = status
-        self.id_auto = id_auto
-        self.file_id = file_id
-        if isinstance(samples, Sample):
-            self.samples.append(samples)
-        elif isinstance(samples, list):
-            for entry in samples:
-                if not isinstance(entry, Sample):
-                    raise Exception(f'Invalid sample: {entry}')
-                    # Add "add sample?"
-            self.samples = samples
-        else:
-            raise Exception('Invalid sample...')
-            # Add "add sample?"
-        # edit analysis
+    def editAnalysis(self):
+        pass
+
+    def getAllAnalyses(self):
+        session = SessionLocal()
+        try:
+            analyses = session.query(DbAnalysis).all()
+            return analyses
+        except Exception as e:
+            print(f"Error retrieving Analyses: {str(e)}", file=sys.stderr)
+            return []
+        finally:
+            session.close()

@@ -7,7 +7,7 @@ connectivity or schema setup.
 
 from sqlalchemy import inspect
 from src.app.db import init_db, engine
-
+print(engine.url)
 
 def run_smoke_test():
     try:

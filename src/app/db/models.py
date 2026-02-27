@@ -81,6 +81,7 @@ class DbAnalysis(Base):
 class DbReduction(Base):
     __tablename__ = 'reductions'
     id = Column(Integer, primary_key=True)
+    reduction_name = Column(String, nullable=False)
     software = Column(String, nullable=False)
     software_version = Column(String, nullable=False)
     handler = Column(String, nullable=False)

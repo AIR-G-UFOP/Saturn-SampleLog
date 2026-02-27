@@ -2,46 +2,37 @@ import sys
 import os
 from datetime import date
 from ..services.analysis_service import AnalysisService
+from ..db.session import SessionLocal
+from ..db.models import DbReduction
 
 
 class ReductionService:
-    def __init__(self):
-        self.software = str
-        self.software_version = str
-        self.handler = str
-        self.date = date
-        self.notes = str
-        self.file_id = str
 
-    def addReduction(self, software, version, handler, red_date, notes, file_id, analysis):
-        if isinstance(analysis, AnalysisService):
-            self.software = software
-            self.software_version = version
-            self.handler = handler
-            self.date = red_date
-            self.notes = notes
-            self.file_id = file_id
-            # analysis here
-            # unique key
-            # save
-        else:
-            raise Exception('Invalid analysis...')
+    def addReduction(self, reduction_info):
+        session = SessionLocal()
+        try:
+            reduction = DbReduction(
+                reduction_name=reduction_info['reduction_name'],
+                software=reduction_info['software'],
+                software_version=reduction_info['version'],
+                handler=reduction_info['handler'],
+                date=reduction_info['date'],
+                notes=reduction_info['notes'],
+                file_id=reduction_info['file_id'],
+                analysis_id=reduction_info['analysis_id']
+            )
+            session.add(reduction)
+            session.commit()
+            return "Reduction logged successfully."
+        except Exception as e:
+            session.rollback()
+            print(f"Error logging reduction: {str(e)}", file=sys.stderr)
+            return "Error logging reduction. Please try again."
+        finally:
+            session.close()
 
-    def deleteReduction(self, key):
-        # test key
-        # delete
+    def editReduction(self):
         pass
 
-    def editReduction(self, key, software, version, handler, red_date, notes, file_id, analysis):
-        # test key
-        if isinstance(analysis, AnalysisService):
-            self.software = software
-            self.software_version = version
-            self.handler = handler
-            self.date = red_date
-            self.notes = notes
-            self.file_id = file_id
-            # analysis here
-            # edit
-        else:
-            raise Exception('Invalid analysis...')
+    def removeReduction(self):
+        pass
