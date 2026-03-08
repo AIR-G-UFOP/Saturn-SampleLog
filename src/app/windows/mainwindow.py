@@ -7,6 +7,7 @@ from ..windows.userlog import UserWindow
 from ..windows.samplelog import SampleWindow
 from ..windows.analysislog import AnalysisWindow
 from ..windows.reductionlog import ReductionWindow
+from ..windows.dblistwindow import DbListWindow
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"  # Auto-adjust based on system settings
@@ -32,6 +33,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.btn_newSample.clicked.connect(self.btn_clicked)
         self.ui.btn_newAnalysis.clicked.connect(self.btn_clicked)
         self.ui.btn_newReduction.clicked.connect(self.btn_clicked)
+        self.ui.btn_UserList.clicked.connect(self.btn_clicked)
+        self.ui.btn_analysisList.clicked.connect(self.btn_clicked)
+        self.ui.btn_reductionList.clicked.connect(self.btn_clicked)
+        self.ui.btn_sampleList.clicked.connect(self.btn_clicked)
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
         self.userLog = None
 
@@ -51,6 +56,14 @@ class MainWindow(QtWidgets.QMainWindow):
             self.open_analysis_log()
         elif sender == "btn_newReduction":
             self.open_reduction_log()
+        elif sender == "btn_UserList":
+            self.open_db_window("user")
+        elif sender == "btn_analysisList":
+            self.open_db_window("analysis")
+        elif sender == "btn_reductionList":
+            self.open_db_window("reduction")
+        elif sender == "btn_sampleList":
+            self.open_db_window("sample")
 
     def open_user_log(self):
         self.userLog = UserWindow(self.userService)
@@ -67,3 +80,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def open_reduction_log(self):
         self.reductionLog = ReductionWindow(self.reductionService, self.analysisService)
         self.reductionLog.show()
+
+    def open_db_window(self, db_type):
+        self.dbListWindow = DbListWindow(db_type)
+        self.dbListWindow.show()
+        self.close()

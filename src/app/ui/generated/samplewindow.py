@@ -377,6 +377,8 @@ class Ui_SampleWindow(object):
         self.verticalLayout_10.addWidget(self.label_7)
         self.date = QtWidgets.QDateEdit(self.content)
         self.date.setMinimumSize(QtCore.QSize(0, 30))
+        self.date.setMinimumDate(QtCore.QDate(2026, 1, 1))
+        self.date.setCalendarPopup(True)
         self.date.setObjectName("date")
         self.verticalLayout_10.addWidget(self.date)
         self.horizontalLayout_9.addLayout(self.verticalLayout_10)

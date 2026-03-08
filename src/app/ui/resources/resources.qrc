@@ -1,13 +1,18 @@
 <RCC>
   <qresource prefix="imagem">
-    <file>images/toolTip.png</file>
-    <file>images/triangulo.png</file>
     <file>images/logo_big.png</file>
-    <file>images/saturn_logo2.png</file>
     <file>images/SATURN-horizontal.png</file>
+    <file>images/saturn_logo.png</file>
     <file>images/SATURN-vertical2.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>icons/cil-settings.png</file>
+    <file>icons/cil-checklist.png</file>
+    <file>icons/cil-list-number.png</file>
+    <file>icons/cil-users.png</file>
+    <file>icons/cil-list.png</file>
+    <file>icons/cil-maximise.png</file>
+    <file>icons/cil-restore.png</file>
     <file>icons/cil-remove-.png</file>
     <file>icons/cil-add.png</file>
     <file>icons/cil-arrow-drop-down.png</file>
@@ -286,10 +291,7 @@
     <file>icons/cil-zoom-in.png</file>
     <file>icons/cil-zoom-out.png</file>
     <file>icons/icon_close.png</file>
-    <file>icons/icon_maximize.png</file>
     <file>icons/icon_menu.png</file>
-    <file>icons/icon_minimize.png</file>
-    <file>icons/icon_restore.png</file>
     <file>icons/icon_settings.png</file>
   </qresource>
 </RCC>

@@ -1,8 +1,9 @@
-from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QSizeGrip
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QSizeGrip, QPushButton
 from PyQt5.QtGui import QColor, QIcon
-from PyQt5.QtCore import QEvent, QTimer, Qt
+from PyQt5.QtCore import QEvent, QTimer, Qt, QPropertyAnimation, QEasingCurve
 from ..widgets.custom_grips import CustomGrip
-from ..config.settings import ENABLE_CUSTOM_TITLE_BAR
+from ..config.settings import (ENABLE_CUSTOM_TITLE_BAR, MENU_WIDTH, TIME_ANIMATION, DEFAULT_MENU_WIDTH,
+                               MENU_SELECTED_STYLESHEET)
 
 
 GLOBAL_STATE = False
@@ -18,7 +19,7 @@ class UIFunctions():
             GLOBAL_STATE = True
             self.ui.shadow.setContentsMargins(0, 0, 0, 0)
             self.ui.maximizeRestoreAppBtn.setToolTip("Restore")
-            self.ui.maximizeRestoreAppBtn.setIcon(QIcon(u":/icons/icons/icon_restore.png"))
+            self.ui.maximizeRestoreAppBtn.setIcon(QIcon(u":/icons/icons/cil-restore.png"))
             self.ui.frame_size_grip.hide()
             self.left_grip.hide()
             self.right_grip.hide()
@@ -31,7 +32,7 @@ class UIFunctions():
             self.ui.shadow.setContentsMargins(10, 10, 10, 10)
             try:
                 self.ui.maximizeRestoreAppBtn.setToolTip("Maximize")
-                self.ui.maximizeRestoreAppBtn.setIcon(QIcon(u":/icons/icons/icon_maximize.png"))
+                self.ui.maximizeRestoreAppBtn.setIcon(QIcon(u":/icons/icons/cil-maximise.png"))
             except:
                 pass
 
@@ -115,3 +116,34 @@ class UIFunctions():
             self.right_grip.setGeometry(self.width() - 10, 10, 10, self.height())
             self.top_grip.setGeometry(0, 0, self.width(), 10)
             self.bottom_grip.setGeometry(0, self.height() - 10, self.width(), 10)
+
+    def toggleMenu(self, enable):
+        if enable:
+            width = self.ui.leftMenuBg.width()
+            max_extend = MENU_WIDTH
+            default_width = DEFAULT_MENU_WIDTH
+            if width == DEFAULT_MENU_WIDTH:
+                widthExtended = max_extend
+            else:
+                widthExtended = default_width
+
+            # ANIMATION
+            self.animation = QPropertyAnimation(self.ui.leftMenuBg, b"minimumWidth")
+            self.animation.setDuration(TIME_ANIMATION)
+            self.animation.setStartValue(width)
+            self.animation.setEndValue(widthExtended)
+            self.animation.setEasingCurve(QEasingCurve.InOutQuart)
+            self.animation.start()
+
+    def resetStyle(self, widget):
+        for w in self.ui.topMenu.findChildren(QPushButton):
+            if w.objectName() != widget:
+                w.setStyleSheet(UIFunctions.deselectMenu(w.styleSheet()))
+
+    def selectMenu(getStyle):
+        select = getStyle + MENU_SELECTED_STYLESHEET
+        return select
+
+    def deselectMenu(getStyle):
+        deselect = getStyle.replace(MENU_SELECTED_STYLESHEET, "")
+        return deselect
