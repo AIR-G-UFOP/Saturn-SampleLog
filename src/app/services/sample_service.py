@@ -3,7 +3,8 @@ import os
 from datetime import date
 from ..services.user_service import UserService
 from sqlalchemy.exc import SQLAlchemyError
-from ..db.models import DbSample
+from sqlalchemy.orm import selectinload
+from ..db.models import DbSample, DbAnalysis
 from ..db.session import SessionLocal
 
 
@@ -59,5 +60,21 @@ class SampleService:
         except SQLAlchemyError as e:
             print(f"Error retrieving samples: {str(e)}", file=sys.stderr)
             return []
+        finally:
+            session.close()
+
+    def getAllSamplesFull(self):
+        session = SessionLocal()
+        try:
+            samples = (
+                session.query(DbSample)
+                .options(
+                    selectinload(DbSample.user),
+                    selectinload(DbSample.analyses)
+                    .selectinload(DbAnalysis.reduction)
+                )
+                .all()
+            )
+            return samples
         finally:
             session.close()

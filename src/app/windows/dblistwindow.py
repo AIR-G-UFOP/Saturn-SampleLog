@@ -3,6 +3,10 @@ import sys
 from PyQt5 import QtWidgets, QtCore, QtGui
 from ..modules.ui_functions import UIFunctions
 from ..ui.generated.listwindow import Ui_ListWindow
+from ..widgets.usercard import UserCard
+from ..widgets.samplecard import SampleCard
+from ..widgets.analysiscard import AnalysisCard
+from ..widgets.reductioncard import ReductionCard
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"  # Auto-adjust based on system settings
@@ -11,7 +15,7 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 class DbListWindow(QtWidgets.QMainWindow):
-    def __init__(self, db_type):
+    def __init__(self, db_type, user_service, sample_service, analysis_service, reduction_service):
         super(DbListWindow, self).__init__()
 
         self.setWindowTitle("Database List Window")
@@ -19,8 +23,22 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         UIFunctions.uiDefinitions(self)
         self.ui.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
+        self.ui.panelArea.setWidgetResizable(True)
+        self.ui.bgCardsLayout.addStretch()
 
         self.dbType = db_type
+        self.userService = user_service
+        self.sampleService = sample_service
+        self.analysisService = analysis_service
+        self.reductionService = reduction_service
+
+        self.DATA_MAP = {
+            "user": (self.userService.getAllUsersFull, UserCard),
+            "sample": (self.sampleService.getAllSamplesFull, SampleCard),
+            "analysis": (self.analysisService.getAllAnalysesFull, AnalysisCard),
+            "reduction": (self.reductionService.getAllReductionsFull, ReductionCard)
+        }
+        self.cards = []
 
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
         self.ui.btn_userList.clicked.connect(self.btn_clicked)
@@ -32,6 +50,8 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.ui.btn_addAnalysis.clicked.connect(self.btn_clicked)
         self.ui.btn_addReductions.clicked.connect(self.btn_clicked)
         self.ui.btn_settings.clicked.connect(self.btn_clicked)
+
+        self.load_cards()
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)
@@ -47,15 +67,19 @@ class DbListWindow(QtWidgets.QMainWindow):
         if btn_name == "btn_userList":
             self.ui.contentStack.setCurrentWidget(self.ui.lists)
             self.dbType = "user"
+            self.load_cards()
         elif btn_name == "btn_sampleList":
             self.ui.contentStack.setCurrentWidget(self.ui.lists)
             self.dbType = "sample"
+            self.load_cards()
         elif btn_name == "btn_analysisList":
            self.ui.contentStack.setCurrentWidget(self.ui.lists)
            self.dbType = "analysis"
+           self.load_cards()
         elif btn_name == "btn_reductionList":
             self.ui.contentStack.setCurrentWidget(self.ui.lists)
             self.dbType = "reduction"
+            self.load_cards()
         elif btn_name == "btn_addUser":
             pass
         elif btn_name == "btn_addSample":
@@ -67,15 +91,29 @@ class DbListWindow(QtWidgets.QMainWindow):
         elif btn_name == "btn_settings":
             self.ui.contentStack.setCurrentWidget(self.ui.settings)
 
-    def load_cards(self):
-        # Clear existing cards
+    def card_clicked(self, selected_card):
+        for card in self.cards:
+            if card == selected_card:
+                card.check_card_state()
+            else:
+                card.collapse()
 
-        # Load cards based on db list type
-        if self.dbType == "user":
-            pass
-        elif self.dbType == "sample":
-            pass
-        elif self.dbType == "analysis":
-            pass
-        elif self.dbType == "reduction":
-            pass
+    def clear_cards(self):
+        while self.ui.bgCardsLayout.count() > 1:
+            item = self.ui.bgCardsLayout.takeAt(0)
+            widget = item.widget()
+            if widget:
+                widget.deleteLater()
+
+    def load_cards(self):
+        self.clear_cards()
+        loader, card_class = self.DATA_MAP[self.dbType]
+        data = loader()
+        for obj in data:
+            card = card_class(obj)
+            self.add_card(card)
+            card.clicked.connect(self.card_clicked)
+            self.cards.append(card)
+
+    def add_card(self, card):
+        self.ui.bgCardsLayout.insertWidget(self.ui.bgCardsLayout.count() - 1, card)

@@ -116,9 +116,6 @@ class Ui_ListWindow(object):
 "#toggleButton:pressed {\n"
 "    background-color: #ff5555;\n"
 "}\n"
-"Line {\n"
-"    background-color: rgb(33, 37, 43);\n"
-"}\n"
 "#bottomBar { \n"
 "    background-color: transparent; \n"
 "}\n"
@@ -131,7 +128,83 @@ class Ui_ListWindow(object):
 "#panelArea {\n"
 "    background-color: transparent;\n"
 "    border: none;\n"
-"}")
+"}\n"
+"QScrollBar:horizontal {\n"
+"    border: none;\n"
+"    background: rgb(40, 44, 52);\n"
+"    height: 8px;\n"
+"    margin: 0px 21px 0 21px;\n"
+"    border-radius: 0px;\n"
+"}\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: rgb(40, 44, 52);\n"
+"    min-width: 25px;\n"
+"    border-radius: 4px\n"
+"}\n"
+"QScrollBar::add-line:horizontal {\n"
+"    border: none;\n"
+"    background: rgb(40, 44, 52);\n"
+"    width: 20px;\n"
+"    border-top-right-radius: 4px;\n"
+"    border-bottom-right-radius: 4px;\n"
+"    subcontrol-position: right;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"QScrollBar::sub-line:horizontal {\n"
+"    border: none;\n"
+"    background: rgb(40, 44, 52);\n"
+"    width: 20px;\n"
+"    border-top-left-radius: 4px;\n"
+"    border-bottom-left-radius: 4px;\n"
+"    subcontrol-position: left;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal\n"
+"{\n"
+"     background: none;\n"
+"}\n"
+"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal\n"
+"{\n"
+"     background: none;\n"
+"}\n"
+" QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: rgb(40, 44, 52);\n"
+"    width: 8px;\n"
+"    margin: 21px 0 21px 0;\n"
+"    border-radius: 0px;\n"
+" }\n"
+" QScrollBar::handle:vertical {    \n"
+"    background:  rgb(40, 44, 52);\n"
+"    min-height: 25px;\n"
+"    border-radius: 4px\n"
+" }\n"
+" QScrollBar::add-line:vertical {\n"
+"     border: none;\n"
+"    background: rgb(40, 44, 52);\n"
+"     height: 20px;\n"
+"    border-bottom-left-radius: 4px;\n"
+"    border-bottom-right-radius: 4px;\n"
+"     subcontrol-position: bottom;\n"
+"     subcontrol-origin: margin;\n"
+" }\n"
+" QScrollBar::sub-line:vertical {\n"
+"    border: none;\n"
+"    background: rgb(40, 44, 52);\n"
+"     height: 20px;\n"
+"    border-top-left-radius: 4px;\n"
+"    border-top-right-radius: 4px;\n"
+"     subcontrol-position: top;\n"
+"     subcontrol-origin: margin;\n"
+" }\n"
+" QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
+"     background: none;\n"
+" }\n"
+"\n"
+" QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"     background: none;\n"
+" }\n"
+"")
         self.stylesheet.setObjectName("stylesheet")
         self.shadow = QtWidgets.QVBoxLayout(self.stylesheet)
         self.shadow.setContentsMargins(10, 10, 10, 10)
@@ -414,16 +487,25 @@ class Ui_ListWindow(object):
         self.lists = QtWidgets.QWidget()
         self.lists.setObjectName("lists")
         self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.lists)
-        self.verticalLayout_9.setContentsMargins(10, 10, 10, 10)
-        self.verticalLayout_9.setSpacing(7)
+        self.verticalLayout_9.setContentsMargins(10, 10, 1, 0)
+        self.verticalLayout_9.setSpacing(0)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.panelArea = QtWidgets.QScrollArea(self.lists)
         self.panelArea.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.panelArea.setWidgetResizable(True)
         self.panelArea.setObjectName("panelArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 709, 469))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 718, 479))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_11.setSpacing(0)
+        self.verticalLayout_11.setObjectName("verticalLayout_11")
+        self.bgCardsLayout = QtWidgets.QVBoxLayout()
+        self.bgCardsLayout.setContentsMargins(-1, -1, 10, -1)
+        self.bgCardsLayout.setSpacing(10)
+        self.bgCardsLayout.setObjectName("bgCardsLayout")
+        self.verticalLayout_11.addLayout(self.bgCardsLayout)
         self.panelArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout_9.addWidget(self.panelArea)
         self.contentStack.addWidget(self.lists)

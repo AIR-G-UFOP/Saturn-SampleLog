@@ -1,7 +1,8 @@
 import sys
 import os
 from sqlalchemy.exc import SQLAlchemyError
-from ..db.models import DbUser
+from sqlalchemy.orm import selectinload
+from ..db.models import DbUser, DbSample, DbAnalysis
 from ..db.session import SessionLocal
 
 
@@ -49,5 +50,21 @@ class UserService:
         except SQLAlchemyError as e:
             print(f"Error retrieving users: {str(e)}", file=sys.stderr)
             return []
+        finally:
+            session.close()
+
+    def getAllUsersFull(self):
+        session = SessionLocal()
+        try:
+            users = (
+                session.query(DbUser)
+                .options(
+                    selectinload(DbUser.samples)
+                    .selectinload(DbSample.analyses)
+                    .selectinload(DbAnalysis.reduction)
+                )
+                .all()
+            )
+            return users
         finally:
             session.close()

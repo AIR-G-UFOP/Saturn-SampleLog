@@ -82,6 +82,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.reductionLog.show()
 
     def open_db_window(self, db_type):
-        self.dbListWindow = DbListWindow(db_type)
+        self.dbListWindow = DbListWindow(db_type, self.userService, self.sampleService, self.analysisService,
+                                         self.reductionService)
         self.dbListWindow.show()
         self.close()

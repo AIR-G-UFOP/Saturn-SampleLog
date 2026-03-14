@@ -1,9 +1,7 @@
 import sys
-import os
-from datetime import date
-from ..services.analysis_service import AnalysisService
+from sqlalchemy.orm import selectinload
 from ..db.session import SessionLocal
-from ..db.models import DbReduction
+from ..db.models import DbReduction, DbAnalysis
 
 
 class ReductionService:
@@ -37,3 +35,29 @@ class ReductionService:
 
     def removeReduction(self):
         pass
+
+    def getAllReductions(self):
+        session = SessionLocal()
+        try:
+            reductions = session.query(DbReduction).all()
+            return reductions
+        except Exception as e:
+            print(f"Error retrieving reductions: {str(e)}", file=sys.stderr)
+            return []
+        finally:
+            session.close()
+
+    def getAllReductionsFull(self):
+        session = SessionLocal()
+        try:
+            reductions = (
+                session.query(DbReduction)
+                .options(
+                    selectinload(DbReduction.analysis)
+                    .selectinload(DbAnalysis.samples)
+                )
+                .all()
+            )
+            return reductions
+        finally:
+            session.close()
