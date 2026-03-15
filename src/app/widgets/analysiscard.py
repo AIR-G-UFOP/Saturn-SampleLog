@@ -2,6 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.analysiscard import Ui_AnalysisCard
 from ..config.settings import (CARD_MIN_HEIGHT, TIME_ANIMATION, CARD_HOVER_STYLESHEET,
                                CARD_NORMAL_STYLESHEET, CARD_SUBHEADING_TEXT_COLOUR)
+from ..utils.utils import get_maximum_height
+
 
 class AnalysisCard(QtWidgets.QWidget):
     clicked = QtCore.pyqtSignal(object)
@@ -56,7 +58,7 @@ class AnalysisCard(QtWidgets.QWidget):
             self.collapse()
 
     def expand(self):
-        self.card_max_height = self.ui.bgCard.layout().sizeHint().height()
+        self.card_max_height = get_maximum_height(self.ui.horizontalLayout)
         self.animation.setStartValue(CARD_MIN_HEIGHT)
         self.animation.setEndValue(self.card_max_height)
         self.animation.start()

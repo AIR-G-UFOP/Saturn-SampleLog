@@ -2,6 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.usercard import Ui_UserCard
 from ..config.settings import (CARD_MIN_HEIGHT, TIME_ANIMATION, CARD_HOVER_STYLESHEET,
                                CARD_NORMAL_STYLESHEET, CARD_SUBHEADING_TEXT_COLOUR)
+from ..utils.utils import get_maximum_height
+
 
 class UserCard(QtWidgets.QWidget):
     clicked = QtCore.pyqtSignal(object)
@@ -25,6 +27,7 @@ class UserCard(QtWidgets.QWidget):
 
         self.analyses_number = 0
         self.reductions_number = 0
+        self.card_max_height = 0
 
         self.sample_info(user.samples)
         self.ui.analysisTitle.setText(f"{self.analyses_number} Analyses")
@@ -55,7 +58,7 @@ class UserCard(QtWidgets.QWidget):
             self.collapse()
 
     def expand(self):
-        self.card_max_height = self.ui.bgCard.layout().sizeHint().height()
+        self.card_max_height = get_maximum_height(self.ui.horizontalLayout)
         self.animation.setStartValue(CARD_MIN_HEIGHT)
         self.animation.setEndValue(self.card_max_height)
         self.animation.start()
