@@ -20,4 +20,4 @@ background-color: #282A36;
 CARD_NORMAL_STYLESHEET = """
 background-color: #44475A;
 """
-CARD_SUBHEADING_TEXT_COLOUR = "color: #6272A4"
+CARD_SUBHEADING_TEXT_COLOUR = "color: #F8F8F2"

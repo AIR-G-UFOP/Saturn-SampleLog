@@ -38,6 +38,12 @@ class DbListWindow(QtWidgets.QMainWindow):
             "analysis": (self.analysisService.getAllAnalysesFull, AnalysisCard),
             "reduction": (self.reductionService.getAllReductionsFull, ReductionCard)
         }
+        BUTTON_DB_MAP = {
+            "user": self.ui.btn_userList,
+            "sample": self.ui.btn_sampleList,
+            "analysis": self.ui.btn_analysisList,
+            "reduction": self.ui.btn_reductionList
+        }
         self.cards = []
 
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
@@ -51,6 +57,8 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.ui.btn_addReductions.clicked.connect(self.btn_clicked)
         self.ui.btn_settings.clicked.connect(self.btn_clicked)
 
+        self.set_btn_style(BUTTON_DB_MAP[self.dbType],
+                           BUTTON_DB_MAP[self.dbType].objectName())
         self.load_cards()
 
     def resizeEvent(self, event):
@@ -62,8 +70,7 @@ class DbListWindow(QtWidgets.QMainWindow):
     def btn_clicked(self):
         btn = self.sender()
         btn_name = btn.objectName()
-        UIFunctions.resetStyle(self, btn_name)
-        btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+        self.set_btn_style(btn, btn_name)
         if btn_name == "btn_userList":
             self.ui.contentStack.setCurrentWidget(self.ui.lists)
             self.dbType = "user"
@@ -91,6 +98,10 @@ class DbListWindow(QtWidgets.QMainWindow):
         elif btn_name == "btn_settings":
             self.ui.contentStack.setCurrentWidget(self.ui.settings)
 
+    def set_btn_style(self, btn, btn_name):
+        UIFunctions.resetStyle(self, btn_name)
+        btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+
     def card_clicked(self, selected_card):
         for card in self.cards:
             if card == selected_card:
@@ -104,6 +115,7 @@ class DbListWindow(QtWidgets.QMainWindow):
             widget = item.widget()
             if widget:
                 widget.deleteLater()
+        self.cards.clear()
 
     def load_cards(self):
         self.clear_cards()

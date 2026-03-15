@@ -69,7 +69,7 @@ class SampleService:
             samples = (
                 session.query(DbSample)
                 .options(
-                    selectinload(DbSample.user),
+                    selectinload(DbSample.users),
                     selectinload(DbSample.analyses)
                     .selectinload(DbAnalysis.reduction)
                 )
