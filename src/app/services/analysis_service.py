@@ -55,7 +55,8 @@ class AnalysisService:
             analyses = (
                 session.query(DbAnalysis)
                 .options(
-                    selectinload(DbAnalysis.samples),
+                    selectinload(DbAnalysis.samples)
+                    .selectinload(DbSample.users),
                     selectinload(DbAnalysis.reduction)
                 )
                 .all()

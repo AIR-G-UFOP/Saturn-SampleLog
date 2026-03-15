@@ -1,7 +1,7 @@
 import sys
 from sqlalchemy.orm import selectinload
 from ..db.session import SessionLocal
-from ..db.models import DbReduction, DbAnalysis
+from ..db.models import DbReduction, DbAnalysis, DbSample
 
 
 class ReductionService:
@@ -55,6 +55,7 @@ class ReductionService:
                 .options(
                     selectinload(DbReduction.analysis)
                     .selectinload(DbAnalysis.samples)
+                    .selectinload(DbSample.users)
                 )
                 .all()
             )

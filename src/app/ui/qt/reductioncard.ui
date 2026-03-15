@@ -115,6 +115,9 @@ QLabel {color: #A8ABB3;}
            <property name="text">
             <string/>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
@@ -139,10 +142,10 @@ QLabel {color: #A8ABB3;}
             <string/>
            </property>
            <property name="scaledContents">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
            <property name="wordWrap">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -151,12 +154,18 @@ QLabel {color: #A8ABB3;}
            <property name="text">
             <string/>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="reductionHandler">
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -165,12 +174,18 @@ QLabel {color: #A8ABB3;}
            <property name="text">
             <string/>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="reductionDate">
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -182,6 +197,9 @@ QLabel {color: #A8ABB3;}
            <property name="scaledContents">
             <bool>true</bool>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
@@ -190,6 +208,9 @@ QLabel {color: #A8ABB3;}
             <string/>
            </property>
            <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+           <property name="wordWrap">
             <bool>true</bool>
            </property>
           </widget>
@@ -230,6 +251,9 @@ QLabel {color: #A8ABB3;}
            <property name="text">
             <string/>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
@@ -249,16 +273,12 @@ QLabel {color: #A8ABB3;}
           </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="analysisMethod">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QLabel" name="analysisStatus">
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -266,6 +286,9 @@ QLabel {color: #A8ABB3;}
           <widget class="QLabel" name="analysisDate">
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -304,6 +327,9 @@ QLabel {color: #A8ABB3;}
           <widget class="QLabel" name="sampleTitle">
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -351,6 +377,9 @@ QLabel {color: #A8ABB3;}
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>

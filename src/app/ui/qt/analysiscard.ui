@@ -115,6 +115,9 @@ QLabel {color: #A8ABB3;}
            <property name="text">
             <string/>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
@@ -134,16 +137,12 @@ QLabel {color: #A8ABB3;}
           </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="analysisMethod">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QLabel" name="analysisEquipment">
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -153,6 +152,9 @@ QLabel {color: #A8ABB3;}
             <string/>
            </property>
            <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="wordWrap">
             <bool>true</bool>
            </property>
           </widget>
@@ -162,12 +164,18 @@ QLabel {color: #A8ABB3;}
            <property name="text">
             <string/>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="analysisStatus">
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -176,12 +184,18 @@ QLabel {color: #A8ABB3;}
            <property name="text">
             <string/>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="analysisFile">
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -220,6 +234,9 @@ QLabel {color: #A8ABB3;}
           <widget class="QLabel" name="sampleTitle">
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -261,6 +278,9 @@ QLabel {color: #A8ABB3;}
           <widget class="QLabel" name="reductionTitle">
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -308,6 +328,9 @@ QLabel {color: #A8ABB3;}
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>

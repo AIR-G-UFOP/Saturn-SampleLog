@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.samplecard import Ui_SampleCard
-from ..config.settings import (CARD_MAX_HEIGHT, CARD_MIN_HEIGHT, TIME_ANIMATION, CARD_HOVER_STYLESHEET,
+from ..config.settings import (CARD_MIN_HEIGHT, TIME_ANIMATION, CARD_HOVER_STYLESHEET,
                                CARD_NORMAL_STYLESHEET, CARD_SUBHEADING_TEXT_COLOUR)
 
 class SampleCard(QtWidgets.QWidget):
@@ -13,8 +13,12 @@ class SampleCard(QtWidgets.QWidget):
         self.setMouseTracking(True)
         self.ui.bgCard.setMouseTracking(True)
 
-        self.analyses_number = 0
         self.reductions_number = 0
+        self.card_max_height = 200
+
+        self.animation = QtCore.QPropertyAnimation(self.ui.bgCard, b"minimumHeight")
+        self.animation.setDuration(TIME_ANIMATION)
+        self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
 
         self.ui.sampleTitle.setText(f"{sample.name}")
         self.ui.sampleDescription.setText(f"{sample.description}")
@@ -25,14 +29,10 @@ class SampleCard(QtWidgets.QWidget):
         self.user_info(sample.users)
         self.analyses_info(sample.analyses)
 
-        self.ui.analysisTitle.setText(f"{self.analyses_number} analyses")
-        self.ui.reductionTitle.setText(f"{self.reductions_number} reductions")
+
+        self.ui.reductionTitle.setText(f"{self.reductions_number} Reductions")
         spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.ui.panelBLayout.addItem(spacer)
-        spacer1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.ui.panelCLayout.addItem(spacer1)
-        spacer2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.ui.panelDLayout.addItem(spacer2)
+        self.ui.panelDLayout.addItem(spacer)
 
     def mousePressEvent(self, event):
         self.clicked.emit(self)
@@ -53,19 +53,14 @@ class SampleCard(QtWidgets.QWidget):
             self.collapse()
 
     def expand(self):
-        self.animation = QtCore.QPropertyAnimation(self.ui.bgCard, b"minimumHeight")
-        self.animation.setDuration(TIME_ANIMATION)
+        self.card_max_height = self.ui.bgCard.layout().sizeHint().height()
         self.animation.setStartValue(CARD_MIN_HEIGHT)
-        self.animation.setEndValue(CARD_MAX_HEIGHT)
-        self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+        self.animation.setEndValue(self.card_max_height)
         self.animation.start()
 
     def collapse(self):
-        self.animation = QtCore.QPropertyAnimation(self.ui.bgCard, b"minimumHeight")
-        self.animation.setDuration(TIME_ANIMATION)
-        self.animation.setStartValue(CARD_MAX_HEIGHT)
+        self.animation.setStartValue(self.card_max_height)
         self.animation.setEndValue(CARD_MIN_HEIGHT)
-        self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
         self.animation.start()
 
     def user_info(self, user):
@@ -76,19 +71,24 @@ class SampleCard(QtWidgets.QWidget):
         self.ui.userEmail.setText(f"{user.email}")
 
     def analyses_info(self, analyses):
-        self.analyses_number += len(analyses)
+        self.ui.analysisTitle.setText(f"{len(analyses)} Analyses")
         for analysis in analyses:
             aname = QtWidgets.QLabel(self)
             aname.setText(analysis.method)
             aname.setStyleSheet(CARD_SUBHEADING_TEXT_COLOUR)
+            aname.setWordWrap(True)
             astatus = QtWidgets.QLabel(self)
             astatus.setText(f"Status: {analysis.status}")
+            astatus.setWordWrap(True)
             adate = QtWidgets.QLabel(self)
             adate.setText(analysis.date.strftime("%d-%m-%Y"))
+            adate.setWordWrap(True)
             self.ui.panelCLayout.addWidget(aname)
             self.ui.panelCLayout.addWidget(astatus)
             self.ui.panelCLayout.addWidget(adate)
             self.reduction_info(analysis.reduction)
+        spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.ui.panelCLayout.addItem(spacer)
 
     def reduction_info(self, reduction):
         if reduction:
@@ -96,10 +96,13 @@ class SampleCard(QtWidgets.QWidget):
             rname = QtWidgets.QLabel(self)
             rname.setText(reduction.reduction_name)
             rname.setStyleSheet(CARD_SUBHEADING_TEXT_COLOUR)
+            rname.setWordWrap(True)
             rstatus = QtWidgets.QLabel(self)
             rstatus.setText(f"Status: {reduction.status}")
+            rstatus.setWordWrap(True)
             rdate = QtWidgets.QLabel(self)
             rdate.setText(reduction.date.strftime("%d-%m-%Y"))
+            rdate.setWordWrap(True)
             self.ui.panelDLayout.addWidget(rname)
             self.ui.panelDLayout.addWidget(rstatus)
             self.ui.panelDLayout.addWidget(rdate)
