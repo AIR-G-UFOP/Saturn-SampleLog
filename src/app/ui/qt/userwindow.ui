@@ -6,62 +6,46 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>395</width>
-    <height>449</height>
+    <width>396</width>
+    <height>408</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>300</width>
+    <height>360</height>
+   </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>600</width>
-    <height>600</height>
+    <width>400</width>
+    <height>410</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="strylesheet">
+  <widget class="QWidget" name="stylesheet">
    <property name="styleSheet">
     <string notr="true">QWidget{
-	color:#f8f8f2;
-	font: 10pt &quot;AbrilTitlingNarrowW04-Bold&quot;;
-}
-/* Tooltip */
-QToolTip {
-	color: #ffffff;
-	background-color: rgba(33, 37, 43, 180);
-	border: 1px solid rgb(44, 49, 58);
-	background-image: none;
-	background-position: left center;
-	background-repeat: no-repeat;
-	border: none;
-	border-left: 2px solid #ff5555;
-	text-align: left;
-	padding-left: 8px;
-	margin: 0px;
+	color: #F8F8F2;
+	font: 8pt &quot;Inter 24pt Medium&quot;;
 }
 /* Bg App */
 #bgApp {	
-	background-color: rgb(40, 44, 52);
-	border: 1px solid rgb(44, 49, 58);
-	border-radius: 5px;	
+	background-color: #282A36;
+}
+#contentTopBg {
+	background-color: #19181f;
 }
 #topLogo {
-	background-color: rgb(33, 37, 43);
-	background-image: url(:/imagem/images/saturn_logo2.png);
+	background-image: url(:/imagem/images/saturn_logo.png);
 	background-position: centered;
 	background-repeat: no-repeat;
 }
 #titleRightInfo { 
 	padding-left: 10px;
-	font: 10pt &quot;AbrilTitlingNarrowW04-Bold&quot;;
  }
-/* Content App */
-#contentTopBg{	
-	background-color: rgb(33, 37, 43);
-}
-#contentBottom{
-	border-top: 3px solid rgb(44, 49, 58);
-}
 /* Top Buttons */
 #rightButtons .QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }
 #rightButtons .QPushButton:hover { background-color: rgb(44, 49, 57); border-style: solid; border-radius: 4px; }
@@ -70,7 +54,7 @@ QToolTip {
 #closeAppBtn:hover{ background-color:#ff5555;}
 #closeAppBtn:pressed { background-color:rgb(193, 64, 64); border-style: solid; border-radius: 5px;}
 /* Bottom Bar */
-#bottomBar { background-color: rgb(44, 49, 58); }
+#bottomBar { background-color: #282A36; }
 #bottomBar QLabel { font-size: 10px; color: rgb(113, 126, 149);}
 #bottomBar .QProgressBar {
 	border-radius: 5px;
@@ -86,25 +70,25 @@ QToolTip {
 /*Button */
 #btn_loguser {
 	border-radius: 5px;	
-	background-color:#50FA7B;
-	color: rgb(33, 37, 43);
+	border: none;
+	background-color: rgb(66, 209, 102);
 }
 #btn_loguser:hover {
-	border: 2px solid rgb(61, 70, 86);
+	background-color: #50fA7B;
 }
 #btn_loguser:pressed {
-	border: 2px solid #50FA7B;
+	background-color: rgb(66, 209, 102);
 }
 #btn_cancel {
 	border-radius: 5px;	
+	border: none;
 	background-color: rgb(52, 59, 72);
-	color: rgb(113, 126, 149);
 }
 #btn_cancel:hover {
-	border: 2px solid rgb(61, 70, 86);
+	background-color: rgb(61, 70, 86);
 }
 #btn_cancel:pressed {
-	border: 2px solid  rgb(52, 59, 72);
+	background-color: rgb(52, 59, 72);
 }
 
 /*LineEdit */
@@ -141,7 +125,8 @@ QToolTip {
 
 /*QLabel */
 #content .QLabel {
-	color: rgb(113, 126, 149);
+	color: #EAEAF0;
+	font: 8pt &quot;Inter 24pt Medium&quot;;
 }
 </string>
    </property>
@@ -353,8 +338,8 @@ QToolTip {
                     <widget class="QLabel" name="titleRightInfo">
                      <property name="font">
                       <font>
-                       <family>AbrilTitlingNarrowW04-Bold</family>
-                       <pointsize>10</pointsize>
+                       <family>Inter 24pt Medium</family>
+                       <pointsize>8</pointsize>
                        <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
@@ -535,7 +520,7 @@ QToolTip {
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>30</height>
+                        <height>25</height>
                        </size>
                       </property>
                      </widget>
@@ -565,7 +550,7 @@ QToolTip {
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>30</height>
+                        <height>25</height>
                        </size>
                       </property>
                      </widget>
@@ -597,7 +582,7 @@ QToolTip {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>30</height>
+                      <height>25</height>
                      </size>
                     </property>
                    </widget>
@@ -627,7 +612,7 @@ QToolTip {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>30</height>
+                      <height>25</height>
                      </size>
                     </property>
                    </widget>
@@ -657,7 +642,7 @@ QToolTip {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>30</height>
+                      <height>25</height>
                      </size>
                     </property>
                    </widget>
@@ -687,7 +672,7 @@ QToolTip {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>50</height>
+                      <height>40</height>
                      </size>
                     </property>
                     <property name="maximumSize">
@@ -726,7 +711,7 @@ QToolTip {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>30</height>
+                      <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
@@ -748,7 +733,7 @@ QToolTip {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>30</height>
+                      <height>25</height>
                      </size>
                     </property>
                     <property name="cursor">
@@ -769,13 +754,13 @@ QToolTip {
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>30</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
-                 <height>30</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="frameShape">

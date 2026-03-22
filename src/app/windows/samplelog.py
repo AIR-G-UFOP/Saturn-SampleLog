@@ -25,7 +25,7 @@ class SampleWindow(QtWidgets.QMainWindow):
 
         self.ui.btn_cancel.clicked.connect(lambda: self.close())
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
-        self.ui.btn_logSanple.clicked.connect(self.register_sample_information)
+        self.ui.btn_logSample.clicked.connect(self.register_sample_information)
 
         self.load_users()
 

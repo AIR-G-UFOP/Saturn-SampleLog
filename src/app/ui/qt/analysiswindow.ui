@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>395</width>
-    <height>498</height>
+    <width>424</width>
+    <height>445</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -22,46 +22,24 @@
   <widget class="QWidget" name="stylesheet">
    <property name="styleSheet">
     <string notr="true">QWidget{
-	color:#f8f8f2;
-	font: 10pt &quot;AbrilTitlingNarrowW04-Bold&quot;;
-}
-/* Tooltip */
-QToolTip {
-	color: #ffffff;
-	background-color: rgba(33, 37, 43, 180);
-	border: 1px solid rgb(44, 49, 58);
-	background-image: none;
-	background-position: left center;
-	background-repeat: no-repeat;
-	border: none;
-	border-left: 2px solid #ff5555;
-	text-align: left;
-	padding-left: 8px;
-	margin: 0px;
+	color: #F8F8F2;
+	font: 8pt &quot;Inter 24pt Medium&quot;;
 }
 /* Bg App */
 #bgApp {	
-	background-color: rgb(40, 44, 52);
-	border: 1px solid rgb(44, 49, 58);
-	border-radius: 5px;	
+	background-color: #282A36;
+}
+#contentTopBg {
+	background-color: #19181f;
 }
 #topLogo {
-	background-color: rgb(33, 37, 43);
-	background-image: url(:/imagem/images/saturn_logo2.png);
+	background-image: url(:/imagem/images/saturn_logo.png);
 	background-position: centered;
 	background-repeat: no-repeat;
 }
 #titleRightInfo { 
 	padding-left: 10px;
-	font: 10pt &quot;AbrilTitlingNarrowW04-Bold&quot;;
  }
-/* Content App */
-#contentTopBg{	
-	background-color: rgb(33, 37, 43);
-}
-#contentBottom{
-	border-top: 3px solid rgb(44, 49, 58);
-}
 /* Top Buttons */
 #rightButtons .QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }
 #rightButtons .QPushButton:hover { background-color: rgb(44, 49, 57); border-style: solid; border-radius: 4px; }
@@ -70,7 +48,7 @@ QToolTip {
 #closeAppBtn:hover{ background-color:#ff5555;}
 #closeAppBtn:pressed { background-color:rgb(193, 64, 64); border-style: solid; border-radius: 5px;}
 /* Bottom Bar */
-#bottomBar { background-color: rgb(44, 49, 58); }
+#bottomBar { background-color: #282A36; }
 #bottomBar QLabel { font-size: 10px; color: rgb(113, 126, 149);}
 #bottomBar .QProgressBar {
 	border-radius: 5px;
@@ -84,27 +62,38 @@ QToolTip {
     border-radius: 5px;
 }
 /*Button */
-#btn_loguser {
+#btn_logAnalysis {
 	border-radius: 5px;	
-	background-color:#50FA7B;
-	color: rgb(33, 37, 43);
+	border: none;
+	background-color: rgb(66, 209, 102);
 }
-#btn_loguser:hover {
-	border: 2px solid rgb(61, 70, 86);
+#btn_logAnalysis::hover {
+	background-color: #50fA7B;
 }
-#btn_loguser:pressed {
-	border: 2px solid #50FA7B;
+#btn_logAnalysis::pressed {
+	background-color: rgb(66, 209, 102);
 }
-QPushButton {
+#btn_cancel {
 	border-radius: 5px;	
+	border: none;
 	background-color: rgb(52, 59, 72);
-	color: #F8F8F2;
 }
-QPushButton:hover {
-	border: 2px solid rgb(61, 70, 86);
+#btn_cancel::hover {
+	background-color: rgb(61, 70, 86);
 }
-QPushButton:pressed {
-	border: 2px solid  rgb(52, 59, 72);
+#btn_cancel::pressed {
+	background-color: rgb(52, 59, 72);
+}
+#btn_addSample {
+	border-radius: 5px;	
+	border: none;
+	background-color: rgb(52, 59, 72);
+}
+#btn_addSample::hover {
+	background-color: rgb(61, 70, 86);
+}
+#btn_addSample::pressed {
+	background-color: rgb(52, 59, 72);
 }
 
 /*LineEdit */
@@ -141,7 +130,8 @@ QPushButton:pressed {
 
 /*QLabel */
 #content .QLabel {
-	color: #F8F8F2
+	color: #EAEAF0;
+	font: 8pt &quot;Inter 24pt Medium&quot;;
 }
 
 /*ComboBox */
@@ -192,6 +182,37 @@ QCheckBox::indicator:checked {
     background: 3px solid rgb(52, 59, 72);
 	border: 3px solid rgb(52, 59, 72);	
 	background-image: url(:/icons/icons/cil-check-alt.png);
+}
+QDateEdit{
+	background-color: rgb(52, 59, 72);
+	border-radius: 5px;
+	border: 2px solid rgb(52, 59, 72);
+	padding: 5px;
+	padding-left: 10px;
+	color: #ffb86c;
+}
+QDateEdit:hover{
+	border: 2px solid rgb(64, 71, 88);
+}
+QDateEdit::drop-down {
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px; 
+	border-left-width: 3px;
+	border-left-color: rgba(39, 44, 54, 150);
+	border-left-style: solid;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;	
+	background-image: url(:/icons/icons/cil-arrow-drop-down.png);
+	background-position: center;
+	background-repeat: no-reperat;
+ }
+QDateEdit QAbstractItemView {
+	/*color: rgb(255, 121, 198);*/
+	color: #ff5555;	
+	background-color: rgb(33, 37, 43);
+	padding: 10px;
+	selection-background-color: rgb(39, 44, 54);
 }</string>
    </property>
    <layout class="QVBoxLayout" name="shadow">
@@ -402,8 +423,8 @@ QCheckBox::indicator:checked {
                     <widget class="QLabel" name="titleRightInfo">
                      <property name="font">
                       <font>
-                       <family>AbrilTitlingNarrowW04-Bold</family>
-                       <pointsize>10</pointsize>
+                       <family>Inter 24pt Medium</family>
+                       <pointsize>8</pointsize>
                        <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
@@ -592,7 +613,13 @@ QCheckBox::indicator:checked {
                         <property name="minimumSize">
                          <size>
                           <width>0</width>
-                          <height>30</height>
+                          <height>25</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>25</height>
                          </size>
                         </property>
                         <property name="cursor">
@@ -632,8 +659,8 @@ QCheckBox::indicator:checked {
                      <widget class="QPushButton" name="btn_addSample">
                       <property name="minimumSize">
                        <size>
-                        <width>100</width>
-                        <height>30</height>
+                        <width>110</width>
+                        <height>25</height>
                        </size>
                       </property>
                       <property name="maximumSize">
@@ -679,7 +706,7 @@ QCheckBox::indicator:checked {
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>30</height>
+                        <height>25</height>
                        </size>
                       </property>
                      </widget>
@@ -697,6 +724,18 @@ QCheckBox::indicator:checked {
                     </item>
                     <item>
                      <widget class="QDateEdit" name="date">
+                      <property name="minimumSize">
+                       <size>
+                        <width>110</width>
+                        <height>25</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>25</height>
+                       </size>
+                      </property>
                       <property name="dateTime">
                        <datetime>
                         <hour>0</hour>
@@ -739,7 +778,7 @@ QCheckBox::indicator:checked {
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>30</height>
+                        <height>25</height>
                        </size>
                       </property>
                      </widget>
@@ -760,7 +799,7 @@ QCheckBox::indicator:checked {
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>30</height>
+                        <height>25</height>
                        </size>
                       </property>
                      </widget>
@@ -792,13 +831,13 @@ QCheckBox::indicator:checked {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>50</height>
+                      <height>40</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
                       <width>16777215</width>
-                      <height>50</height>
+                      <height>40</height>
                      </size>
                     </property>
                     <property name="cursor" stdset="0">
@@ -836,7 +875,7 @@ QCheckBox::indicator:checked {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>30</height>
+                      <height>25</height>
                      </size>
                     </property>
                    </widget>
@@ -863,7 +902,7 @@ QCheckBox::indicator:checked {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>30</height>
+                      <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
@@ -885,7 +924,7 @@ QCheckBox::indicator:checked {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>30</height>
+                      <height>25</height>
                      </size>
                     </property>
                     <property name="cursor">
@@ -906,13 +945,13 @@ QCheckBox::indicator:checked {
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>30</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
-                 <height>30</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="frameShape">

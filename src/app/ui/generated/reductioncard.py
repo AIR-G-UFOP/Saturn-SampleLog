@@ -15,7 +15,7 @@ class Ui_ReductionCard(object):
     def setupUi(self, ReductionCard):
         ReductionCard.setObjectName("ReductionCard")
         ReductionCard.resize(578, 50)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(ReductionCard.sizePolicy().hasHeightForWidth())
@@ -23,20 +23,38 @@ class Ui_ReductionCard(object):
         ReductionCard.setMinimumSize(QtCore.QSize(0, 50))
         ReductionCard.setMaximumSize(QtCore.QSize(16777215, 16777215))
         ReductionCard.setStyleSheet("#bgCard {\n"
-"    background-color: #44475A;\n"
+"    background-color: #282A36;\n"
 "    border-radius: 10px;\n"
 "}\n"
-"#userTitle {color: #8BE9FD;}\n"
-"#sampleTitle {color: #BD93F9;}\n"
-"#analysisTitle {color: #F1FA8C;}\n"
-"#reductionTitle {color: #FFB86C;}\n"
-"QLabel {color: #A8ABB3;}\n"
+"#userTitle {color: #8BE9FD;     font: 8pt \"Inter 24pt Medium\";}\n"
+"#sampleTitle {color: #BD93F9;     font: 8pt \"Inter 24pt Medium\";}\n"
+"#analysisTitle {color: #F1FA8C;     font: 8pt \"Inter 24pt Medium\";}\n"
+"#reductionTitle {color: #FFB86C;     font: 8pt \"Inter 24pt Medium\";}\n"
+"QLabel {color: #A8ABB3;     font: 8pt \"Inter 24pt Medium\";}\n"
+"QPushButton {\n"
+"    border-radius: 5px;    \n"
+"    background-color: rgb(33, 37, 43);\n"
+"    color: #F8F8F2;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40, 44, 52);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    border: 2px solid  #44475A;\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
+"\n"
 "")
         self.verticalLayout = QtWidgets.QVBoxLayout(ReductionCard)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.bgCard = QtWidgets.QFrame(ReductionCard)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgCard.sizePolicy().hasHeightForWidth())
+        self.bgCard.setSizePolicy(sizePolicy)
         self.bgCard.setMinimumSize(QtCore.QSize(0, 50))
         self.bgCard.setMaximumSize(QtCore.QSize(16777215, 0))
         self.bgCard.setFrameShape(QtWidgets.QFrame.NoFrame)

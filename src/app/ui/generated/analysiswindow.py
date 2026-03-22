@@ -14,50 +14,28 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_AnalysisWindow(object):
     def setupUi(self, AnalysisWindow):
         AnalysisWindow.setObjectName("AnalysisWindow")
-        AnalysisWindow.resize(395, 498)
+        AnalysisWindow.resize(424, 445)
         AnalysisWindow.setMaximumSize(QtCore.QSize(600, 600))
         self.stylesheet = QtWidgets.QWidget(AnalysisWindow)
         self.stylesheet.setStyleSheet("QWidget{\n"
-"    color:#f8f8f2;\n"
-"    font: 10pt \"AbrilTitlingNarrowW04-Bold\";\n"
-"}\n"
-"/* Tooltip */\n"
-"QToolTip {\n"
-"    color: #ffffff;\n"
-"    background-color: rgba(33, 37, 43, 180);\n"
-"    border: 1px solid rgb(44, 49, 58);\n"
-"    background-image: none;\n"
-"    background-position: left center;\n"
-"    background-repeat: no-repeat;\n"
-"    border: none;\n"
-"    border-left: 2px solid #ff5555;\n"
-"    text-align: left;\n"
-"    padding-left: 8px;\n"
-"    margin: 0px;\n"
+"    color: #F8F8F2;\n"
+"    font: 8pt \"Inter 24pt Medium\";\n"
 "}\n"
 "/* Bg App */\n"
 "#bgApp {    \n"
-"    background-color: rgb(40, 44, 52);\n"
-"    border: 1px solid rgb(44, 49, 58);\n"
-"    border-radius: 5px;    \n"
+"    background-color: #282A36;\n"
+"}\n"
+"#contentTopBg {\n"
+"    background-color: #19181f;\n"
 "}\n"
 "#topLogo {\n"
-"    background-color: rgb(33, 37, 43);\n"
-"    background-image: url(:/imagem/images/saturn_logo2.png);\n"
+"    background-image: url(:/imagem/images/saturn_logo.png);\n"
 "    background-position: centered;\n"
 "    background-repeat: no-repeat;\n"
 "}\n"
 "#titleRightInfo { \n"
 "    padding-left: 10px;\n"
-"    font: 10pt \"AbrilTitlingNarrowW04-Bold\";\n"
 " }\n"
-"/* Content App */\n"
-"#contentTopBg{    \n"
-"    background-color: rgb(33, 37, 43);\n"
-"}\n"
-"#contentBottom{\n"
-"    border-top: 3px solid rgb(44, 49, 58);\n"
-"}\n"
 "/* Top Buttons */\n"
 "#rightButtons .QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }\n"
 "#rightButtons .QPushButton:hover { background-color: rgb(44, 49, 57); border-style: solid; border-radius: 4px; }\n"
@@ -66,7 +44,7 @@ class Ui_AnalysisWindow(object):
 "#closeAppBtn:hover{ background-color:#ff5555;}\n"
 "#closeAppBtn:pressed { background-color:rgb(193, 64, 64); border-style: solid; border-radius: 5px;}\n"
 "/* Bottom Bar */\n"
-"#bottomBar { background-color: rgb(44, 49, 58); }\n"
+"#bottomBar { background-color: #282A36; }\n"
 "#bottomBar QLabel { font-size: 10px; color: rgb(113, 126, 149);}\n"
 "#bottomBar .QProgressBar {\n"
 "    border-radius: 5px;\n"
@@ -80,27 +58,38 @@ class Ui_AnalysisWindow(object):
 "    border-radius: 5px;\n"
 "}\n"
 "/*Button */\n"
-"#btn_loguser {\n"
+"#btn_logAnalysis {\n"
 "    border-radius: 5px;    \n"
-"    background-color:#50FA7B;\n"
-"    color: rgb(33, 37, 43);\n"
+"    border: none;\n"
+"    background-color: rgb(66, 209, 102);\n"
 "}\n"
-"#btn_loguser:hover {\n"
-"    border: 2px solid rgb(61, 70, 86);\n"
+"#btn_logAnalysis::hover {\n"
+"    background-color: #50fA7B;\n"
 "}\n"
-"#btn_loguser:pressed {\n"
-"    border: 2px solid #50FA7B;\n"
+"#btn_logAnalysis::pressed {\n"
+"    background-color: rgb(66, 209, 102);\n"
 "}\n"
-"QPushButton {\n"
+"#btn_cancel {\n"
 "    border-radius: 5px;    \n"
+"    border: none;\n"
 "    background-color: rgb(52, 59, 72);\n"
-"    color: #F8F8F2;\n"
 "}\n"
-"QPushButton:hover {\n"
-"    border: 2px solid rgb(61, 70, 86);\n"
+"#btn_cancel::hover {\n"
+"    background-color: rgb(61, 70, 86);\n"
 "}\n"
-"QPushButton:pressed {\n"
-"    border: 2px solid  rgb(52, 59, 72);\n"
+"#btn_cancel::pressed {\n"
+"    background-color: rgb(52, 59, 72);\n"
+"}\n"
+"#btn_addSample {\n"
+"    border-radius: 5px;    \n"
+"    border: none;\n"
+"    background-color: rgb(52, 59, 72);\n"
+"}\n"
+"#btn_addSample::hover {\n"
+"    background-color: rgb(61, 70, 86);\n"
+"}\n"
+"#btn_addSample::pressed {\n"
+"    background-color: rgb(52, 59, 72);\n"
 "}\n"
 "\n"
 "/*LineEdit */\n"
@@ -137,7 +126,8 @@ class Ui_AnalysisWindow(object):
 "\n"
 "/*QLabel */\n"
 "#content .QLabel {\n"
-"    color: #F8F8F2\n"
+"    color: #EAEAF0;\n"
+"    font: 8pt \"Inter 24pt Medium\";\n"
 "}\n"
 "\n"
 "/*ComboBox */\n"
@@ -188,6 +178,37 @@ class Ui_AnalysisWindow(object):
 "    background: 3px solid rgb(52, 59, 72);\n"
 "    border: 3px solid rgb(52, 59, 72);    \n"
 "    background-image: url(:/icons/icons/cil-check-alt.png);\n"
+"}\n"
+"QDateEdit{\n"
+"    background-color: rgb(52, 59, 72);\n"
+"    border-radius: 5px;\n"
+"    border: 2px solid rgb(52, 59, 72);\n"
+"    padding: 5px;\n"
+"    padding-left: 10px;\n"
+"    color: #ffb86c;\n"
+"}\n"
+"QDateEdit:hover{\n"
+"    border: 2px solid rgb(64, 71, 88);\n"
+"}\n"
+"QDateEdit::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px; \n"
+"    border-left-width: 3px;\n"
+"    border-left-color: rgba(39, 44, 54, 150);\n"
+"    border-left-style: solid;\n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;    \n"
+"    background-image: url(:/icons/icons/cil-arrow-drop-down.png);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+" }\n"
+"QDateEdit QAbstractItemView {\n"
+"    /*color: rgb(255, 121, 198);*/\n"
+"    color: #ff5555;    \n"
+"    background-color: rgb(33, 37, 43);\n"
+"    padding: 10px;\n"
+"    selection-background-color: rgb(39, 44, 54);\n"
 "}")
         self.stylesheet.setObjectName("stylesheet")
         self.shadow = QtWidgets.QVBoxLayout(self.stylesheet)
@@ -257,8 +278,8 @@ class Ui_AnalysisWindow(object):
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.titleRightInfo = QtWidgets.QLabel(self.titleGripFrame)
         font = QtGui.QFont()
-        font.setFamily("AbrilTitlingNarrowW04-Bold")
-        font.setPointSize(10)
+        font.setFamily("Inter 24pt Medium")
+        font.setPointSize(8)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -337,7 +358,8 @@ class Ui_AnalysisWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sample.sizePolicy().hasHeightForWidth())
         self.sample.setSizePolicy(sizePolicy)
-        self.sample.setMinimumSize(QtCore.QSize(0, 30))
+        self.sample.setMinimumSize(QtCore.QSize(0, 25))
+        self.sample.setMaximumSize(QtCore.QSize(16777215, 25))
         self.sample.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.sample.setObjectName("sample")
         self.horizontalLayout_7.addWidget(self.sample)
@@ -352,7 +374,7 @@ class Ui_AnalysisWindow(object):
         self.label_2.setObjectName("label_2")
         self.verticalLayout_9.addWidget(self.label_2, 0, QtCore.Qt.AlignRight)
         self.btn_addSample = QtWidgets.QPushButton(self.content)
-        self.btn_addSample.setMinimumSize(QtCore.QSize(100, 30))
+        self.btn_addSample.setMinimumSize(QtCore.QSize(110, 25))
         self.btn_addSample.setMaximumSize(QtCore.QSize(100, 16777215))
         self.btn_addSample.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_addSample.setObjectName("btn_addSample")
@@ -369,7 +391,7 @@ class Ui_AnalysisWindow(object):
         self.label_3.setObjectName("label_3")
         self.verticalLayout_8.addWidget(self.label_3)
         self.analysisName = QtWidgets.QLineEdit(self.content)
-        self.analysisName.setMinimumSize(QtCore.QSize(0, 30))
+        self.analysisName.setMinimumSize(QtCore.QSize(0, 25))
         self.analysisName.setObjectName("analysisName")
         self.verticalLayout_8.addWidget(self.analysisName)
         self.horizontalLayout_9.addLayout(self.verticalLayout_8)
@@ -379,6 +401,8 @@ class Ui_AnalysisWindow(object):
         self.label_7.setObjectName("label_7")
         self.verticalLayout_10.addWidget(self.label_7)
         self.date = QtWidgets.QDateEdit(self.content)
+        self.date.setMinimumSize(QtCore.QSize(110, 25))
+        self.date.setMaximumSize(QtCore.QSize(16777215, 25))
         self.date.setDateTime(QtCore.QDateTime(QtCore.QDate(2026, 1, 1), QtCore.QTime(0, 0, 0)))
         self.date.setMinimumDate(QtCore.QDate(2026, 1, 1))
         self.date.setCalendarPopup(True)
@@ -394,7 +418,7 @@ class Ui_AnalysisWindow(object):
         self.label_4.setObjectName("label_4")
         self.verticalLayout_4.addWidget(self.label_4)
         self.equipment = QtWidgets.QLineEdit(self.content)
-        self.equipment.setMinimumSize(QtCore.QSize(0, 30))
+        self.equipment.setMinimumSize(QtCore.QSize(0, 25))
         self.equipment.setObjectName("equipment")
         self.verticalLayout_4.addWidget(self.equipment)
         self.horizontalLayout_8.addLayout(self.verticalLayout_4)
@@ -404,7 +428,7 @@ class Ui_AnalysisWindow(object):
         self.label_5.setObjectName("label_5")
         self.verticalLayout_6.addWidget(self.label_5)
         self.operator_2 = QtWidgets.QLineEdit(self.content)
-        self.operator_2.setMinimumSize(QtCore.QSize(0, 30))
+        self.operator_2.setMinimumSize(QtCore.QSize(0, 25))
         self.operator_2.setObjectName("operator_2")
         self.verticalLayout_6.addWidget(self.operator_2)
         self.horizontalLayout_8.addLayout(self.verticalLayout_6)
@@ -417,8 +441,8 @@ class Ui_AnalysisWindow(object):
         self.notes.setObjectName("notes")
         self.verticalLayout_7.addWidget(self.notes)
         self.analysisNotes = QtWidgets.QTextEdit(self.content)
-        self.analysisNotes.setMinimumSize(QtCore.QSize(0, 50))
-        self.analysisNotes.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.analysisNotes.setMinimumSize(QtCore.QSize(0, 40))
+        self.analysisNotes.setMaximumSize(QtCore.QSize(16777215, 40))
         self.analysisNotes.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.IBeamCursor))
         self.analysisNotes.setObjectName("analysisNotes")
         self.verticalLayout_7.addWidget(self.analysisNotes)
@@ -436,7 +460,7 @@ class Ui_AnalysisWindow(object):
         self.horizontalLayout_10.addWidget(self.generate)
         self.verticalLayout_11.addLayout(self.horizontalLayout_10)
         self.fileName = QtWidgets.QLineEdit(self.content)
-        self.fileName.setMinimumSize(QtCore.QSize(0, 30))
+        self.fileName.setMinimumSize(QtCore.QSize(0, 25))
         self.fileName.setObjectName("fileName")
         self.verticalLayout_11.addWidget(self.fileName)
         self.verticalLayout_12.addLayout(self.verticalLayout_11)
@@ -445,21 +469,21 @@ class Ui_AnalysisWindow(object):
         self.horizontalLayout_12 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
         self.btn_cancel = QtWidgets.QPushButton(self.content)
-        self.btn_cancel.setMinimumSize(QtCore.QSize(0, 30))
+        self.btn_cancel.setMinimumSize(QtCore.QSize(0, 25))
         self.btn_cancel.setMaximumSize(QtCore.QSize(80, 16777215))
         self.btn_cancel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_cancel.setObjectName("btn_cancel")
         self.horizontalLayout_12.addWidget(self.btn_cancel)
         self.btn_logAnalysis = QtWidgets.QPushButton(self.content)
-        self.btn_logAnalysis.setMinimumSize(QtCore.QSize(0, 30))
+        self.btn_logAnalysis.setMinimumSize(QtCore.QSize(0, 25))
         self.btn_logAnalysis.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_logAnalysis.setObjectName("btn_logAnalysis")
         self.horizontalLayout_12.addWidget(self.btn_logAnalysis)
         self.verticalLayout_12.addLayout(self.horizontalLayout_12)
         self.verticalLayout_5.addWidget(self.content)
         self.bottomBar = QtWidgets.QFrame(self.contentBottom)
-        self.bottomBar.setMinimumSize(QtCore.QSize(0, 30))
-        self.bottomBar.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.bottomBar.setMinimumSize(QtCore.QSize(0, 20))
+        self.bottomBar.setMaximumSize(QtCore.QSize(16777215, 20))
         self.bottomBar.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bottomBar.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bottomBar.setObjectName("bottomBar")
@@ -514,3 +538,4 @@ class Ui_AnalysisWindow(object):
         self.btn_cancel.setText(_translate("AnalysisWindow", "Cancel"))
         self.btn_logAnalysis.setText(_translate("AnalysisWindow", "Log Analysis"))
 from ..resources import resources
+

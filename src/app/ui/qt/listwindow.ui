@@ -16,7 +16,7 @@
   <widget class="QWidget" name="stylesheet">
    <property name="font">
     <font>
-     <family>Inter 24pt</family>
+     <family>Inter 24pt Medium</family>
      <pointsize>10</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -26,19 +26,18 @@
    <property name="styleSheet">
     <string notr="true">QWidget{
 	color: #EAEAF0;
-	font: 10pt &quot;Inter 24pt&quot;;
+	font: 10pt &quot;Inter 24pt Medium&quot;;
 }
 /*Bg App */
 #bgApp {	
-	background-color: rgb(40, 44, 52);
-	border: 1px solid rgb(44, 49, 58);
+	background-color: #282A36;
 }
 
 /*Content App */
 #contentBottom {
-	background-color: rgb(33, 37, 43);
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
+	background-color: #19181f;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
 }
 /* Top Buttons */
 #rightButtons .QPushButton { 
@@ -71,18 +70,18 @@
 	background-repeat: no-repeat;
 }
 #titleLeftApp { 
-	font: 10pt &quot;Inter 24pt&quot;; 
+	font: 10pt &quot;Inter 24pt Medium&quot;; 
 }
 #titleRightInfo { 
 	padding-left: 10px; 
-	font: 8pt &quot;Inter 24pt&quot;; 
+	font: 8pt &quot;Inter 24pt Medium&quot;; 
 }
 /* MENUS */
 #topMenu .QPushButton {	
 	border: none;
 	background-color: transparent;
 	text-align: left;
-	border-left: 17px solid transparent;
+	border-left: 18px solid transparent;
 }
 #topMenu .QPushButton:hover {
 	background-color: rgb(44, 49, 57); 
@@ -95,7 +94,7 @@
 	border: none;
 	background-color:transparent;
 	text-align: left;
-	border-left: 17px solid transparent;
+	border-left: 18px solid transparent;
 }
 #bottomMenu .QPushButton:hover {
 	background-color: rgb(44, 49, 57); 
@@ -108,7 +107,7 @@
 #toggleButton {
 	border: none;
 	text-align: left;
-	border-left: 17px solid transparent;
+	border-left: 18px solid transparent;
 	color: #A8ABB3;
 }
 #toggleButton:hover {
@@ -205,7 +204,31 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
  QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
      background: none;
  }
-</string>
+#contentStack {
+	background-color: transparent;
+}
+#bgUser {
+	background-color: #44475A;
+	border-radius: 10px;
+}
+#bgAnalysis {
+	background-color: #44475A;
+	border-radius: 10px;
+}
+#bgSample {
+	background-color: #44475A;
+	border-radius: 10px;
+}
+#bgReduction {
+	background-color: #44475A;
+	border-radius: 10px;
+}
+#contentStack {
+	background-color: transparent;
+}
+#scrollAreaWidgetContents {
+	background-color: transparent;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="shadow">
     <property name="spacing">
@@ -342,7 +365,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
              </property>
              <property name="font">
               <font>
-               <family>Inter 24pt</family>
+               <family>Inter 24pt Medium</family>
                <pointsize>10</pointsize>
                <weight>50</weight>
                <italic>false</italic>
@@ -874,7 +897,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
                    </size>
                   </property>
                   <property name="text">
-                   <string>Laboratory manager</string>
+                   <string>Laboratory Legacy</string>
                   </property>
                  </widget>
                 </item>
@@ -1021,10 +1044,6 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
              </property>
              <item>
               <widget class="QStackedWidget" name="contentStack">
-               <property name="styleSheet">
-                <string notr="true">background-color: transparent;
-</string>
-               </property>
                <property name="currentIndex">
                 <number>0</number>
                </property>
@@ -1058,8 +1077,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>718</width>
-                      <height>479</height>
+                      <width>720</width>
+                      <height>481</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_11">

@@ -14,8 +14,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_UserCard(object):
     def setupUi(self, UserCard):
         UserCard.setObjectName("UserCard")
-        UserCard.resize(578, 51)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        UserCard.resize(578, 50)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(UserCard.sizePolicy().hasHeightForWidth())
@@ -23,28 +23,45 @@ class Ui_UserCard(object):
         UserCard.setMinimumSize(QtCore.QSize(0, 50))
         UserCard.setMaximumSize(QtCore.QSize(16777215, 16777215))
         UserCard.setStyleSheet("#bgCard {\n"
-"    background-color: #44475A;\n"
+"    background-color: #282A36;\n"
 "    border-radius: 10px;\n"
 "}\n"
-"#userTitle {color: #8BE9FD;}\n"
-"#sampleTitle {color: #BD93F9;}\n"
-"#analysisTitle {color: #F1FA8C;}\n"
-"#reductionTitle {color: #FFB86C;}\n"
-"QLabel {color: #A8ABB3;}\n"
+"#userTitle {color: #8BE9FD;     font: 8pt \"Inter 24pt Medium\";}\n"
+"#sampleTitle {color: #BD93F9;     font: 8pt \"Inter 24pt Medium\";}\n"
+"#analysisTitle {color: #F1FA8C;     font: 8pt \"Inter 24pt Medium\";}\n"
+"#reductionTitle {color: #FFB86C;     font: 8pt \"Inter 24pt Medium\";}\n"
+"QLabel {color: #A8ABB3;     font: 8pt \"Inter 24pt Medium\";}\n"
+"QPushButton {\n"
+"    border-radius: 5px;    \n"
+"    background-color: rgb(33, 37, 43);\n"
+"    color: #F8F8F2;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(40, 44, 52);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    border: 2px solid  #44475A;\n"
+"    background-color: rgb(33, 37, 43);\n"
+"}\n"
 "")
         self.verticalLayout = QtWidgets.QVBoxLayout(UserCard)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.bgCard = QtWidgets.QFrame(UserCard)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgCard.sizePolicy().hasHeightForWidth())
+        self.bgCard.setSizePolicy(sizePolicy)
         self.bgCard.setMinimumSize(QtCore.QSize(0, 50))
         self.bgCard.setMaximumSize(QtCore.QSize(16777215, 0))
         self.bgCard.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgCard.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgCard.setObjectName("bgCard")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.bgCard)
-        self.horizontalLayout.setContentsMargins(10, 8, 10, 10)
-        self.horizontalLayout.setSpacing(10)
+        self.horizontalLayout.setContentsMargins(10, 8, 10, 8)
+        self.horizontalLayout.setSpacing(5)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.panelAInfo = QtWidgets.QFrame(self.bgCard)
         self.panelAInfo.setMinimumSize(QtCore.QSize(0, 200))
@@ -124,7 +141,6 @@ class Ui_UserCard(object):
         self.panelDLayout.setObjectName("panelDLayout")
         self.reductionTitle = QtWidgets.QLabel(self.panelDInfo)
         self.reductionTitle.setText("")
-        self.reductionTitle.setWordWrap(True)
         self.reductionTitle.setObjectName("reductionTitle")
         self.panelDLayout.addWidget(self.reductionTitle)
         spacerItem4 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)

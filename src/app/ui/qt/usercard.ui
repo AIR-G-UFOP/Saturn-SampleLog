@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>578</width>
-    <height>51</height>
+    <height>50</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+   <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -33,14 +33,26 @@
   </property>
   <property name="styleSheet">
    <string notr="true">#bgCard {
-	background-color: #44475A;
+	background-color: #282A36;
 	border-radius: 10px;
 }
-#userTitle {color: #8BE9FD;}
-#sampleTitle {color: #BD93F9;}
-#analysisTitle {color: #F1FA8C;}
-#reductionTitle {color: #FFB86C;}
-QLabel {color: #A8ABB3;}
+#userTitle {color: #8BE9FD; 	font: 8pt &quot;Inter 24pt Medium&quot;;}
+#sampleTitle {color: #BD93F9; 	font: 8pt &quot;Inter 24pt Medium&quot;;}
+#analysisTitle {color: #F1FA8C; 	font: 8pt &quot;Inter 24pt Medium&quot;;}
+#reductionTitle {color: #FFB86C; 	font: 8pt &quot;Inter 24pt Medium&quot;;}
+QLabel {color: #A8ABB3; 	font: 8pt &quot;Inter 24pt Medium&quot;;}
+QPushButton {
+	border-radius: 5px;	
+	background-color: rgb(33, 37, 43);
+	color: #F8F8F2;
+}
+QPushButton:hover {
+	background-color: rgb(40, 44, 52);
+}
+QPushButton:pressed {
+	border: 2px solid  #44475A;
+	background-color: rgb(33, 37, 43);
+}
 </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -61,6 +73,12 @@ QLabel {color: #A8ABB3;}
    </property>
    <item alignment="Qt::AlignTop">
     <widget class="QFrame" name="bgCard">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -81,7 +99,7 @@ QLabel {color: #A8ABB3;}
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <property name="spacing">
-       <number>10</number>
+       <number>5</number>
       </property>
       <property name="leftMargin">
        <number>10</number>
@@ -93,7 +111,7 @@ QLabel {color: #A8ABB3;}
        <number>10</number>
       </property>
       <property name="bottomMargin">
-       <number>10</number>
+       <number>8</number>
       </property>
       <item>
        <widget class="QFrame" name="panelAInfo">
@@ -308,9 +326,6 @@ QLabel {color: #A8ABB3;}
           <widget class="QLabel" name="reductionTitle">
            <property name="text">
             <string/>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
            </property>
           </widget>
          </item>

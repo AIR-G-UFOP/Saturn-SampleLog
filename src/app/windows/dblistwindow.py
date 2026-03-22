@@ -25,6 +25,7 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.ui.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
         self.ui.panelArea.setWidgetResizable(True)
         self.ui.bgCardsLayout.addStretch()
+        self.ui.bgCardsLayout.setAlignment(QtCore.Qt.AlignTop)
 
         self.dbType = db_type
         self.userService = user_service

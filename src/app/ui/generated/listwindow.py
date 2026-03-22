@@ -17,7 +17,7 @@ class Ui_ListWindow(object):
         ListWindow.resize(801, 566)
         self.stylesheet = QtWidgets.QWidget(ListWindow)
         font = QtGui.QFont()
-        font.setFamily("Inter 24pt")
+        font.setFamily("Inter 24pt Medium")
         font.setPointSize(10)
         font.setBold(False)
         font.setItalic(False)
@@ -25,19 +25,18 @@ class Ui_ListWindow(object):
         self.stylesheet.setFont(font)
         self.stylesheet.setStyleSheet("QWidget{\n"
 "    color: #EAEAF0;\n"
-"    font: 10pt \"Inter 24pt\";\n"
+"    font: 10pt \"Inter 24pt Medium\";\n"
 "}\n"
 "/*Bg App */\n"
 "#bgApp {    \n"
-"    background-color: rgb(40, 44, 52);\n"
-"    border: 1px solid rgb(44, 49, 58);\n"
+"    background-color: #282A36;\n"
 "}\n"
 "\n"
 "/*Content App */\n"
 "#contentBottom {\n"
-"    background-color: rgb(33, 37, 43);\n"
-"    border-top-left-radius: 5px;\n"
-"    border-bottom-left-radius: 5px;\n"
+"    background-color: #19181f;\n"
+"    border-top-left-radius: 10px;\n"
+"    border-bottom-left-radius: 10px;\n"
 "}\n"
 "/* Top Buttons */\n"
 "#rightButtons .QPushButton { \n"
@@ -70,18 +69,18 @@ class Ui_ListWindow(object):
 "    background-repeat: no-repeat;\n"
 "}\n"
 "#titleLeftApp { \n"
-"    font: 10pt \"Inter 24pt\"; \n"
+"    font: 10pt \"Inter 24pt Medium\"; \n"
 "}\n"
 "#titleRightInfo { \n"
 "    padding-left: 10px; \n"
-"    font: 8pt \"Inter 24pt\"; \n"
+"    font: 8pt \"Inter 24pt Medium\"; \n"
 "}\n"
 "/* MENUS */\n"
 "#topMenu .QPushButton {    \n"
 "    border: none;\n"
 "    background-color: transparent;\n"
 "    text-align: left;\n"
-"    border-left: 17px solid transparent;\n"
+"    border-left: 18px solid transparent;\n"
 "}\n"
 "#topMenu .QPushButton:hover {\n"
 "    background-color: rgb(44, 49, 57); \n"
@@ -94,7 +93,7 @@ class Ui_ListWindow(object):
 "    border: none;\n"
 "    background-color:transparent;\n"
 "    text-align: left;\n"
-"    border-left: 17px solid transparent;\n"
+"    border-left: 18px solid transparent;\n"
 "}\n"
 "#bottomMenu .QPushButton:hover {\n"
 "    background-color: rgb(44, 49, 57); \n"
@@ -107,7 +106,7 @@ class Ui_ListWindow(object):
 "#toggleButton {\n"
 "    border: none;\n"
 "    text-align: left;\n"
-"    border-left: 17px solid transparent;\n"
+"    border-left: 18px solid transparent;\n"
 "    color: #A8ABB3;\n"
 "}\n"
 "#toggleButton:hover {\n"
@@ -204,7 +203,31 @@ class Ui_ListWindow(object):
 " QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
 "     background: none;\n"
 " }\n"
-"")
+"#contentStack {\n"
+"    background-color: transparent;\n"
+"}\n"
+"#bgUser {\n"
+"    background-color: #44475A;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"#bgAnalysis {\n"
+"    background-color: #44475A;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"#bgSample {\n"
+"    background-color: #44475A;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"#bgReduction {\n"
+"    background-color: #44475A;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"#contentStack {\n"
+"    background-color: transparent;\n"
+"}\n"
+"#scrollAreaWidgetContents {\n"
+"    background-color: transparent;\n"
+"}")
         self.stylesheet.setObjectName("stylesheet")
         self.shadow = QtWidgets.QVBoxLayout(self.stylesheet)
         self.shadow.setContentsMargins(10, 10, 10, 10)
@@ -244,7 +267,7 @@ class Ui_ListWindow(object):
         self.titleLeftApp = QtWidgets.QLabel(self.topLogoInfo)
         self.titleLeftApp.setGeometry(QtCore.QRect(50, 10, 101, 16))
         font = QtGui.QFont()
-        font.setFamily("Inter 24pt")
+        font.setFamily("Inter 24pt Medium")
         font.setPointSize(10)
         font.setBold(False)
         font.setItalic(False)
@@ -481,8 +504,6 @@ class Ui_ListWindow(object):
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.contentStack = QtWidgets.QStackedWidget(self.contentBottom)
-        self.contentStack.setStyleSheet("background-color: transparent;\n"
-"")
         self.contentStack.setObjectName("contentStack")
         self.lists = QtWidgets.QWidget()
         self.lists.setObjectName("lists")
@@ -495,7 +516,7 @@ class Ui_ListWindow(object):
         self.panelArea.setWidgetResizable(True)
         self.panelArea.setObjectName("panelArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 718, 479))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 720, 481))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
@@ -566,5 +587,5 @@ class Ui_ListWindow(object):
         self.btn_addAnalysis.setText(_translate("ListWindow", "    Add Analysis"))
         self.btn_addReductions.setText(_translate("ListWindow", "    Add Reduction"))
         self.btn_settings.setText(_translate("ListWindow", "    Settings"))
-        self.titleRightInfo.setText(_translate("ListWindow", "Laboratory manager"))
+        self.titleRightInfo.setText(_translate("ListWindow", "Laboratory Legacy"))
 from ..resources import resources

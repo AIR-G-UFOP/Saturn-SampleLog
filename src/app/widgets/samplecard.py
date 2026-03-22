@@ -55,15 +55,14 @@ class SampleCard(QtWidgets.QWidget):
             self.collapse()
 
     def expand(self):
-        self.card_max_height = self.ui.bgCard.layout().sizeHint().height()
+        self.card_max_height = get_maximum_height(self.ui.horizontalLayout)
         self.animation.setStartValue(CARD_MIN_HEIGHT)
         self.animation.setEndValue(self.card_max_height)
         self.animation.start()
 
-    def expand(self):
-        self.card_max_height = get_maximum_height(self.ui.horizontalLayout)
-        self.animation.setStartValue(CARD_MIN_HEIGHT)
-        self.animation.setEndValue(self.card_max_height)
+    def collapse(self):
+        self.animation.setStartValue(self.card_max_height)
+        self.animation.setEndValue(CARD_MIN_HEIGHT)
         self.animation.start()
 
     def user_info(self, user):
