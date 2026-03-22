@@ -36,21 +36,25 @@ class SampleService:
         # delete sample
         pass
 
-    def editSample(self, key, name, descript, status, add_date, prep, prep_comment, user):
-        # test key
-        if isinstance(user, UserService):
-            self.name = name
-            self.description = descript
-            self.status = status
-            self.date = add_date
-            self.preparation = prep
-            self.preparation_comment = prep_comment
-            # user here
-            # save sample to database using key
-        else:
-            raise Exception('Sample should have an User')
-            # call an "add user?"
-        # Edit sample
+    def editSample(self, sample_id, sample_info):
+        session = SessionLocal()
+        try:
+            sample = session.get(DbSample, sample_id)
+            sample.name = sample_info["name"]
+            sample.description = sample_info["description"]
+            sample.preparation = sample_info["preparation"]
+            sample.comment = sample_info["comment"]
+            sample.status = sample_info["status"]
+            sample.date = sample_info["date"]
+            sample.user_id = sample_info["user_id"]
+            session.commit()
+            return "Sample updated successfully."
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error updating Sample: {str(e)}", file=sys.stderr)
+            return "Error updating Sample. Please try again."
+        finally:
+            session.close()
 
     def getAllSamples(self):
         session = SessionLocal()
@@ -76,5 +80,13 @@ class SampleService:
                 .all()
             )
             return samples
+        finally:
+            session.close()
+
+    def findSampleById(self, sample_id):
+        session = SessionLocal()
+        try:
+            sample = session.get(DbSample, sample_id)
+            return sample
         finally:
             session.close()

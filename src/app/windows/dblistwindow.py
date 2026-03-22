@@ -1,12 +1,16 @@
 import os
 import sys
 from PyQt5 import QtWidgets, QtCore, QtGui
+from sqlalchemy.testing.pickleable import User
+
 from ..modules.ui_functions import UIFunctions
 from ..ui.generated.listwindow import Ui_ListWindow
 from ..widgets.usercard import UserCard
 from ..widgets.samplecard import SampleCard
 from ..widgets.analysiscard import AnalysisCard
 from ..widgets.reductioncard import ReductionCard
+from ..windows.edituser import EditUserWindow
+from ..widgets.overlay import LoadingOverlay
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"  # Auto-adjust based on system settings
@@ -32,6 +36,8 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.sampleService = sample_service
         self.analysisService = analysis_service
         self.reductionService = reduction_service
+        self.overlay = LoadingOverlay(self.ui.bgApp)
+        self.overlay.hide()
 
         self.DATA_MAP = {
             "user": (self.userService.getAllUsersFull, UserCard),
@@ -103,6 +109,7 @@ class DbListWindow(QtWidgets.QMainWindow):
         UIFunctions.resetStyle(self, btn_name)
         btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
+    @QtCore.pyqtSlot(object)
     def card_clicked(self, selected_card):
         for card in self.cards:
             if card == selected_card:
@@ -126,7 +133,24 @@ class DbListWindow(QtWidgets.QMainWindow):
             card = card_class(obj)
             self.add_card(card)
             card.clicked.connect(self.card_clicked)
+            card.edit_requested.connect(self.open_edit_dialog)
             self.cards.append(card)
 
     def add_card(self, card):
         self.ui.bgCardsLayout.insertWidget(self.ui.bgCardsLayout.count() - 1, card)
+
+    @QtCore.pyqtSlot(str, int)
+    def open_edit_dialog(self, db_type, db_id):
+        db_type_map = {
+            "user": EditUserWindow(self.userService, db_id),
+        }
+        self.overlay.show()
+        dialog = db_type_map[db_type]
+        dialog.setWindowModality(QtCore.Qt.WindowModal)
+        dialog.dialog_return.connect(self.return_edit_dialog)
+        dialog.show()
+
+    @QtCore.pyqtSlot()
+    def return_edit_dialog(self):
+        self.overlay.hide()
+        self.load_cards()

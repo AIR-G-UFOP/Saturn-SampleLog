@@ -1,11 +1,13 @@
 <RCC>
   <qresource prefix="imagem">
     <file>images/logo_big.png</file>
+    <file>images/saturn_png.png</file>
     <file>images/SATURN-horizontal.png</file>
     <file>images/saturn_logo.png</file>
     <file>images/SATURN-vertical2.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>icons/cill-edit.png</file>
     <file>icons/cil-settings.png</file>
     <file>icons/cil-checklist.png</file>
     <file>icons/cil-list-number.png</file>

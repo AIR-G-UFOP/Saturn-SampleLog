@@ -33,14 +33,24 @@ class UserService:
         # Delete user
         pass
 
-    def editUser(self, key, f_name, s_name, org, phone, email):
-        # Test key
-        self.first_name = f_name
-        self.surname = s_name
-        self.org = org
-        self.phone = phone
-        self.email = email
-        # edit user
+    def editUser(self, user_id, user_info):
+        session = SessionLocal()
+        try:
+            user = session.get(DbUser, user_id)
+            user.first_name = user_info["first_name"]
+            user.surname = user_info["surname"]
+            user.org = user_info["org"]
+            user.phone = user_info["phone"]
+            user.email = user_info["email"]
+            user.address = user_info["address"]
+            session.commit()
+            return "User updated successfully."
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error updating user: {str(e)}", file=sys.stderr)
+            return "Error updating user. Please try again."
+        finally:
+            session.close()
 
     def getAllUsers(self):
         session = SessionLocal()
@@ -66,5 +76,13 @@ class UserService:
                 .all()
             )
             return users
+        finally:
+            session.close()
+
+    def findUserById(self, user_id):
+        session = SessionLocal()
+        try:
+            user = session.get(DbUser, user_id)
+            return user
         finally:
             session.close()

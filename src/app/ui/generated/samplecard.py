@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_SampleCard(object):
     def setupUi(self, SampleCard):
         SampleCard.setObjectName("SampleCard")
-        SampleCard.resize(578, 51)
+        SampleCard.resize(578, 50)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -43,7 +43,17 @@ class Ui_SampleCard(object):
 "    border: 2px solid  #44475A;\n"
 "    background-color: rgb(33, 37, 43);\n"
 "}\n"
-"\n"
+"QPushButton {\n"
+"    border-radius: 5px;    \n"
+"    background-color: #6272A4;\n"
+"    color: #F8F8F2;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(123, 144, 206);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #6272A4;\n"
+"}\n"
 "")
         self.verticalLayout = QtWidgets.QVBoxLayout(SampleCard)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -65,7 +75,7 @@ class Ui_SampleCard(object):
         self.horizontalLayout.setSpacing(10)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.panelAInfo = QtWidgets.QFrame(self.bgCard)
-        self.panelAInfo.setMinimumSize(QtCore.QSize(0, 200))
+        self.panelAInfo.setMinimumSize(QtCore.QSize(0, 150))
         self.panelAInfo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.panelAInfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.panelAInfo.setObjectName("panelAInfo")
@@ -110,7 +120,7 @@ class Ui_SampleCard(object):
         self.panelALayout.addItem(spacerItem1)
         self.horizontalLayout.addWidget(self.panelAInfo)
         self.panelBInfo = QtWidgets.QFrame(self.bgCard)
-        self.panelBInfo.setMinimumSize(QtCore.QSize(0, 200))
+        self.panelBInfo.setMinimumSize(QtCore.QSize(0, 150))
         self.panelBInfo.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.panelBInfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.panelBInfo.setObjectName("panelBInfo")
@@ -147,7 +157,7 @@ class Ui_SampleCard(object):
         self.panelBLayout.addItem(spacerItem3)
         self.horizontalLayout.addWidget(self.panelBInfo)
         self.panelCnfo = QtWidgets.QFrame(self.bgCard)
-        self.panelCnfo.setMinimumSize(QtCore.QSize(0, 200))
+        self.panelCnfo.setMinimumSize(QtCore.QSize(0, 150))
         self.panelCnfo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.panelCnfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.panelCnfo.setObjectName("panelCnfo")
@@ -162,11 +172,12 @@ class Ui_SampleCard(object):
         self.panelCLayout.addItem(spacerItem4)
         self.horizontalLayout.addWidget(self.panelCnfo)
         self.panelDInfo = QtWidgets.QFrame(self.bgCard)
-        self.panelDInfo.setMinimumSize(QtCore.QSize(0, 200))
+        self.panelDInfo.setMinimumSize(QtCore.QSize(0, 150))
         self.panelDInfo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.panelDInfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.panelDInfo.setObjectName("panelDInfo")
         self.panelDLayout = QtWidgets.QVBoxLayout(self.panelDInfo)
+        self.panelDLayout.setContentsMargins(-1, -1, 0, 0)
         self.panelDLayout.setObjectName("panelDLayout")
         self.reductionTitle = QtWidgets.QLabel(self.panelDInfo)
         self.reductionTitle.setText("")
@@ -175,6 +186,16 @@ class Ui_SampleCard(object):
         self.panelDLayout.addWidget(self.reductionTitle)
         spacerItem5 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.panelDLayout.addItem(spacerItem5)
+        self.btn_editSample = QtWidgets.QPushButton(self.panelDInfo)
+        self.btn_editSample.setMinimumSize(QtCore.QSize(20, 20))
+        self.btn_editSample.setMaximumSize(QtCore.QSize(20, 20))
+        self.btn_editSample.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_editSample.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cill-edit.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_editSample.setIcon(icon)
+        self.btn_editSample.setObjectName("btn_editSample")
+        self.panelDLayout.addWidget(self.btn_editSample, 0, QtCore.Qt.AlignRight)
         self.horizontalLayout.addWidget(self.panelDInfo)
         self.verticalLayout.addWidget(self.bgCard, 0, QtCore.Qt.AlignTop)
 
@@ -184,3 +205,4 @@ class Ui_SampleCard(object):
     def retranslateUi(self, SampleCard):
         _translate = QtCore.QCoreApplication.translate
         SampleCard.setWindowTitle(_translate("SampleCard", "Form"))
+from app.ui.resources import resources

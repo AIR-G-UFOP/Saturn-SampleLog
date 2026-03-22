@@ -19,6 +19,8 @@ class ReductionCard(QtWidgets.QWidget):
         self.animation.setDuration(TIME_ANIMATION)
         self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
 
+        self.reduction_id = reduction.id
+
         self.users_number = 0
         self.card_max_height = 200
 
@@ -97,4 +99,4 @@ class ReductionCard(QtWidgets.QWidget):
         uname.setText(f"{user.first_name} {user.surname}")
         uname.setStyleSheet(CARD_SUBHEADING_TEXT_COLOUR)
         uname.setWordWrap(True)
-        self.ui.panelDLayout.addWidget(uname)
+        self.ui.panelDLayout.insertWidget(self.ui.panelDLayout.count() - 2, uname)

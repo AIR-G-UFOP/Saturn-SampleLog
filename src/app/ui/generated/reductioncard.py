@@ -33,16 +33,16 @@ class Ui_ReductionCard(object):
 "QLabel {color: #A8ABB3;     font: 8pt \"Inter 24pt Medium\";}\n"
 "QPushButton {\n"
 "    border-radius: 5px;    \n"
-"    background-color: rgb(33, 37, 43);\n"
+"    background-color: #6272A4;\n"
 "    color: #F8F8F2;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(40, 44, 52);\n"
+"    background-color: rgb(123, 144, 206);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"    border: 2px solid  #44475A;\n"
-"    background-color: rgb(33, 37, 43);\n"
+"    background-color: #6272A4;\n"
 "}\n"
+"\n"
 "\n"
 "")
         self.verticalLayout = QtWidgets.QVBoxLayout(ReductionCard)
@@ -162,11 +162,17 @@ class Ui_ReductionCard(object):
         self.panelCLayout.addItem(spacerItem4)
         self.horizontalLayout.addWidget(self.panelCnfo)
         self.panelDInfo = QtWidgets.QFrame(self.bgCard)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.panelDInfo.sizePolicy().hasHeightForWidth())
+        self.panelDInfo.setSizePolicy(sizePolicy)
         self.panelDInfo.setMinimumSize(QtCore.QSize(0, 200))
         self.panelDInfo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.panelDInfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.panelDInfo.setObjectName("panelDInfo")
         self.panelDLayout = QtWidgets.QVBoxLayout(self.panelDInfo)
+        self.panelDLayout.setContentsMargins(-1, -1, 0, 0)
         self.panelDLayout.setObjectName("panelDLayout")
         self.userTitle = QtWidgets.QLabel(self.panelDInfo)
         self.userTitle.setMinimumSize(QtCore.QSize(0, 0))
@@ -176,6 +182,17 @@ class Ui_ReductionCard(object):
         self.panelDLayout.addWidget(self.userTitle)
         spacerItem5 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.panelDLayout.addItem(spacerItem5)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.panelDLayout.addItem(spacerItem6)
+        self.btn_editReduction = QtWidgets.QPushButton(self.panelDInfo)
+        self.btn_editReduction.setMinimumSize(QtCore.QSize(20, 20))
+        self.btn_editReduction.setMaximumSize(QtCore.QSize(20, 20))
+        self.btn_editReduction.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cill-edit.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_editReduction.setIcon(icon)
+        self.btn_editReduction.setObjectName("btn_editReduction")
+        self.panelDLayout.addWidget(self.btn_editReduction, 0, QtCore.Qt.AlignRight)
         self.horizontalLayout.addWidget(self.panelDInfo)
         self.verticalLayout.addWidget(self.bgCard, 0, QtCore.Qt.AlignTop)
 
@@ -185,3 +202,4 @@ class Ui_ReductionCard(object):
     def retranslateUi(self, ReductionCard):
         _translate = QtCore.QCoreApplication.translate
         ReductionCard.setWindowTitle(_translate("ReductionCard", "Form"))
+from app.ui.resources import resources

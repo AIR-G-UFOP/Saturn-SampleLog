@@ -14,9 +14,13 @@ background-color: rgb(33, 37, 43);
 """
 CARD_MIN_HEIGHT = 50
 CARD_HOVER_STYLESHEET = """
+#bgCard {
 background-color: #343746;
+}
 """
 CARD_NORMAL_STYLESHEET = """
+#bgCard {
 background-color: #282A36;
+}
 """
 CARD_SUBHEADING_TEXT_COLOUR = "color: #F8F8F2"

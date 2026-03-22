@@ -32,26 +32,36 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#bgCard {
+   <string notr="true">QWidget {
+font: 8pt &quot;Inter 24pt Medium&quot;;
+}
+QToolTip {
+	color: #ffffff;
+	background-color: #282A36;
+	border-left: 2px solid #ff5555;
+	text-align: left;
+	padding-left: 8px;
+	margin: 0px;
+}
+#bgCard {
 	background-color: #282A36;
 	border-radius: 10px;
 }
-#userTitle {color: #8BE9FD; 	font: 8pt &quot;Inter 24pt Medium&quot;;}
-#sampleTitle {color: #BD93F9; 	font: 8pt &quot;Inter 24pt Medium&quot;;}
-#analysisTitle {color: #F1FA8C; 	font: 8pt &quot;Inter 24pt Medium&quot;;}
-#reductionTitle {color: #FFB86C; 	font: 8pt &quot;Inter 24pt Medium&quot;;}
-QLabel {color: #A8ABB3; 	font: 8pt &quot;Inter 24pt Medium&quot;;}
+#userTitle {color: #8BE9FD; 	}
+#sampleTitle {color: #BD93F9; 	}
+#analysisTitle {color: #F1FA8C; }
+#reductionTitle {color: #FFB86C; }
+QLabel {color: #A8ABB3; }
 QPushButton {
 	border-radius: 5px;	
-	background-color: rgb(33, 37, 43);
+	background-color: #6272A4;
 	color: #F8F8F2;
 }
 QPushButton:hover {
-	background-color: rgb(40, 44, 52);
+	background-color: rgb(123, 144, 206);
 }
 QPushButton:pressed {
-	border: 2px solid  #44475A;
-	background-color: rgb(33, 37, 43);
+	background-color: #6272A4;
 }
 </string>
   </property>
@@ -97,9 +107,9 @@ QPushButton:pressed {
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="bgLayout">
       <property name="spacing">
-       <number>5</number>
+       <number>10</number>
       </property>
       <property name="leftMargin">
        <number>10</number>
@@ -111,10 +121,16 @@ QPushButton:pressed {
        <number>10</number>
       </property>
       <property name="bottomMargin">
-       <number>8</number>
+       <number>10</number>
       </property>
       <item>
        <widget class="QFrame" name="panelAInfo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -128,6 +144,21 @@ QPushButton:pressed {
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QVBoxLayout" name="panelALayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>9</number>
+         </property>
+         <property name="topMargin">
+          <number>9</number>
+         </property>
+         <property name="rightMargin">
+          <number>9</number>
+         </property>
+         <property name="bottomMargin">
+          <number>9</number>
+         </property>
          <item>
           <widget class="QLabel" name="userTitle">
            <property name="minimumSize">
@@ -221,6 +252,12 @@ QPushButton:pressed {
       </item>
       <item>
        <widget class="QFrame" name="panelBInfo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -228,12 +265,27 @@ QPushButton:pressed {
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::NoFrame</enum>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QVBoxLayout" name="panelBLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>9</number>
+         </property>
+         <property name="topMargin">
+          <number>9</number>
+         </property>
+         <property name="rightMargin">
+          <number>9</number>
+         </property>
+         <property name="bottomMargin">
+          <number>9</number>
+         </property>
          <item>
           <widget class="QLabel" name="sampleTitle">
            <property name="text">
@@ -254,7 +306,7 @@ QPushButton:pressed {
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>20</width>
+             <width>10</width>
              <height>10</height>
             </size>
            </property>
@@ -265,6 +317,12 @@ QPushButton:pressed {
       </item>
       <item>
        <widget class="QFrame" name="panelCnfo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -278,6 +336,21 @@ QPushButton:pressed {
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QVBoxLayout" name="panelCLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>9</number>
+         </property>
+         <property name="topMargin">
+          <number>9</number>
+         </property>
+         <property name="rightMargin">
+          <number>9</number>
+         </property>
+         <property name="bottomMargin">
+          <number>9</number>
+         </property>
          <item>
           <widget class="QLabel" name="analysisTitle">
            <property name="text">
@@ -309,6 +382,12 @@ QPushButton:pressed {
       </item>
       <item>
        <widget class="QFrame" name="panelDInfo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -322,6 +401,21 @@ QPushButton:pressed {
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QVBoxLayout" name="panelDLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>9</number>
+         </property>
+         <property name="topMargin">
+          <number>9</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QLabel" name="reductionTitle">
            <property name="text">
@@ -345,6 +439,45 @@ QPushButton:pressed {
            </property>
           </spacer>
          </item>
+         <item>
+          <spacer name="verticalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item alignment="Qt::AlignRight">
+          <widget class="QPushButton" name="btn_editUser">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/resources.qrc">
+             <normaloff>:/icons/icons/cill-edit.png</normaloff>:/icons/icons/cill-edit.png</iconset>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
@@ -353,6 +486,8 @@ QPushButton:pressed {
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

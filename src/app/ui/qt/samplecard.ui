@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>578</width>
-    <height>51</height>
+    <height>50</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -53,7 +53,17 @@ QPushButton:pressed {
 	border: 2px solid  #44475A;
 	background-color: rgb(33, 37, 43);
 }
-
+QPushButton {
+	border-radius: 5px;	
+	background-color: #6272A4;
+	color: #F8F8F2;
+}
+QPushButton:hover {
+	background-color: rgb(123, 144, 206);
+}
+QPushButton:pressed {
+	background-color: #6272A4;
+}
 </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -119,7 +129,7 @@ QPushButton:pressed {
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>200</height>
+          <height>150</height>
          </size>
         </property>
         <property name="frameShape">
@@ -238,7 +248,7 @@ QPushButton:pressed {
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>200</height>
+          <height>150</height>
          </size>
         </property>
         <property name="frameShape">
@@ -335,7 +345,7 @@ QPushButton:pressed {
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>200</height>
+          <height>150</height>
          </size>
         </property>
         <property name="frameShape">
@@ -379,7 +389,7 @@ QPushButton:pressed {
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>200</height>
+          <height>150</height>
          </size>
         </property>
         <property name="frameShape">
@@ -389,6 +399,12 @@ QPushButton:pressed {
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QVBoxLayout" name="panelDLayout">
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QLabel" name="reductionTitle">
            <property name="text">
@@ -415,6 +431,32 @@ QPushButton:pressed {
            </property>
           </spacer>
          </item>
+         <item alignment="Qt::AlignRight">
+          <widget class="QPushButton" name="btn_editSample">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/resources.qrc">
+             <normaloff>:/icons/icons/cill-edit.png</normaloff>:/icons/icons/cill-edit.png</iconset>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
@@ -423,6 +465,8 @@ QPushButton:pressed {
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

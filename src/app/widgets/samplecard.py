@@ -7,6 +7,7 @@ from ..utils.utils import get_maximum_height
 
 class SampleCard(QtWidgets.QWidget):
     clicked = QtCore.pyqtSignal(object)
+    edit_requested = QtCore.pyqtSignal(str, int)
 
     def __init__(self, sample):
         super(SampleCard, self).__init__()
@@ -14,6 +15,8 @@ class SampleCard(QtWidgets.QWidget):
         self.ui.setupUi(self)
         self.setMouseTracking(True)
         self.ui.bgCard.setMouseTracking(True)
+
+        self.sample_id = sample.id
 
         self.reductions_number = 0
         self.card_max_height = 200
@@ -31,10 +34,11 @@ class SampleCard(QtWidgets.QWidget):
         self.user_info(sample.users)
         self.analyses_info(sample.analyses)
 
-
         self.ui.reductionTitle.setText(f"{self.reductions_number} Reductions")
         spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.ui.panelDLayout.addItem(spacer)
+
+        self.ui.btn_editSample.clicked.connect(self.edit_sample)
 
     def mousePressEvent(self, event):
         self.clicked.emit(self)
@@ -105,6 +109,11 @@ class SampleCard(QtWidgets.QWidget):
             rdate = QtWidgets.QLabel(self)
             rdate.setText(reduction.date.strftime("%d-%m-%Y"))
             rdate.setWordWrap(True)
-            self.ui.panelDLayout.addWidget(rname)
-            self.ui.panelDLayout.addWidget(rstatus)
-            self.ui.panelDLayout.addWidget(rdate)
+            labels = [rname, rstatus, rdate]
+            position = self.ui.panelDLayout.count() - 1
+            for label in labels:
+                self.ui.panelDLayout.insertWidget(position, label)
+                position += 1
+
+    def edit_sample(self):
+        self.edit_requested.emit("sample", self.sample_id)

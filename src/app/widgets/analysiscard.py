@@ -19,6 +19,8 @@ class AnalysisCard(QtWidgets.QWidget):
         self.animation.setDuration(TIME_ANIMATION)
         self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
 
+        self.analysis_id = analysis.id
+
         self.users_number = 0
         self.reductions_number = 0
 
@@ -94,7 +96,7 @@ class AnalysisCard(QtWidgets.QWidget):
         uname.setText(f"{user.first_name} {user.surname}")
         uname.setStyleSheet(CARD_SUBHEADING_TEXT_COLOUR)
         uname.setWordWrap(True)
-        self.ui.panelDLayout.addWidget(uname)
+        self.ui.panelDLayout.insertWidget(self.ui.panelDLayout.count() - 1, uname)
 
     def reduction_info(self, reduction):
         if reduction:

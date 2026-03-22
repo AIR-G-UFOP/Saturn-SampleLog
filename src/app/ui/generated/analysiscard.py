@@ -33,15 +33,14 @@ class Ui_AnalysisCard(object):
 "QLabel {color: #A8ABB3;     font: 8pt \"Inter 24pt Medium\";}\n"
 "QPushButton {\n"
 "    border-radius: 5px;    \n"
-"    background-color: rgb(33, 37, 43);\n"
+"    background-color: #6272A4;\n"
 "    color: #F8F8F2;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(40, 44, 52);\n"
+"    background-color: rgb(123, 144, 206);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"    border: 2px solid  #44475A;\n"
-"    background-color: rgb(33, 37, 43);\n"
+"    background-color: #6272A4;\n"
 "}\n"
 "\n"
 "")
@@ -148,6 +147,7 @@ class Ui_AnalysisCard(object):
         self.panelDInfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.panelDInfo.setObjectName("panelDInfo")
         self.panelDLayout = QtWidgets.QVBoxLayout(self.panelDInfo)
+        self.panelDLayout.setContentsMargins(-1, -1, 0, 0)
         self.panelDLayout.setObjectName("panelDLayout")
         self.userTitle = QtWidgets.QLabel(self.panelDInfo)
         self.userTitle.setMinimumSize(QtCore.QSize(0, 0))
@@ -157,6 +157,15 @@ class Ui_AnalysisCard(object):
         self.panelDLayout.addWidget(self.userTitle)
         spacerItem4 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.panelDLayout.addItem(spacerItem4)
+        self.btn_editAnalysis = QtWidgets.QPushButton(self.panelDInfo)
+        self.btn_editAnalysis.setMinimumSize(QtCore.QSize(20, 20))
+        self.btn_editAnalysis.setMaximumSize(QtCore.QSize(20, 20))
+        self.btn_editAnalysis.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cill-edit.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_editAnalysis.setIcon(icon)
+        self.btn_editAnalysis.setObjectName("btn_editAnalysis")
+        self.panelDLayout.addWidget(self.btn_editAnalysis, 0, QtCore.Qt.AlignRight)
         self.horizontalLayout.addWidget(self.panelDInfo)
         self.verticalLayout.addWidget(self.bgCard, 0, QtCore.Qt.AlignTop)
 
@@ -166,3 +175,4 @@ class Ui_AnalysisCard(object):
     def retranslateUi(self, AnalysisCard):
         _translate = QtCore.QCoreApplication.translate
         AnalysisCard.setWindowTitle(_translate("AnalysisCard", "Form"))
+from app.ui.resources import resources

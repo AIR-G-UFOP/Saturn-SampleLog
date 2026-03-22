@@ -7,6 +7,7 @@ from ..utils.utils import get_maximum_height
 
 class UserCard(QtWidgets.QWidget):
     clicked = QtCore.pyqtSignal(object)
+    edit_requested = QtCore.pyqtSignal(str, int)
 
     def __init__(self, user):
         super(UserCard, self).__init__()
@@ -18,6 +19,8 @@ class UserCard(QtWidgets.QWidget):
         self.animation = QtCore.QPropertyAnimation(self.ui.bgCard, b"minimumHeight")
         self.animation.setDuration(TIME_ANIMATION)
         self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+
+        self.user_id = user.id
 
         self.ui.userTitle.setText(f"{user.first_name} {user.surname}")
         self.ui.userOrg.setText(f"{user.org}")
@@ -39,6 +42,8 @@ class UserCard(QtWidgets.QWidget):
         spacer2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.ui.panelDLayout.addItem(spacer2)
 
+        self.ui.btn_editUser.clicked.connect(self.edit_user)
+
     def mousePressEvent(self, event):
         self.clicked.emit(self)
         super(UserCard, self).mousePressEvent(event)
@@ -58,7 +63,7 @@ class UserCard(QtWidgets.QWidget):
             self.collapse()
 
     def expand(self):
-        self.card_max_height = get_maximum_height(self.ui.horizontalLayout)
+        self.card_max_height = get_maximum_height(self.ui.bgLayout)
         self.animation.setStartValue(CARD_MIN_HEIGHT)
         self.animation.setEndValue(self.card_max_height)
         self.animation.start()
@@ -117,6 +122,11 @@ class UserCard(QtWidgets.QWidget):
             rdate = QtWidgets.QLabel(self)
             rdate.setText(reduction.date.strftime("%d-%m-%Y"))
             rdate.setWordWrap(True)
-            self.ui.panelDLayout.addWidget(rname)
-            self.ui.panelDLayout.addWidget(rstatus)
-            self.ui.panelDLayout.addWidget(rdate)
+            labels = [rname, rstatus, rdate]
+            position = self.ui.panelDLayout.count() - 1
+            for label in labels:
+                self.ui.panelDLayout.insertWidget(position, label)
+                position += 1
+
+    def edit_user(self):
+        self.edit_requested.emit("user", self.user_id)

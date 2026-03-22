@@ -22,26 +22,36 @@ class Ui_UserCard(object):
         UserCard.setSizePolicy(sizePolicy)
         UserCard.setMinimumSize(QtCore.QSize(0, 50))
         UserCard.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        UserCard.setStyleSheet("#bgCard {\n"
+        UserCard.setStyleSheet("QWidget {\n"
+"font: 8pt \"Inter 24pt Medium\";\n"
+"}\n"
+"QToolTip {\n"
+"    color: #ffffff;\n"
+"    background-color: #282A36;\n"
+"    border-left: 2px solid #ff5555;\n"
+"    text-align: left;\n"
+"    padding-left: 8px;\n"
+"    margin: 0px;\n"
+"}\n"
+"#bgCard {\n"
 "    background-color: #282A36;\n"
 "    border-radius: 10px;\n"
 "}\n"
-"#userTitle {color: #8BE9FD;     font: 8pt \"Inter 24pt Medium\";}\n"
-"#sampleTitle {color: #BD93F9;     font: 8pt \"Inter 24pt Medium\";}\n"
-"#analysisTitle {color: #F1FA8C;     font: 8pt \"Inter 24pt Medium\";}\n"
-"#reductionTitle {color: #FFB86C;     font: 8pt \"Inter 24pt Medium\";}\n"
-"QLabel {color: #A8ABB3;     font: 8pt \"Inter 24pt Medium\";}\n"
+"#userTitle {color: #8BE9FD;     }\n"
+"#sampleTitle {color: #BD93F9;     }\n"
+"#analysisTitle {color: #F1FA8C; }\n"
+"#reductionTitle {color: #FFB86C; }\n"
+"QLabel {color: #A8ABB3; }\n"
 "QPushButton {\n"
 "    border-radius: 5px;    \n"
-"    background-color: rgb(33, 37, 43);\n"
+"    background-color: #6272A4;\n"
 "    color: #F8F8F2;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(40, 44, 52);\n"
+"    background-color: rgb(123, 144, 206);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"    border: 2px solid  #44475A;\n"
-"    background-color: rgb(33, 37, 43);\n"
+"    background-color: #6272A4;\n"
 "}\n"
 "")
         self.verticalLayout = QtWidgets.QVBoxLayout(UserCard)
@@ -59,16 +69,18 @@ class Ui_UserCard(object):
         self.bgCard.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgCard.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgCard.setObjectName("bgCard")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.bgCard)
-        self.horizontalLayout.setContentsMargins(10, 8, 10, 8)
-        self.horizontalLayout.setSpacing(5)
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.bgLayout = QtWidgets.QHBoxLayout(self.bgCard)
+        self.bgLayout.setContentsMargins(10, 8, 10, 10)
+        self.bgLayout.setSpacing(10)
+        self.bgLayout.setObjectName("bgLayout")
         self.panelAInfo = QtWidgets.QFrame(self.bgCard)
-        self.panelAInfo.setMinimumSize(QtCore.QSize(0, 200))
+        self.panelAInfo.setMinimumSize(QtCore.QSize(0, 150))
         self.panelAInfo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.panelAInfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.panelAInfo.setObjectName("panelAInfo")
         self.panelALayout = QtWidgets.QVBoxLayout(self.panelAInfo)
+        self.panelALayout.setContentsMargins(9, 9, 9, 9)
+        self.panelALayout.setSpacing(6)
         self.panelALayout.setObjectName("panelALayout")
         self.userTitle = QtWidgets.QLabel(self.panelAInfo)
         self.userTitle.setMinimumSize(QtCore.QSize(0, 0))
@@ -101,28 +113,32 @@ class Ui_UserCard(object):
         self.panelALayout.addWidget(self.userEmail)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.panelALayout.addItem(spacerItem1)
-        self.horizontalLayout.addWidget(self.panelAInfo)
+        self.bgLayout.addWidget(self.panelAInfo)
         self.panelBInfo = QtWidgets.QFrame(self.bgCard)
-        self.panelBInfo.setMinimumSize(QtCore.QSize(0, 200))
-        self.panelBInfo.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.panelBInfo.setMinimumSize(QtCore.QSize(0, 150))
+        self.panelBInfo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.panelBInfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.panelBInfo.setObjectName("panelBInfo")
         self.panelBLayout = QtWidgets.QVBoxLayout(self.panelBInfo)
+        self.panelBLayout.setContentsMargins(9, 9, 9, 9)
+        self.panelBLayout.setSpacing(6)
         self.panelBLayout.setObjectName("panelBLayout")
         self.sampleTitle = QtWidgets.QLabel(self.panelBInfo)
         self.sampleTitle.setText("")
         self.sampleTitle.setWordWrap(True)
         self.sampleTitle.setObjectName("sampleTitle")
         self.panelBLayout.addWidget(self.sampleTitle)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem2 = QtWidgets.QSpacerItem(10, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.panelBLayout.addItem(spacerItem2)
-        self.horizontalLayout.addWidget(self.panelBInfo)
+        self.bgLayout.addWidget(self.panelBInfo)
         self.panelCnfo = QtWidgets.QFrame(self.bgCard)
-        self.panelCnfo.setMinimumSize(QtCore.QSize(0, 200))
+        self.panelCnfo.setMinimumSize(QtCore.QSize(0, 150))
         self.panelCnfo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.panelCnfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.panelCnfo.setObjectName("panelCnfo")
         self.panelCLayout = QtWidgets.QVBoxLayout(self.panelCnfo)
+        self.panelCLayout.setContentsMargins(9, 9, 9, 9)
+        self.panelCLayout.setSpacing(6)
         self.panelCLayout.setObjectName("panelCLayout")
         self.analysisTitle = QtWidgets.QLabel(self.panelCnfo)
         self.analysisTitle.setText("")
@@ -131,13 +147,15 @@ class Ui_UserCard(object):
         self.panelCLayout.addWidget(self.analysisTitle)
         spacerItem3 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.panelCLayout.addItem(spacerItem3)
-        self.horizontalLayout.addWidget(self.panelCnfo)
+        self.bgLayout.addWidget(self.panelCnfo)
         self.panelDInfo = QtWidgets.QFrame(self.bgCard)
-        self.panelDInfo.setMinimumSize(QtCore.QSize(0, 200))
+        self.panelDInfo.setMinimumSize(QtCore.QSize(0, 150))
         self.panelDInfo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.panelDInfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.panelDInfo.setObjectName("panelDInfo")
         self.panelDLayout = QtWidgets.QVBoxLayout(self.panelDInfo)
+        self.panelDLayout.setContentsMargins(9, 9, 0, 0)
+        self.panelDLayout.setSpacing(6)
         self.panelDLayout.setObjectName("panelDLayout")
         self.reductionTitle = QtWidgets.QLabel(self.panelDInfo)
         self.reductionTitle.setText("")
@@ -145,7 +163,17 @@ class Ui_UserCard(object):
         self.panelDLayout.addWidget(self.reductionTitle)
         spacerItem4 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.panelDLayout.addItem(spacerItem4)
-        self.horizontalLayout.addWidget(self.panelDInfo)
+        self.btn_editUser = QtWidgets.QPushButton(self.panelDInfo)
+        self.btn_editUser.setMinimumSize(QtCore.QSize(20, 20))
+        self.btn_editUser.setMaximumSize(QtCore.QSize(20, 20))
+        self.btn_editUser.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_editUser.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cill-edit.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_editUser.setIcon(icon)
+        self.btn_editUser.setObjectName("btn_editUser")
+        self.panelDLayout.addWidget(self.btn_editUser, 0, QtCore.Qt.AlignRight)
+        self.bgLayout.addWidget(self.panelDInfo)
         self.verticalLayout.addWidget(self.bgCard, 0, QtCore.Qt.AlignTop)
 
         self.retranslateUi(UserCard)
@@ -154,3 +182,4 @@ class Ui_UserCard(object):
     def retranslateUi(self, UserCard):
         _translate = QtCore.QCoreApplication.translate
         UserCard.setWindowTitle(_translate("UserCard", "Form"))
+from ..resources import resources
