@@ -1,7 +1,7 @@
 import os
 import sys
 from PyQt5 import QtCore, QtWidgets, QtGui
-from ..ui.generated.edituserwindow import Ui_EditUserWindow
+from ..ui.generated.edituserdialog import Ui_EditUserDialog
 from ..modules.ui_functions import UIFunctions
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
@@ -10,13 +10,13 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
 QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
-class EditUserWindow(QtWidgets.QMainWindow):
+class EditUserWindow(QtWidgets.QDialog):
     dialog_return = QtCore.pyqtSignal()
 
     def __init__(self, user_service, user_id):
         super(EditUserWindow, self).__init__()
 
-        self.ui = Ui_EditUserWindow()
+        self.ui = Ui_EditUserDialog()
         self.ui.setupUi(self)
         self.setWindowTitle("Edit User information")
         UIFunctions.uiDefinitions(self)
@@ -60,7 +60,7 @@ class EditUserWindow(QtWidgets.QMainWindow):
             self.status_message(result)
         except Exception as e:
             print(e)
-            # self.status_message(e)
+            self.status_message("Something went wrong.")
 
     def validate_fields(self):
         valid = True

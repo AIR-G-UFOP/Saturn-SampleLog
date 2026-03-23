@@ -9,8 +9,10 @@ from ..widgets.usercard import UserCard
 from ..widgets.samplecard import SampleCard
 from ..widgets.analysiscard import AnalysisCard
 from ..widgets.reductioncard import ReductionCard
-from ..windows.edituser import EditUserWindow
 from ..widgets.overlay import LoadingOverlay
+from ..windows.edituser import EditUserWindow
+from .editsample import EditSampleWindow
+
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"  # Auto-adjust based on system settings
@@ -143,12 +145,13 @@ class DbListWindow(QtWidgets.QMainWindow):
     def open_edit_dialog(self, db_type, db_id):
         db_type_map = {
             "user": EditUserWindow(self.userService, db_id),
+            "sample": EditSampleWindow(self.sampleService, db_id, self.userService),
         }
         self.overlay.show()
         dialog = db_type_map[db_type]
         dialog.setWindowModality(QtCore.Qt.WindowModal)
         dialog.dialog_return.connect(self.return_edit_dialog)
-        dialog.show()
+        dialog.exec_()
 
     @QtCore.pyqtSlot()
     def return_edit_dialog(self):
