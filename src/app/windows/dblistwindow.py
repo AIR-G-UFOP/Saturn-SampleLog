@@ -10,8 +10,9 @@ from ..widgets.samplecard import SampleCard
 from ..widgets.analysiscard import AnalysisCard
 from ..widgets.reductioncard import ReductionCard
 from ..widgets.overlay import LoadingOverlay
-from ..windows.edituser import EditUserWindow
+from .edituser import EditUserWindow
 from .editsample import EditSampleWindow
+from .editanalysis import EditAnalysisWindow
 
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
@@ -146,6 +147,7 @@ class DbListWindow(QtWidgets.QMainWindow):
         db_type_map = {
             "user": EditUserWindow(self.userService, db_id),
             "sample": EditSampleWindow(self.sampleService, db_id, self.userService),
+            "analysis": EditAnalysisWindow(self.analysisService, db_id, self.sampleService),
         }
         self.overlay.show()
         dialog = db_type_map[db_type]

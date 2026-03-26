@@ -1,4 +1,6 @@
 import sys
+
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import selectinload
 from ..db.session import SessionLocal
 from ..db.models import DbAnalysis, DbSample
@@ -35,8 +37,27 @@ class AnalysisService:
         # delete analysis
         pass
 
-    def editAnalysis(self):
-        pass
+    def editAnalysis(self, analysis_id, analysis_info, sample_ids):
+        session = SessionLocal()
+        try:
+            analysis = session.get(DbAnalysis, analysis_id)
+            analysis.method = analysis_info["method"]
+            analysis.equipment = analysis_info["equipment"]
+            analysis.conditions = analysis_info["conditions"]
+            analysis.operator = analysis_info["operator"]
+            analysis.date = analysis_info["date"]
+            analysis.file_name = analysis_info["file_name"]
+            analysis.status = analysis_info["status"]
+            samples = session.query(DbSample).filter(DbSample.id.in_(sample_ids)).all()
+            analysis.samples = samples
+            session.commit()
+            return "Analysis updated successfully."
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error updating Analysis: {str(e)}", file=sys.stderr)
+            return f"Error updating Analysis. Please try again."
+        finally:
+            session.close()
 
     def getAllAnalyses(self):
         session = SessionLocal()
@@ -60,6 +81,21 @@ class AnalysisService:
                     selectinload(DbAnalysis.reduction)
                 )
                 .all()
+            )
+            return analyses
+        finally:
+            session.close()
+
+    def findAnalysisById(self, analysis_id):
+        session = SessionLocal()
+        try:
+            analyses = (
+                session.query(DbAnalysis)
+                .options(
+                    selectinload(DbAnalysis.samples)
+                )
+                .filter(DbAnalysis.id == analysis_id)
+                .first()
             )
             return analyses
         finally:

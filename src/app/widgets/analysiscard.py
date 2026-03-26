@@ -7,6 +7,7 @@ from ..utils.utils import get_maximum_height
 
 class AnalysisCard(QtWidgets.QWidget):
     clicked = QtCore.pyqtSignal(object)
+    edit_requested = QtCore.pyqtSignal(str, int)
 
     def __init__(self, analysis):
         super(AnalysisCard, self).__init__()
@@ -40,6 +41,8 @@ class AnalysisCard(QtWidgets.QWidget):
         self.ui.reductionTitle.setText(f"{self.reductions_number} Reductions")
         spacer1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.ui.panelCLayout.addItem(spacer1)
+
+        self.ui.btn_editAnalysis.clicked.connect(self.edit_analysis)
 
     def mousePressEvent(self, event):
         self.clicked.emit(self)
@@ -114,3 +117,6 @@ class AnalysisCard(QtWidgets.QWidget):
             self.ui.panelCLayout.addWidget(rname)
             self.ui.panelCLayout.addWidget(rstatus)
             self.ui.panelCLayout.addWidget(rdate)
+
+    def edit_analysis(self):
+        self.edit_requested.emit("analysis", self.analysis_id)
