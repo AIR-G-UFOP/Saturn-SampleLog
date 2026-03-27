@@ -65,9 +65,10 @@ class SampleCard(QtWidgets.QWidget):
         self.animation.start()
 
     def collapse(self):
-        self.animation.setStartValue(self.card_max_height)
-        self.animation.setEndValue(CARD_MIN_HEIGHT)
-        self.animation.start()
+        if self.ui.bgCard.height() != CARD_MIN_HEIGHT:
+            self.animation.setStartValue(self.card_max_height)
+            self.animation.setEndValue(CARD_MIN_HEIGHT)
+            self.animation.start()
 
     def user_info(self, user):
         self.ui.userTitle.setText(f"{user.first_name} {user.surname}")

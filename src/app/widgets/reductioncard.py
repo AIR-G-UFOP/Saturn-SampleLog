@@ -66,9 +66,10 @@ class ReductionCard(QtWidgets.QWidget):
         self.animation.start()
 
     def collapse(self):
-        self.animation.setStartValue(self.card_max_height)
-        self.animation.setEndValue(CARD_MIN_HEIGHT)
-        self.animation.start()
+        if self.ui.bgCard.height() != CARD_MIN_HEIGHT:
+            self.animation.setStartValue(self.card_max_height)
+            self.animation.setEndValue(CARD_MIN_HEIGHT)
+            self.animation.start()
 
     def analysis_info(self, analysis):
         self.ui.analysisTitle.setText(analysis.method)

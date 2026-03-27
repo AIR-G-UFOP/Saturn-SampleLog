@@ -92,7 +92,7 @@ class SampleWindow(QtWidgets.QMainWindow):
     def reset_fields(self):
         self.ui.sampleName.clear()
         self.ui.sampleDescription.clear()
-        self.ui.userName.clear()
+        self.ui.userName.setCurrentIndex(0)
         self.ui.date.clear()
         self.ui.prepYes.setChecked(False)
         self.ui.instructions.clear()

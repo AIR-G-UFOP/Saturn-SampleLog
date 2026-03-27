@@ -69,9 +69,10 @@ class AnalysisCard(QtWidgets.QWidget):
         self.animation.start()
 
     def collapse(self):
-        self.animation.setStartValue(self.card_max_height)
-        self.animation.setEndValue(CARD_MIN_HEIGHT)
-        self.animation.start()
+        if self.ui.bgCard.height() != CARD_MIN_HEIGHT:
+            self.animation.setStartValue(self.card_max_height)
+            self.animation.setEndValue(CARD_MIN_HEIGHT)
+            self.animation.start()
 
     def samples_info(self, samples):
         self.ui.sampleTitle.setText(f"{len(samples)} Samples")
