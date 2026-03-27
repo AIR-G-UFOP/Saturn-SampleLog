@@ -1,4 +1,6 @@
 import sys
+
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import selectinload
 from ..db.session import SessionLocal
 from ..db.models import DbReduction, DbAnalysis, DbSample
@@ -30,8 +32,27 @@ class ReductionService:
         finally:
             session.close()
 
-    def editReduction(self):
-        pass
+    def editReduction(self, reduction_id, reduction_info):
+        session = SessionLocal()
+        try:
+            reduction = session.get(DbReduction, reduction_id)
+            reduction.reduction_name = reduction_info['reduction_name']
+            reduction.software = reduction_info['software']
+            reduction.software_version = reduction_info['version']
+            reduction.handler = reduction_info['handler']
+            reduction.date = reduction_info['date']
+            reduction.notes = reduction_info['notes']
+            reduction.file_id = reduction_info['file_id']
+            reduction.analysis_id = reduction_info['analysis_id']
+            reduction.status = reduction_info['status']
+            session.commit()
+            return "Reduction updated successfully."
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error updating reduction: {str(e)}", file=sys.stderr)
+            return "Error updating reduction. Please try again."
+        finally:
+            session.close()
 
     def removeReduction(self):
         pass
@@ -60,5 +81,13 @@ class ReductionService:
                 .all()
             )
             return reductions
+        finally:
+            session.close()
+
+    def getReductionById(self, reduction_id):
+        session = SessionLocal()
+        try:
+            reduction = session.get(DbReduction, reduction_id)
+            return reduction
         finally:
             session.close()

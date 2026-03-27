@@ -7,6 +7,7 @@ from ..utils.utils import get_maximum_height
 
 class ReductionCard(QtWidgets.QWidget):
     clicked = QtCore.pyqtSignal(object)
+    edit_requested = QtCore.pyqtSignal(str, int)
 
     def __init__(self, reduction):
         super(ReductionCard, self).__init__()
@@ -37,6 +38,8 @@ class ReductionCard(QtWidgets.QWidget):
         self.ui.userTitle.setText(f"{self.users_number} Users")
         spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.ui.panelDLayout.addItem(spacer)
+
+        self.ui.btn_editReduction.clicked.connect(self.edit_reduction)
 
     def mousePressEvent(self, event):
         self.clicked.emit(self)
@@ -100,3 +103,6 @@ class ReductionCard(QtWidgets.QWidget):
         uname.setStyleSheet(CARD_SUBHEADING_TEXT_COLOUR)
         uname.setWordWrap(True)
         self.ui.panelDLayout.insertWidget(self.ui.panelDLayout.count() - 2, uname)
+
+    def edit_reduction(self):
+        self.edit_requested.emit("reduction", self.reduction_id)
