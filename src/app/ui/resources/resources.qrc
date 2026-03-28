@@ -7,6 +7,8 @@
     <file>images/SATURN-vertical2.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>icons/cil-arrow-up.png</file>
+    <file>icons/cil-arrow-down.png</file>
     <file>icons/cill-edit.png</file>
     <file>icons/cil-settings.png</file>
     <file>icons/cil-checklist.png</file>

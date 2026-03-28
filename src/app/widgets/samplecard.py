@@ -1,7 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.samplecard import Ui_SampleCard
-from ..config.settings import (CARD_MIN_HEIGHT, TIME_ANIMATION, CARD_HOVER_STYLESHEET,
-                               CARD_NORMAL_STYLESHEET, CARD_SUBHEADING_TEXT_COLOUR)
+from ..config.settings import (SAMPLE_CARD_MIN_HEIGHT, TIME_ANIMATION)
 from ..utils.utils import get_maximum_height
 
 
