@@ -26,7 +26,6 @@ class UserCard(QtWidgets.QWidget):
         self.sample_number = 0
         self.analyses_number = 0
         self.reductions_number = 0
-        self.card_max_height = 0
 
         self.sample_info(user.samples)
         self.ui.analysisTitle.setText(f"{self.analyses_number} Analyses")
@@ -46,7 +45,7 @@ class UserCard(QtWidgets.QWidget):
         if self.added_info > 2:
             increase = 184
         else:
-            increase = 87 * self.added_info + 10 * (self.added_info - 1)
+            increase = 88 * self.added_info + 10 * (self.added_info - 1)
         self.ui.bgUserDetails.setMaximumHeight(USER_DETAILS_HEIGHT)
         self.ui.bgBottom.setMaximumHeight(65 + increase)
         self.ui.bgSampleBottom.setMaximumHeight(increase)
@@ -64,7 +63,7 @@ class UserCard(QtWidgets.QWidget):
             self.ui.btn_toggle.setIcon(QtGui.QIcon(CARD_BUTTON_ICON_DOWN))
 
     def create_info_widget(self, info_name, info_status, info_date):
-        bgInfo = QtWidgets.QLabel(self)
+        bgInfo = QtWidgets.QFrame(self)
         bgInfo.setMaximumHeight(WIDGET_INFO_HEIGHT)
         bgInfo.setMinimumHeight(WIDGET_INFO_HEIGHT)
         bgInfo.setProperty("role", "card")

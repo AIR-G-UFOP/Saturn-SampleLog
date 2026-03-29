@@ -20,6 +20,7 @@ ANALYSIS_CARD_MIN_HEIGHT = 159
 REDUCTION_CARD_MIN_HEIGHT = 159
 WIDGET_INFO_HEIGHT = 86
 USER_DETAILS_HEIGHT = 54
+SAMPLE_DETAILS_HEIGHT = 74
 WIDGET_INFO_STYLESHEET = ("""QFrame[role='card'] {
                           background-color: #343746;
                           border-radius: 10px;

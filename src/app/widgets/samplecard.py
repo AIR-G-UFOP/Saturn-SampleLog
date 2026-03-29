@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from ..ui.generated.samplecard import Ui_SampleCard
-from ..config.settings import (SAMPLE_CARD_MIN_HEIGHT, TIME_ANIMATION)
+from ..ui.generated.samplecard import Ui_SampleCardWidget
+from ..config.settings import (SAMPLE_CARD_MIN_HEIGHT, SAMPLE_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
+                               CARD_BUTTON_ICON_DOWN, WIDGET_INFO_HEIGHT, WIDGET_INFO_STYLESHEET,
+                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR)
 from ..utils.utils import get_maximum_height
 
 
@@ -10,110 +12,108 @@ class SampleCard(QtWidgets.QWidget):
 
     def __init__(self, sample):
         super(SampleCard, self).__init__()
-        self.ui = Ui_SampleCard()
+        self.ui = Ui_SampleCardWidget()
         self.ui.setupUi(self)
         self.setMouseTracking(True)
         self.ui.bgCard.setMouseTracking(True)
 
         self.sample_id = sample.id
-
         self.reductions_number = 0
-        self.card_max_height = 200
-
-        self.animation = QtCore.QPropertyAnimation(self.ui.bgCard, b"minimumHeight")
-        self.animation.setDuration(TIME_ANIMATION)
-        self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+        self.analysis_number = 0
 
         self.ui.sampleTitle.setText(f"{sample.name}")
-        self.ui.sampleDescription.setText(f"{sample.description}")
-        self.ui.sampleStatus.setText(f"Status: {sample.status}")
-        self.ui.sampleDate.setText(f"{sample.date.strftime('%Y-%m-%d')}")
-        self.ui.samplePrep.setText(f"Preparation: {sample.preparation}")
-        self.ui.sampleComment.setText(f"Comment: {sample.comment}")
+        self.ui.description.setText(f"{sample.description}")
+        self.ui.status.setText(f"Status: {sample.status}")
+        self.ui.date.setText(f"{sample.date.strftime('%Y-%m-%d')}")
+        self.ui.prep.setText(f"Preparation: {sample.preparation}")
+        self.ui.comment.setText(f"Comment: {sample.comment}")
         self.user_info(sample.users)
         self.analyses_info(sample.analyses)
 
         self.ui.reductionTitle.setText(f"{self.reductions_number} Reductions")
-        spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.ui.panelDLayout.addItem(spacer)
+        self.ui.userTitle.setText(f"User")
+        self.added_info = max(self.reductions_number, self.analysis_number)
 
-        self.ui.btn_editSample.clicked.connect(self.edit_sample)
-
-    def mousePressEvent(self, event):
-        self.clicked.emit(self)
-        super(SampleCard, self).mousePressEvent(event)
-
-    def enterEvent(self, event):
-        self.ui.bgCard.setStyleSheet(CARD_HOVER_STYLESHEET)
-        super().enterEvent(event)
-
-    def leaveEvent(self, event):
-        self.ui.bgCard.setStyleSheet(CARD_NORMAL_STYLESHEET)
-        super().leaveEvent(event)
+        self.ui.btn_edit.clicked.connect(self.edit_sample)
+        self.ui.btn_toggle.clicked.connect(self.trigger_card_stated_change)
 
     def check_card_state(self):
-        if self.ui.bgCard.height() == CARD_MIN_HEIGHT:
+        if self.ui.bgCard.height() == SAMPLE_CARD_MIN_HEIGHT:
             self.expand()
         else:
             self.collapse()
 
     def expand(self):
-        self.card_max_height = get_maximum_height(self.ui.horizontalLayout)
-        self.animation.setStartValue(CARD_MIN_HEIGHT)
-        self.animation.setEndValue(self.card_max_height)
-        self.animation.start()
+        if self.added_info > 2:
+            increase = 184
+        else:
+            increase = 88 * self.added_info + 10 * (self.added_info - 1)
+        self.ui.bgSampleDetails.setMaximumHeight(SAMPLE_DETAILS_HEIGHT)
+        self.ui.bgBottom.setMaximumHeight(65 + increase)
+        self.ui.bgUserBottom.setMaximumHeight(increase)
+        self.ui.bgAnalysisBottom.setMaximumHeight(increase)
+        self.ui.bgReductionBottom.setMaximumHeight(increase)
+        self.ui.btn_toggle.setIcon(QtGui.QIcon(CARD_BUTTON_ICON_UP))
 
     def collapse(self):
-        if self.ui.bgCard.height() != CARD_MIN_HEIGHT:
-            self.animation.setStartValue(self.card_max_height)
-            self.animation.setEndValue(CARD_MIN_HEIGHT)
-            self.animation.start()
+        if self.ui.bgCard.height() != SAMPLE_CARD_MIN_HEIGHT:
+            self.ui.bgSampleDetails.setMaximumHeight(0)
+            self.ui.bgBottom.setMaximumHeight(0)
+            self.ui.bgUserBottom.setMaximumHeight(0)
+            self.ui.bgAnalysisBottom.setMaximumHeight(0)
+            self.ui.bgReductionBottom.setMaximumHeight(0)
+            self.ui.btn_toggle.setIcon(QtGui.QIcon(CARD_BUTTON_ICON_DOWN))
+
+    def create_info_widget(self, info_name, info_status, info_date, info_org):
+        bgInfo = QtWidgets.QFrame(self)
+        bgInfo.setMaximumHeight(WIDGET_INFO_HEIGHT)
+        bgInfo.setMinimumHeight(WIDGET_INFO_HEIGHT)
+        bgInfo.setProperty("role", "card")
+        bgInfo.setStyleSheet(WIDGET_INFO_STYLESHEET)
+        vLayout = QtWidgets.QVBoxLayout(bgInfo)
+        name = QtWidgets.QLabel(self)
+        name.setText(info_name)
+        name.setStyleSheet(CARD_SUBHEADING_STYLESHEET)
+        vLayout.addWidget(name)
+        if info_status is not None:
+            status = QtWidgets.QLabel(self)
+            status.setText(f"Status: {info_status}")
+            status.setStyleSheet(LABEL_COLOUR)
+            vLayout.addWidget(status)
+        if info_date is not None:
+            date = QtWidgets.QLabel(self)
+            date.setText(info_date.strftime("%d-%m-%Y"))
+            date.setStyleSheet(LABEL_COLOUR)
+            vLayout.addWidget(date)
+        if info_org is not None:
+            org = QtWidgets.QLabel(self)
+            org.setText(info_org)
+            org.setStyleSheet(LABEL_COLOUR)
+            vLayout.addWidget(org)
+            vLayout.addItem(QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding))
+        return bgInfo
 
     def user_info(self, user):
-        self.ui.userTitle.setText(f"{user.first_name} {user.surname}")
-        self.ui.userOrg.setText(f"{user.org}")
-        self.ui.userAddress.setText(f"{user.address}")
-        self.ui.userPhone.setText(f"{user.phone}")
-        self.ui.userEmail.setText(f"{user.email}")
+        bgInfo = self.create_info_widget(f"{user.first_name} {user.surname}", None, None,
+                                         user.org)
+        self.ui.userLayout.addWidget(bgInfo)
 
     def analyses_info(self, analyses):
         self.ui.analysisTitle.setText(f"{len(analyses)} Analyses")
+        self.analysis_number = len(analyses)
         for analysis in analyses:
-            aname = QtWidgets.QLabel(self)
-            aname.setText(analysis.method)
-            aname.setStyleSheet(CARD_SUBHEADING_TEXT_COLOUR)
-            aname.setWordWrap(True)
-            astatus = QtWidgets.QLabel(self)
-            astatus.setText(f"Status: {analysis.status}")
-            astatus.setWordWrap(True)
-            adate = QtWidgets.QLabel(self)
-            adate.setText(analysis.date.strftime("%d-%m-%Y"))
-            adate.setWordWrap(True)
-            self.ui.panelCLayout.addWidget(aname)
-            self.ui.panelCLayout.addWidget(astatus)
-            self.ui.panelCLayout.addWidget(adate)
+            bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.date, None)
+            self.ui.AnalysisLayout.addWidget(bgInfo)
             self.reduction_info(analysis.reduction)
-        spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.ui.panelCLayout.addItem(spacer)
 
     def reduction_info(self, reduction):
         if reduction:
             self.reductions_number += 1
-            rname = QtWidgets.QLabel(self)
-            rname.setText(reduction.reduction_name)
-            rname.setStyleSheet(CARD_SUBHEADING_TEXT_COLOUR)
-            rname.setWordWrap(True)
-            rstatus = QtWidgets.QLabel(self)
-            rstatus.setText(f"Status: {reduction.status}")
-            rstatus.setWordWrap(True)
-            rdate = QtWidgets.QLabel(self)
-            rdate.setText(reduction.date.strftime("%d-%m-%Y"))
-            rdate.setWordWrap(True)
-            labels = [rname, rstatus, rdate]
-            position = self.ui.panelDLayout.count() - 1
-            for label in labels:
-                self.ui.panelDLayout.insertWidget(position, label)
-                position += 1
+            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.date, None)
+            self.ui.reductionLayout.addWidget(bgInfo)
 
     def edit_sample(self):
         self.edit_requested.emit("sample", self.sample_id)
+
+    def trigger_card_stated_change(self):
+        self.clicked.emit(self)
