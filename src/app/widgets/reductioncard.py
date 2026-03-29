@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.reductioncard import Ui_ReductionCard
-from ..config.settings import (REDUCTION_CARD_MIN_HEIGHT, TIME_ANIMATION)
+from ..config.settings import (CARD_MIN_HEIGHT, TIME_ANIMATION)
 from ..utils.utils import get_maximum_height
 
 

@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.usercard import Ui_UserCardWidget
-from ..config.settings import (USER_CARD_MIN_HEIGHT, USER_DETAILS_HEIGHT, WIDGET_INFO_HEIGHT,
+from ..config.settings import (CARD_MIN_HEIGHT, USER_DETAILS_HEIGHT, WIDGET_INFO_HEIGHT,
                                WIDGET_INFO_STYLESHEET, CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR,
                                CARD_BUTTON_ICON_DOWN, CARD_BUTTON_ICON_UP)
 from ..utils.utils import get_maximum_height
@@ -36,7 +36,7 @@ class UserCard(QtWidgets.QWidget):
         self.ui.btn_toggle.clicked.connect(self.trigger_card_stated_change)
 
     def check_card_state(self):
-        if self.ui.bgCard.height() == USER_CARD_MIN_HEIGHT:
+        if self.ui.bgCard.height() == CARD_MIN_HEIGHT:
             self.expand()
         else:
             self.collapse()
@@ -54,7 +54,7 @@ class UserCard(QtWidgets.QWidget):
         self.ui.btn_toggle.setIcon(QtGui.QIcon(CARD_BUTTON_ICON_UP))
 
     def collapse(self):
-        if self.ui.bgCard.height() != USER_CARD_MIN_HEIGHT:
+        if self.ui.bgCard.height() != CARD_MIN_HEIGHT:
             self.ui.bgUserDetails.setMaximumHeight(0)
             self.ui.bgBottom.setMaximumHeight(0)
             self.ui.bgSampleBottom.setMaximumHeight(0)

@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.samplecard import Ui_SampleCardWidget
-from ..config.settings import (SAMPLE_CARD_MIN_HEIGHT, SAMPLE_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
+from ..config.settings import (CARD_MIN_HEIGHT, SAMPLE_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
                                CARD_BUTTON_ICON_DOWN, WIDGET_INFO_HEIGHT, WIDGET_INFO_STYLESHEET,
                                CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR)
 from ..utils.utils import get_maximum_height
@@ -38,7 +38,7 @@ class SampleCard(QtWidgets.QWidget):
         self.ui.btn_toggle.clicked.connect(self.trigger_card_stated_change)
 
     def check_card_state(self):
-        if self.ui.bgCard.height() == SAMPLE_CARD_MIN_HEIGHT:
+        if self.ui.bgCard.height() == CARD_MIN_HEIGHT:
             self.expand()
         else:
             self.collapse()
@@ -56,7 +56,7 @@ class SampleCard(QtWidgets.QWidget):
         self.ui.btn_toggle.setIcon(QtGui.QIcon(CARD_BUTTON_ICON_UP))
 
     def collapse(self):
-        if self.ui.bgCard.height() != SAMPLE_CARD_MIN_HEIGHT:
+        if self.ui.bgCard.height() != CARD_MIN_HEIGHT:
             self.ui.bgSampleDetails.setMaximumHeight(0)
             self.ui.bgBottom.setMaximumHeight(0)
             self.ui.bgUserBottom.setMaximumHeight(0)

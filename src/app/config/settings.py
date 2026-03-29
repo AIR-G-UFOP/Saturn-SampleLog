@@ -14,13 +14,11 @@ background-color: rgb(33, 37, 43);
 """
 CARD_BUTTON_ICON_UP = u":/icons/icons/cil-arrow-up.png"
 CARD_BUTTON_ICON_DOWN = u":/icons/icons/cil-arrow-down.png"
-USER_CARD_MIN_HEIGHT = 159
-SAMPLE_CARD_MIN_HEIGHT = 159
-ANALYSIS_CARD_MIN_HEIGHT = 159
-REDUCTION_CARD_MIN_HEIGHT = 159
+CARD_MIN_HEIGHT = 159
 WIDGET_INFO_HEIGHT = 86
 USER_DETAILS_HEIGHT = 54
 SAMPLE_DETAILS_HEIGHT = 74
+ANALYSIS_DETAILS_HEIGHT = 94
 WIDGET_INFO_STYLESHEET = ("""QFrame[role='card'] {
                           background-color: #343746;
                           border-radius: 10px;
