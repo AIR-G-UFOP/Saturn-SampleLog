@@ -3,7 +3,6 @@ from ..ui.generated.analysiscard import Ui_AnalysisCardWidget
 from ..config.settings import (CARD_MIN_HEIGHT, ANALYSIS_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
                                CARD_BUTTON_ICON_DOWN, WIDGET_INFO_STYLESHEET, WIDGET_INFO_HEIGHT,
                                CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR)
-from ..utils.utils import get_maximum_height
 
 
 class AnalysisCard(QtWidgets.QWidget):

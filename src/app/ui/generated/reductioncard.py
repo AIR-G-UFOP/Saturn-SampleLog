@@ -11,195 +11,555 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_ReductionCard(object):
-    def setupUi(self, ReductionCard):
-        ReductionCard.setObjectName("ReductionCard")
-        ReductionCard.resize(578, 50)
+class Ui_ReductionCardWidget(object):
+    def setupUi(self, ReductionCardWidget):
+        ReductionCardWidget.setObjectName("ReductionCardWidget")
+        ReductionCardWidget.resize(754, 165)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(ReductionCard.sizePolicy().hasHeightForWidth())
-        ReductionCard.setSizePolicy(sizePolicy)
-        ReductionCard.setMinimumSize(QtCore.QSize(0, 50))
-        ReductionCard.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        ReductionCard.setStyleSheet("#bgCard {\n"
-"    background-color: #282A36;\n"
+        sizePolicy.setHeightForWidth(ReductionCardWidget.sizePolicy().hasHeightForWidth())
+        ReductionCardWidget.setSizePolicy(sizePolicy)
+        ReductionCardWidget.setStyleSheet("QWidget {\n"
+"font: 8pt \"Inter 24pt Medium\";\n"
+"}\n"
+"#bgCard {\n"
+"    background-color: #343746;\n"
 "    border-radius: 10px;\n"
 "}\n"
-"#userTitle {color: #8BE9FD;     font: 8pt \"Inter 24pt Medium\";}\n"
-"#sampleTitle {color: #BD93F9;     font: 8pt \"Inter 24pt Medium\";}\n"
-"#analysisTitle {color: #F1FA8C;     font: 8pt \"Inter 24pt Medium\";}\n"
-"#reductionTitle {color: #FFB86C;     font: 8pt \"Inter 24pt Medium\";}\n"
-"QLabel {color: #A8ABB3;     font: 8pt \"Inter 24pt Medium\";}\n"
-"QPushButton {\n"
+"#bgSample {\n"
+"    background-color: #20232f;\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#bgSampleBottom .QFrame {\n"
+"    background-color: #343746;\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#bgAnalysis {\n"
+"    background-color: #20232f;\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#bgAnalysisBottom .QFrame {\n"
+"    background-color: #343746;\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#bgUser {\n"
+"    background-color: #20232f;\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#bgUserBottom .QFrame {\n"
+"    background-color: #343746;\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#userTitle {color: #8BE9FD;     font: 10pt;}\n"
+"#sampleTitle {color: #BD93F9; font: 10pt;}\n"
+"#analysisTitle {color: #F1FA8C; font: 10pt;}\n"
+"#reductionTitle {color: #FFB86C; font: 11pt;}\n"
+"\n"
+"QLabel {color: #E0E0E0; }\n"
+"\n"
+"#btn_edit {\n"
 "    border-radius: 5px;    \n"
 "    background-color: #6272A4;\n"
 "    color: #F8F8F2;\n"
 "}\n"
-"QPushButton:hover {\n"
+"#btn_edit:hover {\n"
 "    background-color: rgb(123, 144, 206);\n"
 "}\n"
-"QPushButton:pressed {\n"
+"#btn_edit:pressed {\n"
 "    background-color: #6272A4;\n"
 "}\n"
+"#btn_toggle {\n"
+"    border-radius: 5px;    \n"
+"    background-color: #62A47A;\n"
+"    color: #F8F8F2;\n"
+"}\n"
+"#btn_toggle:hover {\n"
+"    background-color: #6FCF97;\n"
+"}\n"
+"#btn_toggle:pressed {\n"
+"    background-color: #62A47A;\n"
+"}\n"
 "\n"
+"Line {\n"
+"    background-color: #525f7f;\n"
+"    border: none;\n"
+"    height: 1px;\n"
+"}\n"
+"QScrollArea {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
 "\n"
-"")
-        self.verticalLayout = QtWidgets.QVBoxLayout(ReductionCard)
+"QScrollArea > QWidget > QWidget {\n"
+"    background: transparent;\n"
+"}\n"
+"QScrollBar:vertical {\n"
+"    background: transparent;\n"
+"    width: 5px;\n"
+"    margin: 12px 0px 12px 0px;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #343746;\n"
+"    min-height: 30px;\n"
+"    border-radius: 2px;\n"
+"}\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: rgb(83, 88, 112);\n"
+"}\n"
+"QScrollBar::handle:vertical:pressed {\n"
+"    background: #343746;\n"
+"}\n"
+"QScrollBar::sub-line:vertical {\n"
+"            height: 14px;\n"
+"            background: transparent;\n"
+"            subcontrol-origin: margin;\n"
+"            subcontrol-position: top;\n"
+"}\n"
+"QScrollBar::add-line:vertical {\n"
+"            height: 14px;\n"
+"            background: transparent;\n"
+"            subcontrol-origin: margin;\n"
+"            subcontrol-position: bottom;\n"
+"}\n"
+"QScrollBar::up-arrow:vertical {\n"
+"            image: url(:/icons/icons/cil-arrow-up.png);\n"
+"            width: 10px;\n"
+"            height: 10px;\n"
+"}\n"
+"QScrollBar::down-arrow:vertical {\n"
+"            image: url(:/icons/icons/cil-arrow-down.png);\n"
+"            width: 10px;\n"
+"            height: 10px;\n"
+"        }\n"
+"QScrollBar::add-page:vertical,\n"
+"        QScrollBar::sub-page:vertical {\n"
+"            background: transparent;\n"
+"        }")
+        self.verticalLayout = QtWidgets.QVBoxLayout(ReductionCardWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.bgCard = QtWidgets.QFrame(ReductionCard)
+        self.bgCard = QtWidgets.QFrame(ReductionCardWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.bgCard.sizePolicy().hasHeightForWidth())
         self.bgCard.setSizePolicy(sizePolicy)
-        self.bgCard.setMinimumSize(QtCore.QSize(0, 50))
-        self.bgCard.setMaximumSize(QtCore.QSize(16777215, 0))
+        self.bgCard.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.bgCard.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgCard.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgCard.setObjectName("bgCard")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.bgCard)
-        self.horizontalLayout.setContentsMargins(10, 8, 10, 10)
-        self.horizontalLayout.setSpacing(10)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.panelAInfo = QtWidgets.QFrame(self.bgCard)
-        self.panelAInfo.setMinimumSize(QtCore.QSize(0, 200))
-        self.panelAInfo.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.panelAInfo.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.panelAInfo.setObjectName("panelAInfo")
-        self.panelALayout = QtWidgets.QVBoxLayout(self.panelAInfo)
-        self.panelALayout.setObjectName("panelALayout")
-        self.reductionTitle = QtWidgets.QLabel(self.panelAInfo)
-        self.reductionTitle.setText("")
-        self.reductionTitle.setWordWrap(True)
-        self.reductionTitle.setObjectName("reductionTitle")
-        self.panelALayout.addWidget(self.reductionTitle)
-        spacerItem = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.panelALayout.addItem(spacerItem)
-        self.reductionSoftware = QtWidgets.QLabel(self.panelAInfo)
-        self.reductionSoftware.setText("")
-        self.reductionSoftware.setScaledContents(False)
-        self.reductionSoftware.setWordWrap(True)
-        self.reductionSoftware.setObjectName("reductionSoftware")
-        self.panelALayout.addWidget(self.reductionSoftware)
-        self.reductionSoftwareVersion = QtWidgets.QLabel(self.panelAInfo)
-        self.reductionSoftwareVersion.setText("")
-        self.reductionSoftwareVersion.setWordWrap(True)
-        self.reductionSoftwareVersion.setObjectName("reductionSoftwareVersion")
-        self.panelALayout.addWidget(self.reductionSoftwareVersion)
-        self.reductionHandler = QtWidgets.QLabel(self.panelAInfo)
-        self.reductionHandler.setText("")
-        self.reductionHandler.setWordWrap(True)
-        self.reductionHandler.setObjectName("reductionHandler")
-        self.panelALayout.addWidget(self.reductionHandler)
-        self.reductionStatus = QtWidgets.QLabel(self.panelAInfo)
-        self.reductionStatus.setText("")
-        self.reductionStatus.setWordWrap(True)
-        self.reductionStatus.setObjectName("reductionStatus")
-        self.panelALayout.addWidget(self.reductionStatus)
-        self.reductionDate = QtWidgets.QLabel(self.panelAInfo)
-        self.reductionDate.setText("")
-        self.reductionDate.setWordWrap(True)
-        self.reductionDate.setObjectName("reductionDate")
-        self.panelALayout.addWidget(self.reductionDate)
-        self.reductionFile = QtWidgets.QLabel(self.panelAInfo)
-        self.reductionFile.setText("")
-        self.reductionFile.setScaledContents(True)
-        self.reductionFile.setWordWrap(True)
-        self.reductionFile.setObjectName("reductionFile")
-        self.panelALayout.addWidget(self.reductionFile)
-        self.reductionNotes = QtWidgets.QLabel(self.panelAInfo)
-        self.reductionNotes.setText("")
-        self.reductionNotes.setScaledContents(True)
-        self.reductionNotes.setWordWrap(True)
-        self.reductionNotes.setObjectName("reductionNotes")
-        self.panelALayout.addWidget(self.reductionNotes)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.panelALayout.addItem(spacerItem1)
-        self.horizontalLayout.addWidget(self.panelAInfo)
-        self.panelBInfo = QtWidgets.QFrame(self.bgCard)
-        self.panelBInfo.setMinimumSize(QtCore.QSize(0, 200))
-        self.panelBInfo.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.panelBInfo.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.panelBInfo.setObjectName("panelBInfo")
-        self.panelBLayout = QtWidgets.QVBoxLayout(self.panelBInfo)
-        self.panelBLayout.setObjectName("panelBLayout")
-        self.analysisTitle = QtWidgets.QLabel(self.panelBInfo)
-        self.analysisTitle.setText("")
-        self.analysisTitle.setWordWrap(True)
-        self.analysisTitle.setObjectName("analysisTitle")
-        self.panelBLayout.addWidget(self.analysisTitle)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.panelBLayout.addItem(spacerItem2)
-        self.analysisStatus = QtWidgets.QLabel(self.panelBInfo)
-        self.analysisStatus.setText("")
-        self.analysisStatus.setWordWrap(True)
-        self.analysisStatus.setObjectName("analysisStatus")
-        self.panelBLayout.addWidget(self.analysisStatus)
-        self.analysisDate = QtWidgets.QLabel(self.panelBInfo)
-        self.analysisDate.setText("")
-        self.analysisDate.setWordWrap(True)
-        self.analysisDate.setObjectName("analysisDate")
-        self.panelBLayout.addWidget(self.analysisDate)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.panelBLayout.addItem(spacerItem3)
-        self.horizontalLayout.addWidget(self.panelBInfo)
-        self.panelCnfo = QtWidgets.QFrame(self.bgCard)
-        self.panelCnfo.setMinimumSize(QtCore.QSize(0, 200))
-        self.panelCnfo.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.panelCnfo.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.panelCnfo.setObjectName("panelCnfo")
-        self.panelCLayout = QtWidgets.QVBoxLayout(self.panelCnfo)
-        self.panelCLayout.setObjectName("panelCLayout")
-        self.sampleTitle = QtWidgets.QLabel(self.panelCnfo)
-        self.sampleTitle.setText("")
-        self.sampleTitle.setWordWrap(True)
-        self.sampleTitle.setObjectName("sampleTitle")
-        self.panelCLayout.addWidget(self.sampleTitle)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.panelCLayout.addItem(spacerItem4)
-        self.horizontalLayout.addWidget(self.panelCnfo)
-        self.panelDInfo = QtWidgets.QFrame(self.bgCard)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.bgCard)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.bgTop = QtWidgets.QFrame(self.bgCard)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.panelDInfo.sizePolicy().hasHeightForWidth())
-        self.panelDInfo.setSizePolicy(sizePolicy)
-        self.panelDInfo.setMinimumSize(QtCore.QSize(0, 200))
-        self.panelDInfo.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.panelDInfo.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.panelDInfo.setObjectName("panelDInfo")
-        self.panelDLayout = QtWidgets.QVBoxLayout(self.panelDInfo)
-        self.panelDLayout.setContentsMargins(-1, -1, 0, 0)
-        self.panelDLayout.setObjectName("panelDLayout")
-        self.userTitle = QtWidgets.QLabel(self.panelDInfo)
-        self.userTitle.setMinimumSize(QtCore.QSize(0, 0))
-        self.userTitle.setText("")
-        self.userTitle.setWordWrap(True)
-        self.userTitle.setObjectName("userTitle")
-        self.panelDLayout.addWidget(self.userTitle)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.panelDLayout.addItem(spacerItem5)
-        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.panelDLayout.addItem(spacerItem6)
-        self.btn_editReduction = QtWidgets.QPushButton(self.panelDInfo)
-        self.btn_editReduction.setMinimumSize(QtCore.QSize(20, 20))
-        self.btn_editReduction.setMaximumSize(QtCore.QSize(20, 20))
-        self.btn_editReduction.setText("")
+        sizePolicy.setHeightForWidth(self.bgTop.sizePolicy().hasHeightForWidth())
+        self.bgTop.setSizePolicy(sizePolicy)
+        self.bgTop.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgTop.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.bgTop.setObjectName("bgTop")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.bgTop)
+        self.verticalLayout_3.setContentsMargins(15, 15, 15, 15)
+        self.verticalLayout_3.setSpacing(6)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.bgTitle = QtWidgets.QFrame(self.bgTop)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgTitle.sizePolicy().hasHeightForWidth())
+        self.bgTitle.setSizePolicy(sizePolicy)
+        self.bgTitle.setMinimumSize(QtCore.QSize(0, 53))
+        self.bgTitle.setMaximumSize(QtCore.QSize(16777215, 53))
+        self.bgTitle.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgTitle.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgTitle.setObjectName("bgTitle")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.bgTitle)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.bgReductionTitle = QtWidgets.QFrame(self.bgTitle)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgReductionTitle.sizePolicy().hasHeightForWidth())
+        self.bgReductionTitle.setSizePolicy(sizePolicy)
+        self.bgReductionTitle.setMinimumSize(QtCore.QSize(0, 53))
+        self.bgReductionTitle.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgReductionTitle.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgReductionTitle.setObjectName("bgReductionTitle")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.bgReductionTitle)
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_4.setSpacing(20)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.reductionTitle = QtWidgets.QLabel(self.bgReductionTitle)
+        font = QtGui.QFont()
+        font.setFamily("Inter 24pt Medium")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.reductionTitle.setFont(font)
+        self.reductionTitle.setText("")
+        self.reductionTitle.setObjectName("reductionTitle")
+        self.verticalLayout_4.addWidget(self.reductionTitle)
+        self.file = QtWidgets.QLabel(self.bgReductionTitle)
+        self.file.setText("")
+        self.file.setObjectName("file")
+        self.verticalLayout_4.addWidget(self.file)
+        self.horizontalLayout.addWidget(self.bgReductionTitle)
+        self.bgButtons = QtWidgets.QFrame(self.bgTitle)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgButtons.sizePolicy().hasHeightForWidth())
+        self.bgButtons.setSizePolicy(sizePolicy)
+        self.bgButtons.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgButtons.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgButtons.setObjectName("bgButtons")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.bgButtons)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setSpacing(5)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.btn_edit = QtWidgets.QPushButton(self.bgButtons)
+        self.btn_edit.setMinimumSize(QtCore.QSize(25, 25))
+        self.btn_edit.setMaximumSize(QtCore.QSize(25, 25))
+        self.btn_edit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_edit.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/icons/cill-edit.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btn_editReduction.setIcon(icon)
-        self.btn_editReduction.setObjectName("btn_editReduction")
-        self.panelDLayout.addWidget(self.btn_editReduction, 0, QtCore.Qt.AlignRight)
-        self.horizontalLayout.addWidget(self.panelDInfo)
+        self.btn_edit.setIcon(icon)
+        self.btn_edit.setObjectName("btn_edit")
+        self.horizontalLayout_2.addWidget(self.btn_edit, 0, QtCore.Qt.AlignTop)
+        self.btn_toggle = QtWidgets.QPushButton(self.bgButtons)
+        self.btn_toggle.setMinimumSize(QtCore.QSize(25, 25))
+        self.btn_toggle.setMaximumSize(QtCore.QSize(25, 25))
+        self.btn_toggle.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_toggle.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icons/icons/cil-arrow-down.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_toggle.setIcon(icon1)
+        self.btn_toggle.setObjectName("btn_toggle")
+        self.horizontalLayout_2.addWidget(self.btn_toggle, 0, QtCore.Qt.AlignTop)
+        self.horizontalLayout.addWidget(self.bgButtons)
+        self.verticalLayout_3.addWidget(self.bgTitle)
+        self.bgReductionDetails = QtWidgets.QFrame(self.bgTop)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgReductionDetails.sizePolicy().hasHeightForWidth())
+        self.bgReductionDetails.setSizePolicy(sizePolicy)
+        self.bgReductionDetails.setMinimumSize(QtCore.QSize(0, 0))
+        self.bgReductionDetails.setMaximumSize(QtCore.QSize(16777215, 0))
+        self.bgReductionDetails.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgReductionDetails.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgReductionDetails.setObjectName("bgReductionDetails")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.bgReductionDetails)
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_5.setSpacing(6)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.handler = QtWidgets.QLabel(self.bgReductionDetails)
+        self.handler.setText("")
+        self.handler.setObjectName("handler")
+        self.verticalLayout_5.addWidget(self.handler)
+        self.status = QtWidgets.QLabel(self.bgReductionDetails)
+        self.status.setText("")
+        self.status.setObjectName("status")
+        self.verticalLayout_5.addWidget(self.status)
+        self.date = QtWidgets.QLabel(self.bgReductionDetails)
+        self.date.setText("")
+        self.date.setObjectName("date")
+        self.verticalLayout_5.addWidget(self.date)
+        self.notes = QtWidgets.QLabel(self.bgReductionDetails)
+        self.notes.setText("")
+        self.notes.setObjectName("notes")
+        self.verticalLayout_5.addWidget(self.notes)
+        self.software = QtWidgets.QLabel(self.bgReductionDetails)
+        self.software.setText("")
+        self.software.setObjectName("software")
+        self.verticalLayout_5.addWidget(self.software)
+        self.verticalLayout_3.addWidget(self.bgReductionDetails, 0, QtCore.Qt.AlignTop)
+        spacerItem = QtWidgets.QSpacerItem(20, 3, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_3.addItem(spacerItem)
+        self.line = QtWidgets.QFrame(self.bgTop)
+        self.line.setMinimumSize(QtCore.QSize(0, 1))
+        self.line.setMaximumSize(QtCore.QSize(16777215, 1))
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setLineWidth(1)
+        self.line.setMidLineWidth(0)
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setObjectName("line")
+        self.verticalLayout_3.addWidget(self.line)
+        self.verticalLayout_2.addWidget(self.bgTop, 0, QtCore.Qt.AlignTop)
+        self.bgBottom = QtWidgets.QFrame(self.bgCard)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgBottom.sizePolicy().hasHeightForWidth())
+        self.bgBottom.setSizePolicy(sizePolicy)
+        self.bgBottom.setMinimumSize(QtCore.QSize(0, 60))
+        self.bgBottom.setMaximumSize(QtCore.QSize(16777215, 0))
+        self.bgBottom.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgBottom.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgBottom.setObjectName("bgBottom")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.bgBottom)
+        self.horizontalLayout_3.setContentsMargins(15, 0, 15, 15)
+        self.horizontalLayout_3.setSpacing(10)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.bgAnalysis = QtWidgets.QFrame(self.bgBottom)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgAnalysis.sizePolicy().hasHeightForWidth())
+        self.bgAnalysis.setSizePolicy(sizePolicy)
+        self.bgAnalysis.setMinimumSize(QtCore.QSize(0, 50))
+        self.bgAnalysis.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.bgAnalysis.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgAnalysis.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgAnalysis.setObjectName("bgAnalysis")
+        self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.bgAnalysis)
+        self.verticalLayout_14.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_14.setSpacing(0)
+        self.verticalLayout_14.setObjectName("verticalLayout_14")
+        self.bgAnalysisTop = QtWidgets.QFrame(self.bgAnalysis)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgAnalysisTop.sizePolicy().hasHeightForWidth())
+        self.bgAnalysisTop.setSizePolicy(sizePolicy)
+        self.bgAnalysisTop.setMinimumSize(QtCore.QSize(0, 30))
+        self.bgAnalysisTop.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.bgAnalysisTop.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgAnalysisTop.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgAnalysisTop.setObjectName("bgAnalysisTop")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.bgAnalysisTop)
+        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_10.setSpacing(0)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.analysisTitle = QtWidgets.QLabel(self.bgAnalysisTop)
+        font = QtGui.QFont()
+        font.setFamily("Inter 24pt Medium")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.analysisTitle.setFont(font)
+        self.analysisTitle.setText("")
+        self.analysisTitle.setObjectName("analysisTitle")
+        self.verticalLayout_10.addWidget(self.analysisTitle, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_14.addWidget(self.bgAnalysisTop)
+        self.bgAnalysisBottom = QtWidgets.QFrame(self.bgAnalysis)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgAnalysisBottom.sizePolicy().hasHeightForWidth())
+        self.bgAnalysisBottom.setSizePolicy(sizePolicy)
+        self.bgAnalysisBottom.setMaximumSize(QtCore.QSize(16777215, 0))
+        self.bgAnalysisBottom.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgAnalysisBottom.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgAnalysisBottom.setObjectName("bgAnalysisBottom")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.bgAnalysisBottom)
+        self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_7.setSpacing(0)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.scrollArea = QtWidgets.QScrollArea(self.bgAnalysisBottom)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
+        self.scrollArea.setSizePolicy(sizePolicy)
+        self.scrollArea.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.scrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.analysisScroll = QtWidgets.QWidget()
+        self.analysisScroll.setGeometry(QtCore.QRect(0, 0, 208, 16))
+        self.analysisScroll.setObjectName("analysisScroll")
+        self.analysisLayout = QtWidgets.QVBoxLayout(self.analysisScroll)
+        self.analysisLayout.setContentsMargins(0, 0, 5, 0)
+        self.analysisLayout.setSpacing(10)
+        self.analysisLayout.setObjectName("analysisLayout")
+        self.scrollArea.setWidget(self.analysisScroll)
+        self.verticalLayout_7.addWidget(self.scrollArea, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_14.addWidget(self.bgAnalysisBottom)
+        self.horizontalLayout_3.addWidget(self.bgAnalysis)
+        self.bgSample = QtWidgets.QFrame(self.bgBottom)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgSample.sizePolicy().hasHeightForWidth())
+        self.bgSample.setSizePolicy(sizePolicy)
+        self.bgSample.setMinimumSize(QtCore.QSize(0, 50))
+        self.bgSample.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.bgSample.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgSample.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgSample.setObjectName("bgSample")
+        self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.bgSample)
+        self.verticalLayout_17.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_17.setSpacing(0)
+        self.verticalLayout_17.setObjectName("verticalLayout_17")
+        self.bgSampleTop = QtWidgets.QFrame(self.bgSample)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgSampleTop.sizePolicy().hasHeightForWidth())
+        self.bgSampleTop.setSizePolicy(sizePolicy)
+        self.bgSampleTop.setMinimumSize(QtCore.QSize(0, 30))
+        self.bgSampleTop.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.bgSampleTop.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgSampleTop.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgSampleTop.setObjectName("bgSampleTop")
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.bgSampleTop)
+        self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_9.setSpacing(0)
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.sampleTitle = QtWidgets.QLabel(self.bgSampleTop)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.sampleTitle.sizePolicy().hasHeightForWidth())
+        self.sampleTitle.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Inter 24pt Medium")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.sampleTitle.setFont(font)
+        self.sampleTitle.setText("")
+        self.sampleTitle.setObjectName("sampleTitle")
+        self.verticalLayout_9.addWidget(self.sampleTitle, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_17.addWidget(self.bgSampleTop)
+        self.bgSampleBottom = QtWidgets.QFrame(self.bgSample)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgSampleBottom.sizePolicy().hasHeightForWidth())
+        self.bgSampleBottom.setSizePolicy(sizePolicy)
+        self.bgSampleBottom.setMinimumSize(QtCore.QSize(0, 0))
+        self.bgSampleBottom.setMaximumSize(QtCore.QSize(16777215, 0))
+        self.bgSampleBottom.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgSampleBottom.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgSampleBottom.setObjectName("bgSampleBottom")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.bgSampleBottom)
+        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_6.setSpacing(0)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.scrollArea_2 = QtWidgets.QScrollArea(self.bgSampleBottom)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.scrollArea_2.sizePolicy().hasHeightForWidth())
+        self.scrollArea_2.setSizePolicy(sizePolicy)
+        self.scrollArea_2.setStyleSheet("")
+        self.scrollArea_2.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.scrollArea_2.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.scrollArea_2.setWidgetResizable(True)
+        self.scrollArea_2.setObjectName("scrollArea_2")
+        self.sampleScroll = QtWidgets.QWidget()
+        self.sampleScroll.setGeometry(QtCore.QRect(0, 0, 207, 16))
+        self.sampleScroll.setStyleSheet("")
+        self.sampleScroll.setObjectName("sampleScroll")
+        self.sampleLayout = QtWidgets.QVBoxLayout(self.sampleScroll)
+        self.sampleLayout.setContentsMargins(0, 0, 5, 0)
+        self.sampleLayout.setSpacing(10)
+        self.sampleLayout.setObjectName("sampleLayout")
+        self.scrollArea_2.setWidget(self.sampleScroll)
+        self.verticalLayout_6.addWidget(self.scrollArea_2, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_17.addWidget(self.bgSampleBottom)
+        self.horizontalLayout_3.addWidget(self.bgSample)
+        self.bgUser = QtWidgets.QFrame(self.bgBottom)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgUser.sizePolicy().hasHeightForWidth())
+        self.bgUser.setSizePolicy(sizePolicy)
+        self.bgUser.setMinimumSize(QtCore.QSize(0, 50))
+        self.bgUser.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.bgUser.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgUser.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgUser.setObjectName("bgUser")
+        self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.bgUser)
+        self.verticalLayout_12.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_12.setSpacing(0)
+        self.verticalLayout_12.setObjectName("verticalLayout_12")
+        self.bgUserTop = QtWidgets.QFrame(self.bgUser)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgUserTop.sizePolicy().hasHeightForWidth())
+        self.bgUserTop.setSizePolicy(sizePolicy)
+        self.bgUserTop.setMinimumSize(QtCore.QSize(0, 30))
+        self.bgUserTop.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.bgUserTop.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgUserTop.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgUserTop.setObjectName("bgUserTop")
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.bgUserTop)
+        self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_11.setSpacing(0)
+        self.verticalLayout_11.setObjectName("verticalLayout_11")
+        self.userTitle = QtWidgets.QLabel(self.bgUserTop)
+        font = QtGui.QFont()
+        font.setFamily("Inter 24pt Medium")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.userTitle.setFont(font)
+        self.userTitle.setText("")
+        self.userTitle.setObjectName("userTitle")
+        self.verticalLayout_11.addWidget(self.userTitle, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_12.addWidget(self.bgUserTop)
+        self.bgUserBottom = QtWidgets.QFrame(self.bgUser)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgUserBottom.sizePolicy().hasHeightForWidth())
+        self.bgUserBottom.setSizePolicy(sizePolicy)
+        self.bgUserBottom.setMaximumSize(QtCore.QSize(16777215, 0))
+        self.bgUserBottom.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgUserBottom.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgUserBottom.setObjectName("bgUserBottom")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.bgUserBottom)
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_8.setSpacing(0)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.userScrollArea = QtWidgets.QScrollArea(self.bgUserBottom)
+        self.userScrollArea.setStyleSheet("")
+        self.userScrollArea.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.userScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.userScrollArea.setWidgetResizable(True)
+        self.userScrollArea.setObjectName("userScrollArea")
+        self.userScroll = QtWidgets.QWidget()
+        self.userScroll.setGeometry(QtCore.QRect(0, 0, 208, 16))
+        self.userScroll.setStyleSheet("")
+        self.userScroll.setObjectName("userScroll")
+        self.userLayout = QtWidgets.QVBoxLayout(self.userScroll)
+        self.userLayout.setContentsMargins(0, 0, 5, 0)
+        self.userLayout.setSpacing(10)
+        self.userLayout.setObjectName("userLayout")
+        self.userScrollArea.setWidget(self.userScroll)
+        self.verticalLayout_8.addWidget(self.userScrollArea, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_12.addWidget(self.bgUserBottom)
+        self.horizontalLayout_3.addWidget(self.bgUser)
+        self.verticalLayout_2.addWidget(self.bgBottom, 0, QtCore.Qt.AlignTop)
         self.verticalLayout.addWidget(self.bgCard, 0, QtCore.Qt.AlignTop)
 
-        self.retranslateUi(ReductionCard)
-        QtCore.QMetaObject.connectSlotsByName(ReductionCard)
+        self.retranslateUi(ReductionCardWidget)
+        QtCore.QMetaObject.connectSlotsByName(ReductionCardWidget)
 
-    def retranslateUi(self, ReductionCard):
+    def retranslateUi(self, ReductionCardWidget):
         _translate = QtCore.QCoreApplication.translate
-        ReductionCard.setWindowTitle(_translate("ReductionCard", "Form"))
+        ReductionCardWidget.setWindowTitle(_translate("ReductionCardWidget", "Form"))
 from app.ui.resources import resources

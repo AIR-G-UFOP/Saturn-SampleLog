@@ -3,7 +3,6 @@ from ..ui.generated.samplecard import Ui_SampleCardWidget
 from ..config.settings import (CARD_MIN_HEIGHT, SAMPLE_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
                                CARD_BUTTON_ICON_DOWN, WIDGET_INFO_HEIGHT, WIDGET_INFO_STYLESHEET,
                                CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR)
-from ..utils.utils import get_maximum_height
 
 
 class SampleCard(QtWidgets.QWidget):
