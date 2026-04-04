@@ -2,7 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.reductioncard import Ui_ReductionCardWidget
 from ..config.settings import (CARD_MIN_HEIGHT, REDUCTION_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
                                CARD_BUTTON_ICON_DOWN, WIDGET_INFO_HEIGHT, WIDGET_INFO_STYLESHEET,
-                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR, FILE_LABEL_COLOUR)
+                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR, FILE_LABEL_COLOUR, SAMPLE_STATUS_COLOUR,
+                               ANALYSIS_STATUS_COLOUR, REDUCTION_STATUS_COLOUR)
 
 
 class ReductionCard(QtWidgets.QWidget):
@@ -26,6 +27,7 @@ class ReductionCard(QtWidgets.QWidget):
         self.ui.software.setText(f"Software: {reduction.software} version: {reduction.software_version}")
         self.ui.handler.setText(f"Handler: {reduction.handler}")
         self.ui.status.setText(f"Status: {reduction.status}")
+        self.ui.status.setStyleSheet(REDUCTION_STATUS_COLOUR[reduction.status])
         self.ui.date.setText(reduction.status_date.strftime('%Y-%m-%d'))
         self.ui.file.setText(f"Saved as: {reduction.file_name}")
         self.ui.file.setStyleSheet(FILE_LABEL_COLOUR)
@@ -65,7 +67,7 @@ class ReductionCard(QtWidgets.QWidget):
             self.ui.bgAnalysisBottom.setMaximumHeight(0)
             self.ui.btn_toggle.setIcon(QtGui.QIcon(CARD_BUTTON_ICON_DOWN))
 
-    def create_info_widget(self, info_name, info_status, info_date, info_org):
+    def create_info_widget(self, info_name, info_status, info_date, info_org, status_colour):
         bgInfo = QtWidgets.QFrame(self)
         bgInfo.setMaximumHeight(WIDGET_INFO_HEIGHT)
         bgInfo.setMinimumHeight(WIDGET_INFO_HEIGHT)
@@ -79,7 +81,7 @@ class ReductionCard(QtWidgets.QWidget):
         if info_status is not None:
             status = QtWidgets.QLabel(self)
             status.setText(f"Status: {info_status}")
-            status.setStyleSheet(LABEL_COLOUR)
+            status.setStyleSheet(status_colour)
             vLayout.addWidget(status)
         if info_date is not None:
             date = QtWidgets.QLabel(self)
@@ -97,7 +99,8 @@ class ReductionCard(QtWidgets.QWidget):
 
     def analysis_info(self, analysis):
         self.ui.analysisTitle.setText("1 Analysis")
-        bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.status_date, None)
+        bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.status_date, None,
+                                         ANALYSIS_STATUS_COLOUR[analysis.status])
         self.ui.analysisLayout.addWidget(bgInfo)
         self.samples_info(analysis.samples)
 
@@ -105,7 +108,8 @@ class ReductionCard(QtWidgets.QWidget):
         self.ui.sampleTitle.setText(f"{len(samples)} Samples")
         self.samples_number = len(samples)
         for sample in samples:
-            bgInfo = self.create_info_widget(sample.name, sample.status, sample.status_date, None)
+            bgInfo = self.create_info_widget(sample.name, sample.status, sample.status_date, None,
+                                             SAMPLE_STATUS_COLOUR[sample.status])
             self.ui.sampleLayout.addWidget(bgInfo)
             self.user_info(sample.users)
 
@@ -113,7 +117,7 @@ class ReductionCard(QtWidgets.QWidget):
         if self.previous_user != user.id:
             self.users_number += 1
             bgInfo = self.create_info_widget(f"{user.first_name} {user.surname}", None, None,
-                                             user.org)
+                                             user.org, None)
             self.ui.userLayout.addWidget(bgInfo)
             self.previous_user = user.id
 

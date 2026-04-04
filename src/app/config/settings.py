@@ -30,7 +30,7 @@ CARD_SUBHEADING_STYLESHEET = "font: 10pt; color: #F8F8F2"
 LABEL_COLOUR = "color: #BDBDBD"
 FILE_LABEL_COLOUR = "color: #FF5555"
 SAMPLE_STATUS_COLOUR = {
-    "Logged in": "#BDBDBD",
+    "Logged in": "color: #FF79C6",
     "Preparation in progress...": "color: #F1FA8C",
     "Preparation completed": "color: #50FA7B",
     "Analysis in progress...": "color: #F1FA8C",
@@ -40,7 +40,7 @@ SAMPLE_STATUS_COLOUR = {
     "Sent back to User": "color: #BDBDBD",
 }
 ANALYSIS_STATUS_COLOUR = {
-    "Logged in": "#BDBDBD",
+    "Logged in": "color: #FF79C6",
     "Analysis in progress...": "color: #F1FA8C",
     "Analysis completed": "color: #50FA7B",
     "Data Reduction in progress...": "color: #F1FA8C",
@@ -48,7 +48,7 @@ ANALYSIS_STATUS_COLOUR = {
     "Results sent to User": "color: #BDBDBD",
 }
 REDUCTION_STATUS_COLOUR = {
-    "Logged in": "color: #BDBDBD",
+    "Logged in": "color: #FF79C6",
     "Data Reduction in progress...": "color: #F1FA8C",
     "Data Reduction completed": "color: #50FA7B",
     "Results sent to User": "color: #BDBDBD",

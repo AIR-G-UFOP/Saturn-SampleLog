@@ -2,7 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.samplecard import Ui_SampleCardWidget
 from ..config.settings import (CARD_MIN_HEIGHT, SAMPLE_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
                                CARD_BUTTON_ICON_DOWN, WIDGET_INFO_HEIGHT, WIDGET_INFO_STYLESHEET,
-                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR)
+                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR, SAMPLE_STATUS_COLOUR, ANALYSIS_STATUS_COLOUR,
+                               REDUCTION_STATUS_COLOUR)
 
 
 class SampleCard(QtWidgets.QWidget):
@@ -23,6 +24,7 @@ class SampleCard(QtWidgets.QWidget):
         self.ui.sampleTitle.setText(f"{sample.name}")
         self.ui.description.setText(f"{sample.description}")
         self.ui.status.setText(f"Status: {sample.status}")
+        self.ui.status.setStyleSheet(SAMPLE_STATUS_COLOUR[sample.status])
         self.ui.date.setText(f"{sample.status_date.strftime('%Y-%m-%d')}")
         self.ui.prep.setText(f"Preparation: {sample.preparation}")
         self.ui.comment.setText(f"Comment: {sample.comment}")
@@ -63,7 +65,7 @@ class SampleCard(QtWidgets.QWidget):
             self.ui.bgReductionBottom.setMaximumHeight(0)
             self.ui.btn_toggle.setIcon(QtGui.QIcon(CARD_BUTTON_ICON_DOWN))
 
-    def create_info_widget(self, info_name, info_status, info_date, info_org):
+    def create_info_widget(self, info_name, info_status, info_date, info_org, status_colour):
         bgInfo = QtWidgets.QFrame(self)
         bgInfo.setMaximumHeight(WIDGET_INFO_HEIGHT)
         bgInfo.setMinimumHeight(WIDGET_INFO_HEIGHT)
@@ -77,7 +79,7 @@ class SampleCard(QtWidgets.QWidget):
         if info_status is not None:
             status = QtWidgets.QLabel(self)
             status.setText(f"Status: {info_status}")
-            status.setStyleSheet(LABEL_COLOUR)
+            status.setStyleSheet(status_colour)
             vLayout.addWidget(status)
         if info_date is not None:
             date = QtWidgets.QLabel(self)
@@ -94,21 +96,23 @@ class SampleCard(QtWidgets.QWidget):
 
     def user_info(self, user):
         bgInfo = self.create_info_widget(f"{user.first_name} {user.surname}", None, None,
-                                         user.org)
+                                         user.org, None)
         self.ui.userLayout.addWidget(bgInfo)
 
     def analyses_info(self, analyses):
         self.ui.analysisTitle.setText(f"{len(analyses)} Analyses")
         self.analysis_number = len(analyses)
         for analysis in analyses:
-            bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.status_date, None)
+            bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.status_date, None,
+                                             ANALYSIS_STATUS_COLOUR[analysis.status])
             self.ui.AnalysisLayout.addWidget(bgInfo)
             self.reduction_info(analysis.reduction)
 
     def reduction_info(self, reduction):
         if reduction:
             self.reductions_number += 1
-            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.status_date, None)
+            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.status_date, None,
+                                             REDUCTION_STATUS_COLOUR[reduction.status])
             self.ui.reductionLayout.addWidget(bgInfo)
 
     def edit_sample(self):

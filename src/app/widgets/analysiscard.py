@@ -2,7 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.analysiscard import Ui_AnalysisCardWidget
 from ..config.settings import (CARD_MIN_HEIGHT, ANALYSIS_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
                                CARD_BUTTON_ICON_DOWN, WIDGET_INFO_STYLESHEET, WIDGET_INFO_HEIGHT,
-                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR, FILE_LABEL_COLOUR)
+                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR, FILE_LABEL_COLOUR, SAMPLE_STATUS_COLOUR,
+                               ANALYSIS_STATUS_COLOUR, REDUCTION_STATUS_COLOUR)
 
 
 class AnalysisCard(QtWidgets.QWidget):
@@ -28,6 +29,7 @@ class AnalysisCard(QtWidgets.QWidget):
         self.ui.operator_.setText(f"Operator: {analysis.operator}")
         self.ui.conditions.setText(f"Conditions: {analysis.conditions}")
         self.ui.status.setText(f"Status: {analysis.status}")
+        self.ui.status.setStyleSheet(ANALYSIS_STATUS_COLOUR[analysis.status])
         self.ui.date.setText(analysis.status_date.strftime('%Y-%m-%d'))
         self.ui.file.setText(f"Saved as: {analysis.file_name}")
         self.ui.file.setStyleSheet(FILE_LABEL_COLOUR)
@@ -68,7 +70,7 @@ class AnalysisCard(QtWidgets.QWidget):
             self.ui.bgReductionBottom.setMaximumHeight(0)
             self.ui.btn_toggle.setIcon(QtGui.QIcon(CARD_BUTTON_ICON_DOWN))
 
-    def create_info_widget(self, info_name, info_status, info_date, info_org):
+    def create_info_widget(self, info_name, info_status, info_date, info_org, status_colour):
         bgInfo = QtWidgets.QFrame(self)
         bgInfo.setMaximumHeight(WIDGET_INFO_HEIGHT)
         bgInfo.setMinimumHeight(WIDGET_INFO_HEIGHT)
@@ -82,7 +84,7 @@ class AnalysisCard(QtWidgets.QWidget):
         if info_status is not None:
             status = QtWidgets.QLabel(self)
             status.setText(f"Status: {info_status}")
-            status.setStyleSheet(LABEL_COLOUR)
+            status.setStyleSheet(status_colour)
             vLayout.addWidget(status)
         if info_date is not None:
             date = QtWidgets.QLabel(self)
@@ -101,7 +103,8 @@ class AnalysisCard(QtWidgets.QWidget):
         self.ui.sampleTitle.setText(f"{len(samples)} Samples")
         self.sample_number = len(samples)
         for sample in samples:
-            bgInfo = self.create_info_widget(sample.name, sample.status, sample.status_date, None)
+            bgInfo = self.create_info_widget(sample.name, sample.status, sample.status_date, None,
+                                             SAMPLE_STATUS_COLOUR[sample.status])
             self.ui.sampleLayout.addWidget(bgInfo)
             self.user_info(sample.users)
 
@@ -109,14 +112,15 @@ class AnalysisCard(QtWidgets.QWidget):
         if self.previous_user != user.id:
             self.users_number += 1
             bgInfo = self.create_info_widget(f"{user.first_name} {user.surname}", None, None,
-                                             user.org)
+                                             user.org, None)
             self.ui.userLayout.addWidget(bgInfo)
             self.previous_user = user.id
 
     def reduction_info(self, reduction):
         if reduction:
             self.reductions_number += 1
-            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.status_date, None)
+            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.status_date, None,
+                                             REDUCTION_STATUS_COLOUR[reduction.status])
             self.ui.reductionLayout.addWidget(bgInfo)
 
     def edit_analysis(self):

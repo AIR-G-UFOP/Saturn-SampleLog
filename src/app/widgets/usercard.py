@@ -2,7 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.usercard import Ui_UserCardWidget
 from ..config.settings import (CARD_MIN_HEIGHT, USER_DETAILS_HEIGHT, WIDGET_INFO_HEIGHT,
                                WIDGET_INFO_STYLESHEET, CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR,
-                               CARD_BUTTON_ICON_DOWN, CARD_BUTTON_ICON_UP)
+                               CARD_BUTTON_ICON_DOWN, CARD_BUTTON_ICON_UP, SAMPLE_STATUS_COLOUR, ANALYSIS_STATUS_COLOUR,
+                               REDUCTION_STATUS_COLOUR)
 
 
 class UserCard(QtWidgets.QWidget):
@@ -61,7 +62,7 @@ class UserCard(QtWidgets.QWidget):
             self.ui.bgReductionBottom.setMaximumHeight(0)
             self.ui.btn_toggle.setIcon(QtGui.QIcon(CARD_BUTTON_ICON_DOWN))
 
-    def create_info_widget(self, info_name, info_status, info_date):
+    def create_info_widget(self, info_name, info_status, info_date, status_colour):
         bgInfo = QtWidgets.QFrame(self)
         bgInfo.setMaximumHeight(WIDGET_INFO_HEIGHT)
         bgInfo.setMinimumHeight(WIDGET_INFO_HEIGHT)
@@ -73,7 +74,7 @@ class UserCard(QtWidgets.QWidget):
         name.setStyleSheet(CARD_SUBHEADING_STYLESHEET)
         status = QtWidgets.QLabel(self)
         status.setText(f"Status: {info_status}")
-        status.setStyleSheet(LABEL_COLOUR)
+        status.setStyleSheet(status_colour)
         date = QtWidgets.QLabel(self)
         date.setText(info_date.strftime("%d-%m-%Y"))
         date.setStyleSheet(LABEL_COLOUR)
@@ -86,21 +87,24 @@ class UserCard(QtWidgets.QWidget):
         self.ui.sampleTitle.setText(f"{len(samples)} Samples")
         self.sample_number = len(samples)
         for sample in samples:
-            bgInfo = self.create_info_widget(sample.name, sample.status, sample.status_date)
+            bgInfo = self.create_info_widget(sample.name, sample.status, sample.status_date,
+                                             SAMPLE_STATUS_COLOUR[sample.status])
             self.ui.sampleLayout.addWidget(bgInfo)
             self.analysis_info(sample.analyses)
 
     def analysis_info(self, analyses):
         self.analyses_number += len(analyses)
         for analysis in analyses:
-            bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.status_date)
+            bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.status_date,
+                                             ANALYSIS_STATUS_COLOUR[analysis.status])
             self.ui.AnalysisLayout.addWidget(bgInfo)
             self.reduction_info(analysis.reduction)
 
     def reduction_info(self, reduction):
         if reduction:
             self.reductions_number += 1
-            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.status_date)
+            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.status_date,
+                                             REDUCTION_STATUS_COLOUR[reduction.status])
             self.ui.reductionLayout.addWidget(bgInfo)
 
     def edit_user(self):
