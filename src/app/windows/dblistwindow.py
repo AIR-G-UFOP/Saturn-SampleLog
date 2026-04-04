@@ -146,15 +146,15 @@ class DbListWindow(QtWidgets.QMainWindow):
     @QtCore.pyqtSlot(str, int)
     def open_edit_dialog(self, db_type, db_id):
         db_type_map = {
-            "user": EditUserWindow(self.userService, db_id),
-            "sample": EditSampleWindow(self.sampleService, db_id, self.userService),
-            "analysis": EditAnalysisWindow(self.analysisService, db_id, self.sampleService),
-            "reduction": EditReductionWindow(self.reductionService, db_id, self.analysisService),
+            "user": EditUserWindow(self.userService, db_id, self.ui.bgApp, self),
+            "sample": EditSampleWindow(self.sampleService, db_id, self.userService, self.ui.bgApp, self),
+            "analysis": EditAnalysisWindow(self.analysisService, db_id, self.sampleService, self.ui.bgApp, self),
+            "reduction": EditReductionWindow(self.reductionService, db_id, self.analysisService, self.ui.bgApp, self),
         }
         self.overlay.show()
         dialog = db_type_map[db_type]
-        dialog.setWindowModality(QtCore.Qt.WindowModal)
         dialog.dialog_return.connect(self.return_edit_dialog)
+        dialog.setWindowModality(QtCore.Qt.ApplicationModal)
         dialog.exec_()
 
     @QtCore.pyqtSlot()

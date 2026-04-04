@@ -13,13 +13,15 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 class EditUserWindow(QtWidgets.QDialog):
     dialog_return = QtCore.pyqtSignal()
 
-    def __init__(self, user_service, user_id):
-        super(EditUserWindow, self).__init__()
+    def __init__(self, user_service, user_id, bg, parent=None):
+        super(EditUserWindow, self).__init__(parent)
 
         self.ui = Ui_EditUserDialog()
         self.ui.setupUi(self)
         self.setWindowTitle("Edit User information")
+        self.setWindowFlags(QtCore.Qt.Dialog)
         UIFunctions.uiDefinitions(self)
+        self.bg = bg
 
         self.userService = user_service
         self.user = self.userService.findUserById(user_id)
@@ -35,6 +37,15 @@ class EditUserWindow(QtWidgets.QDialog):
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
+
+    def showEvent(self, event):
+        super().showEvent(event)
+        self.setup_position()
+
+    def setup_position(self):
+        x = self.bg.pos().x() + self.bg.width() // 2 - self.width() // 2
+        y = self.bg.pos().y() + self.bg.height() // 2 - self.height() // 2
+        self.move(x, y)
 
     def populate_user_info(self):
         self.ui.name.setText(self.user.first_name)

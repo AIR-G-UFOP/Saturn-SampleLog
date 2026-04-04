@@ -7,7 +7,7 @@ class OverlayWidget(QWidget):
     def __init__(self, parent=None):
         super(OverlayWidget, self).__init__(parent)
         self.setAttribute(Qt.WA_NoSystemBackground)
-        self.setAttribute(Qt.WA_TransparentForMouseEvents)
+        self.setAttribute(Qt.WA_TransparentForMouseEvents, False)
         self.new_parent()
 
     def new_parent(self):

@@ -14,13 +14,14 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 class EditReductionWindow(QtWidgets.QDialog):
     dialog_return = QtCore.pyqtSignal()
 
-    def __init__(self, reduction_service, reduction_id, analysis_service):
-        super(EditReductionWindow, self).__init__()
+    def __init__(self, reduction_service, reduction_id, analysis_service, bg, parent=None):
+        super(EditReductionWindow, self).__init__(parent)
 
         self.ui = Ui_EditeReductionWindow()
         self.ui.setupUi(self)
         self.setWindowTitle("Edit Reduction information")
         UIFunctions.uiDefinitions(self)
+        self.bg = bg
 
         self.reductionService = reduction_service
         self.reduction = self.reductionService.getReductionById(reduction_id)
@@ -37,6 +38,15 @@ class EditReductionWindow(QtWidgets.QDialog):
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
+
+    def showEvent(self, event):
+        super().showEvent(event)
+        self.setup_position()
+
+    def setup_position(self):
+        x = self.bg.pos().x() + self.bg.width() // 2 - self.width() // 2
+        y = self.bg.pos().y() + self.bg.height() // 2 - self.height() // 2
+        self.move(x, y)
 
     def dialog_close(self):
         self.dialog_return.emit()
