@@ -44,18 +44,24 @@ class AnalysisWindow(QtWidgets.QMainWindow):
         combo.setModel(model)
         combo.setEditable(True)
         combo.lineEdit().setReadOnly(True)
-        combo.lineEdit().setPlaceholderText("Select Sample(s)")
+        combo.lineEdit().setText("Select Sample(s)")
+        combo.lineEdit().setStyleSheet("""background: transparent; border: none;""")
+        combo.lineEdit().setFocusPolicy(QtCore.Qt.NoFocus)
         for smp in samples:
             item = QStandardItem(smp.name)
             item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsUserCheckable)
             item.setData(QtCore.Qt.Unchecked, QtCore.Qt.CheckStateRole)
             item.setData(smp.id, QtCore.Qt.UserRole)
             model.appendRow(item)
+        combo.setCurrentIndex(-1)
+        combo.lineEdit().clear()
+        combo.lineEdit().setPlaceholderText("Select Sample(s)")
         model.itemChanged.connect(lambda: self.update_combobox_text(combo))
 
     def update_combobox_text(self, combo):
         checked_items = self.get_checked_items(combo)
         if not checked_items:
+            combo.lineEdit().clear()
             return
         if len(checked_items) <=3:
             combo.lineEdit().setText(", ".join(checked_items))
@@ -68,11 +74,13 @@ class AnalysisWindow(QtWidgets.QMainWindow):
         analysis_info = {
             "method": self.ui.analysisName.text(),
             "equipment": self.ui.equipment.text(),
-            "date": self.ui.date.date().toPyDate(),
+            "status_date": self.ui.date.date().toPyDate(),
+            "start_date": self.ui.startDate.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
             "operator": self.ui.operator_2.text(),
             "conditions": self.ui.analysisNotes.toPlainText(),
             "file_name": self.ui.fileName.text(),
-            "status": "Logged",
+            "status": self.ui.status.currentText(),
         }
         sample_ids = self.get_checked_data(self.ui.sample)
         try:

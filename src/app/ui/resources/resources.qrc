@@ -7,6 +7,9 @@
     <file>images/SATURN-vertical2.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>icons/cill-ok-filled.png</file>
+    <file>icons/cill-ok.png</file>
+    <file>icons/cil-cancel.png</file>
     <file>icons/cil-arrow-up.png</file>
     <file>icons/cil-arrow-down.png</file>
     <file>icons/cill-edit.png</file>
@@ -266,9 +269,9 @@
     <file>icons/cil-transfer.png</file>
     <file>icons/cil-triangle.png</file>
     <file>icons/cil-truck.png</file>
-    <file>icons/cil-user.png</file>
     <file>icons/cil-user-female.png</file>
     <file>icons/cil-user-follow.png</file>
+    <file>icons/cil-user.png</file>
     <file>icons/cil-user-unfollow.png</file>
     <file>icons/cil-vertical-align-bottom.png</file>
     <file>icons/cil-view-column.png</file>

@@ -28,7 +28,7 @@ class EditUserWindow(QtWidgets.QDialog):
 
         self.ui.btn_saveuser.clicked.connect(self.edit_user_information)
         self.ui.btn_cancel.clicked.connect(self.dialog_close)
-        self.ui.closeAppBtn.clicked.connect(self.dialog_close)
+        self.ui.btn_close.clicked.connect(self.dialog_close)
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)

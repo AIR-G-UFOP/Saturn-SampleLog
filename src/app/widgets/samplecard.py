@@ -23,7 +23,7 @@ class SampleCard(QtWidgets.QWidget):
         self.ui.sampleTitle.setText(f"{sample.name}")
         self.ui.description.setText(f"{sample.description}")
         self.ui.status.setText(f"Status: {sample.status}")
-        self.ui.date.setText(f"{sample.date.strftime('%Y-%m-%d')}")
+        self.ui.date.setText(f"{sample.status_date.strftime('%Y-%m-%d')}")
         self.ui.prep.setText(f"Preparation: {sample.preparation}")
         self.ui.comment.setText(f"Comment: {sample.comment}")
         self.user_info(sample.users)
@@ -101,14 +101,14 @@ class SampleCard(QtWidgets.QWidget):
         self.ui.analysisTitle.setText(f"{len(analyses)} Analyses")
         self.analysis_number = len(analyses)
         for analysis in analyses:
-            bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.date, None)
+            bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.status_date, None)
             self.ui.AnalysisLayout.addWidget(bgInfo)
             self.reduction_info(analysis.reduction)
 
     def reduction_info(self, reduction):
         if reduction:
             self.reductions_number += 1
-            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.date, None)
+            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.status_date, None)
             self.ui.reductionLayout.addWidget(bgInfo)
 
     def edit_sample(self):

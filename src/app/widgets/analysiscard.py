@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.analysiscard import Ui_AnalysisCardWidget
 from ..config.settings import (CARD_MIN_HEIGHT, ANALYSIS_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
                                CARD_BUTTON_ICON_DOWN, WIDGET_INFO_STYLESHEET, WIDGET_INFO_HEIGHT,
-                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR)
+                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR, FILE_LABEL_COLOUR)
 
 
 class AnalysisCard(QtWidgets.QWidget):
@@ -28,8 +28,9 @@ class AnalysisCard(QtWidgets.QWidget):
         self.ui.operator_.setText(f"Operator: {analysis.operator}")
         self.ui.conditions.setText(f"Conditions: {analysis.conditions}")
         self.ui.status.setText(f"Status: {analysis.status}")
-        self.ui.date.setText(analysis.date.strftime('%Y-%m-%d'))
+        self.ui.date.setText(analysis.status_date.strftime('%Y-%m-%d'))
         self.ui.file.setText(f"Saved as: {analysis.file_name}")
+        self.ui.file.setStyleSheet(FILE_LABEL_COLOUR)
         self.samples_info(analysis.samples)
         self.reduction_info(analysis.reduction)
 
@@ -100,7 +101,7 @@ class AnalysisCard(QtWidgets.QWidget):
         self.ui.sampleTitle.setText(f"{len(samples)} Samples")
         self.sample_number = len(samples)
         for sample in samples:
-            bgInfo = self.create_info_widget(sample.name, sample.status, sample.date, None)
+            bgInfo = self.create_info_widget(sample.name, sample.status, sample.status_date, None)
             self.ui.sampleLayout.addWidget(bgInfo)
             self.user_info(sample.users)
 
@@ -115,7 +116,7 @@ class AnalysisCard(QtWidgets.QWidget):
     def reduction_info(self, reduction):
         if reduction:
             self.reductions_number += 1
-            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.date, None)
+            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.status_date, None)
             self.ui.reductionLayout.addWidget(bgInfo)
 
     def edit_analysis(self):

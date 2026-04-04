@@ -2,9 +2,9 @@ import os
 import sys
 from PyQt5 import QtCore, QtWidgets, QtGui
 from sqlalchemy.testing.pickleable import User
-
 from ..ui.generated.editsampledialog import Ui_EditSampleDialog
 from ..modules.ui_functions import UIFunctions
+from ..config.settings import (PREP_HEIGHT, TIME_ANIMATION)
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"  # Auto-adjust based on system settings
@@ -31,7 +31,8 @@ class EditSampleWindow(QtWidgets.QDialog):
 
         self.ui.btn_saveSample.clicked.connect(self.edit_sample_information)
         self.ui.btn_cancel.clicked.connect(self.dialog_close)
-        self.ui.closeAppBtn.clicked.connect(self.dialog_close)
+        self.ui.btn_close.clicked.connect(self.dialog_close)
+        self.ui.prepYes.toggled.connect(self.check_prep_state)
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)
@@ -50,13 +51,14 @@ class EditSampleWindow(QtWidgets.QDialog):
                 self.ui.userName.setCurrentText(user_name)
         self.ui.sampleName.setText(self.sample.name)
         self.ui.sampleDescription.setPlainText(self.sample.description)
-        self.ui.status.setText(self.sample.status)
+        self.ui.status.setCurrentText(self.sample.status)
         self.ui.instructions.setText(self.sample.comment)
-        self.ui.date.setDate(QtCore.QDate(self.sample.date))
+        self.ui.date.setDate(QtCore.QDate(self.sample.status_date))
+        self.ui.startDate.setDate(QtCore.QDate(self.sample.start_date))
+        self.ui.endDate.setDate(QtCore.QDate(self.sample.end_date))
         if self.sample.preparation:
             self.ui.prepYes.setChecked(True)
-        else:
-            self.ui.prepNo.setChecked(True)
+            self.check_prep_state()
 
     def edit_sample_information(self):
         if not self.validate_fields():
@@ -65,10 +67,12 @@ class EditSampleWindow(QtWidgets.QDialog):
             "name": self.ui.sampleName.text(),
             "description": self.ui.sampleDescription.toPlainText(),
             "user_id": self.ui.userName.currentData(),
-            "date": self.ui.date.date().toPyDate(),
+            "status_date": self.ui.date.date().toPyDate(),
+            "start_date": self.ui.startDate.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
             "preparation": self.ui.prepYes.isChecked(),
             "comment": self.ui.instructions.text(),
-            "status": self.ui.status.text(),
+            "status": self.ui.status.currentText(),
         }
         try:
             result = self.sampleService.editSample(self.sample_id, sample_info)
@@ -86,7 +90,7 @@ class EditSampleWindow(QtWidgets.QDialog):
             message = True
         else:
             self.clear_highlight_field(self.ui.userName)
-        required_fields = [self.ui.sampleName, self.ui.sampleDescription, self.ui.status]
+        required_fields = [self.ui.sampleName, self.ui.sampleDescription]
         if self.ui.prepYes.isChecked():
             required_fields.append(self.ui.instructions)
         for field in required_fields:
@@ -118,3 +122,13 @@ class EditSampleWindow(QtWidgets.QDialog):
     def dialog_close(self):
         self.dialog_return.emit()
         self.close()
+
+    def check_prep_state(self):
+        if self.ui.prepYes.isChecked():
+            self.ui.instructions.setEnabled(True)
+            self.ui.startDate.setEnabled(True)
+            self.ui.endDate.setEnabled(True)
+        else:
+            self.ui.instructions.setEnabled(False)
+            self.ui.startDate.setEnabled(False)
+            self.ui.endDate.setEnabled(False)

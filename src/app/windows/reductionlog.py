@@ -40,7 +40,7 @@ class ReductionWindow(QtWidgets.QMainWindow):
         self.ui.analysis.clear()
         self.ui.analysis.addItem("Select Analysis", None)
         for anal in analyses:
-            analysis_name = f"{anal.method}-{anal.date.strftime('%Y-%m-%d')}"
+            analysis_name = f"{anal.method}-{anal.status_date.strftime('%Y%m%d')}"
             self.ui.analysis.addItem(analysis_name, anal.id)
 
     def validate_fields(self):
@@ -86,11 +86,13 @@ class ReductionWindow(QtWidgets.QMainWindow):
             "software": self.ui.software.text(),
             "version": self.ui.version.text(),
             "handler": self.ui.handler.text(),
-            "date": self.ui.date.date().toPyDate(),
+            "status_date": self.ui.date.date().toPyDate(),
+            "start_date": self.ui.startDate.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
             "notes": self.ui.notes_2.toPlainText(),
-            "file_id": self.ui.fileName.text(),
+            "file_name": self.ui.fileName.text(),
             "analysis_id": self.ui.analysis.currentData(),
-            "status": "Logged"
+            "status": self.ui.status.currentText()
         }
         try:
             result = self.reductionService.addReduction(reduction_info)

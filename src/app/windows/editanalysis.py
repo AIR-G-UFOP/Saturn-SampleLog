@@ -30,7 +30,7 @@ class EditAnalysisWindow(QtWidgets.QDialog):
 
         self.ui.btn_saveAnalysis.clicked.connect(self.edit_analysis_information)
         self.ui.btn_cancel.clicked.connect(self.dialog_close)
-        self.ui.closeAppBtn.clicked.connect(self.dialog_close)
+        self.ui.btn_close.clicked.connect(self.dialog_close)
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)
@@ -61,7 +61,9 @@ class EditAnalysisWindow(QtWidgets.QDialog):
         combo.setModel(model)
         combo.setEditable(True)
         combo.lineEdit().setReadOnly(True)
-        combo.lineEdit().setPlaceholderText("Select Sample(s)")
+        combo.lineEdit().setText("Select Sample(s)")
+        combo.lineEdit().setStyleSheet("""background: transparent; border: none;""")
+        combo.lineEdit().setFocusPolicy(QtCore.Qt.NoFocus)
         for smp in samples:
             item = QtGui.QStandardItem(smp.name)
             item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsUserCheckable)
@@ -72,12 +74,16 @@ class EditAnalysisWindow(QtWidgets.QDialog):
                     item.setData(QtCore.Qt.Unchecked, QtCore.Qt.CheckStateRole)
             item.setData(smp.id, QtCore.Qt.UserRole)
             model.appendRow(item)
+        combo.setCurrentIndex(-1)
+        combo.lineEdit().clear()
+        combo.lineEdit().setPlaceholderText("Select Sample(s)")
         model.itemChanged.connect(lambda: self.update_combobox_text(combo))
         self.update_combobox_text(combo)
 
     def update_combobox_text(self, combo):
         checked_items = self.get_checked_items(combo)
         if not checked_items:
+            combo.lineEdit().clear()
             return
         if len(checked_items) <= 3:
             combo.lineEdit().setText(", ".join(checked_items))
@@ -111,8 +117,10 @@ class EditAnalysisWindow(QtWidgets.QDialog):
         self.ui.operator_2.setText(self.analysis.operator)
         self.ui.analysisNotes.setPlainText(self.analysis.conditions)
         self.ui.fileName.setText(self.analysis.file_name)
-        self.ui.status.setText(self.analysis.status)
-        self.ui.date.setDate(QtCore.QDate(self.analysis.date))
+        self.ui.status.setCurrentText(self.analysis.status)
+        self.ui.date.setDate(QtCore.QDate(self.analysis.status_date))
+        self.ui.startDate.setDate(QtCore.QDate(self.analysis.start_date))
+        self.ui.endDate.setDate(QtCore.QDate(self.analysis.end_date))
         if self.analysis.file_name != "":
             self.ui.generate.setChecked(True)
 
@@ -124,8 +132,10 @@ class EditAnalysisWindow(QtWidgets.QDialog):
             "equipment": self.ui.equipment.text(),
             "operator": self.ui.operator_2.text(),
             "conditions": self.ui.analysisNotes.toPlainText(),
-            "date": self.ui.date.date().toPyDate(),
-            "status": self.ui.status.text(),
+            "status_date": self.ui.date.date().toPyDate(),
+            "start_date": self.ui.startDate.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
+            "status": self.ui.status.currentText(),
             "file_name": self.ui.fileName.text(),
         }
         sample_ids = self.get_checked_data(self.ui.sample)
@@ -145,8 +155,7 @@ class EditAnalysisWindow(QtWidgets.QDialog):
             message = True
         else:
             self.clear_highlight_field(self.ui.sample)
-        required_fields = [self.ui.analysisName, self.ui.equipment, self.ui.operator_2, self.ui.analysisNotes,
-                           self.ui.status]
+        required_fields = [self.ui.analysisName, self.ui.equipment, self.ui.operator_2, self.ui.analysisNotes]
         if not self.ui.generate.isChecked():
             required_fields.append(self.ui.fileName)
         for field in required_fields:

@@ -20,6 +20,7 @@ USER_DETAILS_HEIGHT = 54
 SAMPLE_DETAILS_HEIGHT = 74
 ANALYSIS_DETAILS_HEIGHT = 94
 REDUCTION_DETAILS_HEIGHT = 94
+PREP_HEIGHT = 103
 WIDGET_INFO_STYLESHEET = ("""QFrame[role='card'] {
                           background-color: #343746;
                           border-radius: 10px;
@@ -27,6 +28,7 @@ WIDGET_INFO_STYLESHEET = ("""QFrame[role='card'] {
                           }""")
 CARD_SUBHEADING_STYLESHEET = "font: 10pt; color: #F8F8F2"
 LABEL_COLOUR = "color: #BDBDBD"
+FILE_LABEL_COLOUR = "color: #FF5555"
 SAMPLE_STATUS_COLOUR = {
     "Logged in": "#BDBDBD",
     "Preparation in progress...": "color: #F1FA8C",
@@ -34,20 +36,20 @@ SAMPLE_STATUS_COLOUR = {
     "Analysis in progress...": "color: #F1FA8C",
     "Analysis completed": "color: #50FA7B",
     "Data Reduction in progress...": "color: #F1FA8C",
-    "Data reduction completed": "color: #50FA7B",
+    "Data Reduction completed": "color: #50FA7B",
     "Sent back to User": "color: #BDBDBD",
 }
 ANALYSIS_STATUS_COLOUR = {
     "Logged in": "#BDBDBD",
     "Analysis in progress...": "color: #F1FA8C",
     "Analysis completed": "color: #50FA7B",
-    "Data reduction in progress...": "color: #F1FA8C",
-    "Data reduction completed": "color: #50FA7B",
+    "Data Reduction in progress...": "color: #F1FA8C",
+    "Data Reduction completed": "color: #50FA7B",
     "Results sent to User": "color: #BDBDBD",
 }
 REDUCTION_STATUS_COLOUR = {
     "Logged in": "color: #BDBDBD",
     "Data Reduction in progress...": "color: #F1FA8C",
-    "Data reduction completed": "color: #50FA7B",
+    "Data Reduction completed": "color: #50FA7B",
     "Results sent to User": "color: #BDBDBD",
 }

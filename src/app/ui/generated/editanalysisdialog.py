@@ -14,34 +14,39 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_EditAnalysisWindow(object):
     def setupUi(self, EditAnalysisWindow):
         EditAnalysisWindow.setObjectName("EditAnalysisWindow")
-        EditAnalysisWindow.resize(471, 455)
+        EditAnalysisWindow.resize(476, 521)
+        EditAnalysisWindow.setMinimumSize(QtCore.QSize(394, 521))
+        EditAnalysisWindow.setMaximumSize(QtCore.QSize(830, 525))
         EditAnalysisWindow.setStyleSheet("QWidget{\n"
 "    color: #F8F8F2;\n"
 "    font: 8pt \"Inter 24pt Medium\";\n"
 "}\n"
-"/* Bg App */\n"
 "#bgApp {    \n"
-"    background-color: #282A36;\n"
+"    background-color: rgb(44, 49, 58);\n"
+"    border-radius: 10px;\n"
 "}\n"
-"#contentTopBg {\n"
-"    background-color: #19181f;\n"
+"#ContentBox {border-radius: 10px;}\n"
+"#bottomBar {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-bottom-left-radius: 10px;\n"
+"    border-bottom-right-radius: 10px;\n"
 "}\n"
-"#topLogo {\n"
-"    background-image: url(:/imagem/images/saturn_logo.png);\n"
-"    background-position: center;\n"
-"    background-repeat: no-repeat;\n"
+"#bgAnalysis {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
 "}\n"
-"#titleRightInfo { \n"
-"    padding-left: 10px;\n"
-" }\n"
-"/* Top Buttons */\n"
-"#closeAppBtn{ background-color: rgba(255, 255, 255, 0); border: none;}\n"
-"#closeAppBtn:hover{ background-color:#ff5555;}\n"
-"#closeAppBtn:pressed { background-color:rgb(193, 64, 64); border-style: solid;}\n"
-"/* Bottom Bar */\n"
-"#bottomBar { background-color: #282A36; }\n"
-"#bottomBar QLabel { font-size: 10px; color: rgb(113, 126, 149);}\n"
-"/*Button */\n"
+"\n"
+"#bgStatus {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#bgFile {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
 "#btn_saveAnalysis {\n"
 "    border-radius: 5px;    \n"
 "    border: none;\n"
@@ -64,8 +69,17 @@ class Ui_EditAnalysisWindow(object):
 "#btn_cancel::pressed {\n"
 "    background-color: rgb(52, 59, 72);\n"
 "}\n"
-"\n"
-"/*LineEdit */\n"
+"#btn_close {\n"
+"    border-radius: 5px;    \n"
+"    border: none;\n"
+"    background-color: rgb(52, 59, 72);\n"
+"}\n"
+"#btn_close::hover {\n"
+"    background-color: #FF5555;\n"
+"}\n"
+"#btn_close::pressed {\n"
+"    background-color: rgb(52, 59, 72);\n"
+"}\n"
 "#content .QLineEdit {\n"
 "    background-color: rgb(52, 59, 72);\n"
 "    border-radius: 5px;\n"
@@ -80,8 +94,6 @@ class Ui_EditAnalysisWindow(object):
 "#content .QLineEdit:focus {\n"
 "    border: 2px solid rgb(91, 101, 124);\n"
 "}\n"
-"\n"
-"/*TextEdit */\n"
 "#content .QTextEdit {\n"
 "    background-color: rgb(52, 59, 72);\n"
 "    border-radius: 5px;\n"
@@ -96,20 +108,17 @@ class Ui_EditAnalysisWindow(object):
 "#content .QTextEdit:focus {\n"
 "    border: 2px solid rgb(91, 101, 124);\n"
 "}\n"
-"\n"
-"/*QLabel */\n"
 "#content .QLabel {\n"
 "    color: #EAEAF0;\n"
 "    font: 8pt \"Inter 24pt Medium\";\n"
 "}\n"
-"\n"
-"/*ComboBox */\n"
 "QComboBox{\n"
 "    background-color: rgb(52, 59, 72);\n"
 "    border-radius: 5px;\n"
 "    border: 2px solid rgb(52, 59, 72);\n"
 "    padding: 5px;\n"
 "    padding-left: 10px;\n"
+"    color: #ffb86c;\n"
 "}\n"
 "QComboBox:hover{\n"
 "    border: 2px solid rgb(64, 71, 88);\n"
@@ -137,7 +146,6 @@ class Ui_EditAnalysisWindow(object):
 "    padding: 10px;\n"
 "    selection-background-color: rgb(39, 44, 54);\n"
 "}\n"
-"/*CheckBox */\n"
 "QCheckBox::indicator {\n"
 "    border: 3px solid rgb(52, 59, 72);\n"
 "    width: 15px;\n"
@@ -203,45 +211,6 @@ class Ui_EditAnalysisWindow(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.contentTopBg = QtWidgets.QFrame(self.contentBox)
-        self.contentTopBg.setMinimumSize(QtCore.QSize(0, 30))
-        self.contentTopBg.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.contentTopBg.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.contentTopBg.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.contentTopBg.setObjectName("contentTopBg")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.contentTopBg)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setSpacing(0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.titleGripFrame = QtWidgets.QFrame(self.contentTopBg)
-        self.titleGripFrame.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.titleGripFrame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.titleGripFrame.setObjectName("titleGripFrame")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.titleGripFrame)
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_2.setSpacing(0)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.topLogo = QtWidgets.QFrame(self.titleGripFrame)
-        self.topLogo.setMinimumSize(QtCore.QSize(45, 30))
-        self.topLogo.setMaximumSize(QtCore.QSize(45, 30))
-        self.topLogo.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.topLogo.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.topLogo.setObjectName("topLogo")
-        self.horizontalLayout_2.addWidget(self.topLogo)
-        self.titleRightInfo = QtWidgets.QLabel(self.titleGripFrame)
-        self.titleRightInfo.setObjectName("titleRightInfo")
-        self.horizontalLayout_2.addWidget(self.titleRightInfo)
-        self.closeAppBtn = QtWidgets.QPushButton(self.titleGripFrame)
-        self.closeAppBtn.setMinimumSize(QtCore.QSize(35, 28))
-        self.closeAppBtn.setMaximumSize(QtCore.QSize(35, 28))
-        self.closeAppBtn.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cil-close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.closeAppBtn.setIcon(icon)
-        self.closeAppBtn.setObjectName("closeAppBtn")
-        self.horizontalLayout_2.addWidget(self.closeAppBtn)
-        self.horizontalLayout.addWidget(self.titleGripFrame)
-        self.verticalLayout_3.addWidget(self.contentTopBg)
         self.contentBottom = QtWidgets.QFrame(self.contentBox)
         self.contentBottom.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.contentBottom.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -254,43 +223,57 @@ class Ui_EditAnalysisWindow(object):
         self.content.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.content.setFrameShadow(QtWidgets.QFrame.Raised)
         self.content.setObjectName("content")
-        self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.content)
-        self.verticalLayout_13.setContentsMargins(10, 10, 10, 10)
-        self.verticalLayout_13.setSpacing(5)
-        self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.content)
+        self.verticalLayout_16.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_16.setSpacing(10)
+        self.verticalLayout_16.setObjectName("verticalLayout_16")
+        self.bgAnalysis = QtWidgets.QFrame(self.content)
+        self.bgAnalysis.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgAnalysis.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgAnalysis.setObjectName("bgAnalysis")
+        self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.bgAnalysis)
+        self.verticalLayout_19.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_19.setSpacing(10)
+        self.verticalLayout_19.setObjectName("verticalLayout_19")
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_8.setSpacing(10)
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.verticalLayout_12 = QtWidgets.QVBoxLayout()
         self.verticalLayout_12.setSpacing(2)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
-        self.label = QtWidgets.QLabel(self.content)
+        self.label = QtWidgets.QLabel(self.bgAnalysis)
         self.label.setObjectName("label")
         self.verticalLayout_12.addWidget(self.label)
-        self.sample = QtWidgets.QComboBox(self.content)
-        self.sample.setMinimumSize(QtCore.QSize(0, 30))
+        self.sample = QtWidgets.QComboBox(self.bgAnalysis)
+        self.sample.setMinimumSize(QtCore.QSize(200, 30))
         self.sample.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.sample.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.sample.setObjectName("sample")
         self.verticalLayout_12.addWidget(self.sample)
-        self.verticalLayout_13.addLayout(self.verticalLayout_12)
+        self.horizontalLayout_8.addLayout(self.verticalLayout_12)
         self.verticalLayout_11 = QtWidgets.QVBoxLayout()
         self.verticalLayout_11.setSpacing(2)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
-        self.label_2 = QtWidgets.QLabel(self.content)
+        self.label_2 = QtWidgets.QLabel(self.bgAnalysis)
         self.label_2.setObjectName("label_2")
         self.verticalLayout_11.addWidget(self.label_2)
-        self.analysisName = QtWidgets.QLineEdit(self.content)
+        self.analysisName = QtWidgets.QLineEdit(self.bgAnalysis)
         self.analysisName.setMinimumSize(QtCore.QSize(0, 25))
         self.analysisName.setMaximumSize(QtCore.QSize(16777215, 25))
         self.analysisName.setObjectName("analysisName")
         self.verticalLayout_11.addWidget(self.analysisName)
-        self.verticalLayout_13.addLayout(self.verticalLayout_11)
+        self.horizontalLayout_8.addLayout(self.verticalLayout_11)
+        self.verticalLayout_19.addLayout(self.horizontalLayout_8)
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_6.setSpacing(10)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.verticalLayout_10 = QtWidgets.QVBoxLayout()
         self.verticalLayout_10.setSpacing(2)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
-        self.label_3 = QtWidgets.QLabel(self.content)
+        self.label_3 = QtWidgets.QLabel(self.bgAnalysis)
         self.label_3.setObjectName("label_3")
         self.verticalLayout_10.addWidget(self.label_3)
-        self.equipment = QtWidgets.QLineEdit(self.content)
+        self.equipment = QtWidgets.QLineEdit(self.bgAnalysis)
         self.equipment.setMinimumSize(QtCore.QSize(0, 25))
         self.equipment.setMaximumSize(QtCore.QSize(16777215, 25))
         self.equipment.setObjectName("equipment")
@@ -299,112 +282,200 @@ class Ui_EditAnalysisWindow(object):
         self.verticalLayout_9 = QtWidgets.QVBoxLayout()
         self.verticalLayout_9.setSpacing(2)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
-        self.label_4 = QtWidgets.QLabel(self.content)
+        self.label_4 = QtWidgets.QLabel(self.bgAnalysis)
         self.label_4.setObjectName("label_4")
         self.verticalLayout_9.addWidget(self.label_4)
-        self.operator_2 = QtWidgets.QLineEdit(self.content)
+        self.operator_2 = QtWidgets.QLineEdit(self.bgAnalysis)
         self.operator_2.setMinimumSize(QtCore.QSize(0, 25))
         self.operator_2.setMaximumSize(QtCore.QSize(16777215, 25))
         self.operator_2.setObjectName("operator_2")
         self.verticalLayout_9.addWidget(self.operator_2)
         self.horizontalLayout_6.addLayout(self.verticalLayout_9)
-        self.verticalLayout_13.addLayout(self.horizontalLayout_6)
+        self.verticalLayout_19.addLayout(self.horizontalLayout_6)
         self.verticalLayout_8 = QtWidgets.QVBoxLayout()
         self.verticalLayout_8.setSpacing(2)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
-        self.label_5 = QtWidgets.QLabel(self.content)
+        self.label_5 = QtWidgets.QLabel(self.bgAnalysis)
         self.label_5.setObjectName("label_5")
         self.verticalLayout_8.addWidget(self.label_5)
-        self.analysisNotes = QtWidgets.QTextEdit(self.content)
+        self.analysisNotes = QtWidgets.QTextEdit(self.bgAnalysis)
         self.analysisNotes.setMinimumSize(QtCore.QSize(0, 40))
         self.analysisNotes.setMaximumSize(QtCore.QSize(16777215, 40))
         self.analysisNotes.setObjectName("analysisNotes")
         self.verticalLayout_8.addWidget(self.analysisNotes)
-        self.verticalLayout_13.addLayout(self.verticalLayout_8)
+        self.verticalLayout_19.addLayout(self.verticalLayout_8)
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setSpacing(10)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_18.setSpacing(2)
+        self.verticalLayout_18.setObjectName("verticalLayout_18")
+        self.label_9 = QtWidgets.QLabel(self.bgAnalysis)
+        self.label_9.setObjectName("label_9")
+        self.verticalLayout_18.addWidget(self.label_9)
+        self.startDate = QtWidgets.QDateEdit(self.bgAnalysis)
+        self.startDate.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.startDate.setMinimumDate(QtCore.QDate(2026, 1, 1))
+        self.startDate.setCalendarPopup(True)
+        self.startDate.setObjectName("startDate")
+        self.verticalLayout_18.addWidget(self.startDate)
+        self.horizontalLayout_3.addLayout(self.verticalLayout_18)
+        self.verticalLayout_13 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_13.setSpacing(2)
+        self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.label_10 = QtWidgets.QLabel(self.bgAnalysis)
+        self.label_10.setObjectName("label_10")
+        self.verticalLayout_13.addWidget(self.label_10)
+        self.endDate = QtWidgets.QDateEdit(self.bgAnalysis)
+        self.endDate.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.endDate.setMinimumDate(QtCore.QDate(2026, 1, 1))
+        self.endDate.setCalendarPopup(True)
+        self.endDate.setObjectName("endDate")
+        self.verticalLayout_13.addWidget(self.endDate)
+        self.horizontalLayout_3.addLayout(self.verticalLayout_13)
+        self.verticalLayout_19.addLayout(self.horizontalLayout_3)
+        self.verticalLayout_16.addWidget(self.bgAnalysis, 0, QtCore.Qt.AlignTop)
+        self.bgFile = QtWidgets.QFrame(self.content)
+        self.bgFile.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgFile.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgFile.setObjectName("bgFile")
+        self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.bgFile)
+        self.verticalLayout_14.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_14.setSpacing(10)
+        self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout()
         self.verticalLayout_7.setSpacing(2)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setSpacing(10)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        self.label_6 = QtWidgets.QLabel(self.content)
+        self.label_6 = QtWidgets.QLabel(self.bgFile)
         self.label_6.setObjectName("label_6")
         self.horizontalLayout_5.addWidget(self.label_6)
-        self.generate = QtWidgets.QCheckBox(self.content)
+        self.generate = QtWidgets.QCheckBox(self.bgFile)
+        self.generate.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.generate.setObjectName("generate")
         self.horizontalLayout_5.addWidget(self.generate)
         self.verticalLayout_7.addLayout(self.horizontalLayout_5)
-        self.fileName = QtWidgets.QLineEdit(self.content)
+        self.fileName = QtWidgets.QLineEdit(self.bgFile)
         self.fileName.setMinimumSize(QtCore.QSize(0, 25))
         self.fileName.setMaximumSize(QtCore.QSize(16777215, 25))
         self.fileName.setObjectName("fileName")
         self.verticalLayout_7.addWidget(self.fileName)
-        self.verticalLayout_13.addLayout(self.verticalLayout_7)
+        self.verticalLayout_14.addLayout(self.verticalLayout_7)
+        self.verticalLayout_16.addWidget(self.bgFile, 0, QtCore.Qt.AlignTop)
+        self.bgStatus = QtWidgets.QFrame(self.content)
+        self.bgStatus.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgStatus.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgStatus.setObjectName("bgStatus")
+        self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.bgStatus)
+        self.verticalLayout_15.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_15.setSpacing(10)
+        self.verticalLayout_15.setObjectName("verticalLayout_15")
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_7.setSpacing(10)
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout()
         self.verticalLayout_6.setSpacing(2)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.label_7 = QtWidgets.QLabel(self.content)
+        self.label_7 = QtWidgets.QLabel(self.bgStatus)
         self.label_7.setObjectName("label_7")
         self.verticalLayout_6.addWidget(self.label_7, 0, QtCore.Qt.AlignTop)
-        self.status = QtWidgets.QLineEdit(self.content)
-        self.status.setMinimumSize(QtCore.QSize(0, 25))
-        self.status.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.status = QtWidgets.QComboBox(self.bgStatus)
+        self.status.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.status.setObjectName("status")
-        self.verticalLayout_6.addWidget(self.status, 0, QtCore.Qt.AlignTop)
+        self.status.addItem("")
+        self.status.addItem("")
+        self.status.addItem("")
+        self.status.addItem("")
+        self.status.addItem("")
+        self.status.addItem("")
+        self.verticalLayout_6.addWidget(self.status)
         self.horizontalLayout_7.addLayout(self.verticalLayout_6)
         self.verticalLayout_5 = QtWidgets.QVBoxLayout()
         self.verticalLayout_5.setSpacing(2)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.label_8 = QtWidgets.QLabel(self.content)
+        self.label_8 = QtWidgets.QLabel(self.bgStatus)
         self.label_8.setObjectName("label_8")
         self.verticalLayout_5.addWidget(self.label_8)
-        self.date = QtWidgets.QDateEdit(self.content)
+        self.date = QtWidgets.QDateEdit(self.bgStatus)
         self.date.setMinimumSize(QtCore.QSize(110, 30))
-        self.date.setMaximumSize(QtCore.QSize(110, 30))
+        self.date.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.date.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.date.setMinimumDate(QtCore.QDate(2026, 1, 1))
         self.date.setCalendarPopup(True)
         self.date.setObjectName("date")
         self.verticalLayout_5.addWidget(self.date)
         self.horizontalLayout_7.addLayout(self.verticalLayout_5)
-        self.verticalLayout_13.addLayout(self.horizontalLayout_7)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_13.addItem(spacerItem)
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.btn_cancel = QtWidgets.QPushButton(self.content)
-        self.btn_cancel.setMinimumSize(QtCore.QSize(0, 25))
-        self.btn_cancel.setMaximumSize(QtCore.QSize(16777215, 25))
-        self.btn_cancel.setObjectName("btn_cancel")
-        self.horizontalLayout_4.addWidget(self.btn_cancel)
-        self.btn_saveAnalysis = QtWidgets.QPushButton(self.content)
-        self.btn_saveAnalysis.setMinimumSize(QtCore.QSize(0, 25))
-        self.btn_saveAnalysis.setMaximumSize(QtCore.QSize(16777215, 25))
-        self.btn_saveAnalysis.setObjectName("btn_saveAnalysis")
-        self.horizontalLayout_4.addWidget(self.btn_saveAnalysis)
-        self.verticalLayout_13.addLayout(self.horizontalLayout_4)
+        self.verticalLayout_15.addLayout(self.horizontalLayout_7)
+        self.verticalLayout_16.addWidget(self.bgStatus, 0, QtCore.Qt.AlignTop)
         self.verticalLayout_4.addWidget(self.content)
         self.bottomBar = QtWidgets.QFrame(self.contentBottom)
-        self.bottomBar.setMinimumSize(QtCore.QSize(0, 20))
-        self.bottomBar.setMaximumSize(QtCore.QSize(16777215, 20))
+        self.bottomBar.setMinimumSize(QtCore.QSize(0, 60))
+        self.bottomBar.setMaximumSize(QtCore.QSize(16777215, 60))
         self.bottomBar.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bottomBar.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bottomBar.setObjectName("bottomBar")
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.bottomBar)
-        self.horizontalLayout_3.setContentsMargins(10, 0, 0, 0)
-        self.horizontalLayout_3.setSpacing(0)
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.label_status = QtWidgets.QLabel(self.bottomBar)
+        self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.bottomBar)
+        self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_17.setSpacing(0)
+        self.verticalLayout_17.setObjectName("verticalLayout_17")
+        self.frame_4 = QtWidgets.QFrame(self.bottomBar)
+        self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_4.setObjectName("frame_4")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_4)
+        self.horizontalLayout_2.setContentsMargins(10, 10, 10, 0)
+        self.horizontalLayout_2.setSpacing(10)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.btn_close = QtWidgets.QPushButton(self.frame_4)
+        self.btn_close.setMinimumSize(QtCore.QSize(25, 0))
+        self.btn_close.setMaximumSize(QtCore.QSize(80, 25))
+        self.btn_close.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cil-close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_close.setIcon(icon)
+        self.btn_close.setObjectName("btn_close")
+        self.horizontalLayout_2.addWidget(self.btn_close)
+        self.btn_cancel = QtWidgets.QPushButton(self.frame_4)
+        self.btn_cancel.setMinimumSize(QtCore.QSize(0, 25))
+        self.btn_cancel.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.btn_cancel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icons/icons/cil-cancel.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_cancel.setIcon(icon1)
+        self.btn_cancel.setObjectName("btn_cancel")
+        self.horizontalLayout_2.addWidget(self.btn_cancel)
+        self.btn_saveAnalysis = QtWidgets.QPushButton(self.frame_4)
+        self.btn_saveAnalysis.setMinimumSize(QtCore.QSize(0, 25))
+        self.btn_saveAnalysis.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.btn_saveAnalysis.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/icons/icons/cill-ok-filled.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_saveAnalysis.setIcon(icon2)
+        self.btn_saveAnalysis.setObjectName("btn_saveAnalysis")
+        self.horizontalLayout_2.addWidget(self.btn_saveAnalysis)
+        self.verticalLayout_17.addWidget(self.frame_4)
+        self.frame_5 = QtWidgets.QFrame(self.bottomBar)
+        self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_5.setObjectName("frame_5")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.frame_5)
+        self.horizontalLayout.setContentsMargins(10, 0, 0, 0)
+        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label_status = QtWidgets.QLabel(self.frame_5)
         self.label_status.setText("")
         self.label_status.setObjectName("label_status")
-        self.horizontalLayout_3.addWidget(self.label_status)
-        self.frame_size_grip = QtWidgets.QFrame(self.bottomBar)
+        self.horizontalLayout.addWidget(self.label_status)
+        self.frame_size_grip = QtWidgets.QFrame(self.frame_5)
         self.frame_size_grip.setMinimumSize(QtCore.QSize(20, 20))
         self.frame_size_grip.setMaximumSize(QtCore.QSize(20, 20))
-        self.frame_size_grip.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_size_grip.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_size_grip.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_size_grip.setObjectName("frame_size_grip")
-        self.horizontalLayout_3.addWidget(self.frame_size_grip)
+        self.horizontalLayout.addWidget(self.frame_size_grip)
+        self.verticalLayout_17.addWidget(self.frame_5)
         self.verticalLayout_4.addWidget(self.bottomBar)
         self.verticalLayout_3.addWidget(self.contentBottom)
         self.verticalLayout_2.addWidget(self.contentBox)
@@ -416,16 +487,24 @@ class Ui_EditAnalysisWindow(object):
     def retranslateUi(self, EditAnalysisWindow):
         _translate = QtCore.QCoreApplication.translate
         EditAnalysisWindow.setWindowTitle(_translate("EditAnalysisWindow", "Dialog"))
-        self.titleRightInfo.setText(_translate("EditAnalysisWindow", "Editing Analysis information..."))
         self.label.setText(_translate("EditAnalysisWindow", "Samples"))
         self.label_2.setText(_translate("EditAnalysisWindow", "Analysis name/Method"))
         self.label_3.setText(_translate("EditAnalysisWindow", "Equipment"))
         self.label_4.setText(_translate("EditAnalysisWindow", "Operator"))
-        self.label_5.setText(_translate("EditAnalysisWindow", "Notes/Operation conditions"))
+        self.label_5.setText(_translate("EditAnalysisWindow", "Operation conditions/Notes"))
+        self.label_9.setText(_translate("EditAnalysisWindow", "Start date"))
+        self.label_10.setText(_translate("EditAnalysisWindow", "End date"))
         self.label_6.setText(_translate("EditAnalysisWindow", "File name"))
         self.generate.setText(_translate("EditAnalysisWindow", "Generate?"))
         self.label_7.setText(_translate("EditAnalysisWindow", "Status"))
+        self.status.setItemText(0, _translate("EditAnalysisWindow", "Logged in"))
+        self.status.setItemText(1, _translate("EditAnalysisWindow", "Analysis in progress..."))
+        self.status.setItemText(2, _translate("EditAnalysisWindow", "Analysis completed"))
+        self.status.setItemText(3, _translate("EditAnalysisWindow", "Data Reduction in progress..."))
+        self.status.setItemText(4, _translate("EditAnalysisWindow", "Data Reduction completed"))
+        self.status.setItemText(5, _translate("EditAnalysisWindow", "Results sent to User"))
         self.label_8.setText(_translate("EditAnalysisWindow", "Date"))
+        self.btn_close.setText(_translate("EditAnalysisWindow", "Close"))
         self.btn_cancel.setText(_translate("EditAnalysisWindow", "Cancel"))
         self.btn_saveAnalysis.setText(_translate("EditAnalysisWindow", "Save changes to Analysis"))
-from app.ui.resources import resources
+from ..resources import resources

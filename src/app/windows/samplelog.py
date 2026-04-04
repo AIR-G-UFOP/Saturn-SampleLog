@@ -3,6 +3,7 @@ import sys
 from PyQt5 import QtCore, QtWidgets, QtGui
 from ..ui.generated.samplewindow import Ui_SampleWindow
 from ..modules.ui_functions import UIFunctions
+from ..config.settings import (PREP_HEIGHT, TIME_ANIMATION)
 
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
@@ -23,9 +24,13 @@ class SampleWindow(QtWidgets.QMainWindow):
         self.sampleService = sample_service
         self.userService = user_service
 
+        self.animation = QtCore.QPropertyAnimation(self.ui.bgPrepBottom, b"maximumHeight")
+        self.animation.setDuration(TIME_ANIMATION)
+
         self.ui.btn_cancel.clicked.connect(lambda: self.close())
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
         self.ui.btn_logSample.clicked.connect(self.register_sample_information)
+        self.ui.prepYes.toggled.connect(self.check_prep_state)
 
         self.load_users()
 
@@ -76,10 +81,12 @@ class SampleWindow(QtWidgets.QMainWindow):
             "name": self.ui.sampleName.text(),
             "description": self.ui.sampleDescription.toPlainText(),
             "user_id": self.ui.userName.currentData(),
-            "date": self.ui.date.date().toPyDate(),
+            "status_date": self.ui.date.date().toPyDate(),
+            "start_date": self.ui.startDate.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
             "preparation": self.ui.prepYes.isChecked(),
             "comment": self.ui.instructions.text(),
-            "status": "Logged"
+            "status": self.ui.status.currentText()
         }
         try:
             result = self.sampleService.addSample(sample_info)
@@ -94,6 +101,9 @@ class SampleWindow(QtWidgets.QMainWindow):
         self.ui.sampleDescription.clear()
         self.ui.userName.setCurrentIndex(0)
         self.ui.date.clear()
+        self.ui.endDate.clear()
+        self.ui.startDate.clear()
+        self.ui.status.setCurrentIndex(0)
         self.ui.prepYes.setChecked(False)
         self.ui.instructions.clear()
 
@@ -108,3 +118,13 @@ class SampleWindow(QtWidgets.QMainWindow):
     @staticmethod
     def clear_highlight_field(field):
         field.setStyleSheet("")
+
+    def check_prep_state(self):
+        if self.ui.prepYes.isChecked():
+            self.animation.setStartValue(0)
+            self.animation.setEndValue(PREP_HEIGHT)
+        else:
+            self.animation.setStartValue(PREP_HEIGHT)
+            self.animation.setEndValue(0)
+        self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+        self.animation.start()

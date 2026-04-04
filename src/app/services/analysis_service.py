@@ -16,7 +16,9 @@ class AnalysisService:
                 equipment=analysis_info["equipment"],
                 conditions=analysis_info["conditions"],
                 operator=analysis_info["operator"],
-                date=analysis_info["date"],
+                status_date=analysis_info["status_date"],
+                start_date=analysis_info["start_date"],
+                end_date=analysis_info["end_date"],
                 file_name=analysis_info["file_name"],
                 status=analysis_info["status"]
             )
@@ -45,7 +47,9 @@ class AnalysisService:
             analysis.equipment = analysis_info["equipment"]
             analysis.conditions = analysis_info["conditions"]
             analysis.operator = analysis_info["operator"]
-            analysis.date = analysis_info["date"]
+            analysis.status_date = analysis_info["status_date"]
+            analysis.start_date = analysis_info["start_date"]
+            analysis.end_date = analysis_info["end_date"]
             analysis.file_name = analysis_info["file_name"]
             analysis.status = analysis_info["status"]
             samples = session.query(DbSample).filter(DbSample.id.in_(sample_ids)).all()

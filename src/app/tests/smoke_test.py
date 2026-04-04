@@ -17,6 +17,7 @@ def run_smoke_test():
         tables = inspector.get_table_names()
         expected_tables = ['users', 'samples', 'analyses', 'reductions']
         for table in expected_tables:
+            print(f"Table: {table} - columns: {inspector.get_columns(table)}")
             if table not in tables:
                 print(f"Smoke test failed: Table '{table}' not found in the database.")
                 return

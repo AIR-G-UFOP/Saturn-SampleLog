@@ -18,9 +18,9 @@ class UserCard(QtWidgets.QWidget):
 
         self.ui.userTitle.setText(f"{user.first_name} {user.surname}")
         self.ui.org.setText(f"{user.org}")
-        self.ui.address.setText(f"{user.address}")
-        self.ui.phone.setText(f"{user.phone}")
-        self.ui.email.setText(f"{user.email}")
+        self.ui.address.setText(f"a: {user.address}")
+        self.ui.phone.setText(f"t: {user.phone}")
+        self.ui.email.setText(f"e: {user.email}")
 
         self.sample_number = 0
         self.analyses_number = 0
@@ -86,21 +86,21 @@ class UserCard(QtWidgets.QWidget):
         self.ui.sampleTitle.setText(f"{len(samples)} Samples")
         self.sample_number = len(samples)
         for sample in samples:
-            bgInfo = self.create_info_widget(sample.name, sample.status, sample.date)
+            bgInfo = self.create_info_widget(sample.name, sample.status, sample.status_date)
             self.ui.sampleLayout.addWidget(bgInfo)
             self.analysis_info(sample.analyses)
 
     def analysis_info(self, analyses):
         self.analyses_number += len(analyses)
         for analysis in analyses:
-            bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.date)
+            bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.status_date)
             self.ui.AnalysisLayout.addWidget(bgInfo)
             self.reduction_info(analysis.reduction)
 
     def reduction_info(self, reduction):
         if reduction:
             self.reductions_number += 1
-            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.date)
+            bgInfo = self.create_info_widget(reduction.reduction_name, reduction.status, reduction.status_date)
             self.ui.reductionLayout.addWidget(bgInfo)
 
     def edit_user(self):

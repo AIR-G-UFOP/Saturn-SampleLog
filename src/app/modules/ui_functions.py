@@ -55,7 +55,10 @@ class UIFunctions():
             if event.type() == QEvent.MouseButtonDblClick:
                 QTimer.singleShot(250, lambda: UIFunctions.maximize_restore(self))
 
-        self.ui.titleGripFrame.mouseDoubleClickEvent = dobleClickMaximizeRestore
+        try:
+            self.ui.titleGripFrame.mouseDoubleClickEvent = dobleClickMaximizeRestore
+        except AttributeError:
+            pass
 
         if ENABLE_CUSTOM_TITLE_BAR:
             # STANDARD TITLE BAR
@@ -73,7 +76,10 @@ class UIFunctions():
                     self.dragPos = event.globalPos()
                     event.accept()
 
-            self.ui.titleGripFrame.mouseMoveEvent = moveWindow
+            try:
+                self.ui.titleGripFrame.mouseMoveEvent = moveWindow
+            except AttributeError:
+                pass
 
             self.left_grip = CustomGrip(self, Qt.LeftEdge, True)
             self.right_grip = CustomGrip(self, Qt.RightEdge, True)

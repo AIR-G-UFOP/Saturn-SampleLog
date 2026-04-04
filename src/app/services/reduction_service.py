@@ -16,9 +16,11 @@ class ReductionService:
                 software=reduction_info['software'],
                 software_version=reduction_info['version'],
                 handler=reduction_info['handler'],
-                date=reduction_info['date'],
+                status_date=reduction_info['status_date'],
+                start_date=reduction_info['start_date'],
+                end_date=reduction_info['end_date'],
                 notes=reduction_info['notes'],
-                file_id=reduction_info['file_id'],
+                file_name=reduction_info['file_name'],
                 analysis_id=reduction_info['analysis_id'],
                 status=reduction_info['status']
             )
@@ -40,9 +42,11 @@ class ReductionService:
             reduction.software = reduction_info['software']
             reduction.software_version = reduction_info['version']
             reduction.handler = reduction_info['handler']
-            reduction.date = reduction_info['date']
+            reduction.status_date = reduction_info['status_date']
+            reduction.start_date = reduction_info['start_date']
+            reduction.end_date = reduction_info['end_date']
             reduction.notes = reduction_info['notes']
-            reduction.file_id = reduction_info['file_id']
+            reduction.file_name = reduction_info['file_name']
             reduction.analysis_id = reduction_info['analysis_id']
             reduction.status = reduction_info['status']
             session.commit()

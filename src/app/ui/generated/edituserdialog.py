@@ -14,38 +14,35 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_EditUserDialog(object):
     def setupUi(self, EditUserDialog):
         EditUserDialog.setObjectName("EditUserDialog")
-        EditUserDialog.resize(524, 339)
+        EditUserDialog.resize(527, 335)
+        EditUserDialog.setMinimumSize(QtCore.QSize(340, 335))
+        EditUserDialog.setMaximumSize(QtCore.QSize(800, 345))
+        EditUserDialog.setSizeIncrement(QtCore.QSize(0, 0))
         EditUserDialog.setStyleSheet("QWidget{\n"
 "    color: #F8F8F2;\n"
 "    font: 8pt \"Inter 24pt Medium\";\n"
 "}\n"
-"/* Bg App */\n"
 "#bgApp {    \n"
-"    background-color: #19181f;\n"
+"    background-color: rgb(44, 49, 58);\n"
+"    border-radius: 10px;\n"
 "}\n"
+"#ContentBox {border-radius: 10px;}\n"
 "#contentTopBg {\n"
-"    background-color: #282A36;\n"
+"    background-color: #20232f;\n"
+"    border-top-left-radius: 10px;\n"
+"    border-top-right-radius: 10px;\n"
 "}\n"
-"#topLogo {\n"
-"    background-image:;\n"
-"    background-position: centered;\n"
-"    background-repeat: no-repeat;\n"
+"#bottomBar {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-bottom-left-radius: 10px;\n"
+"    border-bottom-right-radius: 10px;\n"
 "}\n"
-"#titleRightInfo { \n"
-"    padding-left: 10px;\n"
-" }\n"
-"/* Top Buttons */\n"
-"#rightButtons .QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }\n"
-"#rightButtons .QPushButton:hover { background-color: rgb(44, 49, 57); border-style: solid; border-radius: 4px; }\n"
-"#rightButtons .QPushButton:pressed { background-color: rgb(23, 26, 30); border-style: solid; border-radius: 4px; }\n"
-"#closeAppBtn{ background-color: rgba(255, 255, 255, 0); border: none;}\n"
-"#closeAppBtn:hover{ background-color:#ff5555;}\n"
-"#closeAppBtn:pressed { background-color:rgb(193, 64, 64); border-style: solid;}\n"
-"/* Bottom Bar */\n"
-"#bottomBar { background-color: #282A36; }\n"
-"#bottomBar QLabel { font-size: 10px; color: rgb(113, 126, 149);}\n"
+"#bgUser {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
 "\n"
-"/*Button */\n"
 "#btn_saveuser {\n"
 "    border-radius: 5px;    \n"
 "    border: none;\n"
@@ -60,18 +57,27 @@ class Ui_EditUserDialog(object):
 "#btn_cancel {\n"
 "    border-radius: 5px;    \n"
 "    border: none;\n"
-"    background-color: #282A36;\n"
+"    background-color: rgb(52, 59, 72);\n"
 "}\n"
 "#btn_cancel:hover {\n"
 "    background-color: rgb(61, 70, 86);\n"
 "}\n"
 "#btn_cancel:pressed {\n"
-"    background-color: #282A36;\n"
+"    background-color: rgb(52, 59, 72);\n"
 "}\n"
-"\n"
-"/*LineEdit */\n"
+"#btn_close {\n"
+"    border-radius: 5px;    \n"
+"    border: none;\n"
+"    background-color: rgb(52, 59, 72);\n"
+"}\n"
+"#btn_close:hover {\n"
+"    background-color: #FF5555;\n"
+"}\n"
+"#btn_close:pressed {\n"
+"    background-color: rgb(52, 59, 72);\n"
+"}\n"
 "#content .QLineEdit {\n"
-"    background-color: #282A36;\n"
+"    background-color: rgb(52, 59, 72);\n"
 "    border-radius: 5px;\n"
 "    padding-left: 5px;\n"
 "    selection-color: rgb(255, 255, 255);\n"
@@ -79,15 +85,14 @@ class Ui_EditUserDialog(object):
 "    color: #ffb86c;\n"
 "}\n"
 "#content .QLineEdit:hover {\n"
-"    border: 1px solid #BD93F9;\n"
+"    border: 2px solid rgb(64, 71, 88);\n"
 "}\n"
 "#content .QLineEdit:focus {\n"
-"    border: 1px solid #BD93F9;\n"
+"    border: 2px solid rgb(91, 101, 124);\n"
 "}\n"
 "\n"
-"/*TextEdit */\n"
 "#content .QTextEdit {\n"
-"    background-color: #282A36;\n"
+"    background-color: rgb(52, 59, 72);\n"
 "    border-radius: 5px;\n"
 "    padding-left: 5px;\n"
 "    selection-color: rgb(255, 255, 255);\n"
@@ -95,13 +100,12 @@ class Ui_EditUserDialog(object):
 "    color: #ffb86c;\n"
 "}\n"
 "#content .QTextEdit:hover {\n"
-"    border: 1px solid #BD93F9;\n"
+"    border: 2px solid rgb(64, 71, 88);\n"
 "}\n"
 "#content .QTextEdit:focus {\n"
-"    border: 1px solid rgb(91, 101, 124);\n"
+"    border: 2px solid rgb(91, 101, 124);\n"
 "}\n"
 "\n"
-"/*QLabel */\n"
 "#content .QLabel {\n"
 "    color: #EAEAF0;\n"
 "    font: 8pt \"Inter 24pt Medium\";\n"
@@ -127,55 +131,6 @@ class Ui_EditUserDialog(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.contentTopBg = QtWidgets.QFrame(self.contentBox)
-        self.contentTopBg.setMinimumSize(QtCore.QSize(0, 25))
-        self.contentTopBg.setMaximumSize(QtCore.QSize(16777215, 25))
-        self.contentTopBg.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.contentTopBg.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.contentTopBg.setObjectName("contentTopBg")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.contentTopBg)
-        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_4.setSpacing(0)
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.leftBox = QtWidgets.QFrame(self.contentTopBg)
-        self.leftBox.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.leftBox.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.leftBox.setObjectName("leftBox")
-        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.leftBox)
-        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_5.setSpacing(0)
-        self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.titleGripFrame = QtWidgets.QFrame(self.leftBox)
-        self.titleGripFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.titleGripFrame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.titleGripFrame.setObjectName("titleGripFrame")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.titleGripFrame)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setSpacing(0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.topLogo = QtWidgets.QFrame(self.titleGripFrame)
-        self.topLogo.setMinimumSize(QtCore.QSize(25, 25))
-        self.topLogo.setMaximumSize(QtCore.QSize(25, 25))
-        self.topLogo.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.topLogo.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.topLogo.setObjectName("topLogo")
-        self.horizontalLayout.addWidget(self.topLogo)
-        self.titleRightInfo = QtWidgets.QLabel(self.titleGripFrame)
-        self.titleRightInfo.setObjectName("titleRightInfo")
-        self.horizontalLayout.addWidget(self.titleRightInfo)
-        self.closeAppBtn = QtWidgets.QPushButton(self.titleGripFrame)
-        self.closeAppBtn.setMinimumSize(QtCore.QSize(0, 25))
-        self.closeAppBtn.setMaximumSize(QtCore.QSize(32, 16777215))
-        self.closeAppBtn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.closeAppBtn.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cil-close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.closeAppBtn.setIcon(icon)
-        self.closeAppBtn.setObjectName("closeAppBtn")
-        self.horizontalLayout.addWidget(self.closeAppBtn)
-        self.verticalLayout_5.addWidget(self.titleGripFrame)
-        self.verticalLayout_4.addWidget(self.leftBox)
-        self.verticalLayout_3.addWidget(self.contentTopBg)
         self.contentBottom = QtWidgets.QFrame(self.contentBox)
         self.contentBottom.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.contentBottom.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -193,19 +148,28 @@ class Ui_EditUserDialog(object):
         self.content.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.content.setFrameShadow(QtWidgets.QFrame.Raised)
         self.content.setObjectName("content")
-        self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.content)
-        self.verticalLayout_13.setContentsMargins(10, 10, 10, 10)
-        self.verticalLayout_13.setSpacing(5)
-        self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.content)
+        self.verticalLayout_4.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_4.setSpacing(0)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.bgUser = QtWidgets.QFrame(self.content)
+        self.bgUser.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgUser.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgUser.setObjectName("bgUser")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.bgUser)
+        self.verticalLayout_5.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_5.setSpacing(10)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setSpacing(10)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout()
         self.verticalLayout_7.setSpacing(2)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.label = QtWidgets.QLabel(self.content)
+        self.label = QtWidgets.QLabel(self.bgUser)
         self.label.setObjectName("label")
         self.verticalLayout_7.addWidget(self.label)
-        self.name = QtWidgets.QLineEdit(self.content)
+        self.name = QtWidgets.QLineEdit(self.bgUser)
         self.name.setMinimumSize(QtCore.QSize(0, 25))
         self.name.setObjectName("name")
         self.verticalLayout_7.addWidget(self.name)
@@ -213,87 +177,110 @@ class Ui_EditUserDialog(object):
         self.verticalLayout_8 = QtWidgets.QVBoxLayout()
         self.verticalLayout_8.setSpacing(2)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
-        self.label_2 = QtWidgets.QLabel(self.content)
+        self.label_2 = QtWidgets.QLabel(self.bgUser)
         self.label_2.setObjectName("label_2")
         self.verticalLayout_8.addWidget(self.label_2)
-        self.surname = QtWidgets.QLineEdit(self.content)
+        self.surname = QtWidgets.QLineEdit(self.bgUser)
         self.surname.setMinimumSize(QtCore.QSize(0, 25))
         self.surname.setObjectName("surname")
         self.verticalLayout_8.addWidget(self.surname)
         self.horizontalLayout_5.addLayout(self.verticalLayout_8)
-        self.verticalLayout_13.addLayout(self.horizontalLayout_5)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_5)
         self.verticalLayout_9 = QtWidgets.QVBoxLayout()
         self.verticalLayout_9.setSpacing(2)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
-        self.label_3 = QtWidgets.QLabel(self.content)
+        self.label_3 = QtWidgets.QLabel(self.bgUser)
         self.label_3.setObjectName("label_3")
         self.verticalLayout_9.addWidget(self.label_3)
-        self.org = QtWidgets.QLineEdit(self.content)
+        self.org = QtWidgets.QLineEdit(self.bgUser)
         self.org.setMinimumSize(QtCore.QSize(0, 25))
         self.org.setObjectName("org")
         self.verticalLayout_9.addWidget(self.org)
-        self.verticalLayout_13.addLayout(self.verticalLayout_9)
+        self.verticalLayout_5.addLayout(self.verticalLayout_9)
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_6.setSpacing(10)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.verticalLayout_10 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_10.setSpacing(2)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
-        self.label_4 = QtWidgets.QLabel(self.content)
+        self.label_4 = QtWidgets.QLabel(self.bgUser)
         self.label_4.setObjectName("label_4")
         self.verticalLayout_10.addWidget(self.label_4)
-        self.email = QtWidgets.QLineEdit(self.content)
+        self.email = QtWidgets.QLineEdit(self.bgUser)
         self.email.setMinimumSize(QtCore.QSize(0, 25))
         self.email.setObjectName("email")
         self.verticalLayout_10.addWidget(self.email)
         self.horizontalLayout_6.addLayout(self.verticalLayout_10)
         self.verticalLayout_11 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_11.setSpacing(2)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
-        self.label_5 = QtWidgets.QLabel(self.content)
+        self.label_5 = QtWidgets.QLabel(self.bgUser)
         self.label_5.setObjectName("label_5")
         self.verticalLayout_11.addWidget(self.label_5)
-        self.phone = QtWidgets.QLineEdit(self.content)
+        self.phone = QtWidgets.QLineEdit(self.bgUser)
         self.phone.setMinimumSize(QtCore.QSize(0, 25))
         self.phone.setObjectName("phone")
         self.verticalLayout_11.addWidget(self.phone)
         self.horizontalLayout_6.addLayout(self.verticalLayout_11)
-        self.verticalLayout_13.addLayout(self.horizontalLayout_6)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_6)
         self.verticalLayout_12 = QtWidgets.QVBoxLayout()
         self.verticalLayout_12.setSpacing(2)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
-        self.label_6 = QtWidgets.QLabel(self.content)
+        self.label_6 = QtWidgets.QLabel(self.bgUser)
         self.label_6.setObjectName("label_6")
         self.verticalLayout_12.addWidget(self.label_6)
-        self.address = QtWidgets.QTextEdit(self.content)
+        self.address = QtWidgets.QTextEdit(self.bgUser)
         self.address.setMinimumSize(QtCore.QSize(0, 40))
         self.address.setMaximumSize(QtCore.QSize(16777215, 40))
         self.address.setObjectName("address")
         self.verticalLayout_12.addWidget(self.address)
-        self.verticalLayout_13.addLayout(self.verticalLayout_12)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_13.addItem(spacerItem)
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.btn_cancel = QtWidgets.QPushButton(self.content)
-        self.btn_cancel.setMinimumSize(QtCore.QSize(0, 25))
-        self.btn_cancel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btn_cancel.setObjectName("btn_cancel")
-        self.horizontalLayout_4.addWidget(self.btn_cancel)
-        self.btn_saveuser = QtWidgets.QPushButton(self.content)
-        self.btn_saveuser.setMinimumSize(QtCore.QSize(0, 25))
-        self.btn_saveuser.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btn_saveuser.setObjectName("btn_saveuser")
-        self.horizontalLayout_4.addWidget(self.btn_saveuser)
-        self.verticalLayout_13.addLayout(self.horizontalLayout_4)
+        self.verticalLayout_5.addLayout(self.verticalLayout_12)
+        self.verticalLayout_4.addWidget(self.bgUser, 0, QtCore.Qt.AlignTop)
         self.verticalLayout_6.addWidget(self.content)
         self.bottomBar = QtWidgets.QFrame(self.contentBottom)
-        self.bottomBar.setMinimumSize(QtCore.QSize(0, 20))
-        self.bottomBar.setMaximumSize(QtCore.QSize(16777215, 20))
+        self.bottomBar.setMinimumSize(QtCore.QSize(0, 60))
+        self.bottomBar.setMaximumSize(QtCore.QSize(16777215, 60))
         self.bottomBar.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bottomBar.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bottomBar.setObjectName("bottomBar")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.bottomBar)
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_2.setSpacing(0)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.bottomBar)
+        self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_13.setSpacing(0)
+        self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.frame = QtWidgets.QFrame(self.bottomBar)
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.frame)
+        self.horizontalLayout.setContentsMargins(10, 10, 10, 0)
+        self.horizontalLayout.setSpacing(10)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.btn_close = QtWidgets.QPushButton(self.frame)
+        self.btn_close.setMinimumSize(QtCore.QSize(80, 25))
+        self.btn_close.setMaximumSize(QtCore.QSize(80, 25))
+        self.btn_close.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cil-close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_close.setIcon(icon)
+        self.btn_close.setObjectName("btn_close")
+        self.horizontalLayout.addWidget(self.btn_close)
+        self.btn_cancel = QtWidgets.QPushButton(self.frame)
+        self.btn_cancel.setMinimumSize(QtCore.QSize(0, 25))
+        self.btn_cancel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icons/icons/cil-cancel.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_cancel.setIcon(icon1)
+        self.btn_cancel.setObjectName("btn_cancel")
+        self.horizontalLayout.addWidget(self.btn_cancel)
+        self.btn_saveuser = QtWidgets.QPushButton(self.frame)
+        self.btn_saveuser.setMinimumSize(QtCore.QSize(0, 25))
+        self.btn_saveuser.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/icons/icons/cill-ok-filled.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_saveuser.setIcon(icon2)
+        self.btn_saveuser.setObjectName("btn_saveuser")
+        self.horizontalLayout.addWidget(self.btn_saveuser)
+        self.verticalLayout_13.addWidget(self.frame)
         self.loadingFrame = QtWidgets.QFrame(self.bottomBar)
         self.loadingFrame.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.loadingFrame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -306,14 +293,14 @@ class Ui_EditUserDialog(object):
         self.label_status.setText("")
         self.label_status.setObjectName("label_status")
         self.horizontalLayout_3.addWidget(self.label_status)
-        self.horizontalLayout_2.addWidget(self.loadingFrame)
-        self.frame_size_grip = QtWidgets.QFrame(self.bottomBar)
+        self.frame_size_grip = QtWidgets.QFrame(self.loadingFrame)
         self.frame_size_grip.setMinimumSize(QtCore.QSize(20, 20))
         self.frame_size_grip.setMaximumSize(QtCore.QSize(20, 20))
         self.frame_size_grip.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_size_grip.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_size_grip.setObjectName("frame_size_grip")
-        self.horizontalLayout_2.addWidget(self.frame_size_grip)
+        self.horizontalLayout_3.addWidget(self.frame_size_grip)
+        self.verticalLayout_13.addWidget(self.loadingFrame)
         self.verticalLayout_6.addWidget(self.bottomBar)
         self.verticalLayout_3.addWidget(self.contentBottom)
         self.verticalLayout_2.addWidget(self.contentBox)
@@ -325,13 +312,13 @@ class Ui_EditUserDialog(object):
     def retranslateUi(self, EditUserDialog):
         _translate = QtCore.QCoreApplication.translate
         EditUserDialog.setWindowTitle(_translate("EditUserDialog", "Dialog"))
-        self.titleRightInfo.setText(_translate("EditUserDialog", "Editing User information..."))
         self.label.setText(_translate("EditUserDialog", "First name"))
-        self.label_2.setText(_translate("EditUserDialog", "Surname"))
+        self.label_2.setText(_translate("EditUserDialog", "Last name"))
         self.label_3.setText(_translate("EditUserDialog", "Organisation"))
         self.label_4.setText(_translate("EditUserDialog", "Email"))
         self.label_5.setText(_translate("EditUserDialog", "Phone number"))
-        self.label_6.setText(_translate("EditUserDialog", "Address"))
+        self.label_6.setText(_translate("EditUserDialog", "Full address"))
+        self.btn_close.setText(_translate("EditUserDialog", "Close"))
         self.btn_cancel.setText(_translate("EditUserDialog", "Cancel"))
         self.btn_saveuser.setText(_translate("EditUserDialog", "Save changes to User"))
-from app.ui.resources import resources
+from ..resources import resources

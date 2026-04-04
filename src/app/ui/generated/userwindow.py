@@ -14,51 +14,59 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_UserWindow(object):
     def setupUi(self, UserWindow):
         UserWindow.setObjectName("UserWindow")
-        UserWindow.resize(396, 408)
-        UserWindow.setMinimumSize(QtCore.QSize(300, 360))
-        UserWindow.setMaximumSize(QtCore.QSize(400, 410))
+        UserWindow.resize(508, 546)
+        UserWindow.setMinimumSize(QtCore.QSize(350, 0))
+        UserWindow.setMaximumSize(QtCore.QSize(650, 560))
         self.stylesheet = QtWidgets.QWidget(UserWindow)
+        self.stylesheet.setMinimumSize(QtCore.QSize(0, 0))
+        self.stylesheet.setMaximumSize(QtCore.QSize(16777215, 560))
         self.stylesheet.setStyleSheet("QWidget{\n"
 "    color: #F8F8F2;\n"
 "    font: 8pt \"Inter 24pt Medium\";\n"
 "}\n"
-"/* Bg App */\n"
 "#bgApp {    \n"
-"    background-color: #282A36;\n"
+"    background-color: rgb(44, 49, 58);\n"
+"    border-radius: 10px;\n"
 "}\n"
+"#ContentBox {border-radius: 10px;}\n"
 "#contentTopBg {\n"
-"    background-color: #19181f;\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-top-left-radius: 10px;\n"
+"    border-top-right-radius: 10px;\n"
+"}\n"
+"#bottomBar {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-bottom-left-radius: 10px;\n"
+"    border-bottom-right-radius: 10px;\n"
 "}\n"
 "#topLogo {\n"
 "    background-image: url(:/imagem/images/saturn_logo.png);\n"
-"    background-position: centered;\n"
+"    background-position: center;\n"
 "    background-repeat: no-repeat;\n"
 "}\n"
-"#titleRightInfo { \n"
-"    padding-left: 10px;\n"
-" }\n"
-"/* Top Buttons */\n"
-"#rightButtons .QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }\n"
-"#rightButtons .QPushButton:hover { background-color: rgb(44, 49, 57); border-style: solid; border-radius: 4px; }\n"
-"#rightButtons .QPushButton:pressed { background-color: rgb(23, 26, 30); border-style: solid; border-radius: 4px; }\n"
-"#closeAppBtn{ background-color: rgba(255, 255, 255, 0); border: none; border-radius: 5px;}\n"
+"\n"
+"#titleRightInfo {padding-left: 10px;}\n"
+"#detailsTitle {font: 10pt; color: #8BE9FD;}\n"
+"#contactTitle {font: 10pt; color: #8BE9FD;}\n"
+"#addressTitle {font: 10pt; color: #8BE9FD;}\n"
+"#bgContact {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#bgAddress {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#bgUser {\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#closeAppBtn{ background-color: rgba(255, 255, 255, 0); border: none;}\n"
 "#closeAppBtn:hover{ background-color:#ff5555;}\n"
-"#closeAppBtn:pressed { background-color:rgb(193, 64, 64); border-style: solid; border-radius: 5px;}\n"
-"/* Bottom Bar */\n"
-"#bottomBar { background-color: #282A36; }\n"
-"#bottomBar QLabel { font-size: 10px; color: rgb(113, 126, 149);}\n"
-"#bottomBar .QProgressBar {\n"
-"    border-radius: 5px;\n"
-"    background-color: rgb(52, 59, 72);\n"
-"    text-align: center;\n"
-"    color:  rgb(33, 37, 43);\n"
-"    font-size: 9px;\n"
-"}\n"
-"#bottomBar .QProgressBar::chunk {\n"
-"    background-color: #50FA7B;      \n"
-"    border-radius: 5px;\n"
-"}\n"
-"/*Button */\n"
+"#closeAppBtn:pressed { background-color:rgb(193, 64, 64); border-style: solid;}\n"
 "#btn_loguser {\n"
 "    border-radius: 5px;    \n"
 "    border: none;\n"
@@ -126,6 +134,8 @@ class Ui_UserWindow(object):
         self.shadow.setSpacing(10)
         self.shadow.setObjectName("shadow")
         self.bgApp = QtWidgets.QFrame(self.stylesheet)
+        self.bgApp.setMinimumSize(QtCore.QSize(330, 0))
+        self.bgApp.setMaximumSize(QtCore.QSize(630, 540))
         self.bgApp.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgApp.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgApp.setObjectName("bgApp")
@@ -142,13 +152,13 @@ class Ui_UserWindow(object):
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.contentTopBg = QtWidgets.QFrame(self.contentBox)
-        self.contentTopBg.setMinimumSize(QtCore.QSize(0, 30))
-        self.contentTopBg.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.contentTopBg.setMinimumSize(QtCore.QSize(0, 40))
+        self.contentTopBg.setMaximumSize(QtCore.QSize(16777215, 40))
         self.contentTopBg.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.contentTopBg.setFrameShadow(QtWidgets.QFrame.Raised)
         self.contentTopBg.setObjectName("contentTopBg")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.contentTopBg)
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setContentsMargins(10, 0, 10, 0)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.leftBox = QtWidgets.QFrame(self.contentTopBg)
@@ -170,13 +180,17 @@ class Ui_UserWindow(object):
         self.topLogoInfo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.topLogoInfo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.topLogoInfo.setObjectName("topLogoInfo")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.topLogoInfo)
+        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_10.setSpacing(0)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.topLogo = QtWidgets.QFrame(self.topLogoInfo)
-        self.topLogo.setGeometry(QtCore.QRect(0, -6, 45, 45))
-        self.topLogo.setMinimumSize(QtCore.QSize(45, 45))
-        self.topLogo.setMaximumSize(QtCore.QSize(45, 16777215))
+        self.topLogo.setMinimumSize(QtCore.QSize(45, 40))
+        self.topLogo.setMaximumSize(QtCore.QSize(45, 40))
         self.topLogo.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.topLogo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.topLogo.setObjectName("topLogo")
+        self.verticalLayout_10.addWidget(self.topLogo)
         self.horizontalLayout_5.addWidget(self.topLogoInfo)
         self.titleGripFrame = QtWidgets.QFrame(self.leftBox)
         self.titleGripFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -214,25 +228,15 @@ class Ui_UserWindow(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.minimizeAppBtn = QtWidgets.QPushButton(self.rightButtons)
-        self.minimizeAppBtn.setMinimumSize(QtCore.QSize(35, 28))
-        self.minimizeAppBtn.setMaximumSize(QtCore.QSize(35, 16777215))
-        self.minimizeAppBtn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.minimizeAppBtn.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cil-minimise.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.minimizeAppBtn.setIcon(icon)
-        self.minimizeAppBtn.setObjectName("minimizeAppBtn")
-        self.horizontalLayout_3.addWidget(self.minimizeAppBtn)
         self.horizontalLayout_2.addWidget(self.rightButtons)
         self.closeAppBtn = QtWidgets.QPushButton(self.contentTopBg)
-        self.closeAppBtn.setMinimumSize(QtCore.QSize(35, 28))
+        self.closeAppBtn.setMinimumSize(QtCore.QSize(35, 25))
         self.closeAppBtn.setMaximumSize(QtCore.QSize(35, 16777215))
         self.closeAppBtn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.closeAppBtn.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/icons/icons/cil-close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.closeAppBtn.setIcon(icon1)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cil-close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.closeAppBtn.setIcon(icon)
         self.closeAppBtn.setObjectName("closeAppBtn")
         self.horizontalLayout_2.addWidget(self.closeAppBtn)
         self.verticalLayout_3.addWidget(self.contentTopBg)
@@ -248,19 +252,36 @@ class Ui_UserWindow(object):
         self.content.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.content.setFrameShadow(QtWidgets.QFrame.Raised)
         self.content.setObjectName("content")
-        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.content)
-        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.content)
+        self.verticalLayout_14.setObjectName("verticalLayout_14")
+        self.bgUser = QtWidgets.QFrame(self.content)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgUser.sizePolicy().hasHeightForWidth())
+        self.bgUser.setSizePolicy(sizePolicy)
+        self.bgUser.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgUser.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgUser.setObjectName("bgUser")
+        self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.bgUser)
+        self.verticalLayout_13.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_13.setSpacing(10)
+        self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.detailsTitle = QtWidgets.QLabel(self.bgUser)
+        self.detailsTitle.setStyleSheet("font: 10pt; color: #8BE9FD;")
+        self.detailsTitle.setObjectName("detailsTitle")
+        self.verticalLayout_13.addWidget(self.detailsTitle)
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setSpacing(2)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label = QtWidgets.QLabel(self.content)
+        self.label = QtWidgets.QLabel(self.bgUser)
         self.label.setMinimumSize(QtCore.QSize(90, 0))
         self.label.setStyleSheet("")
         self.label.setObjectName("label")
         self.verticalLayout_2.addWidget(self.label)
-        self.name = QtWidgets.QLineEdit(self.content)
+        self.name = QtWidgets.QLineEdit(self.bgUser)
         self.name.setMinimumSize(QtCore.QSize(0, 25))
         self.name.setObjectName("name")
         self.verticalLayout_2.addWidget(self.name)
@@ -268,115 +289,156 @@ class Ui_UserWindow(object):
         self.verticalLayout_9 = QtWidgets.QVBoxLayout()
         self.verticalLayout_9.setSpacing(2)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
-        self.label_2 = QtWidgets.QLabel(self.content)
+        self.label_2 = QtWidgets.QLabel(self.bgUser)
         self.label_2.setMinimumSize(QtCore.QSize(90, 0))
         self.label_2.setObjectName("label_2")
         self.verticalLayout_9.addWidget(self.label_2)
-        self.surname = QtWidgets.QLineEdit(self.content)
+        self.surname = QtWidgets.QLineEdit(self.bgUser)
         self.surname.setMinimumSize(QtCore.QSize(0, 25))
         self.surname.setObjectName("surname")
         self.verticalLayout_9.addWidget(self.surname)
         self.horizontalLayout_7.addLayout(self.verticalLayout_9)
-        self.verticalLayout_10.addLayout(self.horizontalLayout_7)
+        self.verticalLayout_13.addLayout(self.horizontalLayout_7)
         self.verticalLayout_8 = QtWidgets.QVBoxLayout()
         self.verticalLayout_8.setSpacing(2)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
-        self.label_3 = QtWidgets.QLabel(self.content)
+        self.label_3 = QtWidgets.QLabel(self.bgUser)
         self.label_3.setMinimumSize(QtCore.QSize(90, 0))
         self.label_3.setObjectName("label_3")
         self.verticalLayout_8.addWidget(self.label_3)
-        self.org = QtWidgets.QLineEdit(self.content)
+        self.org = QtWidgets.QLineEdit(self.bgUser)
         self.org.setMinimumSize(QtCore.QSize(0, 25))
         self.org.setObjectName("org")
         self.verticalLayout_8.addWidget(self.org)
-        self.verticalLayout_10.addLayout(self.verticalLayout_8)
+        self.verticalLayout_13.addLayout(self.verticalLayout_8)
+        self.verticalLayout_14.addWidget(self.bgUser, 0, QtCore.Qt.AlignTop)
+        self.bgContact = QtWidgets.QFrame(self.content)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgContact.sizePolicy().hasHeightForWidth())
+        self.bgContact.setSizePolicy(sizePolicy)
+        self.bgContact.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgContact.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgContact.setObjectName("bgContact")
+        self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.bgContact)
+        self.verticalLayout_12.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_12.setSpacing(10)
+        self.verticalLayout_12.setObjectName("verticalLayout_12")
+        self.contactTitle = QtWidgets.QLabel(self.bgContact)
+        self.contactTitle.setStyleSheet("font: 10pt; color: #8BE9FD;")
+        self.contactTitle.setObjectName("contactTitle")
+        self.verticalLayout_12.addWidget(self.contactTitle)
         self.verticalLayout_6 = QtWidgets.QVBoxLayout()
         self.verticalLayout_6.setSpacing(2)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.label_4 = QtWidgets.QLabel(self.content)
+        self.label_4 = QtWidgets.QLabel(self.bgContact)
         self.label_4.setMinimumSize(QtCore.QSize(90, 0))
         self.label_4.setObjectName("label_4")
         self.verticalLayout_6.addWidget(self.label_4)
-        self.email = QtWidgets.QLineEdit(self.content)
+        self.email = QtWidgets.QLineEdit(self.bgContact)
         self.email.setMinimumSize(QtCore.QSize(0, 25))
         self.email.setObjectName("email")
         self.verticalLayout_6.addWidget(self.email)
-        self.verticalLayout_10.addLayout(self.verticalLayout_6)
+        self.verticalLayout_12.addLayout(self.verticalLayout_6)
         self.verticalLayout_4 = QtWidgets.QVBoxLayout()
         self.verticalLayout_4.setSpacing(2)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.label_5 = QtWidgets.QLabel(self.content)
+        self.label_5 = QtWidgets.QLabel(self.bgContact)
         self.label_5.setMinimumSize(QtCore.QSize(90, 0))
         self.label_5.setObjectName("label_5")
         self.verticalLayout_4.addWidget(self.label_5)
-        self.phone = QtWidgets.QLineEdit(self.content)
+        self.phone = QtWidgets.QLineEdit(self.bgContact)
         self.phone.setMinimumSize(QtCore.QSize(0, 25))
         self.phone.setObjectName("phone")
         self.verticalLayout_4.addWidget(self.phone)
-        self.verticalLayout_10.addLayout(self.verticalLayout_4)
+        self.verticalLayout_12.addLayout(self.verticalLayout_4)
+        self.verticalLayout_14.addWidget(self.bgContact, 0, QtCore.Qt.AlignTop)
+        self.bgAddress = QtWidgets.QFrame(self.content)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgAddress.sizePolicy().hasHeightForWidth())
+        self.bgAddress.setSizePolicy(sizePolicy)
+        self.bgAddress.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgAddress.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgAddress.setObjectName("bgAddress")
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.bgAddress)
+        self.verticalLayout_11.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_11.setSpacing(10)
+        self.verticalLayout_11.setObjectName("verticalLayout_11")
+        self.addressTitle = QtWidgets.QLabel(self.bgAddress)
+        self.addressTitle.setStyleSheet("font: 10pt; color: #8BE9FD;")
+        self.addressTitle.setObjectName("addressTitle")
+        self.verticalLayout_11.addWidget(self.addressTitle)
         self.verticalLayout_7 = QtWidgets.QVBoxLayout()
         self.verticalLayout_7.setSpacing(2)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.label_6 = QtWidgets.QLabel(self.content)
+        self.label_6 = QtWidgets.QLabel(self.bgAddress)
         self.label_6.setMinimumSize(QtCore.QSize(90, 0))
         self.label_6.setObjectName("label_6")
-        self.verticalLayout_7.addWidget(self.label_6)
-        self.address = QtWidgets.QTextEdit(self.content)
+        self.verticalLayout_7.addWidget(self.label_6, 0, QtCore.Qt.AlignTop)
+        self.address = QtWidgets.QTextEdit(self.bgAddress)
         self.address.setMinimumSize(QtCore.QSize(0, 40))
-        self.address.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.address.setMaximumSize(QtCore.QSize(16777215, 40))
         self.address.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.IBeamCursor))
         self.address.setMouseTracking(False)
         self.address.setObjectName("address")
-        self.verticalLayout_7.addWidget(self.address)
-        self.verticalLayout_10.addLayout(self.verticalLayout_7)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_10.addItem(spacerItem)
-        self.horizontalLayout_12 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
-        self.btn_cancel = QtWidgets.QPushButton(self.content)
-        self.btn_cancel.setMinimumSize(QtCore.QSize(0, 25))
-        self.btn_cancel.setMaximumSize(QtCore.QSize(80, 16777215))
-        self.btn_cancel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btn_cancel.setObjectName("btn_cancel")
-        self.horizontalLayout_12.addWidget(self.btn_cancel)
-        self.btn_loguser = QtWidgets.QPushButton(self.content)
-        self.btn_loguser.setMinimumSize(QtCore.QSize(0, 25))
-        self.btn_loguser.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btn_loguser.setObjectName("btn_loguser")
-        self.horizontalLayout_12.addWidget(self.btn_loguser)
-        self.verticalLayout_10.addLayout(self.horizontalLayout_12)
+        self.verticalLayout_7.addWidget(self.address, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_11.addLayout(self.verticalLayout_7)
+        self.verticalLayout_14.addWidget(self.bgAddress, 0, QtCore.Qt.AlignTop)
         self.verticalLayout_5.addWidget(self.content)
         self.bottomBar = QtWidgets.QFrame(self.contentBottom)
-        self.bottomBar.setMinimumSize(QtCore.QSize(0, 20))
-        self.bottomBar.setMaximumSize(QtCore.QSize(16777215, 20))
+        self.bottomBar.setMinimumSize(QtCore.QSize(0, 60))
+        self.bottomBar.setMaximumSize(QtCore.QSize(16777215, 60))
         self.bottomBar.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bottomBar.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bottomBar.setObjectName("bottomBar")
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.bottomBar)
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_4.setSpacing(0)
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.bottomBar)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.frame = QtWidgets.QFrame(self.bottomBar)
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame)
+        self.horizontalLayout_4.setContentsMargins(10, 10, 10, 0)
+        self.horizontalLayout_4.setSpacing(10)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.btn_cancel = QtWidgets.QPushButton(self.frame)
+        self.btn_cancel.setMinimumSize(QtCore.QSize(0, 25))
+        self.btn_cancel.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.btn_cancel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_cancel.setObjectName("btn_cancel")
+        self.horizontalLayout_4.addWidget(self.btn_cancel)
+        self.btn_loguser = QtWidgets.QPushButton(self.frame)
+        self.btn_loguser.setMinimumSize(QtCore.QSize(0, 25))
+        self.btn_loguser.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_loguser.setObjectName("btn_loguser")
+        self.horizontalLayout_4.addWidget(self.btn_loguser)
+        self.verticalLayout.addWidget(self.frame)
         self.loadingFrame = QtWidgets.QFrame(self.bottomBar)
         self.loadingFrame.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.loadingFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.loadingFrame.setObjectName("loadingFrame")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.loadingFrame)
-        self.verticalLayout.setContentsMargins(10, 5, 2, 5)
-        self.verticalLayout.setSpacing(2)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.loadingFrame)
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_8.setSpacing(0)
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.label_status = QtWidgets.QLabel(self.loadingFrame)
         self.label_status.setText("")
         self.label_status.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_status.setObjectName("label_status")
-        self.verticalLayout.addWidget(self.label_status)
-        self.horizontalLayout_4.addWidget(self.loadingFrame)
-        self.frame_size_grip = QtWidgets.QFrame(self.bottomBar)
+        self.horizontalLayout_8.addWidget(self.label_status)
+        self.frame_size_grip = QtWidgets.QFrame(self.loadingFrame)
         self.frame_size_grip.setMinimumSize(QtCore.QSize(20, 20))
         self.frame_size_grip.setMaximumSize(QtCore.QSize(20, 20))
         self.frame_size_grip.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_size_grip.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_size_grip.setObjectName("frame_size_grip")
-        self.horizontalLayout_4.addWidget(self.frame_size_grip, 0, QtCore.Qt.AlignBottom)
+        self.horizontalLayout_8.addWidget(self.frame_size_grip)
+        self.verticalLayout.addWidget(self.loadingFrame)
         self.verticalLayout_5.addWidget(self.bottomBar)
         self.verticalLayout_3.addWidget(self.contentBottom)
         self.horizontalLayout.addWidget(self.contentBox)
@@ -390,12 +452,15 @@ class Ui_UserWindow(object):
         _translate = QtCore.QCoreApplication.translate
         UserWindow.setWindowTitle(_translate("UserWindow", "MainWindow"))
         self.titleRightInfo.setText(_translate("UserWindow", "Log new User"))
+        self.detailsTitle.setText(_translate("UserWindow", "User details"))
         self.label.setText(_translate("UserWindow", "First name"))
-        self.label_2.setText(_translate("UserWindow", "Surname"))
+        self.label_2.setText(_translate("UserWindow", "Last name"))
         self.label_3.setText(_translate("UserWindow", "Organisation"))
+        self.contactTitle.setText(_translate("UserWindow", "User contact details"))
         self.label_4.setText(_translate("UserWindow", "Email"))
         self.label_5.setText(_translate("UserWindow", "Phone number"))
-        self.label_6.setText(_translate("UserWindow", "Address"))
+        self.addressTitle.setText(_translate("UserWindow", "User address details"))
+        self.label_6.setText(_translate("UserWindow", "Full address"))
         self.btn_cancel.setText(_translate("UserWindow", "Cancel"))
         self.btn_loguser.setText(_translate("UserWindow", "Log User"))
 from ..resources import resources

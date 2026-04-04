@@ -30,7 +30,7 @@ class EditReductionWindow(QtWidgets.QDialog):
         self.populate_reduction_info()
         self.ui.btn_saveReduction.clicked.connect(self.edit_reduction_information)
         self.ui.btn_cancel.clicked.connect(self.dialog_close)
-        self.ui.closeAppBtn.clicked.connect(self.dialog_close)
+        self.ui.btn_close.clicked.connect(self.dialog_close)
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)
@@ -59,7 +59,7 @@ class EditReductionWindow(QtWidgets.QDialog):
         self.ui.analysis.clear()
         self.ui.analysis.addItem("Select Analysis", None)
         for analysis in analyses:
-            name = f"{analysis.method}-{analysis.date.strftime('%Y-%m-%d')}"
+            name = f"{analysis.method}-{analysis.status_date.strftime('%Y-%m-%d')}"
             self.ui.analysis.addItem(name, analysis.id)
             if self.reduction_id == analysis.id:
                 self.ui.analysis.setCurrentText(name)
@@ -68,10 +68,12 @@ class EditReductionWindow(QtWidgets.QDialog):
         self.ui.version.setText(self.reduction.software_version)
         self.ui.handler.setText(self.reduction.handler)
         self.ui.notes.setPlainText(self.reduction.notes)
-        self.ui.status.setText(self.reduction.status)
-        self.ui.date.setDate(QtCore.QDate(self.reduction.date))
-        self.ui.file.setText(self.reduction.file_id)
-        if self.reduction.file_id != "":
+        self.ui.status.setCurrentText(self.reduction.status)
+        self.ui.date.setDate(QtCore.QDate(self.reduction.status_date))
+        self.ui.startEnd.setDate(QtCore.QDate(self.reduction.start_date))
+        self.ui.endDate.setDate(QtCore.QDate(self.reduction.end_date))
+        self.ui.file.setText(self.reduction.file_name)
+        if self.reduction.file_name != "":
             self.ui.generate.setChecked(True)
 
     def validate_fields(self):
@@ -83,8 +85,7 @@ class EditReductionWindow(QtWidgets.QDialog):
             message = True
         else:
             self.clear_highlight_field(self.ui.analysis)
-        required_fields = [self.ui.reductionName, self.ui.software, self.ui.version, self.ui.handler, self.ui.notes,
-                           self.ui.status]
+        required_fields = [self.ui.reductionName, self.ui.software, self.ui.version, self.ui.handler, self.ui.notes]
         if not self.ui.generate.isChecked():
             required_fields.append(self.ui.file)
         for field in required_fields:
@@ -108,11 +109,13 @@ class EditReductionWindow(QtWidgets.QDialog):
             "software": self.ui.software.text(),
             "version": self.ui.version.text(),
             "handler": self.ui.handler.text(),
-            "date": self.ui.date.date().toPyDate(),
+            "status_date": self.ui.date.date().toPyDate(),
+            "start_date": self.ui.startEnd.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
             "notes": self.ui.notes.toPlainText(),
-            "file_id": self.ui.file.text(),
+            "file_name": self.ui.file.text(),
             "analysis_id": self.ui.analysis.currentData(),
-            "status": self.ui.status.text(),
+            "status": self.ui.status.currentText(),
         }
         try:
             result = self.reductionService.editReduction(self.reduction_id, reduction_info)

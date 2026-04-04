@@ -17,7 +17,9 @@ class SampleService:
                 name=sample_info["name"],
                 description=sample_info["description"],
                 user_id=sample_info["user_id"],
-                date=sample_info["date"],
+                status_date=sample_info["status_date"],
+                start_date=sample_info["start_date"],
+                end_date=sample_info["end_date"],
                 preparation=sample_info["preparation"],
                 comment=sample_info["comment"],
                 status=sample_info["status"])
@@ -45,7 +47,9 @@ class SampleService:
             sample.preparation = sample_info["preparation"]
             sample.comment = sample_info["comment"]
             sample.status = sample_info["status"]
-            sample.date = sample_info["date"]
+            sample.status_date = sample_info["status_date"]
+            sample.start_date = sample_info["start_date"]
+            sample.end_date = sample_info["end_date"]
             sample.user_id = sample_info["user_id"]
             session.commit()
             return "Sample updated successfully."

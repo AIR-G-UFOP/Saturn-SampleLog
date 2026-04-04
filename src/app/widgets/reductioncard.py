@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.reductioncard import Ui_ReductionCardWidget
 from ..config.settings import (CARD_MIN_HEIGHT, REDUCTION_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
                                CARD_BUTTON_ICON_DOWN, WIDGET_INFO_HEIGHT, WIDGET_INFO_STYLESHEET,
-                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR)
+                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR, FILE_LABEL_COLOUR)
 
 
 class ReductionCard(QtWidgets.QWidget):
@@ -26,8 +26,9 @@ class ReductionCard(QtWidgets.QWidget):
         self.ui.software.setText(f"Software: {reduction.software} version: {reduction.software_version}")
         self.ui.handler.setText(f"Handler: {reduction.handler}")
         self.ui.status.setText(f"Status: {reduction.status}")
-        self.ui.date.setText(reduction.date.strftime('%Y-%m-%d'))
-        self.ui.file.setText(f"Saved as: {reduction.file_id}")
+        self.ui.date.setText(reduction.status_date.strftime('%Y-%m-%d'))
+        self.ui.file.setText(f"Saved as: {reduction.file_name}")
+        self.ui.file.setStyleSheet(FILE_LABEL_COLOUR)
         self.ui.notes.setText(f"Notes: {reduction.notes}")
         self.analysis_info(reduction.analysis)
 
@@ -96,7 +97,7 @@ class ReductionCard(QtWidgets.QWidget):
 
     def analysis_info(self, analysis):
         self.ui.analysisTitle.setText("1 Analysis")
-        bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.date, None)
+        bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.status_date, None)
         self.ui.analysisLayout.addWidget(bgInfo)
         self.samples_info(analysis.samples)
 
@@ -104,7 +105,7 @@ class ReductionCard(QtWidgets.QWidget):
         self.ui.sampleTitle.setText(f"{len(samples)} Samples")
         self.samples_number = len(samples)
         for sample in samples:
-            bgInfo = self.create_info_widget(sample.name, sample.status, sample.date, None)
+            bgInfo = self.create_info_widget(sample.name, sample.status, sample.status_date, None)
             self.ui.sampleLayout.addWidget(bgInfo)
             self.user_info(sample.users)
 
