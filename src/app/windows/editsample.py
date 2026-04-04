@@ -23,6 +23,9 @@ class EditSampleWindow(QtWidgets.QDialog):
         self.setWindowTitle("Edit Sample information")
         UIFunctions.uiDefinitions(self)
         self.bg = bg
+        self.ui.date.setDate(QtCore.QDate.currentDate())
+        self.ui.startDate.setDate(QtCore.QDate.currentDate())
+        self.ui.endDate.setDate(QtCore.QDate.currentDate())
 
         self.sampleService = sample_service
         self.sample = self.sampleService.findSampleById(sample_id)
@@ -34,6 +37,9 @@ class EditSampleWindow(QtWidgets.QDialog):
         self.ui.btn_cancel.clicked.connect(self.dialog_close)
         self.ui.btn_close.clicked.connect(self.dialog_close)
         self.ui.prepYes.toggled.connect(self.check_prep_state)
+
+        self.ui.startDate.dateChanged.connect(self.check_status_state)
+        self.ui.endDate.dateChanged.connect(self.check_status_state)
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)
@@ -142,3 +148,14 @@ class EditSampleWindow(QtWidgets.QDialog):
             self.ui.instructions.setEnabled(False)
             self.ui.startDate.setEnabled(False)
             self.ui.endDate.setEnabled(False)
+
+    def check_status_state(self):
+        start_date = self.ui.startDate.date().toPyDate()
+        end_date = self.ui.endDate.date().toPyDate()
+        status_date = self.ui.date.date().toPyDate()
+        if start_date <= status_date <= end_date:
+            self.ui.status.setCurrentText("Preparation in progress...")
+        elif start_date > status_date:
+            self.ui.status.setCurrentText("Logged in")
+        elif end_date < status_date:
+            self.ui.status.setCurrentText("Preparation completed")

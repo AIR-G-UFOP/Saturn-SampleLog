@@ -22,6 +22,9 @@ class EditAnalysisWindow(QtWidgets.QDialog):
         self.setWindowTitle("Edit Analysis information")
         UIFunctions.uiDefinitions(self)
         self.bg = bg
+        self.ui.date.setDate(QtCore.QDate.currentDate())
+        self.ui.startDate.setDate(QtCore.QDate.currentDate())
+        self.ui.endDate.setDate(QtCore.QDate.currentDate())
 
         self.analysisService = analysis_service
         self.analysis = self.analysisService.findAnalysisById(analysis_id)
@@ -32,6 +35,8 @@ class EditAnalysisWindow(QtWidgets.QDialog):
         self.ui.btn_saveAnalysis.clicked.connect(self.edit_analysis_information)
         self.ui.btn_cancel.clicked.connect(self.dialog_close)
         self.ui.btn_close.clicked.connect(self.dialog_close)
+        self.ui.startDate.dateChanged.connect(self.check_status_state)
+        self.ui.endDate.dateChanged.connect(self.check_status_state)
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)
@@ -181,3 +186,15 @@ class EditAnalysisWindow(QtWidgets.QDialog):
             self.status_message("Please fill in all required fields.")
 
         return valid
+
+    def check_status_state(self):
+        start_date = self.ui.startDate.date().toPyDate()
+        end_date = self.ui.endDate.date().toPyDate()
+        status_date = self.ui.date.date().toPyDate()
+
+        if start_date <= status_date <= end_date:
+            self.ui.status.setCurrentText("Analysis in progress...")
+        elif start_date > status_date:
+            self.ui.status.setCurrentText("Logged in")
+        elif end_date < status_date:
+            self.ui.status.setCurrentText("Analysis completed")

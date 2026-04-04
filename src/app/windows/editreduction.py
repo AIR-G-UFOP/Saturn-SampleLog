@@ -22,6 +22,9 @@ class EditReductionWindow(QtWidgets.QDialog):
         self.setWindowTitle("Edit Reduction information")
         UIFunctions.uiDefinitions(self)
         self.bg = bg
+        self.ui.date.setDate(QtCore.QDate.currentDate())
+        self.ui.startEnd.setDate(QtCore.QDate.currentDate())
+        self.ui.endDate.setDate(QtCore.QDate.currentDate())
 
         self.reductionService = reduction_service
         self.reduction = self.reductionService.getReductionById(reduction_id)
@@ -32,6 +35,8 @@ class EditReductionWindow(QtWidgets.QDialog):
         self.ui.btn_saveReduction.clicked.connect(self.edit_reduction_information)
         self.ui.btn_cancel.clicked.connect(self.dialog_close)
         self.ui.btn_close.clicked.connect(self.dialog_close)
+        self.ui.startEnd.dateChanged.connect(self.check_status_state)
+        self.ui.endDate.dateChanged.connect(self.check_status_state)
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)
@@ -133,3 +138,14 @@ class EditReductionWindow(QtWidgets.QDialog):
         except:
             self.status_message("An error occurred. Please try again.")
             raise
+
+    def check_status_state(self):
+        start_date = self.ui.startEnd.date().toPyDate()
+        end_date = self.ui.endDate.date().toPyDate()
+        status_date = self.ui.date.date().toPyDate()
+        if start_date <= status_date <= end_date:
+            self.ui.status.setCurrentText("Data Reduction in progress...")
+        elif start_date > status_date:
+            self.ui.status.setCurrentText("Logged in")
+        elif end_date < status_date:
+            self.ui.status.setCurrentText("Data Reduction finished")

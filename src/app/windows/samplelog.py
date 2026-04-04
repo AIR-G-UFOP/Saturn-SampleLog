@@ -20,6 +20,9 @@ class SampleWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.setWindowTitle("Log new Sample")
         UIFunctions.uiDefinitions(self)
+        self.ui.date.setDate(QtCore.QDate.currentDate())
+        self.ui.startDate.setDate(QtCore.QDate.currentDate())
+        self.ui.endDate.setDate(QtCore.QDate.currentDate())
 
         self.sampleService = sample_service
         self.userService = user_service
@@ -31,6 +34,8 @@ class SampleWindow(QtWidgets.QMainWindow):
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
         self.ui.btn_logSample.clicked.connect(self.register_sample_information)
         self.ui.prepYes.toggled.connect(self.check_prep_state)
+        self.ui.startDate.dateChanged.connect(self.check_status_state)
+        self.ui.endDate.dateChanged.connect(self.check_status_state)
 
         self.load_users()
 
@@ -128,3 +133,14 @@ class SampleWindow(QtWidgets.QMainWindow):
             self.animation.setEndValue(0)
         self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
         self.animation.start()
+
+    def check_status_state(self):
+        start_date = self.ui.startDate.date().toPyDate()
+        end_date = self.ui.endDate.date().toPyDate()
+        status_date = self.ui.date.date().toPyDate()
+        if start_date <= status_date <= end_date:
+            self.ui.status.setCurrentText("Preparation in progress...")
+        elif start_date > status_date:
+            self.ui.status.setCurrentText("Logged in")
+        elif end_date < status_date:
+            self.ui.status.setCurrentText("Preparation completed")
