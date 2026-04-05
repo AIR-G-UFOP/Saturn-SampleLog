@@ -4,7 +4,7 @@ from PyQt5 import QtCore, QtWidgets, QtGui
 from sqlalchemy.testing.pickleable import User
 from ..ui.generated.editsampledialog import Ui_EditSampleDialog
 from ..modules.ui_functions import UIFunctions
-from ..config.settings import (PREP_HEIGHT, TIME_ANIMATION)
+from ..utils.utils import validate_dates
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"  # Auto-adjust based on system settings
@@ -150,12 +150,18 @@ class EditSampleWindow(QtWidgets.QDialog):
             self.ui.endDate.setEnabled(False)
 
     def check_status_state(self):
+        sender = self.sender()
         start_date = self.ui.startDate.date().toPyDate()
         end_date = self.ui.endDate.date().toPyDate()
         status_date = self.ui.date.date().toPyDate()
-        if start_date <= status_date <= end_date:
-            self.ui.status.setCurrentText("Preparation in progress...")
-        elif start_date > status_date:
-            self.ui.status.setCurrentText("Logged in")
-        elif end_date < status_date:
-            self.ui.status.setCurrentText("Preparation completed")
+        if validate_dates(start_date, end_date):
+            if start_date <= status_date <= end_date:
+                self.ui.status.setCurrentText("Preparation in progress...")
+            elif start_date > status_date:
+                self.ui.status.setCurrentText("Logged in")
+            elif end_date < status_date:
+                self.ui.status.setCurrentText("Preparation completed")
+            self.clear_highlight_field(sender)
+        else:
+            self.status_message("Please select a valid date. The end date must be after the start date.")
+            self.highlight_invalid_field(sender)

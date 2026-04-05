@@ -2,9 +2,9 @@ import os
 import sys
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtGui import QStandardItem
-
 from ..ui.generated.analysiswindow import Ui_AnalysisWindow
 from ..modules.ui_functions import UIFunctions
+from ..utils.utils import validate_dates
 
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
@@ -166,13 +166,18 @@ class AnalysisWindow(QtWidgets.QMainWindow):
         field.setStyleSheet("")
 
     def check_status_state(self):
+        sender = self.sender()
         start_date = self.ui.startDate.date().toPyDate()
         end_date = self.ui.endDate.date().toPyDate()
         status_date = self.ui.date.date().toPyDate()
-
-        if start_date <= status_date <= end_date:
-            self.ui.status.setCurrentText("Analysis in progress...")
-        elif start_date > status_date:
-            self.ui.status.setCurrentText("Logged in")
-        elif end_date < status_date:
-            self.ui.status.setCurrentText("Analysis completed")
+        if validate_dates(start_date, end_date):
+            if start_date <= status_date <= end_date:
+                self.ui.status.setCurrentText("Analysis in progress...")
+            elif start_date > status_date:
+                self.ui.status.setCurrentText("Logged in")
+            elif end_date < status_date:
+                self.ui.status.setCurrentText("Analysis completed")
+            self.clear_highlight_field(sender)
+        else:
+            self.status_message("Please select a valid date. The end date must be after the start date.")
+            self.highlight_invalid_field(sender)
