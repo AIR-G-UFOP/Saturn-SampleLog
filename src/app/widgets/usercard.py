@@ -1,9 +1,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.usercard import Ui_UserCardWidget
-from ..config.settings import (CARD_MIN_HEIGHT, USER_DETAILS_HEIGHT, WIDGET_INFO_HEIGHT,
-                               WIDGET_INFO_STYLESHEET, CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR,
-                               CARD_BUTTON_ICON_DOWN, CARD_BUTTON_ICON_UP, SAMPLE_STATUS_COLOUR, ANALYSIS_STATUS_COLOUR,
-                               REDUCTION_STATUS_COLOUR)
+from ..config.ui_settings import (CARD_MIN_HEIGHT, USER_DETAILS_HEIGHT, WIDGET_INFO_HEIGHT,
+                                  WIDGET_INFO_STYLESHEET, CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR,
+                                  CARD_BUTTON_ICON_DOWN, CARD_BUTTON_ICON_UP, SAMPLE_STATUS_COLOUR, ANALYSIS_STATUS_COLOUR,
+                                  REDUCTION_STATUS_COLOUR)
 
 
 class UserCard(QtWidgets.QWidget):

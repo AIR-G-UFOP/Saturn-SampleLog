@@ -23,6 +23,7 @@ class Ui_ListWindow(object):
         font.setItalic(False)
         font.setWeight(50)
         self.stylesheet.setFont(font)
+        self.stylesheet.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.stylesheet.setStyleSheet("QWidget{\n"
 "    color: #EAEAF0;\n"
 "    font: 10pt \"Inter 24pt Medium\";\n"
@@ -203,9 +204,7 @@ class Ui_ListWindow(object):
 " QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
 "     background: none;\n"
 " }\n"
-"#contentStack {\n"
-"    background-color: transparent;\n"
-"}\n"
+"\n"
 "#bgUser {\n"
 "    background-color: #44475A;\n"
 "    border-radius: 10px;\n"
@@ -222,12 +221,142 @@ class Ui_ListWindow(object):
 "    background-color: #44475A;\n"
 "    border-radius: 10px;\n"
 "}\n"
-"#contentStack {\n"
+"QContentStack > QWidget > QWidget {\n"
 "    background-color: transparent;\n"
 "}\n"
 "#scrollAreaWidgetContents {\n"
 "    background-color: transparent;\n"
-"}")
+"}\n"
+"QScrollArea {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
+"QScrollArea > QWidget > QWidget {\n"
+"    background: transparent;\n"
+"}\n"
+"QLineEdit {\n"
+"    background-color: rgb(52, 59, 72);\n"
+"    border-radius: 5px;\n"
+"    padding-left: 5px;\n"
+"    selection-color: rgb(255, 255, 255);\n"
+"    selection-background-color: rgb(255, 121, 198);\n"
+"    color: #ffb86c;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    border: 2px solid rgb(64, 71, 88);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid rgb(91, 101, 124);\n"
+"}\n"
+"QTextEdit {\n"
+"    background-color: rgb(52, 59, 72);\n"
+"    border-radius: 5px;\n"
+"    padding-left: 5px;\n"
+"    selection-color: rgb(255, 255, 255);\n"
+"    selection-background-color: rgb(255, 121, 198);\n"
+"    color: #ffb86c;\n"
+"}\n"
+"QTextEdit:hover {\n"
+"    border: 2px solid rgb(64, 71, 88);\n"
+"}\n"
+"QTextEdit:focus {\n"
+"    border: 2px solid rgb(91, 101, 124);\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"    color: #EAEAF0;\n"
+"    font: 8pt \"Inter 24pt Medium\";\n"
+"}\n"
+"QRadioButton::indicator {\n"
+"    border: 3px solid rgb(52, 59, 72);\n"
+"    width: 15px;\n"
+"    height: 15px;\n"
+"    border-radius: 10px;\n"
+"    background: rgb(44, 49, 60);\n"
+"    color: #F8F8F2;\n"
+"}\n"
+"QComboBox{\n"
+"    background-color: rgb(52, 59, 72);\n"
+"    border-radius: 5px;\n"
+"    border: 2px solid rgb(52, 59, 72);\n"
+"    padding: 5px;\n"
+"    padding-left: 10px;\n"
+"    color: #ffb86c;\n"
+"}\n"
+"QComboBox:hover{\n"
+"    border: 2px solid rgb(64, 71, 88);\n"
+"}\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px; \n"
+"    border-left-width: 3px;\n"
+"    border-left-color: rgba(39, 44, 54, 150);\n"
+"    border-left-style: solid;\n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;    \n"
+"    background-image: url(:/icons/icons/cil-arrow-down.png);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+" }\n"
+"QComboBox QAbstractItemView {\n"
+"    /*color: rgb(255, 121, 198);*/\n"
+"    color: #ff5555;    \n"
+"    background-color: rgb(33, 37, 43);\n"
+"    padding: 10px;\n"
+"    selection-background-color: rgb(39, 44, 54);\n"
+"}\n"
+"#contentBottom .QPushButton {\n"
+"    border-radius: 5px;    \n"
+"    border: none;\n"
+"    background-color: rgb(52, 59, 72);\n"
+"}\n"
+"#contentBottom .QPushButton:hover {\n"
+"    background-color: rgb(61, 70, 86);\n"
+"}\n"
+"#contentBottom .QPushButton:pressed {\n"
+"    background-color: rgb(52, 59, 72);\n"
+"}\n"
+"\n"
+"#bgFileGenerator {\n"
+"    background-color: #343746;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"#bgFrag {\n"
+"    background-color: #20232f;\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#bgListFrag {\n"
+"    background-color: #20232f;\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"#bgPreview {\n"
+"    background-color: #20232f;\n"
+"    border-radius: 10px;\n"
+"    border: 1px solid #525f7f;\n"
+"}\n"
+"QListWidget {\n"
+"    background-color: rgb(52, 59, 72);\n"
+"    border-radius: 5px;\n"
+"    color: #ffb86c;\n"
+"}\n"
+"QListWidget::item{\n"
+"    padding-left: 5px;\n"
+"    padding-right: 5px;\n"
+"    gridline-color: rgb(44, 49, 60);\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QListWidget::item:hover {\n"
+"    border: 2px solid rgb(64, 71, 88);\n"
+"}\n"
+"QListWidget::item:selected{\n"
+"    background-color: rgb(64, 71, 88);\n"
+"    color: #50FA7B;\n"
+"}\n"
+"#fileNameGenTitle {font: 10pt; color: #8BE9FD;}\n"
+"#preview {color: #FF5555;}")
         self.stylesheet.setObjectName("stylesheet")
         self.shadow = QtWidgets.QVBoxLayout(self.stylesheet)
         self.shadow.setContentsMargins(10, 10, 10, 10)
@@ -533,13 +662,147 @@ class Ui_ListWindow(object):
         self.settings = QtWidgets.QWidget()
         self.settings.setObjectName("settings")
         self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.settings)
-        self.verticalLayout_10.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_10.setContentsMargins(10, 10, 0, 10)
         self.verticalLayout_10.setSpacing(0)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.bgSettings = QtWidgets.QFrame(self.settings)
         self.bgSettings.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgSettings.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgSettings.setObjectName("bgSettings")
+        self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.bgSettings)
+        self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_17.setSpacing(0)
+        self.verticalLayout_17.setObjectName("verticalLayout_17")
+        self.scrollArea = QtWidgets.QScrollArea(self.bgSettings)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 721, 471))
+        self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
+        self.verticalLayout_18.setContentsMargins(0, 0, 10, 0)
+        self.verticalLayout_18.setSpacing(10)
+        self.verticalLayout_18.setObjectName("verticalLayout_18")
+        self.bgFileGenerator = QtWidgets.QFrame(self.scrollAreaWidgetContents_2)
+        self.bgFileGenerator.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgFileGenerator.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgFileGenerator.setObjectName("bgFileGenerator")
+        self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.bgFileGenerator)
+        self.verticalLayout_16.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_16.setSpacing(10)
+        self.verticalLayout_16.setObjectName("verticalLayout_16")
+        self.fileNameGenTitle = QtWidgets.QLabel(self.bgFileGenerator)
+        self.fileNameGenTitle.setObjectName("fileNameGenTitle")
+        self.verticalLayout_16.addWidget(self.fileNameGenTitle)
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_6.setSpacing(10)
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.bgFrag = QtWidgets.QFrame(self.bgFileGenerator)
+        self.bgFrag.setMinimumSize(QtCore.QSize(0, 168))
+        self.bgFrag.setMaximumSize(QtCore.QSize(16777215, 168))
+        self.bgFrag.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgFrag.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgFrag.setObjectName("bgFrag")
+        self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.bgFrag)
+        self.verticalLayout_14.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_14.setSpacing(10)
+        self.verticalLayout_14.setObjectName("verticalLayout_14")
+        self.labelFrag = QtWidgets.QLabel(self.bgFrag)
+        self.labelFrag.setObjectName("labelFrag")
+        self.verticalLayout_14.addWidget(self.labelFrag)
+        self.fragment = QtWidgets.QComboBox(self.bgFrag)
+        self.fragment.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.fragment.setObjectName("fragment")
+        self.fragment.addItem("")
+        self.fragment.addItem("")
+        self.fragment.addItem("")
+        self.fragment.addItem("")
+        self.fragment.addItem("")
+        self.fragment.addItem("")
+        self.verticalLayout_14.addWidget(self.fragment)
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setSpacing(10)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.btn_addFrag = QtWidgets.QPushButton(self.bgFrag)
+        self.btn_addFrag.setMinimumSize(QtCore.QSize(0, 25))
+        self.btn_addFrag.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.btn_addFrag.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_addFrag.setObjectName("btn_addFrag")
+        self.horizontalLayout_5.addWidget(self.btn_addFrag)
+        self.btn_removeFrag = QtWidgets.QPushButton(self.bgFrag)
+        self.btn_removeFrag.setMinimumSize(QtCore.QSize(0, 25))
+        self.btn_removeFrag.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.btn_removeFrag.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_removeFrag.setObjectName("btn_removeFrag")
+        self.horizontalLayout_5.addWidget(self.btn_removeFrag)
+        self.verticalLayout_14.addLayout(self.horizontalLayout_5)
+        self.verticalLayout_12 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_12.setSpacing(2)
+        self.verticalLayout_12.setObjectName("verticalLayout_12")
+        self.label_2 = QtWidgets.QLabel(self.bgFrag)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_12.addWidget(self.label_2)
+        self.separator = QtWidgets.QLineEdit(self.bgFrag)
+        self.separator.setMinimumSize(QtCore.QSize(0, 25))
+        self.separator.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.separator.setPlaceholderText("")
+        self.separator.setObjectName("separator")
+        self.verticalLayout_12.addWidget(self.separator)
+        self.verticalLayout_14.addLayout(self.verticalLayout_12)
+        self.horizontalLayout_6.addWidget(self.bgFrag, 0, QtCore.Qt.AlignTop)
+        self.bgListFrag = QtWidgets.QFrame(self.bgFileGenerator)
+        self.bgListFrag.setMinimumSize(QtCore.QSize(0, 168))
+        self.bgListFrag.setMaximumSize(QtCore.QSize(16777215, 168))
+        self.bgListFrag.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgListFrag.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgListFrag.setObjectName("bgListFrag")
+        self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.bgListFrag)
+        self.verticalLayout_13.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_13.setSpacing(10)
+        self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.labelDrag = QtWidgets.QLabel(self.bgListFrag)
+        self.labelDrag.setObjectName("labelDrag")
+        self.verticalLayout_13.addWidget(self.labelDrag, 0, QtCore.Qt.AlignTop)
+        self.listFrag = QtWidgets.QListWidget(self.bgListFrag)
+        self.listFrag.setMinimumSize(QtCore.QSize(0, 100))
+        self.listFrag.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.listFrag.setDragEnabled(True)
+        self.listFrag.setDragDropMode(QtWidgets.QAbstractItemView.InternalMove)
+        self.listFrag.setObjectName("listFrag")
+        self.verticalLayout_13.addWidget(self.listFrag, 0, QtCore.Qt.AlignTop)
+        self.horizontalLayout_6.addWidget(self.bgListFrag, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_16.addLayout(self.horizontalLayout_6)
+        self.bgPreview = QtWidgets.QFrame(self.bgFileGenerator)
+        self.bgPreview.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgPreview.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgPreview.setObjectName("bgPreview")
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.bgPreview)
+        self.horizontalLayout_7.setContentsMargins(10, 10, 10, 10)
+        self.horizontalLayout_7.setSpacing(10)
+        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
+        self.label_4 = QtWidgets.QLabel(self.bgPreview)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_4.sizePolicy().hasHeightForWidth())
+        self.label_4.setSizePolicy(sizePolicy)
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout_7.addWidget(self.label_4, 0, QtCore.Qt.AlignLeft)
+        self.preview = QtWidgets.QLabel(self.bgPreview)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.preview.sizePolicy().hasHeightForWidth())
+        self.preview.setSizePolicy(sizePolicy)
+        self.preview.setText("")
+        self.preview.setObjectName("preview")
+        self.horizontalLayout_7.addWidget(self.preview)
+        self.verticalLayout_16.addWidget(self.bgPreview)
+        self.verticalLayout_18.addWidget(self.bgFileGenerator)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 210, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_18.addItem(spacerItem1)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
+        self.verticalLayout_17.addWidget(self.scrollArea)
         self.verticalLayout_10.addWidget(self.bgSettings)
         self.contentStack.addWidget(self.settings)
         self.verticalLayout_8.addWidget(self.contentStack)
@@ -588,4 +851,18 @@ class Ui_ListWindow(object):
         self.btn_addReductions.setText(_translate("ListWindow", "    Add Reduction"))
         self.btn_settings.setText(_translate("ListWindow", "    Settings"))
         self.titleRightInfo.setText(_translate("ListWindow", "Laboratory Legacy"))
-from ..resources import resources
+        self.fileNameGenTitle.setText(_translate("ListWindow", "File name generator"))
+        self.labelFrag.setText(_translate("ListWindow", "File name fragments"))
+        self.fragment.setItemText(0, _translate("ListWindow", "Current date"))
+        self.fragment.setItemText(1, _translate("ListWindow", "Status date"))
+        self.fragment.setItemText(2, _translate("ListWindow", "Analysis/Reduction name"))
+        self.fragment.setItemText(3, _translate("ListWindow", "Operator"))
+        self.fragment.setItemText(4, _translate("ListWindow", "Handler"))
+        self.fragment.setItemText(5, _translate("ListWindow", "Custom text"))
+        self.btn_addFrag.setText(_translate("ListWindow", "Add"))
+        self.btn_removeFrag.setText(_translate("ListWindow", "Remove"))
+        self.label_2.setText(_translate("ListWindow", "Separator"))
+        self.separator.setText(_translate("ListWindow", "_"))
+        self.labelDrag.setText(_translate("ListWindow", "Drag fragments to reorder"))
+        self.label_4.setText(_translate("ListWindow", "Preview:"))
+from app.ui.resources import resources

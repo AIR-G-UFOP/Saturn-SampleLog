@@ -2,8 +2,8 @@ from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QSizeGrip, QPushButton
 from PyQt5.QtGui import QColor, QIcon
 from PyQt5.QtCore import QEvent, QTimer, Qt, QPropertyAnimation, QEasingCurve
 from ..widgets.custom_grips import CustomGrip
-from ..config.settings import (ENABLE_CUSTOM_TITLE_BAR, MENU_WIDTH, TIME_ANIMATION, DEFAULT_MENU_WIDTH,
-                               MENU_SELECTED_STYLESHEET)
+from ..config.ui_settings import (ENABLE_CUSTOM_TITLE_BAR, MENU_WIDTH, TIME_ANIMATION, DEFAULT_MENU_WIDTH,
+                                  MENU_SELECTED_STYLESHEET)
 
 
 GLOBAL_STATE = False

@@ -3,7 +3,7 @@ import sys
 from PyQt5 import QtCore, QtWidgets, QtGui
 from ..modules.ui_functions import UIFunctions
 from ..ui.generated.editanalysisdialog import Ui_EditAnalysisWindow
-from ..utils.utils import validate_dates
+from ..utils.utils import (validate_dates, highlight_invalid_field, clear_highlight_field)
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"  # Auto-adjust based on system settings
@@ -52,14 +52,6 @@ class EditAnalysisWindow(QtWidgets.QDialog):
         x = self.bg.pos().x() + self.bg.width() // 2 - self.width() // 2
         y = self.bg.pos().y() + self.bg.height() // 2 - self.height() // 2
         self.move(x, y)
-
-    @staticmethod
-    def highlight_invalid_field(field):
-        field.setStyleSheet("border: 1px solid #FF5555;")
-
-    @staticmethod
-    def clear_highlight_field(field):
-        field.setStyleSheet("")
 
     def status_message(self, message):
         QtCore.QTimer.singleShot(0, lambda: self.ui.label_status.setText(message))
@@ -165,22 +157,22 @@ class EditAnalysisWindow(QtWidgets.QDialog):
         valid = True
         message = False
         if len(self.get_checked_data(self.ui.sample)) == 0:
-            self.highlight_invalid_field(self.ui.sample)
+            highlight_invalid_field(self.ui.sample)
             valid = False
             message = True
         else:
-            self.clear_highlight_field(self.ui.sample)
+            clear_highlight_field(self.ui.sample)
         required_fields = [self.ui.analysisName, self.ui.equipment, self.ui.operator_2, self.ui.analysisNotes]
         if not self.ui.generate.isChecked():
             required_fields.append(self.ui.fileName)
         for field in required_fields:
             text = field.text().strip() if isinstance(field, QtWidgets.QLineEdit) else field.toPlainText().strip()
             if not text:
-                self.highlight_invalid_field(field)
+                highlight_invalid_field(field)
                 valid = False
                 message = True
             else:
-                self.clear_highlight_field(field)
+                clear_highlight_field(field)
 
         if message:
             self.status_message("Please fill in all required fields.")
@@ -199,7 +191,7 @@ class EditAnalysisWindow(QtWidgets.QDialog):
                 self.ui.status.setCurrentText("Logged in")
             elif end_date < status_date:
                 self.ui.status.setCurrentText("Analysis completed")
-            self.clear_highlight_field(sender)
+            clear_highlight_field(sender)
         else:
             self.status_message("Please select a valid date. The end date must be after the start date.")
-            self.highlight_invalid_field(sender)
+            highlight_invalid_field(sender)

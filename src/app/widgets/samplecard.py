@@ -1,9 +1,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ..ui.generated.samplecard import Ui_SampleCardWidget
-from ..config.settings import (CARD_MIN_HEIGHT, SAMPLE_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
-                               CARD_BUTTON_ICON_DOWN, WIDGET_INFO_HEIGHT, WIDGET_INFO_STYLESHEET,
-                               CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR, SAMPLE_STATUS_COLOUR, ANALYSIS_STATUS_COLOUR,
-                               REDUCTION_STATUS_COLOUR)
+from ..config.ui_settings import (CARD_MIN_HEIGHT, SAMPLE_DETAILS_HEIGHT, CARD_BUTTON_ICON_UP,
+                                  CARD_BUTTON_ICON_DOWN, WIDGET_INFO_HEIGHT, WIDGET_INFO_STYLESHEET,
+                                  CARD_SUBHEADING_STYLESHEET, LABEL_COLOUR, SAMPLE_STATUS_COLOUR, ANALYSIS_STATUS_COLOUR,
+                                  REDUCTION_STATUS_COLOUR)
 
 
 class SampleCard(QtWidgets.QWidget):

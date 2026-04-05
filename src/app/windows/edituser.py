@@ -3,6 +3,7 @@ import sys
 from PyQt5 import QtCore, QtWidgets, QtGui
 from ..ui.generated.edituserdialog import Ui_EditUserDialog
 from ..modules.ui_functions import UIFunctions
+from ..utils.utils import (highlight_invalid_field, clear_highlight_field)
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"  # Auto-adjust based on system settings
@@ -80,22 +81,14 @@ class EditUserWindow(QtWidgets.QDialog):
         for field in required_fields:
             text = field.text().strip() if isinstance(field, QtWidgets.QLineEdit) else field.toPlainText().strip()
             if not text:
-                self.highlight_invalid_field(field)
+                highlight_invalid_field(field)
                 valid = False
                 message = True
             else:
-                self.clear_highlight_field(field)
+                clear_highlight_field(field)
         if message:
             self.status_message("Please fill in all required fields.")
         return valid
-
-    @staticmethod
-    def highlight_invalid_field(field):
-        field.setStyleSheet("border: 1px solid #FF5555;")
-
-    @staticmethod
-    def clear_highlight_field(field):
-        field.setStyleSheet("")
 
     def status_message(self, message):
         QtCore.QTimer.singleShot(0, lambda: self.ui.label_status.setText(message))

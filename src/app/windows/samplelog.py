@@ -3,8 +3,8 @@ import sys
 from PyQt5 import QtCore, QtWidgets, QtGui
 from ..ui.generated.samplewindow import Ui_SampleWindow
 from ..modules.ui_functions import UIFunctions
-from ..config.settings import (PREP_HEIGHT, TIME_ANIMATION)
-from ..utils.utils import validate_dates
+from ..config.ui_settings import (PREP_HEIGHT, TIME_ANIMATION)
+from ..utils.utils import (validate_dates, highlight_invalid_field, clear_highlight_field)
 
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
@@ -58,22 +58,22 @@ class SampleWindow(QtWidgets.QMainWindow):
         valid = True
         message = False
         if self.ui.userName.currentText() == "Select User":
-            self.highlight_invalid_field(self.ui.userName)
+            highlight_invalid_field(self.ui.userName)
             valid = False
             message = True
         else:
-            self.clear_highlight_field(self.ui.userName)
+            clear_highlight_field(self.ui.userName)
         required_fields = [self.ui.sampleName, self.ui.sampleDescription]
         if self.ui.prepYes.isChecked():
             required_fields.append(self.ui.instructions)
         for field in required_fields:
             text = field.text().strip() if isinstance(field, QtWidgets.QLineEdit) else field.toPlainText().strip()
             if not text:
-                self.highlight_invalid_field(field)
+                highlight_invalid_field(field)
                 valid = False
                 message = True
             else:
-                self.clear_highlight_field(field)
+                clear_highlight_field(field)
 
         if message:
             self.status_message("Please fill in all required fields.")
@@ -117,14 +117,6 @@ class SampleWindow(QtWidgets.QMainWindow):
         QtCore.QTimer.singleShot(0, lambda: self.ui.label_status.setText(message))
         QtCore.QTimer.singleShot(5000, lambda: self.ui.label_status.setText(""))
 
-    @staticmethod
-    def highlight_invalid_field(field):
-        field.setStyleSheet("border: 1px solid #FF5555;")
-
-    @staticmethod
-    def clear_highlight_field(field):
-        field.setStyleSheet("")
-
     def check_prep_state(self):
         if self.ui.prepYes.isChecked():
             self.animation.setStartValue(0)
@@ -147,7 +139,7 @@ class SampleWindow(QtWidgets.QMainWindow):
                 self.ui.status.setCurrentText("Logged in")
             elif end_date < status_date:
                 self.ui.status.setCurrentText("Preparation completed")
-            self.clear_highlight_field(sender)
+            clear_highlight_field(sender)
         else:
             self.status_message("Please select a valid date. The end date must be after the start date.")
-            self.highlight_invalid_field(sender)
+            highlight_invalid_field(sender)

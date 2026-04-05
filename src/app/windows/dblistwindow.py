@@ -1,7 +1,6 @@
 import os
 import sys
 from PyQt5 import QtWidgets, QtCore, QtGui
-from sqlalchemy.testing.pickleable import User
 
 from ..modules.ui_functions import UIFunctions
 from ..ui.generated.listwindow import Ui_ListWindow
@@ -14,6 +13,7 @@ from .edituser import EditUserWindow
 from .editsample import EditSampleWindow
 from .editanalysis import EditAnalysisWindow
 from .editreduction import EditReductionWindow
+from .appsettings import Settings
 
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
@@ -34,6 +34,7 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.ui.panelArea.setWidgetResizable(True)
         self.ui.bgCardsLayout.addStretch()
         self.ui.bgCardsLayout.setAlignment(QtCore.Qt.AlignTop)
+        self.settings = Settings(self.ui)
 
         self.dbType = db_type
         self.userService = user_service
@@ -67,6 +68,7 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.ui.btn_addAnalysis.clicked.connect(self.btn_clicked)
         self.ui.btn_addReductions.clicked.connect(self.btn_clicked)
         self.ui.btn_settings.clicked.connect(self.btn_clicked)
+        self.ui.listFrag.model().rowsMoved.connect(self.update_file_name_preview)
 
         self.set_btn_style(BUTTON_DB_MAP[self.dbType],
                            BUTTON_DB_MAP[self.dbType].objectName())
@@ -161,3 +163,6 @@ class DbListWindow(QtWidgets.QMainWindow):
     def return_edit_dialog(self):
         self.overlay.hide()
         self.load_cards()
+
+    def update_file_name_preview(self):
+        pass
