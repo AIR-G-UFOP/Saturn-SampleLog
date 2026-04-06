@@ -15,7 +15,7 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 class AnalysisWindow(QtWidgets.QMainWindow):
-    def __init__(self, analysis_service, sample_service):
+    def __init__(self, analysis_service, sample_service, settings_service):
         super(AnalysisWindow, self).__init__()
 
         self.ui = Ui_AnalysisWindow()
@@ -28,6 +28,7 @@ class AnalysisWindow(QtWidgets.QMainWindow):
 
         self.analysisService = analysis_service
         self.sampleService = sample_service
+        self.settingsService = settings_service
 
         self.ui.btn_cancel.clicked.connect(lambda: self.close())
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
@@ -35,6 +36,11 @@ class AnalysisWindow(QtWidgets.QMainWindow):
         self.ui.startDate.dateChanged.connect(self.check_status_state)
         self.ui.endDate.dateChanged.connect(self.check_status_state)
         self.ui.generate.toggled.connect(self.generate_file_name)
+        self.ui.analysisName.textChanged.connect(self.generate_file_name)
+        self.ui.equipment.textChanged.connect(self.generate_file_name)
+        self.ui.operator_2.textChanged.connect(self.generate_file_name)
+        self.ui.date.dateChanged.connect(self.generate_file_name)
+        self.ui.btn_copy.clicked.connect(self.copy_file_name_to_clipboard)
 
         self.load_samples()
 
@@ -178,4 +184,35 @@ class AnalysisWindow(QtWidgets.QMainWindow):
 
     def generate_file_name(self):
         if self.ui.generate.isChecked():
-            pass
+            file_name_config = self.settingsService.getFileNameSettings()
+            template = file_name_config["template"]
+            separator = file_name_config["separator"]
+            fragments = []
+            for frag in template:
+                if frag == "Current date":
+                    fragments.append(QtCore.QDate.currentDate().toString("yyyyMMdd"))
+                elif frag == "Status date":
+                    fragments.append(self.ui.date.date().toString("yyyyMMdd"))
+                elif frag == "Analysis/Reduction name":
+                    fragments.append(self.ui.analysisName.text())
+                elif frag == "Operator/Handler name":
+                    fragments.append(self.ui.operator_2.text())
+                elif frag == "Equipment":
+                    fragments.append(self.ui.equipment.text())
+                else:
+                    fragments.append(frag)
+            if fragments:
+                gen = FileNameGenerator(fragments, separator)
+                self.ui.fileName.setText(gen.generate())
+        else:
+            if self.ui.fileName.text() == "":
+                self.ui.fileName.clear()
+
+    def copy_file_name_to_clipboard(self):
+        if self.ui.fileName.text() != "":
+            file_name = self.ui.fileName.text()
+            clipboard = QtWidgets.QApplication.clipboard()
+            clipboard.setText(file_name)
+            self.ui.btn_copy.setIcon(QtGui.QIcon(u":/icons/icons/cill-ok-filled.png"))
+            QtCore.QTimer.singleShot(2000,
+                lambda: self.ui.btn_copy.setIcon(QtGui.QIcon(u":/icons/icons/cil-copy.png")))

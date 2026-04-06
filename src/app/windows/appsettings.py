@@ -1,12 +1,11 @@
 import re
 from PyQt5 import QtWidgets, QtCore
 from ..utils.utils import (highlight_invalid_field, clear_highlight_field)
-from ..services.settings_service import SettingsService
 
 class Settings:
-    def __init__(self, ui):
+    def __init__(self, ui, settings_service):
         self.ui = ui
-        self.settings_service = SettingsService()
+        self.settings_service = settings_service
         # self.settings_service.initSettings()
         self.frags = self.settings_service.DEFAULT_FILE_NAME_SETTINGS["template"]
         self.sep = self.settings_service.DEFAULT_FILE_NAME_SETTINGS["separator"]

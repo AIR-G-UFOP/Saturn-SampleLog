@@ -12,7 +12,7 @@ class FileNameGenerator:
 
     INVALID_CHARS_PATTERN = r'[<>:"/\\|?*\x00-\x1F]'
 
-    def __init__(self, fragments, separator="_", max_length=255, allow_unicode=True, replacement="_"):
+    def __init__(self, fragments, separator="_", max_length=255, allow_unicode=False, replacement="_"):
         """
         Parameters
         ----------
@@ -31,13 +31,7 @@ class FileNameGenerator:
         """
         Generate a sanitized filename. Optionally ensure uniqueness in a directory.
         """
-        # Build raw name
-        parts = []
-        for f in self.fragments:
-            value = f()
-            if value not in (None, "", ""):
-                parts.append(str(value).strip())
-        raw_name = self.separator.join(parts)
+        raw_name = self.separator.join(self.fragments)
         # Sanitize
         safe_name = self._sanitize(raw_name)
         # Ensure uniqueness if directory provided

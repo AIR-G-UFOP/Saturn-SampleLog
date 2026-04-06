@@ -110,7 +110,17 @@
 #btn_addSample::pressed {
 	background-color: rgb(52, 59, 72);
 }
-
+#btn_copy {
+	border-radius: 5px;	
+	border: none;
+	background-color: rgb(52, 59, 72);
+}
+#btn_copy::hover {
+	background-color: rgb(61, 70, 86);
+}
+#btn_copy::pressed {
+	background-color: rgb(52, 59, 72);
+}
 /*LineEdit */
 #content .QLineEdit {
 	background-color: rgb(52, 59, 72);
@@ -667,9 +677,9 @@ QScrollBar::add-page:vertical,
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>0</y>
+                     <y>-125</y>
                      <width>492</width>
-                     <height>594</height>
+                     <height>608</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -829,6 +839,10 @@ QScrollBar::add-page:vertical,
                              </property>
                              <property name="text">
                               <string>New Sample</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resources/resources.qrc">
+                               <normaloff>:/icons/icons/cil-sample.png</normaloff>:/icons/icons/cil-sample.png</iconset>
                              </property>
                             </widget>
                            </item>
@@ -1094,84 +1108,6 @@ QScrollBar::add-page:vertical,
                      </widget>
                     </item>
                     <item>
-                     <widget class="QFrame" name="bgFile">
-                      <property name="frameShape">
-                       <enum>QFrame::NoFrame</enum>
-                      </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Raised</enum>
-                      </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_17">
-                       <property name="spacing">
-                        <number>10</number>
-                       </property>
-                       <property name="leftMargin">
-                        <number>10</number>
-                       </property>
-                       <property name="topMargin">
-                        <number>10</number>
-                       </property>
-                       <property name="rightMargin">
-                        <number>10</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>10</number>
-                       </property>
-                       <item>
-                        <widget class="QLabel" name="fileTitle">
-                         <property name="styleSheet">
-                          <string notr="true">color: #F1FA8C; font: 10pt;</string>
-                         </property>
-                         <property name="text">
-                          <string>Analysis file saved as...</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <layout class="QVBoxLayout" name="verticalLayout_11">
-                         <property name="spacing">
-                          <number>2</number>
-                         </property>
-                         <item>
-                          <layout class="QHBoxLayout" name="horizontalLayout_10">
-                           <property name="spacing">
-                            <number>10</number>
-                           </property>
-                           <item>
-                            <widget class="QLabel" name="label_8">
-                             <property name="text">
-                              <string>File name</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QCheckBox" name="generate">
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="text">
-                              <string>Generate?</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <widget class="QLineEdit" name="fileName">
-                           <property name="minimumSize">
-                            <size>
-                             <width>0</width>
-                             <height>25</height>
-                            </size>
-                           </property>
-                          </widget>
-                         </item>
-                        </layout>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item>
                      <widget class="QFrame" name="bgStatus">
                       <property name="frameShape">
                        <enum>QFrame::NoFrame</enum>
@@ -1314,6 +1250,95 @@ QScrollBar::add-page:vertical,
                       </layout>
                      </widget>
                     </item>
+                    <item>
+                     <widget class="QFrame" name="bgFile">
+                      <property name="frameShape">
+                       <enum>QFrame::NoFrame</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_17">
+                       <item>
+                        <widget class="QLabel" name="fileTitle">
+                         <property name="styleSheet">
+                          <string notr="true">color: #F1FA8C; font: 10pt;</string>
+                         </property>
+                         <property name="text">
+                          <string>Analysis file saved as...</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item alignment="Qt::AlignLeft">
+                        <widget class="QCheckBox" name="generate">
+                         <property name="cursor">
+                          <cursorShape>PointingHandCursor</cursorShape>
+                         </property>
+                         <property name="text">
+                          <string>Use file name generator?</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <layout class="QVBoxLayout" name="verticalLayout_11">
+                         <property name="spacing">
+                          <number>2</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="label_8">
+                           <property name="text">
+                            <string>File name</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_14">
+                           <property name="spacing">
+                            <number>2</number>
+                           </property>
+                           <item>
+                            <widget class="QLineEdit" name="fileName">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_copy">
+                             <property name="minimumSize">
+                              <size>
+                               <width>65</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>65</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="text">
+                              <string>Copy</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resources/resources.qrc">
+                               <normaloff>:/icons/icons/cil-copy.png</normaloff>:/icons/icons/cil-copy.png</iconset>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
                    </layout>
                   </widget>
                  </widget>
@@ -1401,6 +1426,10 @@ QScrollBar::add-page:vertical,
                      <property name="text">
                       <string>Cancel</string>
                      </property>
+                     <property name="icon">
+                      <iconset resource="../resources/resources.qrc">
+                       <normaloff>:/icons/icons/cil-cancel.png</normaloff>:/icons/icons/cil-cancel.png</iconset>
+                     </property>
                     </widget>
                    </item>
                    <item>
@@ -1416,6 +1445,10 @@ QScrollBar::add-page:vertical,
                      </property>
                      <property name="text">
                       <string>Log Analysis</string>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../resources/resources.qrc">
+                       <normaloff>:/icons/icons/cill-ok-filled.png</normaloff>:/icons/icons/cill-ok-filled.png</iconset>
                      </property>
                     </widget>
                    </item>

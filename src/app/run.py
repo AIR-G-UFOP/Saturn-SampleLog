@@ -4,6 +4,7 @@ from src.app.services.user_service import UserService
 from src.app.services.sample_service import SampleService
 from src.app.services.analysis_service import AnalysisService
 from src.app.services.reduction_service import ReductionService
+from src.app.services.settings_service import SettingsService
 import sys
 import traceback
 
@@ -19,8 +20,9 @@ def start_app():
     sample_service = SampleService()
     analysis_service = AnalysisService()
     reduction_service = ReductionService()
+    settings_service = SettingsService()
     app = QApplication([])
-    window = MainWindow(user_service, sample_service, analysis_service, reduction_service)
+    window = MainWindow(user_service, sample_service, analysis_service, reduction_service, settings_service)
     window.show()
     app.exec()
 

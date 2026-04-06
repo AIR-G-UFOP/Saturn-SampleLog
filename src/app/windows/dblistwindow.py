@@ -22,7 +22,7 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 class DbListWindow(QtWidgets.QMainWindow):
-    def __init__(self, db_type, user_service, sample_service, analysis_service, reduction_service):
+    def __init__(self, db_type, user_service, sample_service, analysis_service, reduction_service, settings_service):
         super(DbListWindow, self).__init__()
 
         self.setWindowTitle("Database List Window")
@@ -33,15 +33,16 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.ui.panelArea.setWidgetResizable(True)
         self.ui.bgCardsLayout.addStretch()
         self.ui.bgCardsLayout.setAlignment(QtCore.Qt.AlignTop)
-        self.settings = Settings(self.ui)
 
         self.dbType = db_type
         self.userService = user_service
         self.sampleService = sample_service
         self.analysisService = analysis_service
         self.reductionService = reduction_service
+        self.settingsService = settings_service
         self.overlay = LoadingOverlay(self.ui.bgApp)
         self.overlay.hide()
+        self.settings = Settings(self.ui, self.settingsService)
 
         self.DATA_MAP = {
             "user": (self.userService.getAllUsersFull, UserCard),
@@ -149,7 +150,8 @@ class DbListWindow(QtWidgets.QMainWindow):
         db_type_map = {
             "user": EditUserWindow(self.userService, db_id, self.ui.bgApp, self),
             "sample": EditSampleWindow(self.sampleService, db_id, self.userService, self.ui.bgApp, self),
-            "analysis": EditAnalysisWindow(self.analysisService, db_id, self.sampleService, self.ui.bgApp, self),
+            "analysis": EditAnalysisWindow(self.analysisService, db_id, self.sampleService, self.settingsService,
+                                           self.ui.bgApp, self),
             "reduction": EditReductionWindow(self.reductionService, db_id, self.analysisService, self.ui.bgApp, self),
         }
         self.overlay.show()

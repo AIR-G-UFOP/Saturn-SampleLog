@@ -7,6 +7,7 @@
     <file>images/SATURN-vertical2.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>icons/cil-copy.png</file>
     <file>icons/cil-save.png</file>
     <file>icons/cill-ok-filled.png</file>
     <file>icons/cill-ok.png</file>
