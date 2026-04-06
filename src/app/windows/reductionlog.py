@@ -38,6 +38,7 @@ class ReductionWindow(QtWidgets.QMainWindow):
         self.ui.reductionName.textChanged.connect(self.generate_file_name)
         self.ui.handler.textChanged.connect(self.generate_file_name)
         self.ui.date.dateChanged.connect(self.generate_file_name)
+        self.ui.btn_copy.clicked.connect(self.copy_file_name_to_clipboard)
 
         self.load_analysis()
 
@@ -89,6 +90,12 @@ class ReductionWindow(QtWidgets.QMainWindow):
         self.ui.fileName.clear()
         self.ui.notes.clear()
         self.ui.date.clear()
+        self.ui.status.setCurrentIndex(0)
+        self.ui.generate.setChecked(False)
+        self.ui.date.setDate(QtCore.QDate.currentDate())
+        self.ui.startDate.setDate(QtCore.QDate.currentDate())
+        self.ui.endDate.setDate(QtCore.QDate.currentDate())
+        self.ui.notes.clear()
 
     def register_reduction_information(self):
         if not self.validate_fields():
@@ -104,7 +111,8 @@ class ReductionWindow(QtWidgets.QMainWindow):
             "notes": self.ui.notes_2.toPlainText(),
             "file_name": self.ui.fileName.text(),
             "analysis_id": self.ui.analysis.currentData(),
-            "status": self.ui.status.currentText()
+            "status": self.ui.status.currentText(),
+            "generate_file_name": self.ui.generate.isChecked()
         }
         try:
             result = self.reductionService.addReduction(reduction_info)
@@ -118,7 +126,6 @@ class ReductionWindow(QtWidgets.QMainWindow):
         QtCore.QTimer.singleShot(0, lambda: self.ui.label_status.setText(message))
         QtCore.QTimer.singleShot(5000, lambda: self.ui.label_status.setText(""))
 
-
     def check_status_state(self):
         sender = self.sender()
         start_date = self.ui.startDate.date().toPyDate()
@@ -131,7 +138,8 @@ class ReductionWindow(QtWidgets.QMainWindow):
                 self.ui.status.setCurrentText("Logged in")
             elif end_date < status_date:
                 self.ui.status.setCurrentText("Data Reduction finished")
-            clear_highlight_field(sender)
+            clear_highlight_field(self.ui.startDate)
+            clear_highlight_field(self.ui.endDate)
         else:
             self.status_message("Please select a valid date. The end date must be after the start date.")
             highlight_invalid_field(sender)

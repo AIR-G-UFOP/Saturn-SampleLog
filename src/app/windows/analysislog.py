@@ -94,6 +94,7 @@ class AnalysisWindow(QtWidgets.QMainWindow):
             "conditions": self.ui.analysisNotes.toPlainText(),
             "file_name": self.ui.fileName.text(),
             "status": self.ui.status.currentText(),
+            "generate_file_name": self.ui.generate.isChecked()
         }
         sample_ids = self.get_checked_data(self.ui.sample)
         try:
@@ -160,6 +161,10 @@ class AnalysisWindow(QtWidgets.QMainWindow):
             item = self.ui.sample.model().item(i)
             item.setCheckState(QtCore.Qt.Unchecked)
         self.ui.generate.setChecked(False)
+        self.ui.status.setCurrentIndex(0)
+        self.ui.date.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.ui.startDate.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.ui.endDate.setDateTime(QtCore.QDateTime.currentDateTime())
 
     def status_message(self, message):
         QtCore.QTimer.singleShot(0, lambda: self.ui.label_status.setText(message))
@@ -177,7 +182,8 @@ class AnalysisWindow(QtWidgets.QMainWindow):
                 self.ui.status.setCurrentText("Logged in")
             elif end_date < status_date:
                 self.ui.status.setCurrentText("Analysis completed")
-            clear_highlight_field(sender)
+            clear_highlight_field(self.ui.startDate)
+            clear_highlight_field(self.ui.endDate)
         else:
             self.status_message("Please select a valid date. The end date must be after the start date.")
             highlight_invalid_field(sender)

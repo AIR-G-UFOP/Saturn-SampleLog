@@ -74,6 +74,7 @@ class DbAnalysis(Base):
     end_date = Column(Date, nullable=False)
     file_name = Column(String, nullable=False)
     status = Column(String, nullable=False)
+    generate_file_name = Column(Boolean, nullable=False)
 
     samples = relationship(
         'DbSample',
@@ -97,6 +98,7 @@ class DbReduction(Base):
     notes = Column(String, nullable=False)
     file_name = Column(String, nullable=False)
     status = Column(String, nullable=False)
+    generate_file_name = Column(Boolean, nullable=False)
     analysis_id = Column(Integer, ForeignKey('analyses.id'), unique=True, nullable=False)
     analysis = relationship('DbAnalysis', back_populates='reduction')
 

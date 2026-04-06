@@ -139,7 +139,8 @@ class SampleWindow(QtWidgets.QMainWindow):
                 self.ui.status.setCurrentText("Logged in")
             elif end_date < status_date:
                 self.ui.status.setCurrentText("Preparation completed")
-            clear_highlight_field(sender)
+            clear_highlight_field(self.ui.startDate)
+            clear_highlight_field(self.ui.endDate)
         else:
             self.status_message("Please select a valid date. The end date must be after the start date.")
             highlight_invalid_field(sender)

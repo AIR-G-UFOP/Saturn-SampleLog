@@ -136,7 +136,7 @@ class EditAnalysisWindow(QtWidgets.QDialog):
         self.ui.date.setDate(QtCore.QDate(self.analysis.status_date))
         self.ui.startDate.setDate(QtCore.QDate(self.analysis.start_date))
         self.ui.endDate.setDate(QtCore.QDate(self.analysis.end_date))
-        if self.analysis.file_name != "":
+        if self.analysis.generate_file_name:
             self.ui.generate.setChecked(True)
 
     def edit_analysis_information(self):
@@ -152,6 +152,7 @@ class EditAnalysisWindow(QtWidgets.QDialog):
             "end_date": self.ui.endDate.date().toPyDate(),
             "status": self.ui.status.currentText(),
             "file_name": self.ui.fileName.text(),
+            "generate_file_name": self.ui.generate.isChecked()
         }
         sample_ids = self.get_checked_data(self.ui.sample)
         try:

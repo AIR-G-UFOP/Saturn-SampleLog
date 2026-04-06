@@ -20,7 +20,8 @@ class AnalysisService:
                 start_date=analysis_info["start_date"],
                 end_date=analysis_info["end_date"],
                 file_name=analysis_info["file_name"],
-                status=analysis_info["status"]
+                status=analysis_info["status"],
+                generate_file_name=analysis_info["generate_file_name"]
             )
             samples = session.query(DbSample).filter(DbSample.id.in_(sample_ids)).all()
             new_analysis.samples.extend(samples)
@@ -52,6 +53,7 @@ class AnalysisService:
             analysis.end_date = analysis_info["end_date"]
             analysis.file_name = analysis_info["file_name"]
             analysis.status = analysis_info["status"]
+            analysis.generate_file_name = analysis_info["generate_file_name"]
             samples = session.query(DbSample).filter(DbSample.id.in_(sample_ids)).all()
             analysis.samples = samples
             session.commit()

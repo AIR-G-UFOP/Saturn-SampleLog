@@ -22,7 +22,8 @@ class ReductionService:
                 notes=reduction_info['notes'],
                 file_name=reduction_info['file_name'],
                 analysis_id=reduction_info['analysis_id'],
-                status=reduction_info['status']
+                status=reduction_info['status'],
+                generate_file_name=reduction_info['generate_file_name'],
             )
             session.add(reduction)
             session.commit()
@@ -49,6 +50,7 @@ class ReductionService:
             reduction.file_name = reduction_info['file_name']
             reduction.analysis_id = reduction_info['analysis_id']
             reduction.status = reduction_info['status']
+            reduction.generate_file_name = reduction_info['generate_file_name']
             session.commit()
             return "Reduction updated successfully."
         except SQLAlchemyError as e:

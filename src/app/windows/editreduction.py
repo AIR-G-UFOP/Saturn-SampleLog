@@ -86,7 +86,7 @@ class EditReductionWindow(QtWidgets.QDialog):
         self.ui.startEnd.setDate(QtCore.QDate(self.reduction.start_date))
         self.ui.endDate.setDate(QtCore.QDate(self.reduction.end_date))
         self.ui.fileName.setText(self.reduction.file_name)
-        if self.reduction.file_name != "":
+        if self.reduction.generate_file_name:
             self.ui.generate.setChecked(True)
 
     def validate_fields(self):
@@ -100,7 +100,7 @@ class EditReductionWindow(QtWidgets.QDialog):
             clear_highlight_field(self.ui.analysis)
         required_fields = [self.ui.reductionName, self.ui.software, self.ui.version, self.ui.handler, self.ui.notes]
         if not self.ui.generate.isChecked():
-            required_fields.append(self.ui.file)
+            required_fields.append(self.ui.fileName)
         for field in required_fields:
             text = field.text().strip() if isinstance(field, QtWidgets.QLineEdit) else field.toPlainText().strip()
             if not text:
@@ -129,6 +129,7 @@ class EditReductionWindow(QtWidgets.QDialog):
             "file_name": self.ui.fileName.text(),
             "analysis_id": self.ui.analysis.currentData(),
             "status": self.ui.status.currentText(),
+            "generate_file_name": self.ui.generate.isChecked()
         }
         try:
             result = self.reductionService.editReduction(self.reduction_id, reduction_info)

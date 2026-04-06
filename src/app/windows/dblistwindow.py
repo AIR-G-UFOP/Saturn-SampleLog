@@ -68,7 +68,6 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.ui.btn_addAnalysis.clicked.connect(self.btn_clicked)
         self.ui.btn_addReductions.clicked.connect(self.btn_clicked)
         self.ui.btn_settings.clicked.connect(self.btn_clicked)
-        self.ui.listFrag.model().rowsMoved.connect(self.update_file_name_preview)
 
         self.set_btn_style(BUTTON_DB_MAP[self.dbType],
                            BUTTON_DB_MAP[self.dbType].objectName())
@@ -165,6 +164,3 @@ class DbListWindow(QtWidgets.QMainWindow):
     def return_edit_dialog(self):
         self.overlay.hide()
         self.load_cards()
-
-    def update_file_name_preview(self):
-        pass
