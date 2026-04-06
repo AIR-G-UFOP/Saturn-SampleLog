@@ -39,6 +39,7 @@ class ReductionCard(QtWidgets.QWidget):
 
         self.ui.btn_edit.clicked.connect(self.edit_reduction)
         self.ui.btn_toggle.clicked.connect(self.trigger_card_stated_change)
+        self.ui.btn_copy.clicked.connect(self.copy_file_name_to_clipboard)
 
     def check_card_state(self):
         if self.ui.bgCard.height() == CARD_MIN_HEIGHT:
@@ -126,3 +127,13 @@ class ReductionCard(QtWidgets.QWidget):
 
     def trigger_card_stated_change(self):
         self.clicked.emit(self)
+
+    def copy_file_name_to_clipboard(self):
+        if self.ui.file.text() != "":
+            file_name = self.ui.file.text()
+            file_name = file_name.removeprefix("Saved as: ")
+            clipboard = QtWidgets.QApplication.clipboard()
+            clipboard.setText(file_name)
+            self.ui.btn_copy.setIcon(QtGui.QIcon(u":/icons/icons/cill-ok-filled.png"))
+            QtCore.QTimer.singleShot(2000,
+                lambda: self.ui.btn_copy.setIcon(QtGui.QIcon(u":/icons/icons/cil-copy.png")))

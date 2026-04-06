@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_AnalysisCardWidget(object):
     def setupUi(self, AnalysisCardWidget):
         AnalysisCardWidget.setObjectName("AnalysisCardWidget")
-        AnalysisCardWidget.resize(754, 165)
+        AnalysisCardWidget.resize(754, 259)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -85,6 +85,17 @@ class Ui_AnalysisCardWidget(object):
 "}\n"
 "#btn_toggle:pressed {\n"
 "    background-color: #62A47A;\n"
+"}\n"
+"#btn_copy {\n"
+"    border: none;\n"
+"    background-color: transparent;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"#btn_copy:hover {\n"
+"    background-color: rgb(61, 70, 86);\n"
+"}\n"
+"#btn_copy:pressed {\n"
+"    background-color: rgb(52, 59, 72);\n"
 "}\n"
 "\n"
 "Line {\n"
@@ -267,7 +278,6 @@ class Ui_AnalysisCardWidget(object):
         self.bgAnalysisDetails.setObjectName("bgAnalysisDetails")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.bgAnalysisDetails)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_5.setSpacing(6)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.operator_ = QtWidgets.QLabel(self.bgAnalysisDetails)
         self.operator_.setText("")
@@ -285,13 +295,28 @@ class Ui_AnalysisCardWidget(object):
         self.date.setText("")
         self.date.setObjectName("date")
         self.verticalLayout_5.addWidget(self.date)
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.file = QtWidgets.QLabel(self.bgAnalysisDetails)
         self.file.setText("")
         self.file.setObjectName("file")
-        self.verticalLayout_5.addWidget(self.file)
+        self.horizontalLayout_4.addWidget(self.file)
+        self.btn_copy = QtWidgets.QPushButton(self.bgAnalysisDetails)
+        self.btn_copy.setMinimumSize(QtCore.QSize(0, 14))
+        self.btn_copy.setMaximumSize(QtCore.QSize(15, 14))
+        self.btn_copy.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_copy.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/icons/icons/cil-copy.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_copy.setIcon(icon2)
+        self.btn_copy.setObjectName("btn_copy")
+        self.horizontalLayout_4.addWidget(self.btn_copy)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_4)
         self.verticalLayout_3.addWidget(self.bgAnalysisDetails, 0, QtCore.Qt.AlignTop)
-        spacerItem = QtWidgets.QSpacerItem(20, 3, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout_3.addItem(spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 3, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_3.addItem(spacerItem1)
         self.line = QtWidgets.QFrame(self.bgTop)
         self.line.setMinimumSize(QtCore.QSize(0, 1))
         self.line.setMaximumSize(QtCore.QSize(16777215, 1))
@@ -564,4 +589,4 @@ class Ui_AnalysisCardWidget(object):
     def retranslateUi(self, AnalysisCardWidget):
         _translate = QtCore.QCoreApplication.translate
         AnalysisCardWidget.setWindowTitle(_translate("AnalysisCardWidget", "Form"))
-from app.ui.resources import resources
+from ..resources import resources

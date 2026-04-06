@@ -86,6 +86,17 @@ class Ui_ReductionCardWidget(object):
 "#btn_toggle:pressed {\n"
 "    background-color: #62A47A;\n"
 "}\n"
+"#btn_copy {\n"
+"    border: none;\n"
+"    background-color: transparent;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"#btn_copy:hover {\n"
+"    background-color: rgb(61, 70, 86);\n"
+"}\n"
+"#btn_copy:pressed {\n"
+"    background-color: rgb(52, 59, 72);\n"
+"}\n"
 "\n"
 "Line {\n"
 "    background-color: #525f7f;\n"
@@ -211,13 +222,33 @@ class Ui_ReductionCardWidget(object):
         font.setItalic(False)
         font.setWeight(50)
         self.reductionTitle.setFont(font)
-        self.reductionTitle.setText("")
         self.reductionTitle.setObjectName("reductionTitle")
         self.verticalLayout_4.addWidget(self.reductionTitle)
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_4.setSpacing(10)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.file = QtWidgets.QLabel(self.bgReductionTitle)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.file.sizePolicy().hasHeightForWidth())
+        self.file.setSizePolicy(sizePolicy)
         self.file.setText("")
         self.file.setObjectName("file")
-        self.verticalLayout_4.addWidget(self.file)
+        self.horizontalLayout_4.addWidget(self.file, 0, QtCore.Qt.AlignLeft)
+        self.btn_copy = QtWidgets.QPushButton(self.bgReductionTitle)
+        self.btn_copy.setMinimumSize(QtCore.QSize(0, 14))
+        self.btn_copy.setMaximumSize(QtCore.QSize(15, 14))
+        self.btn_copy.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_copy.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cil-copy.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_copy.setIcon(icon)
+        self.btn_copy.setObjectName("btn_copy")
+        self.horizontalLayout_4.addWidget(self.btn_copy, 0, QtCore.Qt.AlignLeft)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_4)
         self.horizontalLayout.addWidget(self.bgReductionTitle)
         self.bgButtons = QtWidgets.QFrame(self.bgTitle)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
@@ -237,9 +268,9 @@ class Ui_ReductionCardWidget(object):
         self.btn_edit.setMaximumSize(QtCore.QSize(25, 25))
         self.btn_edit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_edit.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icons/icons/cill-edit.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btn_edit.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icons/icons/cill-edit.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_edit.setIcon(icon1)
         self.btn_edit.setObjectName("btn_edit")
         self.horizontalLayout_2.addWidget(self.btn_edit, 0, QtCore.Qt.AlignTop)
         self.btn_toggle = QtWidgets.QPushButton(self.bgButtons)
@@ -247,9 +278,9 @@ class Ui_ReductionCardWidget(object):
         self.btn_toggle.setMaximumSize(QtCore.QSize(25, 25))
         self.btn_toggle.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_toggle.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/icons/icons/cil-arrow-down.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btn_toggle.setIcon(icon1)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/icons/icons/cil-arrow-down.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_toggle.setIcon(icon2)
         self.btn_toggle.setObjectName("btn_toggle")
         self.horizontalLayout_2.addWidget(self.btn_toggle, 0, QtCore.Qt.AlignTop)
         self.horizontalLayout.addWidget(self.bgButtons)
@@ -290,8 +321,8 @@ class Ui_ReductionCardWidget(object):
         self.software.setObjectName("software")
         self.verticalLayout_5.addWidget(self.software)
         self.verticalLayout_3.addWidget(self.bgReductionDetails, 0, QtCore.Qt.AlignTop)
-        spacerItem = QtWidgets.QSpacerItem(20, 3, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout_3.addItem(spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 3, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_3.addItem(spacerItem1)
         self.line = QtWidgets.QFrame(self.bgTop)
         self.line.setMinimumSize(QtCore.QSize(0, 1))
         self.line.setMaximumSize(QtCore.QSize(16777215, 1))
@@ -562,4 +593,5 @@ class Ui_ReductionCardWidget(object):
     def retranslateUi(self, ReductionCardWidget):
         _translate = QtCore.QCoreApplication.translate
         ReductionCardWidget.setWindowTitle(_translate("ReductionCardWidget", "Form"))
-from app.ui.resources import resources
+        self.reductionTitle.setText(_translate("ReductionCardWidget", "tryrtyrtyrtyt"))
+from ..resources import resources
