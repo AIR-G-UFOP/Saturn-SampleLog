@@ -79,7 +79,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.analysisLog.show()
 
     def open_reduction_log(self):
-        self.reductionLog = ReductionWindow(self.reductionService, self.analysisService)
+        self.reductionLog = ReductionWindow(self.reductionService, self.analysisService, self.settingsService)
         self.reductionLog.show()
 
     def open_db_window(self, db_type):

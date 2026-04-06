@@ -4,6 +4,7 @@ from PyQt5 import QtCore, QtWidgets, QtGui
 from ..modules.ui_functions import UIFunctions
 from ..ui.generated.editreductiondialog import Ui_EditeReductionWindow
 from ..utils.utils import (validate_dates, highlight_invalid_field, clear_highlight_field)
+from ..modules.file_name_generator import FileNameGenerator
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"  # Auto-adjust based on system settings
@@ -14,7 +15,7 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 class EditReductionWindow(QtWidgets.QDialog):
     dialog_return = QtCore.pyqtSignal()
 
-    def __init__(self, reduction_service, reduction_id, analysis_service, bg, parent=None):
+    def __init__(self, reduction_service, reduction_id, analysis_service, settings_service, bg, parent=None):
         super(EditReductionWindow, self).__init__(parent)
 
         self.ui = Ui_EditeReductionWindow()
@@ -30,6 +31,7 @@ class EditReductionWindow(QtWidgets.QDialog):
         self.reduction = self.reductionService.getReductionById(reduction_id)
         self.reduction_id = reduction_id
         self.analysisService = analysis_service
+        self.settingsService = settings_service
 
         self.populate_reduction_info()
         self.ui.btn_saveReduction.clicked.connect(self.edit_reduction_information)
@@ -37,6 +39,10 @@ class EditReductionWindow(QtWidgets.QDialog):
         self.ui.btn_close.clicked.connect(self.dialog_close)
         self.ui.startEnd.dateChanged.connect(self.check_status_state)
         self.ui.endDate.dateChanged.connect(self.check_status_state)
+        self.ui.generate.toggled.connect(self.generate_file_name)
+        self.ui.reductionName.textChanged.connect(self.generate_file_name)
+        self.ui.handler.textChanged.connect(self.generate_file_name)
+        self.ui.date.dateChanged.connect(self.generate_file_name)
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)
@@ -79,7 +85,7 @@ class EditReductionWindow(QtWidgets.QDialog):
         self.ui.date.setDate(QtCore.QDate(self.reduction.status_date))
         self.ui.startEnd.setDate(QtCore.QDate(self.reduction.start_date))
         self.ui.endDate.setDate(QtCore.QDate(self.reduction.end_date))
-        self.ui.file.setText(self.reduction.file_name)
+        self.ui.fileName.setText(self.reduction.file_name)
         if self.reduction.file_name != "":
             self.ui.generate.setChecked(True)
 
@@ -120,7 +126,7 @@ class EditReductionWindow(QtWidgets.QDialog):
             "start_date": self.ui.startEnd.date().toPyDate(),
             "end_date": self.ui.endDate.date().toPyDate(),
             "notes": self.ui.notes.toPlainText(),
-            "file_name": self.ui.file.text(),
+            "file_name": self.ui.fileName.text(),
             "analysis_id": self.ui.analysis.currentData(),
             "status": self.ui.status.currentText(),
         }
@@ -147,3 +153,36 @@ class EditReductionWindow(QtWidgets.QDialog):
         else:
             self.status_message("Please select a valid date. The end date must be after the start date.")
             highlight_invalid_field(sender)
+
+    def generate_file_name(self):
+        if self.ui.generate.isChecked():
+            file_name_config = self.settingsService.getFileNameSettings()
+            template = file_name_config["template"]
+            separator = file_name_config["separator"]
+            fragments = []
+            for frag in template:
+                if frag == "Current date":
+                    fragments.append(QtCore.QDate.currentDate().toString("yyyyMMdd"))
+                elif frag == "Status date":
+                    fragments.append(self.ui.date.date().toString("yyyyMMdd"))
+                elif frag == "Analysis/Reduction name":
+                    fragments.append(self.ui.reductionName.text())
+                elif frag == "Operator/Handler name":
+                    fragments.append(self.ui.handler.text())
+                else:
+                    fragments.append(frag)
+            if fragments:
+                gen = FileNameGenerator(fragments, separator)
+                self.ui.fileName.setText(gen.generate())
+        else:
+            if self.ui.fileName.text() == "":
+                self.ui.fileName.clear()
+
+    def copy_file_name_to_clipboard(self):
+        if self.ui.fileName.text() != "":
+            file_name = self.ui.fileName.text()
+            clipboard = QtWidgets.QApplication.clipboard()
+            clipboard.setText(file_name)
+            self.ui.btn_copy.setIcon(QtGui.QIcon(u":/icons/icons/cill-ok-filled.png"))
+            QtCore.QTimer.singleShot(2000,
+                lambda: self.ui.btn_copy.setIcon(QtGui.QIcon(u":/icons/icons/cil-copy.png")))

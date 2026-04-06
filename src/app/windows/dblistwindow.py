@@ -152,7 +152,8 @@ class DbListWindow(QtWidgets.QMainWindow):
             "sample": EditSampleWindow(self.sampleService, db_id, self.userService, self.ui.bgApp, self),
             "analysis": EditAnalysisWindow(self.analysisService, db_id, self.sampleService, self.settingsService,
                                            self.ui.bgApp, self),
-            "reduction": EditReductionWindow(self.reductionService, db_id, self.analysisService, self.ui.bgApp, self),
+            "reduction": EditReductionWindow(self.reductionService, db_id, self.analysisService, self.settingsService,
+                                             self.ui.bgApp, self),
         }
         self.overlay.show()
         dialog = db_type_map[db_type]
