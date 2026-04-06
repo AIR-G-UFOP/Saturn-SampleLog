@@ -18,7 +18,7 @@ class Ui_ListWindow(object):
         self.stylesheet = QtWidgets.QWidget(ListWindow)
         font = QtGui.QFont()
         font.setFamily("Inter 24pt Medium")
-        font.setPointSize(10)
+        font.setPointSize(8)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -26,7 +26,7 @@ class Ui_ListWindow(object):
         self.stylesheet.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.stylesheet.setStyleSheet("QWidget{\n"
 "    color: #EAEAF0;\n"
-"    font: 10pt \"Inter 24pt Medium\";\n"
+"    font: 8pt \"Inter 24pt Medium\";\n"
 "}\n"
 "/*Bg App */\n"
 "#bgApp {    \n"
@@ -306,15 +306,15 @@ class Ui_ListWindow(object):
 "    padding: 10px;\n"
 "    selection-background-color: rgb(39, 44, 54);\n"
 "}\n"
-"#contentBottom .QPushButton {\n"
+"#bgFrag .QPushButton {\n"
 "    border-radius: 5px;    \n"
 "    border: none;\n"
 "    background-color: rgb(52, 59, 72);\n"
 "}\n"
-"#contentBottom .QPushButton:hover {\n"
+"#bgFrag .QPushButton:hover {\n"
 "    background-color: rgb(61, 70, 86);\n"
 "}\n"
-"#contentBottom .QPushButton:pressed {\n"
+"#bgFrag .QPushButton:pressed {\n"
 "    background-color: rgb(52, 59, 72);\n"
 "}\n"
 "\n"
@@ -356,7 +356,19 @@ class Ui_ListWindow(object):
 "    color: #50FA7B;\n"
 "}\n"
 "#fileNameGenTitle {font: 10pt; color: #8BE9FD;}\n"
-"#preview {color: #FF5555;}")
+"#preview {color: #FF5555;}\n"
+"\n"
+"#btn_saveFileGen {\n"
+"    border-radius: 5px;    \n"
+"    border: none;\n"
+"    background-color: rgb(66, 209, 102);\n"
+"}\n"
+"#btn_saveFileGen:hover {\n"
+"    background-color: #50fA7B;\n"
+"}\n"
+"#btn_saveFileGen:pressed {\n"
+"    background-color: rgb(66, 209, 102);\n"
+"}")
         self.stylesheet.setObjectName("stylesheet")
         self.shadow = QtWidgets.QVBoxLayout(self.stylesheet)
         self.shadow.setContentsMargins(10, 10, 10, 10)
@@ -727,12 +739,18 @@ class Ui_ListWindow(object):
         self.btn_addFrag.setMinimumSize(QtCore.QSize(0, 25))
         self.btn_addFrag.setMaximumSize(QtCore.QSize(16777215, 25))
         self.btn_addFrag.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        icon13 = QtGui.QIcon()
+        icon13.addPixmap(QtGui.QPixmap(":/icons/icons/cil-add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_addFrag.setIcon(icon13)
         self.btn_addFrag.setObjectName("btn_addFrag")
         self.horizontalLayout_5.addWidget(self.btn_addFrag)
         self.btn_removeFrag = QtWidgets.QPushButton(self.bgFrag)
         self.btn_removeFrag.setMinimumSize(QtCore.QSize(0, 25))
         self.btn_removeFrag.setMaximumSize(QtCore.QSize(16777215, 25))
         self.btn_removeFrag.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        icon14 = QtGui.QIcon()
+        icon14.addPixmap(QtGui.QPixmap(":/icons/icons/cil-remove-.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_removeFrag.setIcon(icon14)
         self.btn_removeFrag.setObjectName("btn_removeFrag")
         self.horizontalLayout_5.addWidget(self.btn_removeFrag)
         self.verticalLayout_14.addLayout(self.horizontalLayout_5)
@@ -797,6 +815,15 @@ class Ui_ListWindow(object):
         self.preview.setText("")
         self.preview.setObjectName("preview")
         self.horizontalLayout_7.addWidget(self.preview)
+        self.btn_saveFileGen = QtWidgets.QPushButton(self.bgPreview)
+        self.btn_saveFileGen.setMinimumSize(QtCore.QSize(70, 25))
+        self.btn_saveFileGen.setMaximumSize(QtCore.QSize(70, 25))
+        self.btn_saveFileGen.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        icon15 = QtGui.QIcon()
+        icon15.addPixmap(QtGui.QPixmap(":/icons/icons/cil-save.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_saveFileGen.setIcon(icon15)
+        self.btn_saveFileGen.setObjectName("btn_saveFileGen")
+        self.horizontalLayout_7.addWidget(self.btn_saveFileGen)
         self.verticalLayout_16.addWidget(self.bgPreview)
         self.verticalLayout_18.addWidget(self.bgFileGenerator)
         spacerItem1 = QtWidgets.QSpacerItem(20, 210, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -816,10 +843,10 @@ class Ui_ListWindow(object):
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.bottomBar)
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.label = QtWidgets.QLabel(self.bottomBar)
-        self.label.setText("")
-        self.label.setObjectName("label")
-        self.horizontalLayout_4.addWidget(self.label)
+        self.label_status = QtWidgets.QLabel(self.bottomBar)
+        self.label_status.setText("")
+        self.label_status.setObjectName("label_status")
+        self.horizontalLayout_4.addWidget(self.label_status)
         self.frame_size_grip = QtWidgets.QFrame(self.bottomBar)
         self.frame_size_grip.setMinimumSize(QtCore.QSize(20, 0))
         self.frame_size_grip.setMaximumSize(QtCore.QSize(20, 16777215))
@@ -840,29 +867,30 @@ class Ui_ListWindow(object):
         _translate = QtCore.QCoreApplication.translate
         ListWindow.setWindowTitle(_translate("ListWindow", "MainWindow"))
         self.titleLeftApp.setText(_translate("ListWindow", "Saturn Project"))
-        self.toggleButton.setText(_translate("ListWindow", "    Collapse"))
-        self.btn_userList.setText(_translate("ListWindow", "    User list"))
-        self.btn_sampleList.setText(_translate("ListWindow", "    Sample list"))
-        self.btn_analysisList.setText(_translate("ListWindow", "    Analysis list"))
-        self.btn_reductionList.setText(_translate("ListWindow", "    Reduction list"))
-        self.btn_addUser.setText(_translate("ListWindow", "    Add User"))
-        self.btn_addSample.setText(_translate("ListWindow", "    Add Sample"))
-        self.btn_addAnalysis.setText(_translate("ListWindow", "    Add Analysis"))
-        self.btn_addReductions.setText(_translate("ListWindow", "    Add Reduction"))
-        self.btn_settings.setText(_translate("ListWindow", "    Settings"))
+        self.toggleButton.setText(_translate("ListWindow", "     Collapse"))
+        self.btn_userList.setText(_translate("ListWindow", "     User list"))
+        self.btn_sampleList.setText(_translate("ListWindow", "     Sample list"))
+        self.btn_analysisList.setText(_translate("ListWindow", "     Analysis list"))
+        self.btn_reductionList.setText(_translate("ListWindow", "     Reduction list"))
+        self.btn_addUser.setText(_translate("ListWindow", "     Add User"))
+        self.btn_addSample.setText(_translate("ListWindow", "     Add Sample"))
+        self.btn_addAnalysis.setText(_translate("ListWindow", "     Add Analysis"))
+        self.btn_addReductions.setText(_translate("ListWindow", "     Add Reduction"))
+        self.btn_settings.setText(_translate("ListWindow", "     Settings"))
         self.titleRightInfo.setText(_translate("ListWindow", "Laboratory Legacy"))
-        self.fileNameGenTitle.setText(_translate("ListWindow", "File name generator"))
-        self.labelFrag.setText(_translate("ListWindow", "File name fragments"))
+        self.fileNameGenTitle.setText(_translate("ListWindow", "File name generator template"))
+        self.labelFrag.setText(_translate("ListWindow", "Choose template fragments"))
         self.fragment.setItemText(0, _translate("ListWindow", "Current date"))
         self.fragment.setItemText(1, _translate("ListWindow", "Status date"))
         self.fragment.setItemText(2, _translate("ListWindow", "Analysis/Reduction name"))
-        self.fragment.setItemText(3, _translate("ListWindow", "Operator"))
-        self.fragment.setItemText(4, _translate("ListWindow", "Handler"))
+        self.fragment.setItemText(3, _translate("ListWindow", "Operator/Handler name"))
+        self.fragment.setItemText(4, _translate("ListWindow", "Equipment"))
         self.fragment.setItemText(5, _translate("ListWindow", "Custom text"))
         self.btn_addFrag.setText(_translate("ListWindow", "Add"))
         self.btn_removeFrag.setText(_translate("ListWindow", "Remove"))
-        self.label_2.setText(_translate("ListWindow", "Separator"))
+        self.label_2.setText(_translate("ListWindow", "Choose a separator"))
         self.separator.setText(_translate("ListWindow", "_"))
         self.labelDrag.setText(_translate("ListWindow", "Drag fragments to reorder"))
         self.label_4.setText(_translate("ListWindow", "Preview:"))
+        self.btn_saveFileGen.setText(_translate("ListWindow", "Save"))
 from app.ui.resources import resources

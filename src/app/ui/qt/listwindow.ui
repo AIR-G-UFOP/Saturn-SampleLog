@@ -17,7 +17,7 @@
    <property name="font">
     <font>
      <family>Inter 24pt Medium</family>
-     <pointsize>10</pointsize>
+     <pointsize>8</pointsize>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
@@ -29,7 +29,7 @@
    <property name="styleSheet">
     <string notr="true">QWidget{
 	color: #EAEAF0;
-	font: 10pt &quot;Inter 24pt Medium&quot;;
+	font: 8pt &quot;Inter 24pt Medium&quot;;
 }
 /*Bg App */
 #bgApp {	
@@ -309,15 +309,15 @@ QComboBox QAbstractItemView {
 	padding: 10px;
 	selection-background-color: rgb(39, 44, 54);
 }
-#contentBottom .QPushButton {
+#bgFrag .QPushButton {
 	border-radius: 5px;	
 	border: none;
 	background-color: rgb(52, 59, 72);
 }
-#contentBottom .QPushButton:hover {
+#bgFrag .QPushButton:hover {
 	background-color: rgb(61, 70, 86);
 }
-#contentBottom .QPushButton:pressed {
+#bgFrag .QPushButton:pressed {
 	background-color: rgb(52, 59, 72);
 }
 
@@ -359,7 +359,19 @@ QListWidget::item:selected{
 	color: #50FA7B;
 }
 #fileNameGenTitle {font: 10pt; color: #8BE9FD;}
-#preview {color: #FF5555;}</string>
+#preview {color: #FF5555;}
+
+#btn_saveFileGen {
+	border-radius: 5px;	
+	border: none;
+	background-color: rgb(66, 209, 102);
+}
+#btn_saveFileGen:hover {
+	background-color: #50fA7B;
+}
+#btn_saveFileGen:pressed {
+	background-color: rgb(66, 209, 102);
+}</string>
    </property>
    <layout class="QVBoxLayout" name="shadow">
     <property name="spacing">
@@ -587,7 +599,7 @@ QListWidget::item:selected{
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>    Collapse</string>
+                   <string>     Collapse</string>
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
@@ -652,7 +664,7 @@ QListWidget::item:selected{
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>    User list</string>
+                   <string>     User list</string>
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
@@ -684,7 +696,7 @@ QListWidget::item:selected{
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>    Sample list</string>
+                   <string>     Sample list</string>
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
@@ -710,7 +722,7 @@ QListWidget::item:selected{
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>    Analysis list</string>
+                   <string>     Analysis list</string>
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
@@ -736,7 +748,7 @@ QListWidget::item:selected{
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>    Reduction list</string>
+                   <string>     Reduction list</string>
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
@@ -762,7 +774,7 @@ QListWidget::item:selected{
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>    Add User</string>
+                   <string>     Add User</string>
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
@@ -788,7 +800,7 @@ QListWidget::item:selected{
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>    Add Sample</string>
+                   <string>     Add Sample</string>
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
@@ -814,7 +826,7 @@ QListWidget::item:selected{
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>    Add Analysis</string>
+                   <string>     Add Analysis</string>
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
@@ -840,7 +852,7 @@ QListWidget::item:selected{
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>    Add Reduction</string>
+                   <string>     Add Reduction</string>
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
@@ -866,7 +878,7 @@ QListWidget::item:selected{
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>    Settings</string>
+                   <string>     Settings</string>
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
@@ -1342,7 +1354,7 @@ QListWidget::item:selected{
                            <item>
                             <widget class="QLabel" name="fileNameGenTitle">
                              <property name="text">
-                              <string>File name generator</string>
+                              <string>File name generator template</string>
                              </property>
                             </widget>
                            </item>
@@ -1390,7 +1402,7 @@ QListWidget::item:selected{
                                 <item>
                                  <widget class="QLabel" name="labelFrag">
                                   <property name="text">
-                                   <string>File name fragments</string>
+                                   <string>Choose template fragments</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -1416,12 +1428,12 @@ QListWidget::item:selected{
                                   </item>
                                   <item>
                                    <property name="text">
-                                    <string>Operator</string>
+                                    <string>Operator/Handler name</string>
                                    </property>
                                   </item>
                                   <item>
                                    <property name="text">
-                                    <string>Handler</string>
+                                    <string>Equipment</string>
                                    </property>
                                   </item>
                                   <item>
@@ -1456,6 +1468,10 @@ QListWidget::item:selected{
                                     <property name="text">
                                      <string>Add</string>
                                     </property>
+                                    <property name="icon">
+                                     <iconset resource="../resources/resources.qrc">
+                                      <normaloff>:/icons/icons/cil-add.png</normaloff>:/icons/icons/cil-add.png</iconset>
+                                    </property>
                                    </widget>
                                   </item>
                                   <item>
@@ -1478,6 +1494,10 @@ QListWidget::item:selected{
                                     <property name="text">
                                      <string>Remove</string>
                                     </property>
+                                    <property name="icon">
+                                     <iconset resource="../resources/resources.qrc">
+                                      <normaloff>:/icons/icons/cil-remove-.png</normaloff>:/icons/icons/cil-remove-.png</iconset>
+                                    </property>
                                    </widget>
                                   </item>
                                  </layout>
@@ -1490,7 +1510,7 @@ QListWidget::item:selected{
                                   <item>
                                    <widget class="QLabel" name="label_2">
                                     <property name="text">
-                                     <string>Separator</string>
+                                     <string>Choose a separator</string>
                                     </property>
                                    </widget>
                                   </item>
@@ -1641,6 +1661,32 @@ QListWidget::item:selected{
                                 </property>
                                </widget>
                               </item>
+                              <item>
+                               <widget class="QPushButton" name="btn_saveFileGen">
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>70</width>
+                                  <height>25</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>70</width>
+                                  <height>25</height>
+                                 </size>
+                                </property>
+                                <property name="cursor">
+                                 <cursorShape>PointingHandCursor</cursorShape>
+                                </property>
+                                <property name="text">
+                                 <string>Save</string>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resources/resources.qrc">
+                                  <normaloff>:/icons/icons/cil-save.png</normaloff>:/icons/icons/cil-save.png</iconset>
+                                </property>
+                               </widget>
+                              </item>
                              </layout>
                             </widget>
                            </item>
@@ -1708,7 +1754,7 @@ QListWidget::item:selected{
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="label">
+              <widget class="QLabel" name="label_status">
                <property name="text">
                 <string/>
                </property>

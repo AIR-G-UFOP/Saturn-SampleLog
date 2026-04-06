@@ -12,11 +12,13 @@ and status. It has a many-to-many relationship with DbSample and a one-to-many r
 
 - DbReduction: Represents a reduction, with attributes such as software, software version, handler, date, notes,
 file ID, status, and analysis_id. It has a many-to-one relationship with DbAnalysis.
+
+-DbSettings: Represents a settings, with attributes such as file name template.
 """
 
 
 from .base import Base
-from sqlalchemy import Column, Integer, String, Date, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, Boolean, ForeignKey, JSON
 from sqlalchemy.orm import relationship
 
 
@@ -97,4 +99,10 @@ class DbReduction(Base):
     status = Column(String, nullable=False)
     analysis_id = Column(Integer, ForeignKey('analyses.id'), unique=True, nullable=False)
     analysis = relationship('DbAnalysis', back_populates='reduction')
+
+
+class DbSettings(Base):
+    __tablename__ = 'settings'
+    id = Column(Integer, primary_key=True)
+    file_name_config = Column(JSON, nullable=False)
 
