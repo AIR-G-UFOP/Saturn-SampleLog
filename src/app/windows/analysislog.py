@@ -2,6 +2,7 @@ import os
 import sys
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtGui import QStandardItem
+
 from ..ui.generated.analysiswindow import Ui_AnalysisWindow
 from ..modules.ui_functions import UIFunctions
 from ..utils.utils import (validate_dates, highlight_invalid_field, clear_highlight_field)
@@ -15,7 +16,7 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 class AnalysisWindow(QtWidgets.QMainWindow):
-    def __init__(self, analysis_service, sample_service, settings_service):
+    def __init__(self, analysis_service, sample_service, settings_service, task_service):
         super(AnalysisWindow, self).__init__()
 
         self.ui = Ui_AnalysisWindow()
@@ -29,6 +30,7 @@ class AnalysisWindow(QtWidgets.QMainWindow):
         self.analysisService = analysis_service
         self.sampleService = sample_service
         self.settingsService = settings_service
+        self.taskService = task_service
 
         self.ui.btn_cancel.clicked.connect(lambda: self.close())
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
@@ -99,11 +101,30 @@ class AnalysisWindow(QtWidgets.QMainWindow):
         }
         sample_ids = self.get_checked_data(self.ui.sample)
         try:
-            result = self.analysisService.addAnalysis(analysis_info, sample_ids)
+            result, result_id = self.analysisService.addAnalysis(analysis_info, sample_ids)
+            if self.ui.task.isChecked():
+                self.add_task_to_db(result_id)
             self.reset_fields()
             self.status_message(result)
         except Exception as e:
             self.status_message("Something went wrong. Check log for details.")
+            raise
+
+    def add_task_to_db(self, result_id):
+        task_info = {
+            "name": f"Analysis: {self.ui.analysisName.text()}",
+            "start_date": self.ui.startDate.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
+            "status": "Pending",
+            "description": self.ui.equipment.text(),
+            "task_type": "analysis",
+            "analysis_id": result_id
+        }
+        try:
+            self.taskService.addTask(task_info)
+            print("Task added successfully.")
+        except Exception as e:
+            print('Something went wrong while adding the task. See logs for details.')
             raise
 
     def validate_fields(self):

@@ -77,7 +77,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.sampleLog.show()
 
     def open_analysis_log(self):
-        self.analysisLog = AnalysisWindow(self.analysisService, self.sampleService, self.settingsService)
+        self.analysisLog = AnalysisWindow(self.analysisService, self.sampleService, self.settingsService,
+                                          self.taskService)
         self.analysisLog.show()
 
     def open_reduction_log(self):

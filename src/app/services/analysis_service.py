@@ -28,7 +28,7 @@ class AnalysisService:
             new_analysis.samples.extend(samples)
             session.add(new_analysis)
             session.commit()
-            return "Analysis added successfully."
+            return "Analysis added successfully.", new_analysis.id
         except Exception as e:
             session.rollback()
             print(f"Error adding Analysis: {str(e)}", file=sys.stderr)

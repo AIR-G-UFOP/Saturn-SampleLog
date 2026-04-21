@@ -15,7 +15,8 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 class EditAnalysisWindow(QtWidgets.QDialog):
     dialog_return = QtCore.pyqtSignal()
 
-    def __init__(self, analysis_service, analysis_id, sample_service, settings_service, bg, parent=None):
+    def __init__(self, analysis_service, analysis_id, sample_service, settings_service, task_service,
+                 bg, parent=None):
         super(EditAnalysisWindow, self).__init__(parent)
 
         self.ui = Ui_EditAnalysisWindow()
@@ -32,6 +33,7 @@ class EditAnalysisWindow(QtWidgets.QDialog):
         self.analysis_id = analysis_id
         self.sampleService = sample_service
         self.settingsService = settings_service
+        self.taskService = task_service
         self.populate_analysis_information()
 
         self.ui.btn_saveAnalysis.clicked.connect(self.edit_analysis_information)
@@ -160,10 +162,29 @@ class EditAnalysisWindow(QtWidgets.QDialog):
         sample_ids = self.get_checked_data(self.ui.sample)
         try:
             result = self.analysisService.editAnalysis(self.analysis_id, analysis_info, sample_ids)
+            if self.ui.task.isChecked():
+                self.add_task_to_db(self.analysis_id)
             self.status_message(result)
         except Exception as e:
             print(e)
             self.status_message("Something went wrong.")
+
+    def add_task_to_db(self, result_id):
+        task_info = {
+            "name": f"Analysis: {self.ui.analysisName.text()}",
+            "start_date": self.ui.startDate.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
+            "status": "Pending",
+            "description": self.ui.equipment.text(),
+            "task_type": "analysis",
+            "analysis_id": result_id
+        }
+        try:
+            self.taskService.addTask(task_info)
+            print("Task added successfully.")
+        except Exception as e:
+            print('Something went wrong while adding the task. See logs for details.')
+            raise
 
     def validate_fields(self):
         valid = True

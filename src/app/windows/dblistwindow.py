@@ -158,7 +158,7 @@ class DbListWindow(QtWidgets.QMainWindow):
             "sample": lambda: EditSampleWindow(self.sampleService, db_id, self.userService, self.taskService,
                                                self.ui.bgApp, self),
             "analysis": lambda: EditAnalysisWindow(self.analysisService, db_id, self.sampleService,
-                                                   self.settingsService, self.ui.bgApp, self),
+                                                   self.settingsService, self.taskService, self.ui.bgApp, self),
             "reduction": lambda: EditReductionWindow(self.reductionService, db_id, self.analysisService,
                                                      self.settingsService, self.ui.bgApp, self),
         }
