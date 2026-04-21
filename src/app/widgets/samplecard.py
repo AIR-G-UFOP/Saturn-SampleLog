@@ -116,6 +116,7 @@ class SampleCard(QtWidgets.QWidget):
             self.ui.reductionLayout.addWidget(bgInfo)
 
     def edit_sample(self):
+        print(f"Sample card emitted: {self.sample_id}")
         self.edit_requested.emit("sample", self.sample_id)
 
     def trigger_card_stated_change(self):

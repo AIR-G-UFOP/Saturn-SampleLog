@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>588</width>
-    <height>570</height>
+    <width>470</width>
+    <height>594</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -651,7 +651,7 @@ QScrollBar::add-page:vertical,
                  <number>0</number>
                 </property>
                 <property name="rightMargin">
-                 <number>0</number>
+                 <number>5</number>
                 </property>
                 <property name="bottomMargin">
                  <number>0</number>
@@ -666,8 +666,8 @@ QScrollBar::add-page:vertical,
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>563</width>
-                     <height>661</height>
+                     <width>440</width>
+                     <height>692</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -681,7 +681,7 @@ QScrollBar::add-page:vertical,
                      <number>10</number>
                     </property>
                     <property name="rightMargin">
-                     <number>10</number>
+                     <number>5</number>
                     </property>
                     <property name="bottomMargin">
                      <number>10</number>
@@ -1110,6 +1110,16 @@ QScrollBar::add-page:vertical,
                           </layout>
                          </item>
                         </layout>
+                       </item>
+                       <item>
+                        <widget class="QCheckBox" name="task">
+                         <property name="cursor">
+                          <cursorShape>PointingHandCursor</cursorShape>
+                         </property>
+                         <property name="text">
+                          <string>Create and add a task to the Timetable?</string>
+                         </property>
+                        </widget>
                        </item>
                       </layout>
                      </widget>

@@ -94,7 +94,8 @@ class AnalysisWindow(QtWidgets.QMainWindow):
             "conditions": self.ui.analysisNotes.toPlainText(),
             "file_name": self.ui.fileName.text(),
             "status": self.ui.status.currentText(),
-            "generate_file_name": self.ui.generate.isChecked()
+            "generate_file_name": self.ui.generate.isChecked(),
+            "task": self.ui.task.isChecked(),
         }
         sample_ids = self.get_checked_data(self.ui.sample)
         try:
@@ -165,6 +166,7 @@ class AnalysisWindow(QtWidgets.QMainWindow):
         self.ui.date.setDateTime(QtCore.QDateTime.currentDateTime())
         self.ui.startDate.setDateTime(QtCore.QDateTime.currentDateTime())
         self.ui.endDate.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.ui.task.setChecked(False)
 
     def status_message(self, message):
         QtCore.QTimer.singleShot(0, lambda: self.ui.label_status.setText(message))

@@ -21,6 +21,8 @@ class UIFunctions():
             self.ui.maximizeRestoreAppBtn.setToolTip("Restore")
             self.ui.maximizeRestoreAppBtn.setIcon(QIcon(u":/icons/icons/cil-restore.png"))
             self.ui.frame_size_grip.hide()
+            self.ui.bgApp.setStyleSheet("#bgApp {border-radius: 0px;}")
+            self.ui.closeAppBtn.setStyleSheet("#closeAppBtn {border-top-right-radius: 0px;}")
             self.left_grip.hide()
             self.right_grip.hide()
             self.top_grip.hide()
@@ -41,6 +43,8 @@ class UIFunctions():
             self.right_grip.show()
             self.top_grip.show()
             self.bottom_grip.show()
+            self.ui.bgApp.setStyleSheet("#bgApp {border-radius: 10px;}")
+            self.ui.closeAppBtn.setStyleSheet("#closeAppBtn {border-top-right-radius: 10px;}")
 
     def returStatus(self):
         return GLOBAL_STATE

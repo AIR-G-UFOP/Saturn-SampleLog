@@ -275,11 +275,25 @@ class Ui_SampleWindow(object):
 "            image: url(:/icons/icons/cil-arrow-down.png);\n"
 "            width: 15px;\n"
 "            height: 15px;\n"
-"        }\n"
+"}\n"
 "QScrollBar::add-page:vertical,\n"
 "        QScrollBar::sub-page:vertical {\n"
 "            background: transparent;\n"
-"        }")
+"}\n"
+"QCheckBox::indicator {\n"
+"    border: 3px solid rgb(52, 59, 72);\n"
+"    width: 15px;\n"
+"    height: 15px;\n"
+"    background: rgb(44, 49, 60);\n"
+"}\n"
+"QCheckBox::indicator:hover {\n"
+"    border: 3px solid rgb(58, 66, 81);\n"
+"}\n"
+"QCheckBox::indicator:checked {\n"
+"    background: 3px solid rgb(52, 59, 72);\n"
+"    border: 3px solid rgb(52, 59, 72);    \n"
+"    background-image: url(:/icons/icons/cil-check-alt.png);\n"
+"}")
         self.stylesheet.setObjectName("stylesheet")
         self.shadow = QtWidgets.QVBoxLayout(self.stylesheet)
         self.shadow.setContentsMargins(10, 10, 10, 10)
@@ -624,6 +638,10 @@ class Ui_SampleWindow(object):
         self.verticalLayout_13.addWidget(self.endDate)
         self.horizontalLayout_9.addLayout(self.verticalLayout_13)
         self.verticalLayout_14.addLayout(self.horizontalLayout_9)
+        self.task = QtWidgets.QCheckBox(self.bgPrepBottom)
+        self.task.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.task.setObjectName("task")
+        self.verticalLayout_14.addWidget(self.task)
         self.verticalLayout_16.addWidget(self.bgPrepBottom, 0, QtCore.Qt.AlignTop)
         self.verticalLayout_21.addWidget(self.bgPrep)
         self.bgStatus = QtWidgets.QFrame(self.scrollAreaWidgetContents)
@@ -758,6 +776,7 @@ class Ui_SampleWindow(object):
         self.instructions.setPlaceholderText(_translate("SampleWindow", "e.g., Prepare as a 1-inch resin mount"))
         self.label_9.setText(_translate("SampleWindow", "Start date"))
         self.label_10.setText(_translate("SampleWindow", "End date"))
+        self.task.setText(_translate("SampleWindow", "Create and add a task to the Timetable?"))
         self.label_8.setText(_translate("SampleWindow", "Status"))
         self.status.setItemText(0, _translate("SampleWindow", "Logged in"))
         self.status.setItemText(1, _translate("SampleWindow", "Preparation in progress..."))
@@ -770,4 +789,4 @@ class Ui_SampleWindow(object):
         self.label_7.setText(_translate("SampleWindow", "Date"))
         self.btn_cancel.setText(_translate("SampleWindow", "Cancel"))
         self.btn_logSample.setText(_translate("SampleWindow", "Log Sample"))
-from app.ui.resources import resources
+from ..resources import resources

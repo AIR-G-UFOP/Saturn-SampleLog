@@ -125,6 +125,7 @@ class AnalysisCard(QtWidgets.QWidget):
             self.ui.reductionLayout.addWidget(bgInfo)
 
     def edit_analysis(self):
+        print(f"Analysis emitted: {self.analysis_id}")
         self.edit_requested.emit("analysis", self.analysis_id)
 
     def trigger_card_stated_change(self):

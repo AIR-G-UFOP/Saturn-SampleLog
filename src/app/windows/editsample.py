@@ -75,6 +75,8 @@ class EditSampleWindow(QtWidgets.QDialog):
         if self.sample.preparation:
             self.ui.prepYes.setChecked(True)
             self.check_prep_state()
+        if self.sample.task:
+            self.ui.task.setChecked(True)
 
     def edit_sample_information(self):
         if not self.validate_fields():
@@ -89,6 +91,7 @@ class EditSampleWindow(QtWidgets.QDialog):
             "preparation": self.ui.prepYes.isChecked(),
             "comment": self.ui.instructions.text(),
             "status": self.ui.status.currentText(),
+            "task": self.ui.task.isChecked(),
         }
         try:
             result = self.sampleService.editSample(self.sample_id, sample_info)

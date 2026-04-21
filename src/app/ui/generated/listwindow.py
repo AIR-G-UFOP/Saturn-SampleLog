@@ -31,6 +31,7 @@ class Ui_ListWindow(object):
 "/*Bg App */\n"
 "#bgApp {    \n"
 "    background-color: #282A36;\n"
+"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "/*Content App */\n"
@@ -45,15 +46,16 @@ class Ui_ListWindow(object):
 "    border: none;  \n"
 "}\n"
 "#rightButtons .QPushButton:hover { \n"
-"    background-color: rgb(44, 49, 57); \n"
+"    background-color: rgb(52, 59, 72);\n"
 "    border-style: solid; \n"
 "}\n"
 "#rightButtons .QPushButton:pressed { \n"
-"    background-color: rgb(23, 26, 30); \n"
+"    background-color: transparent; \n"
 "    border-style: solid; \n"
 "}\n"
 "#closeAppBtn{ \n"
 "    background-color: transparent; \n"
+"    border-top-right-radius: 10px;\n"
 "    border: none;\n"
 "}\n"
 "#closeAppBtn:hover{ \n"
@@ -84,7 +86,7 @@ class Ui_ListWindow(object):
 "    border-left: 18px solid transparent;\n"
 "}\n"
 "#topMenu .QPushButton:hover {\n"
-"    background-color: rgb(44, 49, 57); \n"
+"    background-color: rgb(52, 59, 72); \n"
 "}\n"
 "#topMenu .QPushButton:pressed {    \n"
 "    background-color: #ff5555;\n"
@@ -111,7 +113,7 @@ class Ui_ListWindow(object):
 "    color: #A8ABB3;\n"
 "}\n"
 "#toggleButton:hover {\n"
-"    background-color: rgb(44, 49, 57); \n"
+"    background-color: rgb(52, 59, 72); \n"
 "}\n"
 "#toggleButton:pressed {\n"
 "    background-color: #ff5555;\n"
@@ -368,6 +370,29 @@ class Ui_ListWindow(object):
 "}\n"
 "#btn_saveFileGen:pressed {\n"
 "    background-color: rgb(66, 209, 102);\n"
+"}\n"
+"\n"
+"#bgTopCalendar QPushButton {\n"
+"    border-radius: 5px;    \n"
+"    border: none;\n"
+"    background-color: rgb(52, 59, 72);\n"
+"}\n"
+"#bgTopCalendar QPushButton:hover {\n"
+"    background-color: rgb(61, 70, 86);\n"
+"}\n"
+"#bgTopCalendar QPushButton:pressed {\n"
+"    background-color: rgb(52, 59, 72);\n"
+"}\n"
+"#bgBottomCalendar QPushButton {\n"
+"    border-radius: 5px;    \n"
+"    border: none;\n"
+"    background-color: #6272A4;\n"
+"}\n"
+"#bgBottomCalendar QPushButton:hover {\n"
+"    background-color: rgb(61, 70, 86);\n"
+"}\n"
+"#bgBottomCalendar QPushButton:pressed {\n"
+"    background-color: #6272A4;\n"
 "}")
         self.stylesheet.setObjectName("stylesheet")
         self.shadow = QtWidgets.QVBoxLayout(self.stylesheet)
@@ -531,13 +556,22 @@ class Ui_ListWindow(object):
         self.btn_addReductions.setIcon(icon8)
         self.btn_addReductions.setObjectName("btn_addReductions")
         self.verticalLayout_5.addWidget(self.btn_addReductions)
+        self.btn_timetable = QtWidgets.QPushButton(self.topMenu)
+        self.btn_timetable.setMinimumSize(QtCore.QSize(0, 30))
+        self.btn_timetable.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.btn_timetable.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap(":/icons/icons/cil-calendar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_timetable.setIcon(icon9)
+        self.btn_timetable.setObjectName("btn_timetable")
+        self.verticalLayout_5.addWidget(self.btn_timetable)
         self.btn_settings = QtWidgets.QPushButton(self.topMenu)
         self.btn_settings.setMinimumSize(QtCore.QSize(0, 30))
         self.btn_settings.setMaximumSize(QtCore.QSize(16777215, 30))
         self.btn_settings.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap(":/icons/icons/cil-settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btn_settings.setIcon(icon9)
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap(":/icons/icons/cil-settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_settings.setIcon(icon10)
         self.btn_settings.setObjectName("btn_settings")
         self.verticalLayout_5.addWidget(self.btn_settings)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -609,9 +643,9 @@ class Ui_ListWindow(object):
         self.minimizeAppBtn.setMaximumSize(QtCore.QSize(35, 28))
         self.minimizeAppBtn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.minimizeAppBtn.setText("")
-        icon10 = QtGui.QIcon()
-        icon10.addPixmap(QtGui.QPixmap(":/icons/icons/cil-minimise.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.minimizeAppBtn.setIcon(icon10)
+        icon11 = QtGui.QIcon()
+        icon11.addPixmap(QtGui.QPixmap(":/icons/icons/cil-minimise.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.minimizeAppBtn.setIcon(icon11)
         self.minimizeAppBtn.setObjectName("minimizeAppBtn")
         self.horizontalLayout_3.addWidget(self.minimizeAppBtn)
         self.maximizeRestoreAppBtn = QtWidgets.QPushButton(self.rightButtons)
@@ -619,9 +653,9 @@ class Ui_ListWindow(object):
         self.maximizeRestoreAppBtn.setMaximumSize(QtCore.QSize(35, 28))
         self.maximizeRestoreAppBtn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.maximizeRestoreAppBtn.setText("")
-        icon11 = QtGui.QIcon()
-        icon11.addPixmap(QtGui.QPixmap(":/icons/icons/cil-maximise.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.maximizeRestoreAppBtn.setIcon(icon11)
+        icon12 = QtGui.QIcon()
+        icon12.addPixmap(QtGui.QPixmap(":/icons/icons/cil-maximise.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.maximizeRestoreAppBtn.setIcon(icon12)
         self.maximizeRestoreAppBtn.setObjectName("maximizeRestoreAppBtn")
         self.horizontalLayout_3.addWidget(self.maximizeRestoreAppBtn)
         self.horizontalLayout_2.addWidget(self.rightButtons, 0, QtCore.Qt.AlignTop)
@@ -630,9 +664,9 @@ class Ui_ListWindow(object):
         self.closeAppBtn.setMaximumSize(QtCore.QSize(35, 28))
         self.closeAppBtn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.closeAppBtn.setText("")
-        icon12 = QtGui.QIcon()
-        icon12.addPixmap(QtGui.QPixmap(":/icons/icons/cil-close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.closeAppBtn.setIcon(icon12)
+        icon13 = QtGui.QIcon()
+        icon13.addPixmap(QtGui.QPixmap(":/icons/icons/cil-close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.closeAppBtn.setIcon(icon13)
         self.closeAppBtn.setObjectName("closeAppBtn")
         self.horizontalLayout_2.addWidget(self.closeAppBtn, 0, QtCore.Qt.AlignTop)
         self.verticalLayout_2.addWidget(self.contentTopBg)
@@ -739,18 +773,18 @@ class Ui_ListWindow(object):
         self.btn_addFrag.setMinimumSize(QtCore.QSize(0, 25))
         self.btn_addFrag.setMaximumSize(QtCore.QSize(16777215, 25))
         self.btn_addFrag.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        icon13 = QtGui.QIcon()
-        icon13.addPixmap(QtGui.QPixmap(":/icons/icons/cil-add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btn_addFrag.setIcon(icon13)
+        icon14 = QtGui.QIcon()
+        icon14.addPixmap(QtGui.QPixmap(":/icons/icons/cil-add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_addFrag.setIcon(icon14)
         self.btn_addFrag.setObjectName("btn_addFrag")
         self.horizontalLayout_5.addWidget(self.btn_addFrag)
         self.btn_removeFrag = QtWidgets.QPushButton(self.bgFrag)
         self.btn_removeFrag.setMinimumSize(QtCore.QSize(0, 25))
         self.btn_removeFrag.setMaximumSize(QtCore.QSize(16777215, 25))
         self.btn_removeFrag.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        icon14 = QtGui.QIcon()
-        icon14.addPixmap(QtGui.QPixmap(":/icons/icons/cil-remove-.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btn_removeFrag.setIcon(icon14)
+        icon15 = QtGui.QIcon()
+        icon15.addPixmap(QtGui.QPixmap(":/icons/icons/cil-remove-.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_removeFrag.setIcon(icon15)
         self.btn_removeFrag.setObjectName("btn_removeFrag")
         self.horizontalLayout_5.addWidget(self.btn_removeFrag)
         self.verticalLayout_14.addLayout(self.horizontalLayout_5)
@@ -819,9 +853,9 @@ class Ui_ListWindow(object):
         self.btn_saveFileGen.setMinimumSize(QtCore.QSize(70, 25))
         self.btn_saveFileGen.setMaximumSize(QtCore.QSize(70, 25))
         self.btn_saveFileGen.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        icon15 = QtGui.QIcon()
-        icon15.addPixmap(QtGui.QPixmap(":/icons/icons/cil-save.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btn_saveFileGen.setIcon(icon15)
+        icon16 = QtGui.QIcon()
+        icon16.addPixmap(QtGui.QPixmap(":/icons/icons/cil-save.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_saveFileGen.setIcon(icon16)
         self.btn_saveFileGen.setObjectName("btn_saveFileGen")
         self.horizontalLayout_7.addWidget(self.btn_saveFileGen)
         self.verticalLayout_16.addWidget(self.bgPreview)
@@ -832,6 +866,119 @@ class Ui_ListWindow(object):
         self.verticalLayout_17.addWidget(self.scrollArea)
         self.verticalLayout_10.addWidget(self.bgSettings)
         self.contentStack.addWidget(self.settings)
+        self.calendar = QtWidgets.QWidget()
+        self.calendar.setObjectName("calendar")
+        self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.calendar)
+        self.verticalLayout_19.setContentsMargins(10, 10, 0, 10)
+        self.verticalLayout_19.setSpacing(0)
+        self.verticalLayout_19.setObjectName("verticalLayout_19")
+        self.bgCalendar = QtWidgets.QFrame(self.calendar)
+        self.bgCalendar.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgCalendar.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgCalendar.setObjectName("bgCalendar")
+        self.verticalLayout_20 = QtWidgets.QVBoxLayout(self.bgCalendar)
+        self.verticalLayout_20.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_20.setSpacing(0)
+        self.verticalLayout_20.setObjectName("verticalLayout_20")
+        self.scrollArea_2 = QtWidgets.QScrollArea(self.bgCalendar)
+        self.scrollArea_2.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.scrollArea_2.setWidgetResizable(True)
+        self.scrollArea_2.setObjectName("scrollArea_2")
+        self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 721, 471))
+        self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
+        self.verticalLayout_21 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_3)
+        self.verticalLayout_21.setContentsMargins(0, 0, 10, 0)
+        self.verticalLayout_21.setSpacing(10)
+        self.verticalLayout_21.setObjectName("verticalLayout_21")
+        self.bgTopCalendar = QtWidgets.QFrame(self.scrollAreaWidgetContents_3)
+        self.bgTopCalendar.setMinimumSize(QtCore.QSize(0, 0))
+        self.bgTopCalendar.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgTopCalendar.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgTopCalendar.setObjectName("bgTopCalendar")
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.bgTopCalendar)
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_8.setSpacing(5)
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        self.btn_previousMonth = QtWidgets.QPushButton(self.bgTopCalendar)
+        self.btn_previousMonth.setMinimumSize(QtCore.QSize(25, 25))
+        self.btn_previousMonth.setMaximumSize(QtCore.QSize(25, 25))
+        self.btn_previousMonth.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_previousMonth.setText("")
+        icon17 = QtGui.QIcon()
+        icon17.addPixmap(QtGui.QPixmap(":/icons/icons/cil-arrow-left.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_previousMonth.setIcon(icon17)
+        self.btn_previousMonth.setIconSize(QtCore.QSize(16, 16))
+        self.btn_previousMonth.setAutoRepeat(False)
+        self.btn_previousMonth.setAutoExclusive(False)
+        self.btn_previousMonth.setObjectName("btn_previousMonth")
+        self.horizontalLayout_8.addWidget(self.btn_previousMonth)
+        self.comboMonth = QtWidgets.QComboBox(self.bgTopCalendar)
+        self.comboMonth.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.comboMonth.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboMonth.setObjectName("comboMonth")
+        self.horizontalLayout_8.addWidget(self.comboMonth)
+        self.comboYear = QtWidgets.QComboBox(self.bgTopCalendar)
+        self.comboYear.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.comboYear.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboYear.setObjectName("comboYear")
+        self.horizontalLayout_8.addWidget(self.comboYear)
+        self.btn_nextMonth = QtWidgets.QPushButton(self.bgTopCalendar)
+        self.btn_nextMonth.setMinimumSize(QtCore.QSize(25, 25))
+        self.btn_nextMonth.setMaximumSize(QtCore.QSize(25, 25))
+        self.btn_nextMonth.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_nextMonth.setText("")
+        icon18 = QtGui.QIcon()
+        icon18.addPixmap(QtGui.QPixmap(":/icons/icons/cil-arrow-right.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_nextMonth.setIcon(icon18)
+        self.btn_nextMonth.setIconSize(QtCore.QSize(16, 16))
+        self.btn_nextMonth.setObjectName("btn_nextMonth")
+        self.horizontalLayout_8.addWidget(self.btn_nextMonth)
+        spacerItem2 = QtWidgets.QSpacerItem(221, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_8.addItem(spacerItem2)
+        self.samplePrep = QtWidgets.QLabel(self.bgTopCalendar)
+        self.samplePrep.setObjectName("samplePrep")
+        self.horizontalLayout_8.addWidget(self.samplePrep)
+        self.analysis = QtWidgets.QLabel(self.bgTopCalendar)
+        self.analysis.setObjectName("analysis")
+        self.horizontalLayout_8.addWidget(self.analysis)
+        self.dataReduction = QtWidgets.QLabel(self.bgTopCalendar)
+        self.dataReduction.setObjectName("dataReduction")
+        self.horizontalLayout_8.addWidget(self.dataReduction)
+        self.verticalLayout_21.addWidget(self.bgTopCalendar, 0, QtCore.Qt.AlignTop)
+        self.bgContentCalendar = QtWidgets.QFrame(self.scrollAreaWidgetContents_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgContentCalendar.sizePolicy().hasHeightForWidth())
+        self.bgContentCalendar.setSizePolicy(sizePolicy)
+        self.bgContentCalendar.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgContentCalendar.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgContentCalendar.setObjectName("bgContentCalendar")
+        self.calendarLayout = QtWidgets.QVBoxLayout(self.bgContentCalendar)
+        self.calendarLayout.setContentsMargins(0, 0, 0, 0)
+        self.calendarLayout.setSpacing(0)
+        self.calendarLayout.setObjectName("calendarLayout")
+        self.verticalLayout_21.addWidget(self.bgContentCalendar)
+        self.bgBottomCalendar = QtWidgets.QFrame(self.scrollAreaWidgetContents_3)
+        self.bgBottomCalendar.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgBottomCalendar.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgBottomCalendar.setObjectName("bgBottomCalendar")
+        self.verticalLayout_23 = QtWidgets.QVBoxLayout(self.bgBottomCalendar)
+        self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_23.setSpacing(10)
+        self.verticalLayout_23.setObjectName("verticalLayout_23")
+        self.btn_addTask = QtWidgets.QPushButton(self.bgBottomCalendar)
+        self.btn_addTask.setMinimumSize(QtCore.QSize(0, 25))
+        self.btn_addTask.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_addTask.setIcon(icon14)
+        self.btn_addTask.setObjectName("btn_addTask")
+        self.verticalLayout_23.addWidget(self.btn_addTask)
+        self.verticalLayout_21.addWidget(self.bgBottomCalendar, 0, QtCore.Qt.AlignBottom)
+        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_3)
+        self.verticalLayout_20.addWidget(self.scrollArea_2)
+        self.verticalLayout_19.addWidget(self.bgCalendar)
+        self.contentStack.addWidget(self.calendar)
         self.verticalLayout_8.addWidget(self.contentStack)
         self.verticalLayout_2.addWidget(self.contentBottom)
         self.bottomBar = QtWidgets.QFrame(self.contentBox)
@@ -876,6 +1023,7 @@ class Ui_ListWindow(object):
         self.btn_addSample.setText(_translate("ListWindow", "     Add Sample"))
         self.btn_addAnalysis.setText(_translate("ListWindow", "     Add Analysis"))
         self.btn_addReductions.setText(_translate("ListWindow", "     Add Reduction"))
+        self.btn_timetable.setText(_translate("ListWindow", "     Timetable"))
         self.btn_settings.setText(_translate("ListWindow", "     Settings"))
         self.titleRightInfo.setText(_translate("ListWindow", "Laboratory Legacy"))
         self.fileNameGenTitle.setText(_translate("ListWindow", "File name generator template"))
@@ -893,4 +1041,8 @@ class Ui_ListWindow(object):
         self.labelDrag.setText(_translate("ListWindow", "Drag fragments to reorder"))
         self.label_4.setText(_translate("ListWindow", "Preview:"))
         self.btn_saveFileGen.setText(_translate("ListWindow", "Save"))
+        self.samplePrep.setText(_translate("ListWindow", "Sample preparation"))
+        self.analysis.setText(_translate("ListWindow", "Analysis"))
+        self.dataReduction.setText(_translate("ListWindow", "Data Reduction"))
+        self.btn_addTask.setText(_translate("ListWindow", "Add a new task to calendar"))
 from app.ui.resources import resources

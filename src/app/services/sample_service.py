@@ -22,7 +22,8 @@ class SampleService:
                 end_date=sample_info["end_date"],
                 preparation=sample_info["preparation"],
                 comment=sample_info["comment"],
-                status=sample_info["status"])
+                status=sample_info["status"],
+                task=sample_info["task"])
             session.add(new_sample)
             session.commit()
             return "Sample added successfully."
@@ -51,6 +52,7 @@ class SampleService:
             sample.start_date = sample_info["start_date"]
             sample.end_date = sample_info["end_date"]
             sample.user_id = sample_info["user_id"]
+            sample.task = sample_info["task"]
             session.commit()
             return "Sample updated successfully."
         except SQLAlchemyError as e:

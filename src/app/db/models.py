@@ -14,6 +14,10 @@ and status. It has a many-to-many relationship with DbSample and a one-to-many r
 file ID, status, and analysis_id. It has a many-to-one relationship with DbAnalysis.
 
 -DbSettings: Represents a settings, with attributes such as file name template.
+
+-DbTasks: Represents tasks, with attributes such as name, start date, end date, completed at, status, description,
+task type, and foreign keys to sample, analysis, and reduction. It has relationships with DbSample, DbAnalysis,
+and DbReduction.
 """
 
 
@@ -53,6 +57,7 @@ class DbSample(Base):
     preparation = Column(Boolean, nullable=False)
     comment = Column(String, nullable=True)
     status = Column(String, nullable=False)
+    task = Column(Boolean, default=False, server_default="0", nullable=False)
 
     users = relationship('DbUser', back_populates='samples')
     analyses = relationship(
@@ -75,6 +80,7 @@ class DbAnalysis(Base):
     file_name = Column(String, nullable=False)
     status = Column(String, nullable=False)
     generate_file_name = Column(Boolean, nullable=False)
+    task = Column(Boolean, default=False, server_default="0", nullable=False)
 
     samples = relationship(
         'DbSample',
@@ -101,10 +107,31 @@ class DbReduction(Base):
     generate_file_name = Column(Boolean, nullable=False)
     analysis_id = Column(Integer, ForeignKey('analyses.id'), unique=True, nullable=False)
     analysis = relationship('DbAnalysis', back_populates='reduction')
+    task = Column(Boolean, default=False, server_default="0", nullable=False)
 
 
 class DbSettings(Base):
     __tablename__ = 'settings'
     id = Column(Integer, primary_key=True)
     file_name_config = Column(JSON, nullable=False)
+
+
+class DBTasks(Base):
+    __tablename__ = 'tasks'
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    start_date = Column(Date, nullable=False)
+    end_date = Column(Date, nullable=False)
+    completed_at = Column(Date, nullable=True)
+    status = Column(String, nullable=False)
+    description = Column(String, nullable=False)
+    task_type = Column(String, nullable=False) # e.g. "sample_preparation", "analysis", "reduction", "other"
+    sample_id = Column(Integer, ForeignKey("samples.id"), nullable=True)
+    analysis_id = Column(Integer, ForeignKey("analyses.id"), nullable=True)
+    reduction_id = Column(Integer, ForeignKey("reductions.id"), nullable=True)
+
+    sample = relationship("DbSample")
+    analysis = relationship("DbAnalysis")
+    reduction = relationship("DbReduction")
+
 

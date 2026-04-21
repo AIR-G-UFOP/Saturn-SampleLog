@@ -14,8 +14,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_EditAnalysisWindow(object):
     def setupUi(self, EditAnalysisWindow):
         EditAnalysisWindow.setObjectName("EditAnalysisWindow")
-        EditAnalysisWindow.resize(476, 521)
-        EditAnalysisWindow.setMinimumSize(QtCore.QSize(394, 521))
+        EditAnalysisWindow.resize(459, 379)
+        EditAnalysisWindow.setMinimumSize(QtCore.QSize(394, 300))
         EditAnalysisWindow.setMaximumSize(QtCore.QSize(830, 525))
         EditAnalysisWindow.setStyleSheet("QWidget{\n"
 "    color: #F8F8F2;\n"
@@ -201,6 +201,57 @@ class Ui_EditAnalysisWindow(object):
 "    background-color: rgb(33, 37, 43);\n"
 "    padding: 10px;\n"
 "    selection-background-color: rgb(39, 44, 54);\n"
+"}\n"
+"QScrollArea {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QScrollArea > QWidget > QWidget {\n"
+"    background: transparent;\n"
+"}\n"
+"QScrollBar:vertical {\n"
+"    background: transparent;\n"
+"    width: 5px;\n"
+"    margin: 12px 0px 12px 0px;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #525f7f;\n"
+"    min-height: 30px;\n"
+"    border-radius: 2px;\n"
+"}\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: rgb(83, 88, 112);\n"
+"}\n"
+"QScrollBar::handle:vertical:pressed {\n"
+"    background: #343746;\n"
+"}\n"
+"QScrollBar::sub-line:vertical {\n"
+"            height: 14px;\n"
+"            background: transparent;\n"
+"            subcontrol-origin: margin;\n"
+"            subcontrol-position: top;\n"
+"}\n"
+"QScrollBar::add-line:vertical {\n"
+"            height: 14px;\n"
+"            background: transparent;\n"
+"            subcontrol-origin: margin;\n"
+"            subcontrol-position: bottom;\n"
+"}\n"
+"QScrollBar::up-arrow:vertical {\n"
+"            image: url(:/icons/icons/cil-arrow-up.png);\n"
+"            width: 15px;\n"
+"            height: 15px;\n"
+"}\n"
+"QScrollBar::down-arrow:vertical {\n"
+"            image: url(:/icons/icons/cil-arrow-down.png);\n"
+"            width: 15px;\n"
+"            height: 15px;\n"
+"}\n"
+"QScrollBar::add-page:vertical,\n"
+"        QScrollBar::sub-page:vertical {\n"
+"            background: transparent;\n"
 "}")
         self.verticalLayout = QtWidgets.QVBoxLayout(EditAnalysisWindow)
         self.verticalLayout.setContentsMargins(10, 10, 10, 10)
@@ -235,10 +286,20 @@ class Ui_EditAnalysisWindow(object):
         self.content.setFrameShadow(QtWidgets.QFrame.Raised)
         self.content.setObjectName("content")
         self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.content)
-        self.verticalLayout_16.setContentsMargins(10, 10, 10, 10)
-        self.verticalLayout_16.setSpacing(10)
+        self.verticalLayout_16.setContentsMargins(0, 0, 5, 0)
+        self.verticalLayout_16.setSpacing(0)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
-        self.bgAnalysis = QtWidgets.QFrame(self.content)
+        self.scrollArea = QtWidgets.QScrollArea(self.content)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 429, 496))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.verticalLayout_20 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_20.setContentsMargins(10, 10, 5, 10)
+        self.verticalLayout_20.setSpacing(10)
+        self.verticalLayout_20.setObjectName("verticalLayout_20")
+        self.bgAnalysis = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.bgAnalysis.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgAnalysis.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgAnalysis.setObjectName("bgAnalysis")
@@ -345,8 +406,12 @@ class Ui_EditAnalysisWindow(object):
         self.verticalLayout_13.addWidget(self.endDate)
         self.horizontalLayout_3.addLayout(self.verticalLayout_13)
         self.verticalLayout_19.addLayout(self.horizontalLayout_3)
-        self.verticalLayout_16.addWidget(self.bgAnalysis, 0, QtCore.Qt.AlignTop)
-        self.bgStatus = QtWidgets.QFrame(self.content)
+        self.task = QtWidgets.QCheckBox(self.bgAnalysis)
+        self.task.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.task.setObjectName("task")
+        self.verticalLayout_19.addWidget(self.task)
+        self.verticalLayout_20.addWidget(self.bgAnalysis)
+        self.bgStatus = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.bgStatus.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgStatus.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgStatus.setObjectName("bgStatus")
@@ -390,8 +455,8 @@ class Ui_EditAnalysisWindow(object):
         self.verticalLayout_5.addWidget(self.date)
         self.horizontalLayout_7.addLayout(self.verticalLayout_5)
         self.verticalLayout_15.addLayout(self.horizontalLayout_7)
-        self.verticalLayout_16.addWidget(self.bgStatus)
-        self.bgFile = QtWidgets.QFrame(self.content)
+        self.verticalLayout_20.addWidget(self.bgStatus)
+        self.bgFile = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.bgFile.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgFile.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgFile.setObjectName("bgFile")
@@ -428,7 +493,9 @@ class Ui_EditAnalysisWindow(object):
         self.horizontalLayout_4.addWidget(self.btn_copy)
         self.verticalLayout_7.addLayout(self.horizontalLayout_4)
         self.verticalLayout_14.addLayout(self.verticalLayout_7)
-        self.verticalLayout_16.addWidget(self.bgFile, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_20.addWidget(self.bgFile)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout_16.addWidget(self.scrollArea)
         self.verticalLayout_4.addWidget(self.content)
         self.bottomBar = QtWidgets.QFrame(self.contentBottom)
         self.bottomBar.setMinimumSize(QtCore.QSize(0, 60))
@@ -514,6 +581,7 @@ class Ui_EditAnalysisWindow(object):
         self.label_5.setText(_translate("EditAnalysisWindow", "Operation conditions/Notes"))
         self.label_9.setText(_translate("EditAnalysisWindow", "Start date"))
         self.label_10.setText(_translate("EditAnalysisWindow", "End date"))
+        self.task.setText(_translate("EditAnalysisWindow", "Create and add a task to the Timetable?"))
         self.label_7.setText(_translate("EditAnalysisWindow", "Status"))
         self.status.setItemText(0, _translate("EditAnalysisWindow", "Logged in"))
         self.status.setItemText(1, _translate("EditAnalysisWindow", "Analysis in progress..."))
@@ -528,4 +596,4 @@ class Ui_EditAnalysisWindow(object):
         self.btn_close.setText(_translate("EditAnalysisWindow", "Close"))
         self.btn_cancel.setText(_translate("EditAnalysisWindow", "Cancel"))
         self.btn_saveAnalysis.setText(_translate("EditAnalysisWindow", "Save changes to Analysis"))
-from app.ui.resources import resources
+from ..resources import resources

@@ -677,9 +677,9 @@ QScrollBar::add-page:vertical,
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-125</y>
+                     <y>-64</y>
                      <width>492</width>
-                     <height>608</height>
+                     <height>639</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1103,6 +1103,16 @@ QScrollBar::add-page:vertical,
                           </layout>
                          </item>
                         </layout>
+                       </item>
+                       <item>
+                        <widget class="QCheckBox" name="task">
+                         <property name="cursor">
+                          <cursorShape>PointingHandCursor</cursorShape>
+                         </property>
+                         <property name="text">
+                          <string>Create and add a task to the Timetable?</string>
+                         </property>
+                        </widget>
                        </item>
                       </layout>
                      </widget>

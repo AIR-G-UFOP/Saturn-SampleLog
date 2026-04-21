@@ -92,7 +92,8 @@ class SampleWindow(QtWidgets.QMainWindow):
             "end_date": self.ui.endDate.date().toPyDate(),
             "preparation": self.ui.prepYes.isChecked(),
             "comment": self.ui.instructions.text(),
-            "status": self.ui.status.currentText()
+            "status": self.ui.status.currentText(),
+            "task": self.ui.task.isChecked()
         }
         try:
             result = self.sampleService.addSample(sample_info)
@@ -106,12 +107,13 @@ class SampleWindow(QtWidgets.QMainWindow):
         self.ui.sampleName.clear()
         self.ui.sampleDescription.clear()
         self.ui.userName.setCurrentIndex(0)
-        self.ui.date.clear()
-        self.ui.endDate.clear()
-        self.ui.startDate.clear()
+        self.ui.date.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.ui.startDate.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.ui.endDate.setDateTime(QtCore.QDateTime.currentDateTime())
         self.ui.status.setCurrentIndex(0)
         self.ui.prepYes.setChecked(False)
         self.ui.instructions.clear()
+        self.ui.task.setChecked(False)
 
     def status_message(self, message):
         QtCore.QTimer.singleShot(0, lambda: self.ui.label_status.setText(message))

@@ -426,7 +426,7 @@ class Ui_AnalysisWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -125, 492, 608))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -64, 492, 639))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_19.setContentsMargins(10, 10, 10, 10)
@@ -593,6 +593,10 @@ class Ui_AnalysisWindow(object):
         self.verticalLayout_14.addWidget(self.endDate)
         self.horizontalLayout_9.addLayout(self.verticalLayout_14)
         self.verticalLayout_16.addLayout(self.horizontalLayout_9)
+        self.task = QtWidgets.QCheckBox(self.bgAnalysis)
+        self.task.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.task.setObjectName("task")
+        self.verticalLayout_16.addWidget(self.task)
         self.verticalLayout_19.addWidget(self.bgAnalysis)
         self.bgStatus = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.bgStatus.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -761,6 +765,7 @@ class Ui_AnalysisWindow(object):
         self.notes.setText(_translate("AnalysisWindow", "Operation conditions/notes"))
         self.label_9.setText(_translate("AnalysisWindow", "Start date"))
         self.label_10.setText(_translate("AnalysisWindow", "End date"))
+        self.task.setText(_translate("AnalysisWindow", "Create and add a task to the Timetable?"))
         self.label_6.setText(_translate("AnalysisWindow", "Status"))
         self.status.setItemText(0, _translate("AnalysisWindow", "Logged in"))
         self.status.setItemText(1, _translate("AnalysisWindow", "Analysis in progress..."))
@@ -775,4 +780,4 @@ class Ui_AnalysisWindow(object):
         self.btn_copy.setText(_translate("AnalysisWindow", "Copy"))
         self.btn_cancel.setText(_translate("AnalysisWindow", "Cancel"))
         self.btn_logAnalysis.setText(_translate("AnalysisWindow", "Log Analysis"))
-from app.ui.resources import resources
+from ..resources import resources

@@ -88,6 +88,8 @@ class EditReductionWindow(QtWidgets.QDialog):
         self.ui.fileName.setText(self.reduction.file_name)
         if self.reduction.generate_file_name:
             self.ui.generate.setChecked(True)
+        if self.reduction.task:
+            self.ui.task.setChecked(True)
 
     def validate_fields(self):
         valid = True
@@ -129,7 +131,8 @@ class EditReductionWindow(QtWidgets.QDialog):
             "file_name": self.ui.fileName.text(),
             "analysis_id": self.ui.analysis.currentData(),
             "status": self.ui.status.currentText(),
-            "generate_file_name": self.ui.generate.isChecked()
+            "generate_file_name": self.ui.generate.isChecked(),
+            "task": self.ui.task.isChecked(),
         }
         try:
             result = self.reductionService.editReduction(self.reduction_id, reduction_info)

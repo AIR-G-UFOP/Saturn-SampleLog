@@ -96,6 +96,7 @@ class ReductionWindow(QtWidgets.QMainWindow):
         self.ui.startDate.setDate(QtCore.QDate.currentDate())
         self.ui.endDate.setDate(QtCore.QDate.currentDate())
         self.ui.notes.clear()
+        self.ui.task.setChecked(False)
 
     def register_reduction_information(self):
         if not self.validate_fields():
@@ -112,7 +113,8 @@ class ReductionWindow(QtWidgets.QMainWindow):
             "file_name": self.ui.fileName.text(),
             "analysis_id": self.ui.analysis.currentData(),
             "status": self.ui.status.currentText(),
-            "generate_file_name": self.ui.generate.isChecked()
+            "generate_file_name": self.ui.generate.isChecked(),
+            "task": self.ui.task.isChecked()
         }
         try:
             result = self.reductionService.addReduction(reduction_info)

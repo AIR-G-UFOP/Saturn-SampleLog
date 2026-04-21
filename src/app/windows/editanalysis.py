@@ -138,6 +138,8 @@ class EditAnalysisWindow(QtWidgets.QDialog):
         self.ui.endDate.setDate(QtCore.QDate(self.analysis.end_date))
         if self.analysis.generate_file_name:
             self.ui.generate.setChecked(True)
+        if self.analysis.task:
+            self.ui.task.setChecked(True)
 
     def edit_analysis_information(self):
         if not self.validate_fields():
@@ -152,7 +154,8 @@ class EditAnalysisWindow(QtWidgets.QDialog):
             "end_date": self.ui.endDate.date().toPyDate(),
             "status": self.ui.status.currentText(),
             "file_name": self.ui.fileName.text(),
-            "generate_file_name": self.ui.generate.isChecked()
+            "generate_file_name": self.ui.generate.isChecked(),
+            "task": self.ui.task.isChecked()
         }
         sample_ids = self.get_checked_data(self.ui.sample)
         try:

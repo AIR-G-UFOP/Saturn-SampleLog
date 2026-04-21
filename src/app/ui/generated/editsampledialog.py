@@ -14,14 +14,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_EditSampleDialog(object):
     def setupUi(self, EditSampleDialog):
         EditSampleDialog.setObjectName("EditSampleDialog")
-        EditSampleDialog.resize(485, 510)
+        EditSampleDialog.resize(474, 449)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(EditSampleDialog.sizePolicy().hasHeightForWidth())
         EditSampleDialog.setSizePolicy(sizePolicy)
-        EditSampleDialog.setMinimumSize(QtCore.QSize(440, 510))
-        EditSampleDialog.setMaximumSize(QtCore.QSize(750, 510))
+        EditSampleDialog.setMinimumSize(QtCore.QSize(440, 300))
+        EditSampleDialog.setMaximumSize(QtCore.QSize(500, 510))
         EditSampleDialog.setStyleSheet("QWidget{\n"
 "    color: #F8F8F2;\n"
 "    font: 8pt \"Inter 24pt Medium\";\n"
@@ -200,6 +200,71 @@ class Ui_EditSampleDialog(object):
 "    background-color: rgb(33, 37, 43);\n"
 "    padding: 10px;\n"
 "    selection-background-color: rgb(39, 44, 54);\n"
+"}\n"
+"QScrollArea {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QScrollArea > QWidget > QWidget {\n"
+"    background: transparent;\n"
+"}\n"
+"QScrollBar:vertical {\n"
+"    background: transparent;\n"
+"    width: 5px;\n"
+"    margin: 12px 0px 12px 0px;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #525f7f;\n"
+"    min-height: 30px;\n"
+"    border-radius: 2px;\n"
+"}\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: rgb(83, 88, 112);\n"
+"}\n"
+"QScrollBar::handle:vertical:pressed {\n"
+"    background: #343746;\n"
+"}\n"
+"QScrollBar::sub-line:vertical {\n"
+"            height: 14px;\n"
+"            background: transparent;\n"
+"            subcontrol-origin: margin;\n"
+"            subcontrol-position: top;\n"
+"}\n"
+"QScrollBar::add-line:vertical {\n"
+"            height: 14px;\n"
+"            background: transparent;\n"
+"            subcontrol-origin: margin;\n"
+"            subcontrol-position: bottom;\n"
+"}\n"
+"QScrollBar::up-arrow:vertical {\n"
+"            image: url(:/icons/icons/cil-arrow-up.png);\n"
+"            width: 15px;\n"
+"            height: 15px;\n"
+"}\n"
+"QScrollBar::down-arrow:vertical {\n"
+"            image: url(:/icons/icons/cil-arrow-down.png);\n"
+"            width: 15px;\n"
+"            height: 15px;\n"
+"}\n"
+"QScrollBar::add-page:vertical,\n"
+"        QScrollBar::sub-page:vertical {\n"
+"            background: transparent;\n"
+"}\n"
+"QCheckBox::indicator {\n"
+"    border: 3px solid rgb(52, 59, 72);\n"
+"    width: 15px;\n"
+"    height: 15px;\n"
+"    background: rgb(44, 49, 60);\n"
+"}\n"
+"QCheckBox::indicator:hover {\n"
+"    border: 3px solid rgb(58, 66, 81);\n"
+"}\n"
+"QCheckBox::indicator:checked {\n"
+"    background: 3px solid rgb(52, 59, 72);\n"
+"    border: 3px solid rgb(52, 59, 72);    \n"
+"    background-image: url(:/icons/icons/cil-check-alt.png);\n"
 "}")
         self.verticalLayout = QtWidgets.QVBoxLayout(EditSampleDialog)
         self.verticalLayout.setContentsMargins(10, 10, 10, 10)
@@ -240,10 +305,20 @@ class Ui_EditSampleDialog(object):
         self.content.setFrameShadow(QtWidgets.QFrame.Raised)
         self.content.setObjectName("content")
         self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.content)
-        self.verticalLayout_16.setContentsMargins(10, 10, 10, 10)
-        self.verticalLayout_16.setSpacing(10)
+        self.verticalLayout_16.setContentsMargins(0, 0, 5, 0)
+        self.verticalLayout_16.setSpacing(0)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
-        self.bgSample = QtWidgets.QFrame(self.content)
+        self.scrollArea = QtWidgets.QScrollArea(self.content)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 444, 460))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_18.setContentsMargins(10, 10, 5, 10)
+        self.verticalLayout_18.setSpacing(10)
+        self.verticalLayout_18.setObjectName("verticalLayout_18")
+        self.bgSample = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.bgSample.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgSample.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgSample.setObjectName("bgSample")
@@ -292,8 +367,8 @@ class Ui_EditSampleDialog(object):
         self.sampleDescription.setObjectName("sampleDescription")
         self.verticalLayout_7.addWidget(self.sampleDescription)
         self.verticalLayout_11.addLayout(self.verticalLayout_7)
-        self.verticalLayout_16.addWidget(self.bgSample, 0, QtCore.Qt.AlignTop)
-        self.bgPrep = QtWidgets.QFrame(self.content)
+        self.verticalLayout_18.addWidget(self.bgSample)
+        self.bgPrep = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.bgPrep.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgPrep.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgPrep.setObjectName("bgPrep")
@@ -323,13 +398,13 @@ class Ui_EditSampleDialog(object):
         self.verticalLayout_9.addLayout(self.horizontalLayout_4)
         self.verticalLayout_15.addLayout(self.verticalLayout_9)
         self.bgPrepBottom = QtWidgets.QFrame(self.bgPrep)
-        self.bgPrepBottom.setMinimumSize(QtCore.QSize(0, 103))
+        self.bgPrepBottom.setMinimumSize(QtCore.QSize(0, 135))
         self.bgPrepBottom.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.bgPrepBottom.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgPrepBottom.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgPrepBottom.setObjectName("bgPrepBottom")
         self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.bgPrepBottom)
-        self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_17.setContentsMargins(0, 0, 0, 2)
         self.verticalLayout_17.setSpacing(10)
         self.verticalLayout_17.setObjectName("verticalLayout_17")
         self.verticalLayout_8 = QtWidgets.QVBoxLayout()
@@ -374,9 +449,13 @@ class Ui_EditSampleDialog(object):
         self.verticalLayout_13.addWidget(self.endDate)
         self.horizontalLayout.addLayout(self.verticalLayout_13)
         self.verticalLayout_17.addLayout(self.horizontalLayout)
+        self.task = QtWidgets.QCheckBox(self.bgPrepBottom)
+        self.task.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.task.setObjectName("task")
+        self.verticalLayout_17.addWidget(self.task)
         self.verticalLayout_15.addWidget(self.bgPrepBottom, 0, QtCore.Qt.AlignTop)
-        self.verticalLayout_16.addWidget(self.bgPrep, 0, QtCore.Qt.AlignTop)
-        self.bgStatus = QtWidgets.QFrame(self.content)
+        self.verticalLayout_18.addWidget(self.bgPrep)
+        self.bgStatus = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.bgStatus.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgStatus.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgStatus.setObjectName("bgStatus")
@@ -424,7 +503,9 @@ class Ui_EditSampleDialog(object):
         self.verticalLayout_6.addWidget(self.date)
         self.horizontalLayout_6.addLayout(self.verticalLayout_6)
         self.verticalLayout_12.addLayout(self.horizontalLayout_6)
-        self.verticalLayout_16.addWidget(self.bgStatus, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout_18.addWidget(self.bgStatus)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout_16.addWidget(self.scrollArea)
         self.verticalLayout_2.addWidget(self.content)
         self.bottomBar = QtWidgets.QFrame(self.contentBottom)
         self.bottomBar.setMinimumSize(QtCore.QSize(0, 60))
@@ -495,7 +576,7 @@ class Ui_EditSampleDialog(object):
         self.verticalLayout_2.addWidget(self.bottomBar)
         self.verticalLayout_3.addWidget(self.contentBottom)
         self.shadow.addWidget(self.contentBox)
-        self.verticalLayout.addWidget(self.bgApp, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout.addWidget(self.bgApp)
 
         self.retranslateUi(EditSampleDialog)
         QtCore.QMetaObject.connectSlotsByName(EditSampleDialog)
@@ -512,6 +593,7 @@ class Ui_EditSampleDialog(object):
         self.label_6.setText(_translate("EditSampleDialog", "Instructions"))
         self.label_8.setText(_translate("EditSampleDialog", "Start date"))
         self.label_9.setText(_translate("EditSampleDialog", "End date"))
+        self.task.setText(_translate("EditSampleDialog", "Create and add a task to the Timetable?"))
         self.label_7.setText(_translate("EditSampleDialog", "Status"))
         self.status.setItemText(0, _translate("EditSampleDialog", "Logged in"))
         self.status.setItemText(1, _translate("EditSampleDialog", "Preparation in progress..."))

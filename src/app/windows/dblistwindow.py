@@ -13,6 +13,7 @@ from .editsample import EditSampleWindow
 from .editanalysis import EditAnalysisWindow
 from .editreduction import EditReductionWindow
 from .appsettings import Settings
+from .timetable import Timetable
 
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
@@ -43,6 +44,7 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.overlay = LoadingOverlay(self.ui.bgApp)
         self.overlay.hide()
         self.settings = Settings(self.ui, self.settingsService)
+        self.timetable = Timetable(self.ui)
 
         self.DATA_MAP = {
             "user": (self.userService.getAllUsersFull, UserCard),
@@ -68,6 +70,7 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.ui.btn_addAnalysis.clicked.connect(self.btn_clicked)
         self.ui.btn_addReductions.clicked.connect(self.btn_clicked)
         self.ui.btn_settings.clicked.connect(self.btn_clicked)
+        self.ui.btn_timetable.clicked.connect(self.btn_clicked)
 
         self.set_btn_style(BUTTON_DB_MAP[self.dbType],
                            BUTTON_DB_MAP[self.dbType].objectName())
@@ -109,6 +112,8 @@ class DbListWindow(QtWidgets.QMainWindow):
             pass
         elif btn_name == "btn_settings":
             self.ui.contentStack.setCurrentWidget(self.ui.settings)
+        elif btn_name == "btn_timetable":
+            self.ui.contentStack.setCurrentWidget(self.ui.calendar)
 
     def set_btn_style(self, btn, btn_name):
         UIFunctions.resetStyle(self, btn_name)
@@ -146,16 +151,17 @@ class DbListWindow(QtWidgets.QMainWindow):
 
     @QtCore.pyqtSlot(str, int)
     def open_edit_dialog(self, db_type, db_id):
+        print(f"Card edit received db_type: {db_type} and db_id: {db_id}")
         db_type_map = {
-            "user": EditUserWindow(self.userService, db_id, self.ui.bgApp, self),
-            "sample": EditSampleWindow(self.sampleService, db_id, self.userService, self.ui.bgApp, self),
-            "analysis": EditAnalysisWindow(self.analysisService, db_id, self.sampleService, self.settingsService,
-                                           self.ui.bgApp, self),
-            "reduction": EditReductionWindow(self.reductionService, db_id, self.analysisService, self.settingsService,
-                                             self.ui.bgApp, self),
+            "user": lambda: EditUserWindow(self.userService, db_id, self.ui.bgApp, self),
+            "sample": lambda: EditSampleWindow(self.sampleService, db_id, self.userService, self.ui.bgApp, self),
+            "analysis": lambda: EditAnalysisWindow(self.analysisService, db_id, self.sampleService,
+                                                   self.settingsService, self.ui.bgApp, self),
+            "reduction": lambda: EditReductionWindow(self.reductionService, db_id, self.analysisService,
+                                                     self.settingsService, self.ui.bgApp, self),
         }
         self.overlay.show()
-        dialog = db_type_map[db_type]
+        dialog = db_type_map[db_type]()
         dialog.dialog_return.connect(self.return_edit_dialog)
         dialog.setWindowModality(QtCore.Qt.ApplicationModal)
         dialog.exec_()

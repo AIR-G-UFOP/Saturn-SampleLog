@@ -14,14 +14,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_EditeReductionWindow(object):
     def setupUi(self, EditeReductionWindow):
         EditeReductionWindow.setObjectName("EditeReductionWindow")
-        EditeReductionWindow.resize(479, 584)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        EditeReductionWindow.resize(479, 427)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(EditeReductionWindow.sizePolicy().hasHeightForWidth())
         EditeReductionWindow.setSizePolicy(sizePolicy)
         EditeReductionWindow.setMinimumSize(QtCore.QSize(0, 0))
-        EditeReductionWindow.setMaximumSize(QtCore.QSize(760, 584))
+        EditeReductionWindow.setMaximumSize(QtCore.QSize(760, 550))
         EditeReductionWindow.setStyleSheet("QWidget{\n"
 "    color: #F8F8F2;\n"
 "    font: 8pt \"Inter 24pt Medium\";\n"
@@ -208,6 +208,57 @@ class Ui_EditeReductionWindow(object):
 "    background-color: rgb(33, 37, 43);\n"
 "    padding: 10px;\n"
 "    selection-background-color: rgb(39, 44, 54);\n"
+"}\n"
+"QScrollArea {\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QScrollArea > QWidget > QWidget {\n"
+"    background: transparent;\n"
+"}\n"
+"QScrollBar:vertical {\n"
+"    background: transparent;\n"
+"    width: 5px;\n"
+"    margin: 12px 0px 12px 0px;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #525f7f;\n"
+"    min-height: 30px;\n"
+"    border-radius: 2px;\n"
+"}\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: rgb(83, 88, 112);\n"
+"}\n"
+"QScrollBar::handle:vertical:pressed {\n"
+"    background: #343746;\n"
+"}\n"
+"QScrollBar::sub-line:vertical {\n"
+"            height: 14px;\n"
+"            background: transparent;\n"
+"            subcontrol-origin: margin;\n"
+"            subcontrol-position: top;\n"
+"}\n"
+"QScrollBar::add-line:vertical {\n"
+"            height: 14px;\n"
+"            background: transparent;\n"
+"            subcontrol-origin: margin;\n"
+"            subcontrol-position: bottom;\n"
+"}\n"
+"QScrollBar::up-arrow:vertical {\n"
+"            image: url(:/icons/icons/cil-arrow-up.png);\n"
+"            width: 15px;\n"
+"            height: 15px;\n"
+"}\n"
+"QScrollBar::down-arrow:vertical {\n"
+"            image: url(:/icons/icons/cil-arrow-down.png);\n"
+"            width: 15px;\n"
+"            height: 15px;\n"
+"}\n"
+"QScrollBar::add-page:vertical,\n"
+"        QScrollBar::sub-page:vertical {\n"
+"            background: transparent;\n"
 "}")
         self.verticalLayout = QtWidgets.QVBoxLayout(EditeReductionWindow)
         self.verticalLayout.setContentsMargins(10, 10, 10, 10)
@@ -247,10 +298,20 @@ class Ui_EditeReductionWindow(object):
         self.content.setFrameShadow(QtWidgets.QFrame.Raised)
         self.content.setObjectName("content")
         self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.content)
-        self.verticalLayout_19.setContentsMargins(10, 10, 10, 10)
-        self.verticalLayout_19.setSpacing(10)
+        self.verticalLayout_19.setContentsMargins(0, 0, 5, 0)
+        self.verticalLayout_19.setSpacing(0)
         self.verticalLayout_19.setObjectName("verticalLayout_19")
-        self.bgReduction = QtWidgets.QFrame(self.content)
+        self.scrollArea = QtWidgets.QScrollArea(self.content)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 449, 543))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.verticalLayout_20 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_20.setContentsMargins(10, 10, 5, 10)
+        self.verticalLayout_20.setSpacing(10)
+        self.verticalLayout_20.setObjectName("verticalLayout_20")
+        self.bgReduction = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.bgReduction.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgReduction.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgReduction.setObjectName("bgReduction")
@@ -374,8 +435,12 @@ class Ui_EditeReductionWindow(object):
         self.verticalLayout_14.addWidget(self.endDate)
         self.horizontalLayout_8.addLayout(self.verticalLayout_14)
         self.verticalLayout_16.addLayout(self.horizontalLayout_8)
-        self.verticalLayout_19.addWidget(self.bgReduction, 0, QtCore.Qt.AlignTop)
-        self.bgStatus = QtWidgets.QFrame(self.content)
+        self.task = QtWidgets.QCheckBox(self.bgReduction)
+        self.task.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.task.setObjectName("task")
+        self.verticalLayout_16.addWidget(self.task)
+        self.verticalLayout_20.addWidget(self.bgReduction)
+        self.bgStatus = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.bgStatus.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgStatus.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgStatus.setObjectName("bgStatus")
@@ -417,8 +482,8 @@ class Ui_EditeReductionWindow(object):
         self.verticalLayout_12.addWidget(self.date)
         self.horizontalLayout_6.addLayout(self.verticalLayout_12)
         self.verticalLayout_17.addLayout(self.horizontalLayout_6)
-        self.verticalLayout_19.addWidget(self.bgStatus)
-        self.bgFile = QtWidgets.QFrame(self.content)
+        self.verticalLayout_20.addWidget(self.bgStatus)
+        self.bgFile = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.bgFile.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgFile.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgFile.setObjectName("bgFile")
@@ -453,9 +518,9 @@ class Ui_EditeReductionWindow(object):
         self.horizontalLayout_4.addWidget(self.btn_copy)
         self.verticalLayout_13.addLayout(self.horizontalLayout_4)
         self.verticalLayout_18.addLayout(self.verticalLayout_13)
-        self.verticalLayout_19.addWidget(self.bgFile, 0, QtCore.Qt.AlignTop)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_19.addItem(spacerItem)
+        self.verticalLayout_20.addWidget(self.bgFile)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout_19.addWidget(self.scrollArea)
         self.verticalLayout_4.addWidget(self.content)
         self.bottomBar = QtWidgets.QFrame(self.contentBottom)
         self.bottomBar.setMinimumSize(QtCore.QSize(0, 60))
@@ -526,7 +591,7 @@ class Ui_EditeReductionWindow(object):
         self.verticalLayout_4.addWidget(self.bottomBar)
         self.verticalLayout_2.addWidget(self.contentBottom)
         self.shadow.addWidget(self.contentBox)
-        self.verticalLayout.addWidget(self.bgApp, 0, QtCore.Qt.AlignTop)
+        self.verticalLayout.addWidget(self.bgApp)
 
         self.retranslateUi(EditeReductionWindow)
         QtCore.QMetaObject.connectSlotsByName(EditeReductionWindow)
@@ -542,6 +607,7 @@ class Ui_EditeReductionWindow(object):
         self.label_6.setText(_translate("EditeReductionWindow", "Notes"))
         self.label_10.setText(_translate("EditeReductionWindow", "Start date"))
         self.label_11.setText(_translate("EditeReductionWindow", "End date"))
+        self.task.setText(_translate("EditeReductionWindow", "Create and add a task to the Timetable?"))
         self.label_7.setText(_translate("EditeReductionWindow", "Status"))
         self.status.setItemText(0, _translate("EditeReductionWindow", "Logged in"))
         self.status.setItemText(1, _translate("EditeReductionWindow", "Data Reduction in progress..."))
@@ -554,4 +620,4 @@ class Ui_EditeReductionWindow(object):
         self.btn_close.setText(_translate("EditeReductionWindow", "Close"))
         self.btn_cancel.setText(_translate("EditeReductionWindow", "Cancel"))
         self.btn_saveReduction.setText(_translate("EditeReductionWindow", "Save changes to Data Reduction"))
-from app.ui.resources import resources
+from ..resources import resources

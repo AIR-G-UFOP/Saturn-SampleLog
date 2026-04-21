@@ -15,7 +15,7 @@ def run_smoke_test():
         init_db()
         inspector = inspect(engine)
         tables = inspector.get_table_names()
-        expected_tables = ['users', 'samples', 'analyses', 'reductions', 'settings']
+        expected_tables = ['users', 'samples', 'analyses', 'reductions', 'settings', 'tasks']
         for table in expected_tables:
             if table not in tables:
                 print(f"Smoke test failed: Table '{table}' not found in the database.")

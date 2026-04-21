@@ -10,7 +10,7 @@ MENU_WIDTH = 200
 TIME_ANIMATION = 500
 MENU_SELECTED_STYLESHEET = """
 border-left: 17px solid qlineargradient(spread:pad, x1:0.034, y1:0, x2:0.216, y2:0, stop:0.499 #FF5555, stop:0.5 rgba(85, 170, 255, 0));
-background-color: rgb(33, 37, 43);
+background-color: #19181f;
 """
 CARD_BUTTON_ICON_UP = u":/icons/icons/cil-arrow-up.png"
 CARD_BUTTON_ICON_DOWN = u":/icons/icons/cil-arrow-down.png"
@@ -20,7 +20,7 @@ USER_DETAILS_HEIGHT = 54
 SAMPLE_DETAILS_HEIGHT = 74
 ANALYSIS_DETAILS_HEIGHT = 94
 REDUCTION_DETAILS_HEIGHT = 94
-PREP_HEIGHT = 103
+PREP_HEIGHT = 135
 WIDGET_INFO_STYLESHEET = ("""QFrame[role='card'] {
                           background-color: #343746;
                           border-radius: 10px;
