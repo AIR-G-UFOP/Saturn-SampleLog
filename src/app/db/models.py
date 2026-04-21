@@ -22,7 +22,7 @@ and DbReduction.
 
 
 from .base import Base
-from sqlalchemy import Column, Integer, String, Date, Boolean, ForeignKey, JSON
+from sqlalchemy import Column, Integer, String, Date, Boolean, ForeignKey, JSON, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 
@@ -133,5 +133,15 @@ class DBTasks(Base):
     sample = relationship("DbSample")
     analysis = relationship("DbAnalysis")
     reduction = relationship("DbReduction")
+
+    __table_args__ = (
+        UniqueConstraint(
+            "task_type",
+            "name",
+            "start_date",
+            "end_date",
+            name="uq_task_identity"
+        ),
+    )
 
 
