@@ -2,6 +2,7 @@ import os
 import sys
 from PyQt5 import QtCore, QtWidgets, QtGui
 from sqlalchemy.testing.pickleable import User
+
 from ..ui.generated.editsampledialog import Ui_EditSampleDialog
 from ..modules.ui_functions import UIFunctions
 from ..utils.utils import (validate_dates, highlight_invalid_field, clear_highlight_field)
@@ -15,7 +16,7 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 class EditSampleWindow(QtWidgets.QDialog):
     dialog_return = QtCore.pyqtSignal()
 
-    def __init__(self, sample_service, sample_id, user_service, bg, parent=None):
+    def __init__(self, sample_service, sample_id, user_service, task_service, bg, parent=None):
         super(EditSampleWindow, self).__init__(parent)
 
         self.ui = Ui_EditSampleDialog()
@@ -31,6 +32,7 @@ class EditSampleWindow(QtWidgets.QDialog):
         self.sample = self.sampleService.findSampleById(sample_id)
         self.sample_id = sample_id
         self.userService = user_service
+        self.taskService = task_service
         self.populate_sample_info()
 
         self.ui.btn_saveSample.clicked.connect(self.edit_sample_information)
@@ -95,10 +97,29 @@ class EditSampleWindow(QtWidgets.QDialog):
         }
         try:
             result = self.sampleService.editSample(self.sample_id, sample_info)
+            if self.ui.task.isChecked():
+                self.add_task_to_db(self.sample_id)
             self.status_message(result)
         except Exception as e:
             print(e)
             self.status_message("Something went wrong.")
+
+    def add_task_to_db(self, sample_id):
+        task_info = {
+            "name": f"Sample Prep: {self.ui.sampleName.text()}",
+            "start_date": self.ui.startDate.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
+            "status": "Pending",
+            "description": self.ui.instructions.text(),
+            "task_type": "sample_preparation",
+            "sample_id": sample_id
+        }
+        try:
+            self.taskService.addTask(task_info)
+            print("Task added successfully.")
+        except Exception as e:
+            print('Something went wrong while adding the task. See logs for details.')
+            raise
 
     def validate_fields(self):
         valid = True

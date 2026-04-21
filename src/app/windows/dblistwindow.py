@@ -23,7 +23,8 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 class DbListWindow(QtWidgets.QMainWindow):
-    def __init__(self, db_type, user_service, sample_service, analysis_service, reduction_service, settings_service):
+    def __init__(self, db_type, user_service, sample_service, analysis_service, reduction_service, settings_service,
+                 task_service):
         super(DbListWindow, self).__init__()
 
         self.setWindowTitle("Database List Window")
@@ -41,6 +42,7 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.analysisService = analysis_service
         self.reductionService = reduction_service
         self.settingsService = settings_service
+        self.taskService = task_service
         self.overlay = LoadingOverlay(self.ui.bgApp)
         self.overlay.hide()
         self.settings = Settings(self.ui, self.settingsService)
@@ -151,10 +153,10 @@ class DbListWindow(QtWidgets.QMainWindow):
 
     @QtCore.pyqtSlot(str, int)
     def open_edit_dialog(self, db_type, db_id):
-        print(f"Card edit received db_type: {db_type} and db_id: {db_id}")
         db_type_map = {
             "user": lambda: EditUserWindow(self.userService, db_id, self.ui.bgApp, self),
-            "sample": lambda: EditSampleWindow(self.sampleService, db_id, self.userService, self.ui.bgApp, self),
+            "sample": lambda: EditSampleWindow(self.sampleService, db_id, self.userService, self.taskService,
+                                               self.ui.bgApp, self),
             "analysis": lambda: EditAnalysisWindow(self.analysisService, db_id, self.sampleService,
                                                    self.settingsService, self.ui.bgApp, self),
             "reduction": lambda: EditReductionWindow(self.reductionService, db_id, self.analysisService,

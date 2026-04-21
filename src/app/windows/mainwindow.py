@@ -16,7 +16,8 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self, user_service, sample_service, analysis_service, reduction_service, settings_service):
+    def __init__(self, user_service, sample_service, analysis_service, reduction_service, settings_service,
+                 task_service):
         super(MainWindow, self).__init__()
 
         self.ui = Ui_MainWindow()
@@ -29,6 +30,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.analysisService = analysis_service
         self.reductionService = reduction_service
         self.settingsService = settings_service
+        self.taskService = task_service
 
         self.ui.btn_newUser.clicked.connect(self.btn_clicked)
         self.ui.btn_newSample.clicked.connect(self.btn_clicked)
@@ -71,7 +73,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.userLog.show()
 
     def open_sample_log(self):
-        self.sampleLog = SampleWindow(self.sampleService, self.userService)
+        self.sampleLog = SampleWindow(self.sampleService, self.userService, self.taskService)
         self.sampleLog.show()
 
     def open_analysis_log(self):
@@ -84,6 +86,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def open_db_window(self, db_type):
         self.dbListWindow = DbListWindow(db_type, self.userService, self.sampleService, self.analysisService,
-                                         self.reductionService, self.settingsService)
+                                         self.reductionService, self.settingsService, self.taskService)
         self.dbListWindow.show()
         self.close()

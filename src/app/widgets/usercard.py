@@ -108,7 +108,6 @@ class UserCard(QtWidgets.QWidget):
             self.ui.reductionLayout.addWidget(bgInfo)
 
     def edit_user(self):
-        print(f"User card emitted: {self.user_id}")
         self.edit_requested.emit("user", self.user_id)
 
     def trigger_card_stated_change(self):

@@ -26,7 +26,7 @@ class SampleService:
                 task=sample_info["task"])
             session.add(new_sample)
             session.commit()
-            return "Sample added successfully."
+            return "Sample added successfully.", new_sample.id
         except SQLAlchemyError as e:
             session.rollback()
             print(f"Error adding Sample: {str(e)}", file=sys.stderr)

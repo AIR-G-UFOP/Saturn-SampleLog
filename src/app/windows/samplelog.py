@@ -14,7 +14,7 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 class SampleWindow(QtWidgets.QMainWindow):
-    def __init__(self, sample_service, user_service):
+    def __init__(self, sample_service, user_service, task_service):
         super(SampleWindow, self).__init__()
 
         self.ui = Ui_SampleWindow()
@@ -27,6 +27,7 @@ class SampleWindow(QtWidgets.QMainWindow):
 
         self.sampleService = sample_service
         self.userService = user_service
+        self.taskService = task_service
 
         self.animation = QtCore.QPropertyAnimation(self.ui.bgPrepBottom, b"maximumHeight")
         self.animation.setDuration(TIME_ANIMATION)
@@ -96,11 +97,30 @@ class SampleWindow(QtWidgets.QMainWindow):
             "task": self.ui.task.isChecked()
         }
         try:
-            result = self.sampleService.addSample(sample_info)
+            result, result_id = self.sampleService.addSample(sample_info)
+            if self.ui.task.isChecked():
+                self.add_task_to_db(result_id)
             self.reset_fields()
             self.status_message(result)
         except Exception as e:
             self.status_message('Something went wrong. See logs for details.')
+            raise
+
+    def add_task_to_db(self, result_id):
+        task_info = {
+            "name": f"Sample Prep: {self.ui.sampleName.text()}",
+            "start_date": self.ui.startDate.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
+            "status": "Pending",
+            "description": self.ui.instructions.text(),
+            "task_type": "sample_preparation",
+            "sample_id": result_id
+        }
+        try:
+            self.taskService.addTask(task_info)
+            print("Task added successfully.")
+        except Exception as e:
+            print('Something went wrong while adding the task. See logs for details.')
             raise
 
     def reset_fields(self):

@@ -123,7 +123,6 @@ class ReductionCard(QtWidgets.QWidget):
             self.previous_user = user.id
 
     def edit_reduction(self):
-        print(f"Reduction card emitted: {self.reduction_id}")
         self.edit_requested.emit("reduction", self.reduction_id)
 
     def trigger_card_stated_change(self):

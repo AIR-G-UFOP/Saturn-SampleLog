@@ -1,10 +1,13 @@
 from PyQt5.QtWidgets import QApplication
+
+
 from src.app.windows.mainwindow import MainWindow
 from src.app.services.user_service import UserService
 from src.app.services.sample_service import SampleService
 from src.app.services.analysis_service import AnalysisService
 from src.app.services.reduction_service import ReductionService
 from src.app.services.settings_service import SettingsService
+from src.app.services.task_service import TaskService
 import sys
 import traceback
 
@@ -21,8 +24,10 @@ def start_app():
     analysis_service = AnalysisService()
     reduction_service = ReductionService()
     settings_service = SettingsService()
+    task_service = TaskService()
     app = QApplication([])
-    window = MainWindow(user_service, sample_service, analysis_service, reduction_service, settings_service)
+    window = MainWindow(user_service, sample_service, analysis_service, reduction_service, settings_service,
+                        task_service)
     window.show()
     app.exec()
 
