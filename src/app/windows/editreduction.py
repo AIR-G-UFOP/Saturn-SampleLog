@@ -15,7 +15,8 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 class EditReductionWindow(QtWidgets.QDialog):
     dialog_return = QtCore.pyqtSignal()
 
-    def __init__(self, reduction_service, reduction_id, analysis_service, settings_service, bg, parent=None):
+    def __init__(self, reduction_service, reduction_id, analysis_service, settings_service, task_service,
+                 bg, parent=None):
         super(EditReductionWindow, self).__init__(parent)
 
         self.ui = Ui_EditeReductionWindow()
@@ -32,6 +33,7 @@ class EditReductionWindow(QtWidgets.QDialog):
         self.reduction_id = reduction_id
         self.analysisService = analysis_service
         self.settingsService = settings_service
+        self.taskService = task_service
 
         self.populate_reduction_info()
         self.ui.btn_saveReduction.clicked.connect(self.edit_reduction_information)
@@ -136,9 +138,27 @@ class EditReductionWindow(QtWidgets.QDialog):
         }
         try:
             result = self.reductionService.editReduction(self.reduction_id, reduction_info)
+            if self.ui.task.isChecked():
+                self.add_task_to_db(self.reduction_id)
             self.status_message(result)
         except:
             self.status_message("An error occurred. Please try again.")
+            raise
+
+    def add_task_to_db(self, result_id):
+        task_info = {
+            "name": f"Reduction: {self.ui.reductionName.text()}",
+            "start_date": self.ui.startEnd.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
+            "status": "Pending",
+            "description": self.ui.handler.text(),
+            "task_type": "reduction",
+            "reduction_id": result_id
+        }
+        try:
+            self.taskService.upsertTask(task_info)
+        except Exception as e:
+            print('Something went wrong while adding the task. See logs for details.')
             raise
 
     def check_status_state(self):

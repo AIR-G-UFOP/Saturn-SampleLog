@@ -14,7 +14,7 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 class ReductionWindow(QtWidgets.QMainWindow):
-    def __init__(self, reduction_service, analysis_service, settings_service):
+    def __init__(self, reduction_service, analysis_service, settings_service, task_service):
         super(ReductionWindow, self).__init__()
 
         self.ui = Ui_ReductionWindow()
@@ -28,6 +28,7 @@ class ReductionWindow(QtWidgets.QMainWindow):
         self.reductionService = reduction_service
         self.analysisService = analysis_service
         self.settingsService = settings_service
+        self.taskService = task_service
 
         self.ui.btn_cancel.clicked.connect(lambda: self.close())
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
@@ -117,11 +118,29 @@ class ReductionWindow(QtWidgets.QMainWindow):
             "task": self.ui.task.isChecked()
         }
         try:
-            result = self.reductionService.addReduction(reduction_info)
+            result, result_id = self.reductionService.addReduction(reduction_info)
+            if self.ui.task.isChecked():
+                self.add_task_to_db(result_id)
             self.reset_fields()
             self.status_message(result)
         except:
             self.status_message("Error logging data reduction")
+            raise
+
+    def add_task_to_db(self, result_id):
+        task_info = {
+            "name": f"Reduction: {self.ui.reductionName.text()}",
+            "start_date": self.ui.startDate.date().toPyDate(),
+            "end_date": self.ui.endDate.date().toPyDate(),
+            "status": "Pending",
+            "description": self.ui.handler.text(),
+            "task_type": "reduction",
+            "reduction_id": result_id
+        }
+        try:
+            self.taskService.upsertTask(task_info)
+        except Exception as e:
+            print('Something went wrong while adding the task. See logs for details.')
             raise
 
     def status_message(self, message):

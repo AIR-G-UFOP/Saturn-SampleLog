@@ -135,13 +135,9 @@ class DBTasks(Base):
     reduction = relationship("DbReduction")
 
     __table_args__ = (
-        UniqueConstraint(
-            "task_type",
-            "name",
-            "start_date",
-            "end_date",
-            name="uq_task_identity"
-        ),
+        UniqueConstraint('sample_id', 'task_type', name='uq_sample_task'),
+        UniqueConstraint('analysis_id', 'task_type', name='uq_analysis_task'),
+        UniqueConstraint('reduction_id', 'task_type', name='uq_reduction_task'),
     )
 
 

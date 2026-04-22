@@ -121,8 +121,7 @@ class AnalysisWindow(QtWidgets.QMainWindow):
             "analysis_id": result_id
         }
         try:
-            self.taskService.addTask(task_info)
-            print("Task added successfully.")
+            self.taskService.upsertTask(task_info)
         except Exception as e:
             print('Something went wrong while adding the task. See logs for details.')
             raise

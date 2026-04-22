@@ -28,7 +28,7 @@ class ReductionService:
             )
             session.add(reduction)
             session.commit()
-            return "Reduction logged successfully."
+            return "Reduction logged successfully.", reduction.id
         except Exception as e:
             session.rollback()
             print(f"Error logging reduction: {str(e)}", file=sys.stderr)
