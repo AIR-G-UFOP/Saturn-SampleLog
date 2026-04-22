@@ -486,6 +486,9 @@ QCheckBox::indicator:checked {
                             <property name="cursor">
                              <cursorShape>PointingHandCursor</cursorShape>
                             </property>
+                            <property name="focusPolicy">
+                             <enum>Qt::StrongFocus</enum>
+                            </property>
                            </widget>
                           </item>
                          </layout>
@@ -721,6 +724,9 @@ QCheckBox::indicator:checked {
                                <property name="cursor">
                                 <cursorShape>PointingHandCursor</cursorShape>
                                </property>
+                               <property name="focusPolicy">
+                                <enum>Qt::StrongFocus</enum>
+                               </property>
                                <property name="minimumDate">
                                 <date>
                                  <year>2026</year>
@@ -751,6 +757,9 @@ QCheckBox::indicator:checked {
                               <widget class="QDateEdit" name="endDate">
                                <property name="cursor">
                                 <cursorShape>PointingHandCursor</cursorShape>
+                               </property>
+                               <property name="focusPolicy">
+                                <enum>Qt::StrongFocus</enum>
                                </property>
                                <property name="minimumDate">
                                 <date>
@@ -842,6 +851,9 @@ QCheckBox::indicator:checked {
                             <property name="cursor">
                              <cursorShape>PointingHandCursor</cursorShape>
                             </property>
+                            <property name="focusPolicy">
+                             <enum>Qt::StrongFocus</enum>
+                            </property>
                             <item>
                              <property name="text">
                               <string>Logged in</string>
@@ -914,6 +926,9 @@ QCheckBox::indicator:checked {
                             </property>
                             <property name="cursor">
                              <cursorShape>PointingHandCursor</cursorShape>
+                            </property>
+                            <property name="focusPolicy">
+                             <enum>Qt::StrongFocus</enum>
                             </property>
                             <property name="minimumDate">
                              <date>

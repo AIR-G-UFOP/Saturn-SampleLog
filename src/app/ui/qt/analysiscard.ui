@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>754</width>
-    <height>259</height>
+    <height>165</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -152,6 +152,42 @@ QScrollBar::down-arrow:vertical {
         }
 QScrollBar::add-page:vertical,
         QScrollBar::sub-page:vertical {
+            background: transparent;
+        }
+QScrollBar:horizontal {
+    background: transparent;
+    height: 5px;
+    margin: 0px 12px 0px 12px;
+    border: none;
+}
+QScrollBar::handle:horizontal {
+    background: #343746;
+    min-width: 30px;
+    border-radius: 2px;
+}
+QScrollBar::sub-line:horizontal,
+QScrollBar::add-line:horizontal {
+    width: 14px;
+    background: transparent;
+}
+QScrollBar::handle:horizontal:hover {
+    background: rgb(83, 88, 112);
+}
+QScrollBar::handle:horizontal:pressed {
+    background: #343746;
+}
+QScrollBar::right-arrow:horizontal {
+            image: url(:/icons/icons/cil-arrow-right.png);
+            width: 10px;
+            height: 10px;
+}
+QScrollBar::left-arrow:horizontal {
+            image: url(:/icons/icons/cil-arrow-left.png);
+            width: 10px;
+            height: 10px;
+}
+QScrollBar::add-page:horizontal,
+        QScrollBar::sub-page:horizontal {
             background: transparent;
         }</string>
   </property>

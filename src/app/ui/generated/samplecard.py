@@ -142,6 +142,42 @@ class Ui_SampleCardWidget(object):
 "QScrollBar::add-page:vertical,\n"
 "        QScrollBar::sub-page:vertical {\n"
 "            background: transparent;\n"
+"        }\n"
+"QScrollBar:horizontal {\n"
+"    background: transparent;\n"
+"    height: 5px;\n"
+"    margin: 0px 12px 0px 12px;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: #343746;\n"
+"    min-width: 30px;\n"
+"    border-radius: 2px;\n"
+"}\n"
+"QScrollBar::sub-line:horizontal,\n"
+"QScrollBar::add-line:horizontal {\n"
+"    width: 14px;\n"
+"    background: transparent;\n"
+"}\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: rgb(83, 88, 112);\n"
+"}\n"
+"QScrollBar::handle:horizontal:pressed {\n"
+"    background: #343746;\n"
+"}\n"
+"QScrollBar::right-arrow:horizontal {\n"
+"            image: url(:/icons/icons/cil-arrow-right.png);\n"
+"            width: 10px;\n"
+"            height: 10px;\n"
+"}\n"
+"QScrollBar::left-arrow:horizontal {\n"
+"            image: url(:/icons/icons/cil-arrow-left.png);\n"
+"            width: 10px;\n"
+"            height: 10px;\n"
+"}\n"
+"QScrollBar::add-page:horizontal,\n"
+"        QScrollBar::sub-page:horizontal {\n"
+"            background: transparent;\n"
 "        }")
         self.verticalLayout = QtWidgets.QVBoxLayout(SampleCardWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -560,4 +596,4 @@ class Ui_SampleCardWidget(object):
     def retranslateUi(self, SampleCardWidget):
         _translate = QtCore.QCoreApplication.translate
         SampleCardWidget.setWindowTitle(_translate("SampleCardWidget", "Form"))
-from ..resources import resources
+from app.ui.resources import resources

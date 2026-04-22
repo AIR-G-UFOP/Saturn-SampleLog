@@ -26,6 +26,7 @@ class UserCard(QtWidgets.QWidget):
         self.sample_number = 0
         self.analyses_number = 0
         self.reductions_number = 0
+        self.analyses = []
 
         self.sample_info(user.samples)
         self.ui.analysisTitle.setText(f"{self.analyses_number} Analyses")
@@ -95,10 +96,12 @@ class UserCard(QtWidgets.QWidget):
     def analysis_info(self, analyses):
         self.analyses_number += len(analyses)
         for analysis in analyses:
-            bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.status_date,
-                                             ANALYSIS_STATUS_COLOUR[analysis.status])
-            self.ui.AnalysisLayout.addWidget(bgInfo)
-            self.reduction_info(analysis.reduction)
+            if analysis.id not in self.analyses:
+                bgInfo = self.create_info_widget(analysis.method, analysis.status, analysis.status_date,
+                                                 ANALYSIS_STATUS_COLOUR[analysis.status])
+                self.ui.AnalysisLayout.addWidget(bgInfo)
+                self.reduction_info(analysis.reduction)
+                self.analyses.append(analysis.id)
 
     def reduction_info(self, reduction):
         if reduction:

@@ -769,6 +769,9 @@ QScrollBar::add-page:vertical,
                              <property name="cursor">
                               <cursorShape>PointingHandCursor</cursorShape>
                              </property>
+                             <property name="focusPolicy">
+                              <enum>Qt::StrongFocus</enum>
+                             </property>
                             </widget>
                            </item>
                           </layout>
@@ -1052,6 +1055,9 @@ QScrollBar::add-page:vertical,
                              <property name="cursor">
                               <cursorShape>PointingHandCursor</cursorShape>
                              </property>
+                             <property name="focusPolicy">
+                              <enum>Qt::StrongFocus</enum>
+                             </property>
                              <property name="minimumDate">
                               <date>
                                <year>2026</year>
@@ -1094,6 +1100,9 @@ QScrollBar::add-page:vertical,
                              </property>
                              <property name="cursor">
                               <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="focusPolicy">
+                              <enum>Qt::StrongFocus</enum>
                              </property>
                              <property name="minimumDate">
                               <date>
@@ -1182,6 +1191,9 @@ QScrollBar::add-page:vertical,
                              <property name="cursor">
                               <cursorShape>PointingHandCursor</cursorShape>
                              </property>
+                             <property name="focusPolicy">
+                              <enum>Qt::StrongFocus</enum>
+                             </property>
                              <item>
                               <property name="text">
                                <string>Logged in</string>
@@ -1234,6 +1246,9 @@ QScrollBar::add-page:vertical,
                              </property>
                              <property name="cursor">
                               <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="focusPolicy">
+                              <enum>Qt::StrongFocus</enum>
                              </property>
                              <property name="minimumDate">
                               <date>

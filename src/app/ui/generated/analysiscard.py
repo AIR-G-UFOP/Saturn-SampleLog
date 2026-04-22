@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_AnalysisCardWidget(object):
     def setupUi(self, AnalysisCardWidget):
         AnalysisCardWidget.setObjectName("AnalysisCardWidget")
-        AnalysisCardWidget.resize(754, 259)
+        AnalysisCardWidget.resize(754, 165)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -152,6 +152,42 @@ class Ui_AnalysisCardWidget(object):
 "        }\n"
 "QScrollBar::add-page:vertical,\n"
 "        QScrollBar::sub-page:vertical {\n"
+"            background: transparent;\n"
+"        }\n"
+"QScrollBar:horizontal {\n"
+"    background: transparent;\n"
+"    height: 5px;\n"
+"    margin: 0px 12px 0px 12px;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar::handle:horizontal {\n"
+"    background: #343746;\n"
+"    min-width: 30px;\n"
+"    border-radius: 2px;\n"
+"}\n"
+"QScrollBar::sub-line:horizontal,\n"
+"QScrollBar::add-line:horizontal {\n"
+"    width: 14px;\n"
+"    background: transparent;\n"
+"}\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: rgb(83, 88, 112);\n"
+"}\n"
+"QScrollBar::handle:horizontal:pressed {\n"
+"    background: #343746;\n"
+"}\n"
+"QScrollBar::right-arrow:horizontal {\n"
+"            image: url(:/icons/icons/cil-arrow-right.png);\n"
+"            width: 10px;\n"
+"            height: 10px;\n"
+"}\n"
+"QScrollBar::left-arrow:horizontal {\n"
+"            image: url(:/icons/icons/cil-arrow-left.png);\n"
+"            width: 10px;\n"
+"            height: 10px;\n"
+"}\n"
+"QScrollBar::add-page:horizontal,\n"
+"        QScrollBar::sub-page:horizontal {\n"
 "            background: transparent;\n"
 "        }")
         self.verticalLayout = QtWidgets.QVBoxLayout(AnalysisCardWidget)
