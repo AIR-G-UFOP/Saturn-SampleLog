@@ -1980,6 +1980,32 @@ QListWidget::item:selected{
                             </spacer>
                            </item>
                            <item>
+                            <widget class="QFrame" name="frame">
+                             <property name="minimumSize">
+                              <size>
+                               <width>10</width>
+                               <height>10</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>10</width>
+                               <height>10</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">background-color: #BD93F9;
+</string>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::NoFrame</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
                             <widget class="QLabel" name="samplePrep">
                              <property name="text">
                               <string>Sample preparation</string>
@@ -1987,9 +2013,59 @@ QListWidget::item:selected{
                             </widget>
                            </item>
                            <item>
+                            <widget class="QFrame" name="frame_2">
+                             <property name="minimumSize">
+                              <size>
+                               <width>10</width>
+                               <height>10</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>10</width>
+                               <height>10</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">background-color:#F1FA8C</string>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::NoFrame</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
                             <widget class="QLabel" name="analysis">
                              <property name="text">
                               <string>Analysis</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QFrame" name="frame_3">
+                             <property name="minimumSize">
+                              <size>
+                               <width>10</width>
+                               <height>10</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>10</width>
+                               <height>10</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">background-color:#FFB86C</string>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::NoFrame</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
                              </property>
                             </widget>
                            </item>

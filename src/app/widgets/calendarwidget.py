@@ -3,200 +3,7 @@ from PyQt5.QtWidgets import (
     QWidget, QGridLayout, QLabel, QVBoxLayout, QFrame, QSizePolicy, QHBoxLayout, QScrollArea, QApplication)
 from PyQt5.QtCore import (
     Qt, QDate, pyqtSignal, QPoint)
-
-
-class TooltipCard(QFrame):
-    def __init__(self, title, details, date_text, parent=None):
-        super().__init__(parent, Qt.ToolTip)
-        self.setObjectName("tooltipCard")
-        self.setWindowFlags(Qt.ToolTip | Qt.FramelessWindowHint)
-
-        self.setStyleSheet("""
-            QFrame#tooltipCard {
-                background: #2b2f3f;
-                border: 1px solid #3a3f5a;
-                border-radius: 10px;
-            }
-            QLabel {
-                color: #d6dcff;
-            }
-        """)
-
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(10, 10, 10, 10)
-        layout.setSpacing(6)
-
-        title_lbl = QLabel(f"• {title}")
-        title_lbl.setStyleSheet("font-weight: bold; color:#aee3ff;")
-
-        details_lbl = QLabel(details)
-        details_lbl.setWordWrap(True)
-
-        date_lbl = QLabel(date_text)
-        date_lbl.setStyleSheet("color:#9aa3c7; font-size:10px;")
-
-        layout.addWidget(title_lbl)
-        layout.addWidget(details_lbl)
-        layout.addWidget(date_lbl)
-
-
-class DayWidget(QFrame):
-    clicked = pyqtSignal(QDate, bool)
-    doubleClicked = pyqtSignal(QDate)
-    taskClicked = pyqtSignal()
-
-    def __init__(self, date, is_current_month=True, is_today=False, tasks=None, style=None, parent=None):
-        super().__init__(parent)
-        self.date = date
-        self.tasks = tasks or []
-        self.is_current_month = is_current_month
-        self.is_today = is_today
-        self.style = style or {}
-
-        self.tooltip = None
-
-        self.setObjectName("dayWidget")
-        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.setCursor(Qt.PointingHandCursor)
-
-        self.base_style = ""
-        self.apply_style()
-
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(6, 6, 6, 6)
-        layout.setSpacing(4)
-
-        header = QHBoxLayout()
-
-        self.date_label = QLabel(str(date.day()))
-        base_date_style = self.style.get("date_label", "color: #d6dcff; font-weight: bold;")
-        if not self.is_current_month:
-            base_date_style += self.style.get("faded_text", "color: #44475A;")
-        self.date_label.setStyleSheet(base_date_style)
-
-        header.addWidget(self.date_label, alignment=Qt.AlignLeft)
-
-        if self.is_today:
-            badge = QLabel("Today")
-            badge.setStyleSheet(self.style.get("today_badge", "background:#5c6bc0;color:white;border-radius:6px;padding:2px 4px;font-size:9px;"))
-            header.addWidget(badge, alignment=Qt.AlignRight)
-
-        layout.addLayout(header)
-
-        scroll = QScrollArea()
-        scroll.setWidgetResizable(True)
-        scroll.setFrameShape(QFrame.NoFrame)
-        container = QWidget()
-        v = QVBoxLayout(container)
-        v.setContentsMargins(0, 0, 0, 0)
-        v.setSpacing(2)
-
-        for task in self.tasks:
-            label = QLabel(task)
-            label.setWordWrap(True)
-
-            label.enterEvent = lambda e, tsk=task, lbl=label: self.show_tooltip(tsk, lbl)
-            label.leaveEvent = lambda e: self.hide_tooltip()
-            label.mousePressEvent = lambda e, tsk=task: self.edit_task(tsk)
-
-            task_style = self.style.get("task", "background:#3b4266;color:white;border-radius:6px;padding:2px 4px;font-size:10px;")
-            if not self.is_current_month:
-                task_style += self.style.get("faded_text", "color:#6b6f8a;")
-            label.setStyleSheet(task_style)
-            v.addWidget(label)
-
-        v.addStretch()
-        scroll.setWidget(container)
-        layout.addWidget(scroll)
-
-    def show_tooltip(self, task_text, widget):
-        self.hide_tooltip()
-
-        self.tooltip = TooltipCard(
-            title=task_text,
-            details="Detailed description here...",
-            date_text=self.date.toString()
-        )
-
-        self.tooltip.adjustSize()
-
-        # Base position (stable anchor: above cell with smart horizontal flipping)
-        anchor_pos = widget.mapToGlobal(QPoint(0, 0))
-
-        # Default: align left
-        x = anchor_pos.x()
-        y = anchor_pos.y() - self.tooltip.height() - 8
-
-        # Screen geometry
-        screen_obj = QApplication.screenAt(anchor_pos)
-        if not screen_obj:
-            screen_obj = QApplication.primaryScreen()
-        screen = screen_obj.availableGeometry()
-
-        # Flip to right-align if overflowing right
-        if x + self.tooltip.width() > screen.right():
-            x = anchor_pos.x() + widget.width() - self.tooltip.width()
-
-        # Clamp if still out of bounds
-        if x < screen.left():
-            x = screen.left() + 8
-
-        # Screen geometry
-        # Detect correct screen (multi-monitor aware)
-        screen_obj = QApplication.screenAt(anchor_pos)
-        if not screen_obj:
-            screen_obj = QApplication.primaryScreen()
-        screen = screen_obj.availableGeometry()
-
-        # Adjust horizontally if overflowing right
-        if x + self.tooltip.width() > screen.right():
-            x = screen.right() - self.tooltip.width() - 10
-
-        # Adjust vertically if overflowing bottom
-        if y + self.tooltip.height() > screen.bottom():
-            y = anchor_pos.y() - self.tooltip.height() - 10
-
-        # Prevent going off left/top
-        if x < screen.left():
-            x = screen.left() + 10
-        if y < screen.top():
-            y = screen.top() + 10
-
-        self.tooltip.move(x, y)
-        self.tooltip.show()
-
-    def hide_tooltip(self):
-        if self.tooltip:
-            self.tooltip.close()
-            self.tooltip = None
-
-    def apply_style(self):
-        base = self.style.get("day", "border:1px solid #343746;border-radius:10px;background:#343746;")
-
-        if not self.is_current_month:
-            base += self.style.get("other_month", "background:#282A36;border:1px solid #282A36;")
-
-        if self.is_today:
-            base += self.style.get("today", "border:1px solid #5c6bc0;")
-
-        self.base_style = base
-        self.setStyleSheet(f"QFrame#dayWidget {{{base}}}")
-
-    def enterEvent(self, event):
-        hover = self.style.get("hover", "background:#1b2040;")
-        self.setStyleSheet(f"QFrame#dayWidget {{{self.base_style + hover}}}")
-
-    def leaveEvent(self, event):
-        self.setStyleSheet(f"QFrame#dayWidget {{{self.base_style}}}")
-
-    def mousePressEvent(self, event):
-        self.clicked.emit(self.date, self.is_current_month)
-
-    def mouseDoubleClickEvent(self, event):
-        self.doubleClicked.emit(self.date)
-
-    def edit_task(self, task_text):
-        self.taskClicked.emit()
+from .calendardaywidget import DayWidget
 
 
 class CalendarWidget(QWidget):
@@ -206,12 +13,16 @@ class CalendarWidget(QWidget):
     createTask = pyqtSignal()
     editTask = pyqtSignal()
 
-    def __init__(self):
+    def __init__(self, task_service):
         super().__init__()
 
         self.current_date = QDate.currentDate()
-        self.tasks = {}
-        self.style = {}
+        self.taskService = task_service
+        self.style = {
+            "sample_preparation": "background:#BD93F9;color:#282A36;border-radius:6px;padding:2px 4px;font-size:9px;",
+            "analysis": "background:#F1FA8C;color:#282A36;border-radius:6px;padding:2px 4px;font-size:9px;",
+            "reduction": "background:#FFB86C;color:#282A36;border-radius:6px;padding:2px 4px;font-size:9px;",
+        }
 
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(5, 5, 5, 5)
@@ -235,6 +46,10 @@ class CalendarWidget(QWidget):
         self.grid = QGridLayout()
         self.grid.setSpacing(2)
         self.main_layout.addLayout(self.grid)
+        for i in range(7):
+            self.grid.setColumnStretch(i, 1)
+        for i in range(6):
+            self.grid.setRowStretch(i, 1)
         self.refresh()
 
     def refresh(self):
@@ -279,7 +94,7 @@ class CalendarWidget(QWidget):
 
     def add_day_widget(self, date, row, col, is_current_month):
         is_today = date == QDate.currentDate()
-        tasks = self.tasks.get(date, [])
+        tasks = self.taskService.getTasksByDate(date.toPyDate())
 
         widget = DayWidget(date, is_current_month, is_today, tasks, self.style)
         widget.clicked.connect(self.handle_day_click)

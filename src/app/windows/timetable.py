@@ -4,9 +4,10 @@ from ..widgets.calendarwidget import CalendarWidget
 from PyQt5.QtCore import QDate, pyqtSlot
 
 class Timetable:
-    def __init__(self, ui):
+    def __init__(self, ui, task_service):
         self.ui = ui
-        self.calendar = CalendarWidget()
+        self.taskService = task_service
+        self.calendar = CalendarWidget(self.taskService)
         self.ui.calendarLayout.addWidget(self.calendar)
         self.setup_header()
         self.calendar.createTask.connect(self.create_task)

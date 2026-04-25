@@ -51,3 +51,11 @@ class TaskService:
 
         finally:
             session.close()
+
+    def getTasksByDate(self, date):
+        session = SessionLocal()
+        try:
+            query = session.query(DBTasks).filter(DBTasks.start_date == date).all()
+            return query
+        finally:
+            session.close()

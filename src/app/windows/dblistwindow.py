@@ -31,6 +31,7 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.ui = Ui_ListWindow()
         self.ui.setupUi(self)
         UIFunctions.uiDefinitions(self)
+
         self.ui.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
         self.ui.panelArea.setWidgetResizable(True)
         self.ui.bgCardsLayout.addStretch()
@@ -46,7 +47,7 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.overlay = LoadingOverlay(self.ui.bgApp)
         self.overlay.hide()
         self.settings = Settings(self.ui, self.settingsService)
-        self.timetable = Timetable(self.ui)
+        self.timetable = Timetable(self.ui, self.taskService)
 
         self.DATA_MAP = {
             "user": (self.userService.getAllUsersFull, UserCard),
