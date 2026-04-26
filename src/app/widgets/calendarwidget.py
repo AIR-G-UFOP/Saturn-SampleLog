@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import (
     QWidget, QGridLayout, QLabel, QVBoxLayout, QFrame, QSizePolicy, QHBoxLayout, QScrollArea, QApplication)
 from PyQt5.QtCore import (
-    Qt, QDate, pyqtSignal, QPoint)
+    Qt, QDate, pyqtSignal, pyqtSlot)
 from .calendardaywidget import DayWidget
 
 
@@ -10,7 +10,7 @@ class CalendarWidget(QWidget):
     dateClicked = pyqtSignal(QDate)
     monthChanged = pyqtSignal(int, int)
     calendarRefresh = pyqtSignal(int, int)
-    createTask = pyqtSignal()
+    createTask = pyqtSignal(QDate)
     editTask = pyqtSignal()
 
     def __init__(self, task_service):
@@ -129,13 +129,9 @@ class CalendarWidget(QWidget):
     def edit_task(self):
         self.editTask.emit()
 
+    @pyqtSlot(QDate)
     def create_task(self, date):
-        # dialog = EventDialog(date, parent=self)
-        # if dialog.exec_():
-        #     text = dialog.title.text()
-        #     if text:
-        #         self.add_task(date, text)
-        self.createTask.emit()
+        self.createTask.emit(date)
 
     def update_tasks(self):
         # self.tasks.setdefault(date, []).append(text)

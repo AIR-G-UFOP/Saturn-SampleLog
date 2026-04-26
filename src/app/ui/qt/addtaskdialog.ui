@@ -434,7 +434,7 @@ QScrollBar::add-page:vertical,
                      </property>
                      <item>
                       <property name="text">
-                       <string>Sample praparation</string>
+                       <string>Sample preparation</string>
                       </property>
                      </item>
                      <item>
