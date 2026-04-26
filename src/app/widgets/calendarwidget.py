@@ -11,7 +11,7 @@ class CalendarWidget(QWidget):
     monthChanged = pyqtSignal(int, int)
     calendarRefresh = pyqtSignal(int, int)
     createTask = pyqtSignal(QDate)
-    editTask = pyqtSignal()
+    editTask = pyqtSignal(object)
 
     def __init__(self, task_service):
         super().__init__()
@@ -126,14 +126,10 @@ class CalendarWidget(QWidget):
             self.set_month(date.year(), date.month())
         self.dateClicked.emit(date)
 
-    def edit_task(self):
-        self.editTask.emit()
+    @pyqtSlot(object)
+    def edit_task(self, task):
+        self.editTask.emit(task)
 
     @pyqtSlot(QDate)
     def create_task(self, date):
         self.createTask.emit(date)
-
-    def update_tasks(self):
-        # self.tasks.setdefault(date, []).append(text)
-        # self.refresh()
-        pass

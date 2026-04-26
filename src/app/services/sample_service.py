@@ -34,11 +34,6 @@ class SampleService:
         finally:
             session.close()
 
-    def deleteSample(self, key):
-        # test key
-        # delete sample
-        pass
-
     def editSample(self, sample_id, sample_info):
         session = SessionLocal()
         try:
@@ -96,3 +91,42 @@ class SampleService:
             return sample
         finally:
             session.close()
+
+    def updateStatus(self, sample_id, new_status, new_date):
+        session = SessionLocal()
+        try:
+            sample = session.get(DbSample, sample_id)
+            if not sample:
+                print("Sample not found")
+                return
+            sample.status = new_status
+            sample.status_date = new_date
+            session.commit()
+            print("Sample updated successfully.")
+            return
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error updating Sample status: {str(e)}", file=sys.stderr)
+            return
+        finally:
+            session.close()
+
+    def removeTask(self, sample_id):
+        session = SessionLocal()
+        try:
+            sample = session.get(DbSample, sample_id)
+            if not sample:
+                print("Sample not found")
+                return
+            sample.task = False
+            session.commit()
+            print("Task removed from sample successfully.")
+            return
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error removing Task: {str(e)}", file=sys.stderr)
+            return
+        finally:
+            session.close()
+
+

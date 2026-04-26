@@ -99,3 +99,40 @@ class ReductionService:
             return reduction
         finally:
             session.close()
+
+    def updateStatus(self, reduction_id, new_status, new_date):
+        session = SessionLocal()
+        try:
+            reduction = session.get(DbReduction, reduction_id)
+            if not reduction:
+                print("Reduction not found")
+                return
+            reduction.status = new_status
+            reduction.status_date = new_date
+            session.commit()
+            print("Reduction updated successfully.")
+            return
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error updating Reduction status: {str(e)}", file=sys.stderr)
+            return
+        finally:
+            session.close()
+
+    def removeTask(self, reduction_id):
+        session = SessionLocal()
+        try:
+            reduction = session.get(DbReduction, reduction_id)
+            if not reduction:
+                print("Reduction not found")
+                return
+            reduction.task = False
+            session.commit()
+            print("Task removed from Reduction successfully.")
+            return
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error removing Task: {str(e)}", file=sys.stderr)
+            return
+        finally:
+            session.close()

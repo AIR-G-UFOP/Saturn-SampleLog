@@ -108,3 +108,41 @@ class AnalysisService:
             return analyses
         finally:
             session.close()
+
+    def updateStatus(self, analysis_id, new_status, new_date):
+        session = SessionLocal()
+        try:
+            analysis = session.get(DbAnalysis, analysis_id)
+            if not analysis:
+                print("Analysis not found")
+                return
+
+            analysis.status = new_status
+            analysis.status_date = new_date
+            session.commit()
+            print("Analysis updated successfully.")
+            return
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error updating Analysis status: {str(e)}", file=sys.stderr)
+            return
+        finally:
+            session.close()
+
+    def removeTask(self, analysis_id):
+        session = SessionLocal()
+        try:
+            analysis = session.get(DbAnalysis, analysis_id)
+            if not analysis:
+                print("Analysis not found")
+                return
+            analysis.task = False
+            session.commit()
+            print("Task removed from Analysis successfully.")
+            return
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Error removing Task: {str(e)}", file=sys.stderr)
+            return
+        finally:
+            session.close()

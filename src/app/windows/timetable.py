@@ -6,6 +6,7 @@ from PyQt5.QtCore import QDate, pyqtSignal
 
 class Timetable(QtCore.QObject):
     addTask = pyqtSignal(QDate)
+    editTask = pyqtSignal(object)
     
     def __init__(self, calendarLayout, comboMonth, comboYear, previousMonth, nextMonth, btn_addtask, task_service,
                  parent=None):
@@ -42,8 +43,8 @@ class Timetable(QtCore.QObject):
         self.comboMonth.setCurrentIndex(month - 1)
         self.comboYear.setCurrentText(str(year))
 
-    def edit_task(self):
-        pass
+    def edit_task(self, task):
+        self.editTask.emit(task)
 
     def create_task(self, date):
         if not date:

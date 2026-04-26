@@ -18,6 +18,15 @@ class TaskService:
                 if not task:
                     print("Task not found")
                     return
+                task.name = task_info["name"]
+                task.description = task_info["description"]
+                task.status = task_info["status"]
+                task.start_date = task_info["start_date"]
+                task.end_date = task_info["end_date"]
+                try:
+                    task.completed_at = task_info["completed_at"]
+                except KeyError:
+                    pass
                 session.commit()
                 print("updated by id")
                 return
@@ -64,6 +73,24 @@ class TaskService:
         try:
             query = session.query(DBTasks).filter(DBTasks.start_date == date).all()
             return query
+        finally:
+            session.close()
+
+    def deleteTask(self, task_id):
+        session = SessionLocal()
+        try:
+            task = session.get(DBTasks, task_id)
+            if not task:
+                print("Task not found")
+                return
+            session.delete(task)
+            session.commit()
+            print("deleted")
+            return
+        except Exception as e:
+            session.rollback()
+            print(e)
+            return
         finally:
             session.close()
 

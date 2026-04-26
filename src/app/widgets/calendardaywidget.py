@@ -9,7 +9,7 @@ from .calendartooltipcard import TooltipCard
 class DayWidget(QFrame):
     clicked = pyqtSignal(QDate, bool)
     doubleClicked = pyqtSignal(QDate)
-    taskClicked = pyqtSignal()
+    taskClicked = pyqtSignal(object)
 
     def __init__(self, date, is_current_month=True, is_today=False, tasks=None, style=None, parent=None):
         super().__init__(parent)
@@ -162,5 +162,5 @@ class DayWidget(QFrame):
     def mouseDoubleClickEvent(self, event):
         self.doubleClicked.emit(self.date)
 
-    def edit_task(self, task_text):
-        self.taskClicked.emit()
+    def edit_task(self, task):
+        self.taskClicked.emit(task)

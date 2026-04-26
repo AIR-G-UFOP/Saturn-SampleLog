@@ -1,5 +1,5 @@
 import os
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5 import QtWidgets, QtCore
 from ..ui.generated.addtaskdialog import Ui_AddTaskDialog
 from ..modules.ui_functions import UIFunctions
 from ..utils.utils import (highlight_invalid_field, clear_highlight_field, validate_dates)

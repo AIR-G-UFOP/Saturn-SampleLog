@@ -626,45 +626,22 @@ QScrollBar::add-page:vertical,
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="taskType">
+                    <widget class="QLineEdit" name="taskType">
                      <property name="minimumSize">
                       <size>
                        <width>0</width>
-                       <height>30</height>
+                       <height>25</height>
                       </size>
                      </property>
                      <property name="maximumSize">
                       <size>
                        <width>16777215</width>
-                       <height>30</height>
+                       <height>25</height>
                       </size>
                      </property>
-                     <property name="cursor">
-                      <cursorShape>PointingHandCursor</cursorShape>
+                     <property name="readOnly">
+                      <bool>true</bool>
                      </property>
-                     <property name="focusPolicy">
-                      <enum>Qt::StrongFocus</enum>
-                     </property>
-                     <item>
-                      <property name="text">
-                       <string>Sample praparation</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Analysis</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Data reduction</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Other</string>
-                      </property>
-                     </item>
                     </widget>
                    </item>
                   </layout>

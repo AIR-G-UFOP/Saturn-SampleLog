@@ -15,6 +15,7 @@ from .editreduction import EditReductionWindow
 from .appsettings import Settings
 from .timetable import Timetable
 from .addtaskdialog import AddTaskDialog
+from .edittaskdialog import EditTaskDialog
 
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
@@ -52,6 +53,7 @@ class DbListWindow(QtWidgets.QMainWindow):
             self.ui.calendarLayout, self.ui.comboMonth, self.ui.comboYear, self.ui.btn_previousMonth,
             self.ui.btn_nextMonth, self.ui.btn_addTask, self.taskService, self)
         self.timetable.addTask.connect(self.open_add_task_dialog)
+        self.timetable.editTask.connect(self.open_edit_task_dialog)
 
         self.DATA_MAP = {
             "user": (self.userService.getAllUsersFull, UserCard),
@@ -177,17 +179,27 @@ class DbListWindow(QtWidgets.QMainWindow):
     def return_edit_dialog(self):
         self.overlay.hide()
         self.load_cards()
+        self.timetable.refresh()
 
     @QtCore.pyqtSlot(QtCore.QDate)
     def open_add_task_dialog(self, date):
         self.overlay.show()
         dialog = AddTaskDialog(self.sampleService, self.analysisService, self.reductionService, self.taskService, self,
                                self.ui.bgApp, date)
-        dialog.returnAddTask.connect(self.return_add_task_dialog)
+        dialog.returnAddTask.connect(self.return_task_dialog)
         dialog.setWindowModality(QtCore.Qt.ApplicationModal)
         dialog.exec_()
 
     @QtCore.pyqtSlot()
-    def return_add_task_dialog(self):
+    def return_task_dialog(self):
         self.overlay.hide()
         self.timetable.refresh()
+
+    @QtCore.pyqtSlot(object)
+    def open_edit_task_dialog(self, task):
+        self.overlay.show()
+        dialog = EditTaskDialog(self, self.ui.bgApp, task, self.sampleService, self.analysisService,
+                                self.reductionService, self.taskService)
+        dialog.returnEditTask.connect(self.return_task_dialog)
+        dialog.setWindowModality(QtCore.Qt.ApplicationModal)
+        dialog.exec_()
