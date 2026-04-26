@@ -3,6 +3,8 @@ from PyQt5 import QtCore, QtWidgets
 from ..ui.generated.edittaskdialog import Ui_EditTaskDialog
 from ..modules.ui_functions import UIFunctions
 from ..utils.utils import (highlight_invalid_field, clear_highlight_field, validate_dates)
+from ..widgets.overlay import LoadingOverlay
+from .warningdialog import WarningDialog
 
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
@@ -23,6 +25,8 @@ class EditTaskDialog(QtWidgets.QDialog):
         self.setWindowFlags(QtCore.Qt.Dialog)
         UIFunctions.uiDefinitions(self)
         self.bg = bg
+        self.overlay = LoadingOverlay(self.ui.bgApp)
+        self.overlay.hide()
 
         self.task = task
         self.sampleService = sample_service
@@ -140,10 +144,15 @@ class EditTaskDialog(QtWidgets.QDialog):
             raise
 
     def delete_task(self):
-        # pop up message
-        self.taskService.deleteTask(self.task.id)
-        self.remove_task_from_parent()
-        self.dialog_close()
+        self.overlay.show()
+        dialog = WarningDialog(self.ui.bgApp, self)
+        dialog.setWindowModality(QtCore.Qt.ApplicationModal)
+        result = dialog.exec()
+        self.overlay.hide()
+        if result:
+            self.taskService.deleteTask(self.task.id)
+            self.remove_task_from_parent()
+            self.dialog_close()
 
     def handle_parent_status(self):
         task_type = self.task.task_type
