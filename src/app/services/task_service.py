@@ -1,4 +1,5 @@
 import sys
+from datetime import date
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlalchemy.orm import selectinload
 from ..db.models import DBTasks
@@ -57,6 +58,24 @@ class TaskService:
         finally:
             session.close()
 
+    def deleteTask(self, task_id):
+        session = SessionLocal()
+        try:
+            task = session.get(DBTasks, task_id)
+            if not task:
+                print("Task not found")
+                return
+            session.delete(task)
+            session.commit()
+            print("deleted")
+            return
+        except Exception as e:
+            session.rollback()
+            print(e)
+            return
+        finally:
+            session.close()
+
     @staticmethod
     def get_task(session, task_type, sample_id=None, analysis_id=None, reduction_id=None):
         query = session.query(DBTasks).filter(DBTasks.task_type == task_type)
@@ -76,21 +95,28 @@ class TaskService:
         finally:
             session.close()
 
-    def deleteTask(self, task_id):
+    def getTasksByMonth(self, month, year):
         session = SessionLocal()
         try:
-            task = session.get(DBTasks, task_id)
-            if not task:
-                print("Task not found")
-                return
-            session.delete(task)
-            session.commit()
-            print("deleted")
-            return
-        except Exception as e:
-            session.rollback()
-            print(e)
-            return
+            start = date(year, month, 1)
+            if month == 12:
+                end = date(year + 1, 1, 1)
+            else:
+                end = date(year, month + 1, 1)
+            tasks = session.query(DBTasks).filter(
+                DBTasks.start_date < end,
+                DBTasks.end_date >= start
+            ).all()
+            return tasks
         finally:
             session.close()
+
+    def getTaskById(self, task_id):
+        session = SessionLocal()
+        try:
+            task = session.query(DBTasks).filter(DBTasks.id == task_id).first()
+            return task
+        finally:
+            session.close()
+
 

@@ -52,7 +52,7 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.settings = Settings(self.ui, self.settingsService)
         self.timetable = Timetable(
             self.ui.calendarLayout, self.ui.comboMonth, self.ui.comboYear, self.ui.btn_previousMonth,
-            self.ui.btn_nextMonth, self.ui.btn_addTask, self.taskService, self)
+            self.ui.btn_nextMonth, self.ui.btn_today, self.ui.btn_addTask, self.taskService, self)
         self.timetable.addTask.connect(self.open_add_task_dialog)
         self.timetable.editTask.connect(self.open_edit_task_dialog)
 
@@ -180,9 +180,9 @@ class DbListWindow(QtWidgets.QMainWindow):
     def return_edit_dialog(self):
         self.overlay.hide()
         self.load_cards()
-        self.timetable.refresh()
+        self.timetable.refresh_calendar()
 
-    @QtCore.pyqtSlot(QtCore.QDate)
+    @QtCore.pyqtSlot(object)
     def open_add_task_dialog(self, date):
         self.overlay.show()
         dialog = AddTaskDialog(self.sampleService, self.analysisService, self.reductionService, self.taskService, self,
@@ -194,7 +194,7 @@ class DbListWindow(QtWidgets.QMainWindow):
     @QtCore.pyqtSlot()
     def return_task_dialog(self):
         self.overlay.hide()
-        self.timetable.refresh()
+        self.timetable.refresh_calendar()
 
     @QtCore.pyqtSlot(object)
     def open_edit_task_dialog(self, task):

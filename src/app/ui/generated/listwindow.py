@@ -374,15 +374,15 @@ class Ui_ListWindow(object):
 "\n"
 "#bgTopCalendar QPushButton {\n"
 "    border-radius: 5px;    \n"
-"    border: none;\n"
-"    background-color: rgb(52, 59, 72);\n"
+"    background: rgba(33,34,44,0.95);\n"
+"    border: 1px solid rgba(68,71,90,0.8);\n"
 "}\n"
-"#bgTopCalendar QPushButton:hover {\n"
-"    background-color: rgb(61, 70, 86);\n"
+"#bgTopCalendar QComboBox {\n"
+"    background: rgba(33,34,44,0.95);\n"
+"    border: 1px solid rgba(68,71,90,0.8);\n"
+"    border-radius: 5px;\n"
 "}\n"
-"#bgTopCalendar QPushButton:pressed {\n"
-"    background-color: rgb(52, 59, 72);\n"
-"}\n"
+"\n"
 "#bgBottomCalendar QPushButton {\n"
 "    border-radius: 5px;    \n"
 "    border: none;\n"
@@ -393,6 +393,11 @@ class Ui_ListWindow(object):
 "}\n"
 "#bgBottomCalendar QPushButton:pressed {\n"
 "    background-color: #6272A4;\n"
+"}\n"
+"#bgContentCalendar {\n"
+"    background: rgba(33,34,44,0.95);\n"
+"    border: 1px solid rgba(68,71,90,0.8);\n"
+"    border-radius: 10px;\n"
 "}")
         self.stylesheet.setObjectName("stylesheet")
         self.shadow = QtWidgets.QVBoxLayout(self.stylesheet)
@@ -916,11 +921,13 @@ class Ui_ListWindow(object):
         self.comboMonth = QtWidgets.QComboBox(self.bgTopCalendar)
         self.comboMonth.setMaximumSize(QtCore.QSize(16777215, 25))
         self.comboMonth.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboMonth.setStyleSheet("")
         self.comboMonth.setObjectName("comboMonth")
         self.horizontalLayout_8.addWidget(self.comboMonth)
         self.comboYear = QtWidgets.QComboBox(self.bgTopCalendar)
         self.comboYear.setMaximumSize(QtCore.QSize(16777215, 25))
         self.comboYear.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboYear.setStyleSheet("")
         self.comboYear.setObjectName("comboYear")
         self.horizontalLayout_8.addWidget(self.comboYear)
         self.btn_nextMonth = QtWidgets.QPushButton(self.bgTopCalendar)
@@ -934,6 +941,12 @@ class Ui_ListWindow(object):
         self.btn_nextMonth.setIconSize(QtCore.QSize(16, 16))
         self.btn_nextMonth.setObjectName("btn_nextMonth")
         self.horizontalLayout_8.addWidget(self.btn_nextMonth)
+        self.btn_today = QtWidgets.QPushButton(self.bgTopCalendar)
+        self.btn_today.setMinimumSize(QtCore.QSize(40, 25))
+        self.btn_today.setMaximumSize(QtCore.QSize(40, 25))
+        self.btn_today.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_today.setObjectName("btn_today")
+        self.horizontalLayout_8.addWidget(self.btn_today)
         spacerItem2 = QtWidgets.QSpacerItem(221, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_8.addItem(spacerItem2)
         self.frame = QtWidgets.QFrame(self.bgTopCalendar)
@@ -977,14 +990,16 @@ class Ui_ListWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.bgContentCalendar.sizePolicy().hasHeightForWidth())
         self.bgContentCalendar.setSizePolicy(sizePolicy)
+        self.bgContentCalendar.setMinimumSize(QtCore.QSize(0, 300))
+        self.bgContentCalendar.setStyleSheet("")
         self.bgContentCalendar.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgContentCalendar.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgContentCalendar.setObjectName("bgContentCalendar")
         self.calendarLayout = QtWidgets.QVBoxLayout(self.bgContentCalendar)
-        self.calendarLayout.setContentsMargins(0, 0, 0, 0)
+        self.calendarLayout.setContentsMargins(10, 0, 10, 10)
         self.calendarLayout.setSpacing(0)
         self.calendarLayout.setObjectName("calendarLayout")
-        self.verticalLayout_21.addWidget(self.bgContentCalendar)
+        self.verticalLayout_21.addWidget(self.bgContentCalendar, 0, QtCore.Qt.AlignTop)
         self.bgBottomCalendar = QtWidgets.QFrame(self.scrollAreaWidgetContents_3)
         self.bgBottomCalendar.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgBottomCalendar.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -999,7 +1014,17 @@ class Ui_ListWindow(object):
         self.btn_addTask.setIcon(icon14)
         self.btn_addTask.setObjectName("btn_addTask")
         self.verticalLayout_23.addWidget(self.btn_addTask)
-        self.verticalLayout_21.addWidget(self.bgBottomCalendar, 0, QtCore.Qt.AlignBottom)
+        self.verticalLayout_21.addWidget(self.bgBottomCalendar, 0, QtCore.Qt.AlignTop)
+        self.bgTaskList = QtWidgets.QFrame(self.scrollAreaWidgetContents_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bgTaskList.sizePolicy().hasHeightForWidth())
+        self.bgTaskList.setSizePolicy(sizePolicy)
+        self.bgTaskList.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.bgTaskList.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgTaskList.setObjectName("bgTaskList")
+        self.verticalLayout_21.addWidget(self.bgTaskList)
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_3)
         self.verticalLayout_20.addWidget(self.scrollArea_2)
         self.verticalLayout_19.addWidget(self.bgCalendar)
@@ -1066,7 +1091,8 @@ class Ui_ListWindow(object):
         self.labelDrag.setText(_translate("ListWindow", "Drag fragments to reorder"))
         self.label_4.setText(_translate("ListWindow", "Preview:"))
         self.btn_saveFileGen.setText(_translate("ListWindow", "Save"))
-        self.samplePrep.setText(_translate("ListWindow", "Sample preparation"))
+        self.btn_today.setText(_translate("ListWindow", "Today"))
+        self.samplePrep.setText(_translate("ListWindow", "Sample prep"))
         self.analysis.setText(_translate("ListWindow", "Analysis"))
         self.dataReduction.setText(_translate("ListWindow", "Data Reduction"))
         self.btn_addTask.setText(_translate("ListWindow", "Add a new task to calendar"))

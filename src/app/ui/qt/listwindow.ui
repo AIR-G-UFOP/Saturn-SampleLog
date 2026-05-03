@@ -377,15 +377,15 @@ QListWidget::item:selected{
 
 #bgTopCalendar QPushButton {
 	border-radius: 5px;	
-	border: none;
-	background-color: rgb(52, 59, 72);
+	background: rgba(33,34,44,0.95);
+	border: 1px solid rgba(68,71,90,0.8);
 }
-#bgTopCalendar QPushButton:hover {
-	background-color: rgb(61, 70, 86);
+#bgTopCalendar QComboBox {
+	background: rgba(33,34,44,0.95);
+	border: 1px solid rgba(68,71,90,0.8);
+	border-radius: 5px;
 }
-#bgTopCalendar QPushButton:pressed {
-	background-color: rgb(52, 59, 72);
-}
+
 #bgBottomCalendar QPushButton {
 	border-radius: 5px;	
 	border: none;
@@ -396,6 +396,11 @@ QListWidget::item:selected{
 }
 #bgBottomCalendar QPushButton:pressed {
 	background-color: #6272A4;
+}
+#bgContentCalendar {
+	background: rgba(33,34,44,0.95);
+	border: 1px solid rgba(68,71,90,0.8);
+	border-radius: 10px;
 }</string>
    </property>
    <layout class="QVBoxLayout" name="shadow">
@@ -1919,18 +1924,8 @@ QListWidget::item:selected{
                              <property name="cursor">
                               <cursorShape>PointingHandCursor</cursorShape>
                              </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QComboBox" name="comboYear">
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>25</height>
-                              </size>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
+                             <property name="styleSheet">
+                              <string notr="true"/>
                              </property>
                             </widget>
                            </item>
@@ -1963,6 +1958,44 @@ QListWidget::item:selected{
                                <width>16</width>
                                <height>16</height>
                               </size>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QComboBox" name="comboYear">
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_today">
+                             <property name="minimumSize">
+                              <size>
+                               <width>40</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>40</width>
+                               <height>25</height>
+                              </size>
+                             </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="text">
+                              <string>Today</string>
                              </property>
                             </widget>
                            </item>
@@ -2008,7 +2041,7 @@ QListWidget::item:selected{
                            <item>
                             <widget class="QLabel" name="samplePrep">
                              <property name="text">
-                              <string>Sample preparation</string>
+                              <string>Sample prep</string>
                              </property>
                             </widget>
                            </item>
@@ -2079,13 +2112,22 @@ QListWidget::item:selected{
                           </layout>
                          </widget>
                         </item>
-                        <item>
+                        <item alignment="Qt::AlignTop">
                          <widget class="QFrame" name="bgContentCalendar">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                             <horstretch>0</horstretch>
                             <verstretch>0</verstretch>
                            </sizepolicy>
+                          </property>
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>300</height>
+                           </size>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
                           </property>
                           <property name="frameShape">
                            <enum>QFrame::NoFrame</enum>
@@ -2098,21 +2140,21 @@ QListWidget::item:selected{
                             <number>0</number>
                            </property>
                            <property name="leftMargin">
-                            <number>0</number>
+                            <number>10</number>
                            </property>
                            <property name="topMargin">
                             <number>0</number>
                            </property>
                            <property name="rightMargin">
-                            <number>0</number>
+                            <number>10</number>
                            </property>
                            <property name="bottomMargin">
-                            <number>0</number>
+                            <number>10</number>
                            </property>
                           </layout>
                          </widget>
                         </item>
-                        <item alignment="Qt::AlignBottom">
+                        <item alignment="Qt::AlignTop">
                          <widget class="QFrame" name="bgBottomCalendar">
                           <property name="frameShape">
                            <enum>QFrame::NoFrame</enum>
@@ -2157,6 +2199,22 @@ QListWidget::item:selected{
                             </widget>
                            </item>
                           </layout>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QFrame" name="bgTaskList">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::StyledPanel</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
                          </widget>
                         </item>
                        </layout>
