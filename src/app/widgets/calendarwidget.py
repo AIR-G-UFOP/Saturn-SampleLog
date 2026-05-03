@@ -3,7 +3,7 @@ from datetime import date, timedelta
 from typing import Dict, List, Optional
 
 from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QPainter, QBrush, QColor
 from PyQt5.QtWidgets import (
     QFrame,
     QGridLayout,
@@ -12,6 +12,8 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
+
+
 
 COLOURS: Dict[str, str] = {
     "bg0": "#191A21",
@@ -179,8 +181,95 @@ def calendar_global_stylesheet() -> str:
     )
 
 
+class EventHoverCard(QFrame):
+    def __init__(self, parent: Optional[QWidget] = None):
+        super().__init__(parent, Qt.ToolTip | Qt.FramelessWindowHint)
+        self.setAttribute(Qt.WA_ShowWithoutActivating)
+        self.setAttribute(Qt.WA_TranslucentBackground)
+        self.setObjectName("eventHoverCard")
+        self.setStyleSheet(
+            "#eventHoverCard {"
+            f"background: #343746;"
+            "border-radius: 10px;"
+            "}"
+        )
+        self.setFixedWidth(320)
+
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setSpacing(10)
+
+        self.category_badge = QLabel()
+        self.category_badge.setAlignment(Qt.AlignCenter)
+        self.category_badge.setFixedHeight(24)
+        self.category_badge.setMinimumWidth(84)
+
+        self.title_label = QLabel()
+        self.title_label.setWordWrap(True)
+        self.title_label.setFont(QFont("Inter", 10, QFont.Bold))
+        self.title_label.setStyleSheet(f"color: {COLOURS['fg']};")
+
+        self.time_label = QLabel()
+        self.time_label.setWordWrap(True)
+        self.time_label.setStyleSheet(f"color: {COLOURS['cyan']}; font-size: 9px; font-weight: 600;")
+
+        self.description_label = QLabel()
+        self.description_label.setWordWrap(True)
+        self.description_label.setStyleSheet(f"color: {COLOURS['muted']}; font-size: 9px;")
+
+        self.footer_label = QLabel("Left click to edit this task")
+        self.footer_label.setWordWrap(True)
+        self.footer_label.setStyleSheet(f"color: {COLOURS['comment']}; font-size: 9px;")
+
+        layout.addWidget(self.category_badge, 0, Qt.AlignLeft)
+        layout.addWidget(self.title_label)
+        layout.addWidget(self.time_label)
+        layout.addWidget(self.description_label)
+        layout.addSpacing(2)
+        layout.addWidget(self.footer_label)
+
+    def set_task(self, task: CalendarTask):
+        style = CATEGORY_STYLES.get(task.category, {"color": COLOURS['purple'], "bg": "rgba(189,147,249,0.18)"})
+        self.category_badge.setText(task.category.upper())
+        self.category_badge.setStyleSheet(
+            "padding: 2px 10px; border-radius: 12px; font-size: 9px; font-weight: 700;"
+            f"background: {style['bg']};"
+            f"border: 1px solid {style['color']};"
+            f"color: {style['color']};"
+            f"border-radius: 10px;"
+        )
+        self.title_label.setText(task.title)
+        self.time_label.setText(format_date_range(task))
+        self.description_label.setText(task.description or "No extra details")
+        self.adjustSize()
+
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.setRenderHint(QPainter.Antialiasing)
+        rect = self.rect()
+        color = QColor("#343746")
+        painter.setBrush(QBrush(color))
+        painter.setPen(Qt.NoPen)
+        painter.drawRoundedRect(rect, 10, 10)
+
+
+class ClickableDayCell(QFrame):
+    clicked = pyqtSignal(object)
+
+    def __init__(self, day_value: date, parent: Optional[QWidget] = None):
+        super().__init__(parent)
+        self.day_value = day_value
+        self.setCursor(Qt.PointingHandCursor)
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.clicked.emit(self.day_value)
+        super().mousePressEvent(event)
+        
+
 class TaskBarButton(QPushButton):
     edit_requested = pyqtSignal(object)
+    hover_card: Optional[EventHoverCard] = None
 
     def __init__(self, segment: WeekSegment, parent: Optional[QWidget] = None):
         super().__init__(parent)
@@ -190,7 +279,7 @@ class TaskBarButton(QPushButton):
         suffix = " →" if segment.continued_to_next else ""
         self.setText(f"{prefix}{task.title}{suffix}")
         self.setCursor(Qt.PointingHandCursor)
-        self.setToolTip(self._build_tooltip())
+        self.setMouseTracking(True)
         self.setStyleSheet(
             "QPushButton {"
             f"background: {CATEGORY_STYLES.get(task.category, {'bg': 'rgba(68,71,90,0.5)'})['bg']};"
@@ -208,30 +297,41 @@ class TaskBarButton(QPushButton):
         )
         self.clicked.connect(lambda: self.edit_requested.emit(task.task_id))
 
-    def _build_tooltip(self) -> str:
-        task = self.segment.task
-        return (
-            f"<div style='color:{COLOURS['fg']};'>"
-            f"<b>{task.title}</b><br>"
-            f"{task.category}<br>"
-            f"{format_date_range(task)}<br>"
-            f"{task.description}"
-            "</div>"
-        )
+    @classmethod
+    def _get_hover_card(cls) -> EventHoverCard:
+        if cls.hover_card is None:
+            cls.hover_card = EventHoverCard()
+        return cls.hover_card
 
+    def _show_hover_card(self):
+        card = self._get_hover_card()
+        card.set_task(self.segment.task)
+        global_pos = self.mapToGlobal(self.rect().bottomLeft())
+        card.move(global_pos.x(), global_pos.y() + 8)
+        card.show()
+        card.raise_()
 
-class ClickableDayCell(QFrame):
-    clicked = pyqtSignal(object)
+    def _hide_hover_card(self):
+        self._get_hover_card().hide()
 
-    def __init__(self, day_value: date, parent: Optional[QWidget] = None):
-        super().__init__(parent)
-        self.day_value = day_value
-        self.setCursor(Qt.PointingHandCursor)
+    def enterEvent(self, event):
+        self._show_hover_card()
+        super().enterEvent(event)
 
-    def mousePressEvent(self, event):
-        if event.button() == Qt.LeftButton:
-            self.clicked.emit(self.day_value)
-        super().mousePressEvent(event)
+    def leaveEvent(self, event):
+        self._hide_hover_card()
+        super().leaveEvent(event)
+
+    def mouseMoveEvent(self, event):
+        card = self._get_hover_card()
+        if card.isVisible():
+            global_pos = self.mapToGlobal(self.rect().bottomLeft())
+            card.move(global_pos.x(), global_pos.y() + 8)
+        super().mouseMoveEvent(event)
+
+    def hideEvent(self, event):
+        self._hide_hover_card()
+        super().hideEvent(event)
 
 
 class WeekRowWidget(QFrame):

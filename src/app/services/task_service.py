@@ -119,4 +119,10 @@ class TaskService:
         finally:
             session.close()
 
-
+    def getAllTasks(self):
+        session = SessionLocal()
+        try:
+            tasks = session.query(DBTasks).all()
+            return tasks
+        finally:
+            session.close()

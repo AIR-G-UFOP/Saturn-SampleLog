@@ -16,6 +16,7 @@ from .appsettings import Settings
 from .timetable import Timetable
 from .addtaskdialog import AddTaskDialog
 from .edittaskdialog import EditTaskDialog
+from .warningdialog import WarningDialog
 
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
@@ -52,9 +53,11 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.settings = Settings(self.ui, self.settingsService)
         self.timetable = Timetable(
             self.ui.calendarLayout, self.ui.comboMonth, self.ui.comboYear, self.ui.btn_previousMonth,
-            self.ui.btn_nextMonth, self.ui.btn_today, self.ui.btn_addTask, self.taskService, self)
+            self.ui.btn_nextMonth, self.ui.btn_today, self.ui.btn_addTask, self.taskService, self.ui.taskListLayout,
+            self.ui.taskListCount, self)
         self.timetable.addTask.connect(self.open_add_task_dialog)
         self.timetable.editTask.connect(self.open_edit_task_dialog)
+        self.timetable.deleteTask.connect(self.open_delete_task_dialog)
 
         self.DATA_MAP = {
             "user": (self.userService.getAllUsersFull, UserCard),
@@ -204,3 +207,27 @@ class DbListWindow(QtWidgets.QMainWindow):
         dialog.returnEditTask.connect(self.return_task_dialog)
         dialog.setWindowModality(QtCore.Qt.ApplicationModal)
         dialog.exec_()
+
+    @QtCore.pyqtSlot(object)
+    def open_delete_task_dialog(self, task):
+        self.overlay.show()
+        dialog = WarningDialog(self.ui.bgApp, self)
+        dialog.setWindowModality(QtCore.Qt.ApplicationModal)
+        result = dialog.exec()
+        self.overlay.hide()
+        if result:
+            self.taskService.deleteTask(task.id)
+            task_type = task.task_type
+            if task_type == "other":
+                return
+            if task_type == "sample_preparation":
+                sample_id = task.sample_id
+                self.sampleService.removeTask(sample_id)
+            elif task_type == "analysis":
+                analysis_id = task.analysis_id
+                self.analysisService.removeTask(analysis_id)
+            elif task_type == "reduction":
+                reduction_id = task.reduction_id
+                self.reductionService.removeTask(reduction_id)
+            self.timetable.refresh_calendar()
+

@@ -1,30 +1,39 @@
 from PyQt5 import QtCore
 from PyQt5.QtCore import QDate, pyqtSignal
 from datetime import date
+from typing import List
+
+from PyQt5.QtWidgets import QLabel
+
 from ..widgets.calendarwidget import (
     CalendarMonthView,
     first_of_month,
     CalendarTask,
 )
+from ..widgets.tasklistwidget import TaskListItem, sort_tasks
 
 
 class Timetable(QtCore.QObject):
     addTask = pyqtSignal(object)
     editTask = pyqtSignal(object)
+    deleteTask = pyqtSignal(object)
     
     def __init__(self, calendarLayout, comboMonth, comboYear, previousMonth, nextMonth, btn_today, btn_addtask,
-                 task_service,
+                 task_service, taskListLayout, taskCountLabel,
                  parent=None):
         super(Timetable, self).__init__(parent)
 
         self.taskService = task_service
         self.current_month = first_of_month(date.today())
+        self.task_cards: List[TaskListItem] = []
 
         self.comboMonth = comboMonth
         self.comboYear = comboYear
         self.previousMonth = previousMonth
         self.nextMonth = nextMonth
         self.btn_today = btn_today
+        self.taskListLayout = taskListLayout
+        self.taskCountLabel = taskCountLabel
         self.setup_controls()
 
         self.calendar = CalendarMonthView(task_service)
@@ -88,10 +97,53 @@ class Timetable(QtCore.QObject):
         self.comboMonth.blockSignals(False)
         self.comboYear.blockSignals(False)
 
+    def handle_task_focus_request(self, task_id: int):
+        task = self.find_task(task_id)
+        if task is None:
+            return
+        self.current_month = first_of_month(task.start_date)
+        self.refresh_calendar()
+
     def refresh_calendar(self):
         self.sync_controls_to_current_month()
         self.tasks = self.get_tasks()
         self.calendar.set_month_and_tasks(self.current_month, self.tasks)
+        self.refresh_task_list()
+
+    def refresh_task_list(self):
+        while self.taskListLayout.count():
+            item = self.taskListLayout.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+
+        self.task_cards = []
+        tasks = self.taskService.getAllTasks()
+        sorted_tasks = sort_tasks([
+            CalendarTask(
+                task.id,
+                task.name,
+                task.description,
+                task.start_date,
+                task.end_date,
+                task.task_type)
+            for task in tasks])
+        if not sorted_tasks:
+            self.taskCountLabel.setText("0 Tasks")
+            empty_label = QLabel("No tasks loaded")
+            empty_label.setStyleSheet("color: #BFBFBF; font-size: 11px;")
+            self.taskListLayout.addWidget(empty_label)
+            self.taskListLayout.addStretch(1)
+            return
+        for task in sorted_tasks:
+            card = TaskListItem(task)
+            card.navigate_requested.connect(self.handle_task_focus_request)
+            card.edit_requested.connect(self.edit_task)
+            card.delete_requested.connect(self.delete_task)
+            self.taskListLayout.addWidget(card)
+            self.task_cards.append(card)
+        self.taskCountLabel.setText(f"{len(sorted_tasks)} Tasks")
+        self.taskListLayout.addStretch(1)
 
     def find_task(self, task_id_to_find: int):
         return self.taskService.getTaskById(task_id_to_find)
@@ -104,4 +156,8 @@ class Timetable(QtCore.QObject):
         if not clicked_date:
             clicked_date = date.today()
         self.addTask.emit(clicked_date)
+
+    def delete_task(self, task_id_to_delete: int):
+        task = self.find_task(task_id_to_delete)
+        self.deleteTask.emit(task)
 

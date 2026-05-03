@@ -131,82 +131,85 @@ class Ui_ListWindow(object):
 "    background-color: transparent;\n"
 "    border: none;\n"
 "}\n"
-"QScrollBar:horizontal {\n"
+"QScrollBar:vertical {\n"
+"    background: transparent;\n"
+"    width: 5px;\n"
+"    margin: 12px 0px 12px 0px;\n"
 "    border: none;\n"
-"    background: rgb(40, 44, 52);\n"
-"    height: 8px;\n"
-"    margin: 0px 21px 0 21px;\n"
-"    border-radius: 0px;\n"
+"}\n"
+"QScrollBar::handle:vertical {\n"
+"    background: rgb(83, 88, 112);\n"
+"    min-height: 30px;\n"
+"    border-radius: 2px;\n"
+"}\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: rgb(83, 88, 112);\n"
+"}\n"
+"QScrollBar::handle:vertical:pressed {\n"
+"    background: rgb(83, 88, 112);\n"
+"}\n"
+"QScrollBar::sub-line:vertical {\n"
+"            height: 14px;\n"
+"            background: transparent;\n"
+"            subcontrol-origin: margin;\n"
+"            subcontrol-position: top;\n"
+"}\n"
+"QScrollBar::add-line:vertical {\n"
+"            height: 14px;\n"
+"            background: transparent;\n"
+"            subcontrol-origin: margin;\n"
+"            subcontrol-position: bottom;\n"
+"}\n"
+"QScrollBar::up-arrow:vertical {\n"
+"            image: url(:/icons/icons/cil-arrow-up.png);\n"
+"            width: 15px;\n"
+"            height: 15px;\n"
+"}\n"
+"QScrollBar::down-arrow:vertical {\n"
+"            image: url(:/icons/icons/cil-arrow-down.png);\n"
+"            width: 15px;\n"
+"            height: 15px;\n"
+"}\n"
+"QScrollBar::add-page:vertical,\n"
+"        QScrollBar::sub-page:vertical {\n"
+"            background: transparent;\n"
+"}\n"
+"QScrollBar:horizontal {\n"
+"    background: transparent;\n"
+"    height: 5px;\n"
+"    margin: 0px 12px 0px 12px;\n"
+"    border: none;\n"
 "}\n"
 "QScrollBar::handle:horizontal {\n"
-"    background: rgb(40, 44, 52);\n"
-"    min-width: 25px;\n"
-"    border-radius: 4px\n"
+"    background: rgb(83, 88, 112);\n"
+"    min-width: 30px;\n"
+"    border-radius: 2px;\n"
 "}\n"
+"QScrollBar::sub-line:horizontal,\n"
 "QScrollBar::add-line:horizontal {\n"
-"    border: none;\n"
-"    background: rgb(40, 44, 52);\n"
-"    width: 20px;\n"
-"    border-top-right-radius: 4px;\n"
-"    border-bottom-right-radius: 4px;\n"
-"    subcontrol-position: right;\n"
-"    subcontrol-origin: margin;\n"
+"    width: 14px;\n"
+"    background: transparent;\n"
 "}\n"
-"QScrollBar::sub-line:horizontal {\n"
-"    border: none;\n"
-"    background: rgb(40, 44, 52);\n"
-"    width: 20px;\n"
-"    border-top-left-radius: 4px;\n"
-"    border-bottom-left-radius: 4px;\n"
-"    subcontrol-position: left;\n"
-"    subcontrol-origin: margin;\n"
+"QScrollBar::handle:horizontal:hover {\n"
+"    background: rgb(83, 88, 112);\n"
 "}\n"
-"QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal\n"
-"{\n"
-"     background: none;\n"
+"QScrollBar::handle:horizontal:pressed {\n"
+"    background: rgb(83, 88, 112);\n"
 "}\n"
-"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal\n"
-"{\n"
-"     background: none;\n"
+"QScrollBar::right-arrow:horizontal {\n"
+"            image: url(:/icons/icons/cil-arrow-right.png);\n"
+"            width: 10px;\n"
+"            height: 10px;\n"
 "}\n"
-" QScrollBar:vertical {\n"
-"    border: none;\n"
-"    background: rgb(40, 44, 52);\n"
-"    width: 8px;\n"
-"    margin: 21px 0 21px 0;\n"
-"    border-radius: 0px;\n"
-" }\n"
-" QScrollBar::handle:vertical {    \n"
-"    background:  rgb(40, 44, 52);\n"
-"    min-height: 25px;\n"
-"    border-radius: 4px\n"
-" }\n"
-" QScrollBar::add-line:vertical {\n"
-"     border: none;\n"
-"    background: rgb(40, 44, 52);\n"
-"     height: 20px;\n"
-"    border-bottom-left-radius: 4px;\n"
-"    border-bottom-right-radius: 4px;\n"
-"     subcontrol-position: bottom;\n"
-"     subcontrol-origin: margin;\n"
-" }\n"
-" QScrollBar::sub-line:vertical {\n"
-"    border: none;\n"
-"    background: rgb(40, 44, 52);\n"
-"     height: 20px;\n"
-"    border-top-left-radius: 4px;\n"
-"    border-top-right-radius: 4px;\n"
-"     subcontrol-position: top;\n"
-"     subcontrol-origin: margin;\n"
-" }\n"
-" QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
-"     background: none;\n"
-" }\n"
-"\n"
-" QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
-"     background: none;\n"
-" }\n"
-"\n"
+"QScrollBar::left-arrow:horizontal {\n"
+"            image: url(:/icons/icons/cil-arrow-left.png);\n"
+"            width: 10px;\n"
+"            height: 10px;\n"
+"}\n"
+"QScrollBar::add-page:horizontal,\n"
+"        QScrollBar::sub-page:horizontal {\n"
+"            background: transparent;\n"
+"        }\n"
 "#bgUser {\n"
 "    background-color: #44475A;\n"
 "    border-radius: 10px;\n"
@@ -386,18 +389,30 @@ class Ui_ListWindow(object):
 "#bgBottomCalendar QPushButton {\n"
 "    border-radius: 5px;    \n"
 "    border: none;\n"
-"    background-color: #6272A4;\n"
+"    background-color: rgb(76, 235, 115);\n"
 "}\n"
 "#bgBottomCalendar QPushButton:hover {\n"
-"    background-color: rgb(61, 70, 86);\n"
+"    background-color: rgb(64, 200, 98);\n"
 "}\n"
 "#bgBottomCalendar QPushButton:pressed {\n"
-"    background-color: #6272A4;\n"
+"    background-color: rgb(76, 235, 115);\n"
 "}\n"
 "#bgContentCalendar {\n"
 "    background: rgba(33,34,44,0.95);\n"
 "    border: 1px solid rgba(68,71,90,0.8);\n"
 "    border-radius: 10px;\n"
+"}\n"
+"#bgTaskList {\n"
+"    background: rgba(33,34,44,0.95);\n"
+"    border: 1px solid rgba(68,71,90,0.8);\n"
+"    border-radius: 10px;\n"
+"}\n"
+"#taskListDetail {\n"
+"    color: #BFBFBF; \n"
+"    font-size: 8px;\n"
+"}\n"
+"#taskListCount {\n"
+"    color: #50FA7B;\n"
 "}")
         self.stylesheet.setObjectName("stylesheet")
         self.shadow = QtWidgets.QVBoxLayout(self.stylesheet)
@@ -882,7 +897,7 @@ class Ui_ListWindow(object):
         self.bgCalendar.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgCalendar.setObjectName("bgCalendar")
         self.verticalLayout_20 = QtWidgets.QVBoxLayout(self.bgCalendar)
-        self.verticalLayout_20.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_20.setContentsMargins(0, 0, 5, 0)
         self.verticalLayout_20.setSpacing(0)
         self.verticalLayout_20.setObjectName("verticalLayout_20")
         self.scrollArea_2 = QtWidgets.QScrollArea(self.bgCalendar)
@@ -890,10 +905,10 @@ class Ui_ListWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 721, 471))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 716, 471))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.verticalLayout_21 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_3)
-        self.verticalLayout_21.setContentsMargins(0, 0, 10, 0)
+        self.verticalLayout_21.setContentsMargins(0, 0, 5, 0)
         self.verticalLayout_21.setSpacing(10)
         self.verticalLayout_21.setObjectName("verticalLayout_21")
         self.bgTopCalendar = QtWidgets.QFrame(self.scrollAreaWidgetContents_3)
@@ -924,12 +939,6 @@ class Ui_ListWindow(object):
         self.comboMonth.setStyleSheet("")
         self.comboMonth.setObjectName("comboMonth")
         self.horizontalLayout_8.addWidget(self.comboMonth)
-        self.comboYear = QtWidgets.QComboBox(self.bgTopCalendar)
-        self.comboYear.setMaximumSize(QtCore.QSize(16777215, 25))
-        self.comboYear.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.comboYear.setStyleSheet("")
-        self.comboYear.setObjectName("comboYear")
-        self.horizontalLayout_8.addWidget(self.comboYear)
         self.btn_nextMonth = QtWidgets.QPushButton(self.bgTopCalendar)
         self.btn_nextMonth.setMinimumSize(QtCore.QSize(25, 25))
         self.btn_nextMonth.setMaximumSize(QtCore.QSize(25, 25))
@@ -941,6 +950,12 @@ class Ui_ListWindow(object):
         self.btn_nextMonth.setIconSize(QtCore.QSize(16, 16))
         self.btn_nextMonth.setObjectName("btn_nextMonth")
         self.horizontalLayout_8.addWidget(self.btn_nextMonth)
+        self.comboYear = QtWidgets.QComboBox(self.bgTopCalendar)
+        self.comboYear.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.comboYear.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.comboYear.setStyleSheet("")
+        self.comboYear.setObjectName("comboYear")
+        self.horizontalLayout_8.addWidget(self.comboYear)
         self.btn_today = QtWidgets.QPushButton(self.bgTopCalendar)
         self.btn_today.setMinimumSize(QtCore.QSize(40, 25))
         self.btn_today.setMaximumSize(QtCore.QSize(40, 25))
@@ -1021,9 +1036,48 @@ class Ui_ListWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.bgTaskList.sizePolicy().hasHeightForWidth())
         self.bgTaskList.setSizePolicy(sizePolicy)
-        self.bgTaskList.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.bgTaskList.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bgTaskList.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bgTaskList.setObjectName("bgTaskList")
+        self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.bgTaskList)
+        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_15.setSpacing(0)
+        self.verticalLayout_15.setObjectName("verticalLayout_15")
+        self.bgTopTaskList = QtWidgets.QFrame(self.bgTaskList)
+        self.bgTopTaskList.setMinimumSize(QtCore.QSize(0, 0))
+        self.bgTopTaskList.setMaximumSize(QtCore.QSize(16777215, 52))
+        self.bgTopTaskList.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgTopTaskList.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgTopTaskList.setObjectName("bgTopTaskList")
+        self.verticalLayout_24 = QtWidgets.QVBoxLayout(self.bgTopTaskList)
+        self.verticalLayout_24.setContentsMargins(10, 5, 10, 2)
+        self.verticalLayout_24.setSpacing(1)
+        self.verticalLayout_24.setObjectName("verticalLayout_24")
+        self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        self.taskListTitle = QtWidgets.QLabel(self.bgTopTaskList)
+        self.taskListTitle.setObjectName("taskListTitle")
+        self.horizontalLayout_9.addWidget(self.taskListTitle)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_9.addItem(spacerItem3)
+        self.taskListCount = QtWidgets.QLabel(self.bgTopTaskList)
+        self.taskListCount.setText("")
+        self.taskListCount.setObjectName("taskListCount")
+        self.horizontalLayout_9.addWidget(self.taskListCount)
+        self.verticalLayout_24.addLayout(self.horizontalLayout_9)
+        self.taskListDetail = QtWidgets.QLabel(self.bgTopTaskList)
+        self.taskListDetail.setObjectName("taskListDetail")
+        self.verticalLayout_24.addWidget(self.taskListDetail)
+        self.verticalLayout_15.addWidget(self.bgTopTaskList, 0, QtCore.Qt.AlignTop)
+        self.bgContentTaskList = QtWidgets.QFrame(self.bgTaskList)
+        self.bgContentTaskList.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.bgContentTaskList.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.bgContentTaskList.setObjectName("bgContentTaskList")
+        self.taskListLayout = QtWidgets.QVBoxLayout(self.bgContentTaskList)
+        self.taskListLayout.setContentsMargins(10, 10, 10, 10)
+        self.taskListLayout.setSpacing(10)
+        self.taskListLayout.setObjectName("taskListLayout")
+        self.verticalLayout_15.addWidget(self.bgContentTaskList)
         self.verticalLayout_21.addWidget(self.bgTaskList)
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_3)
         self.verticalLayout_20.addWidget(self.scrollArea_2)
@@ -1096,4 +1150,6 @@ class Ui_ListWindow(object):
         self.analysis.setText(_translate("ListWindow", "Analysis"))
         self.dataReduction.setText(_translate("ListWindow", "Data Reduction"))
         self.btn_addTask.setText(_translate("ListWindow", "Add a new task to calendar"))
+        self.taskListTitle.setText(_translate("ListWindow", "All Tasks"))
+        self.taskListDetail.setText(_translate("ListWindow", "Sorted by date. Click a task to jump to its month."))
 from app.ui.resources import resources
