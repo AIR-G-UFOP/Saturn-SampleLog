@@ -53,3 +53,30 @@ REDUCTION_STATUS_COLOUR = {
     "Data Reduction completed": "color: #50FA7B",
     "Results sent to User": "color: #BDBDBD",
 }
+WORKSPACE_TOOLBAR_SELECTED = """
+    QPushButton {
+	border-radius: 5px;	
+	background: #44475A;
+	border: 1px solid rgba(68,71,90,0.8);
+}
+    QPushButton:hover{
+	background: #282a36;
+}
+    QPushButton:pressed {
+	background: #44475A;
+}
+    """
+
+WORKSPACE_TOOLBAR_NOT_SELECTED = """
+    QPushButton {
+	border-radius: 5px;	
+	background: rgba(33,34,44,0.95);
+	border: 1px solid rgba(68,71,90,0.8);
+}
+    QPushButton:hover{
+	background: #282a36;
+}
+    QPushButton:pressed {
+	background: rgba(33,34,44,0.95);
+}
+    """

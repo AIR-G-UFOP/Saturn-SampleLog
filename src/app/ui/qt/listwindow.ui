@@ -383,10 +383,41 @@ QListWidget::item:selected{
 	background: rgba(33,34,44,0.95);
 	border: 1px solid rgba(68,71,90,0.8);
 }
-#bgTopCalendar QComboBox {
+#bgTopCalendar QComboBox{
 	background: rgba(33,34,44,0.95);
 	border: 1px solid rgba(68,71,90,0.8);
 	border-radius: 5px;
+	padding: 5px;
+	padding-left: 10px;
+}
+#bgTopCalendar QComboBox::drop-down {
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 20px; 
+	border-left-width: 2px;
+	border-left-color: rgba(39, 44, 54, 150);
+	border-left-style: solid;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;	
+ }
+#bgTopCalendar QComboBox::down-arrow {
+	image: url(:/icons/icons/cil-arrow-down.png);
+	width: 16px;
+	height: 16px;
+}
+#bgTopCalendar QComboBox QAbstractItemView {
+	background: rgba(33,34,44,0.95);
+	border: 1px solid rgba(68,71,90,0.8);
+	padding: 10px;
+	selection-background-color: rgb(39, 44, 54);
+}
+
+QSpinBox{
+	background: rgba(33,34,44,0.95);
+	border: 1px solid rgba(68,71,90,0.8);
+	border-radius: 5px;
+	padding: 5px;
+	padding-left: 10px;
 }
 
 #bgBottomCalendar QPushButton {
@@ -462,7 +493,7 @@ QListWidget::item:selected{
         <widget class="QFrame" name="leftMenuBg">
          <property name="minimumSize">
           <size>
-           <width>50</width>
+           <width>200</width>
            <height>0</height>
           </size>
          </property>
@@ -802,110 +833,6 @@ QListWidget::item:selected{
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="btn_addUser">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="text">
-                   <string>     Add User</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../resources/resources.qrc">
-                    <normaloff>:/icons/icons/cil-user-a.png</normaloff>:/icons/icons/cil-user-a.png</iconset>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btn_addSample">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="text">
-                   <string>     Add Sample</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../resources/resources.qrc">
-                    <normaloff>:/icons/icons/cil-sample.png</normaloff>:/icons/icons/cil-sample.png</iconset>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btn_addAnalysis">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="text">
-                   <string>     Add Analysis</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../resources/resources.qrc">
-                    <normaloff>:/icons/icons/cil-troubleshoot.png</normaloff>:/icons/icons/cil-troubleshoot.png</iconset>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btn_addReductions">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="text">
-                   <string>     Add Reduction</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../resources/resources.qrc">
-                    <normaloff>:/icons/icons/cil-analysis.png</normaloff>:/icons/icons/cil-analysis.png</iconset>
-                  </property>
-                 </widget>
-                </item>
-                <item>
                  <widget class="QPushButton" name="btn_timetable">
                   <property name="minimumSize">
                    <size>
@@ -970,39 +897,6 @@ QListWidget::item:selected{
                   </property>
                  </spacer>
                 </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="bottomMenu">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::NoFrame</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_7">
-                <property name="spacing">
-                 <number>10</number>
-                </property>
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>10</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>20</number>
-                </property>
                </layout>
               </widget>
              </item>
@@ -1291,7 +1185,7 @@ QListWidget::item:selected{
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>720</width>
+                      <width>570</width>
                       <height>481</height>
                      </rect>
                     </property>
@@ -1378,7 +1272,7 @@ QListWidget::item:selected{
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>721</width>
+                         <width>571</width>
                          <height>471</height>
                         </rect>
                        </property>
@@ -1840,7 +1734,7 @@ QListWidget::item:selected{
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>716</width>
+                         <width>566</width>
                          <height>471</height>
                         </rect>
                        </property>

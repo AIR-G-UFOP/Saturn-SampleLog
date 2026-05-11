@@ -7,6 +7,34 @@
     <file>images/SATURN-vertical2.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>icons/cil-arrow-upward.png</file>
+    <file>icons/cil-arrow-downward.png</file>
+    <file>icons/cil-arrow-down.png</file>
+    <file>icons/cil-arrow-up.png</file>
+    <file>icons/cil-arrow-left.png</file>
+    <file>icons/cil-arrow-right.png</file>
+    <file>icons/cil-strikethrough.png</file>
+    <file>icons/cil-ident-increase.png</file>
+    <file>icons/cil-ident-decrease.png</file>
+    <file>icons/cil-list-number.png</file>
+    <file>icons/cil-list-bullet.png</file>
+    <file>icons/cil-align-left.png</file>
+    <file>icons/cil-align-center.png</file>
+    <file>icons/cil-align-right.png</file>
+    <file>icons/cil-align-justify.png</file>
+    <file>icons/cil-highligt.png</file>
+    <file>icons/cil-italic.png</file>
+    <file>icons/cil-undo.png</file>
+    <file>icons/cil-redo.png</file>
+    <file>icons/cil-add-log.png</file>
+    <file>icons/cil-bold.png</file>
+    <file>icons/cil-font-colour.png</file>
+    <file>icons/cil-font-size.png</file>
+    <file>icons/cill-add-book.png</file>
+    <file>icons/cill-books.png</file>
+    <file>icons/cil-log.png</file>
+    <file>icons/cill-page.png</file>
+    <file>icons/cil-underlined.png</file>
     <file>icons/cil-remove-task.png</file>
     <file>icons/cil-edit-calendar.png</file>
     <file>icons/cil-calendar.png</file>

@@ -33,7 +33,6 @@ class DbListWindow(QtWidgets.QMainWindow):
         self.setWindowTitle("Database List Window")
         self.ui = Ui_ListWindow()
         self.ui.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.Dialog)
         UIFunctions.uiDefinitions(self)
 
         self.ui.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))

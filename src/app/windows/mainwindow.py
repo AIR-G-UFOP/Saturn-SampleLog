@@ -8,6 +8,7 @@ from ..windows.samplelog import SampleWindow
 from ..windows.analysislog import AnalysisWindow
 from ..windows.reductionlog import ReductionWindow
 from ..windows.dblistwindow import DbListWindow
+from ..windows.worspacewindow import WorkspaceWindow
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"  # Auto-adjust based on system settings
@@ -40,6 +41,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.btn_analysisList.clicked.connect(self.btn_clicked)
         self.ui.btn_reductionList.clicked.connect(self.btn_clicked)
         self.ui.btn_sampleList.clicked.connect(self.btn_clicked)
+        self.ui.btn_workspace.clicked.connect(self.btn_clicked)
         self.ui.closeAppBtn.clicked.connect(lambda: self.close())
         self.userLog = None
 
@@ -67,6 +69,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.open_db_window("reduction")
         elif sender == "btn_sampleList":
             self.open_db_window("sample")
+        elif sender == "btn_workspace":
+            self.open_workspace()
 
     def open_user_log(self):
         self.userLog = UserWindow(self.userService)
@@ -91,3 +95,8 @@ class MainWindow(QtWidgets.QMainWindow):
                                          self.reductionService, self.settingsService, self.taskService)
         self.dbListWindow.show()
         self.close()
+
+    def open_workspace(self):
+        self.workspace = WorkspaceWindow(self.userService, self.sampleService, self.analysisService,
+                                         self.reductionService,)
+        self.workspace.show()

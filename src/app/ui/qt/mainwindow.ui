@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>449</width>
-    <height>426</height>
+    <height>482</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -514,7 +514,7 @@ Button */
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_11">
                 <item>
-                 <widget class="QPushButton" name="pushButton_2">
+                 <widget class="QPushButton" name="btn_newUser">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -693,6 +693,25 @@ Button */
                    </layout>
                   </item>
                  </layout>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="btn_workspace">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>50</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>50</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Workspace</string>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </widget>
