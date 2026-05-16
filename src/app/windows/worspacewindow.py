@@ -1,9 +1,15 @@
-import sys
 import os
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtGui import QTextCharFormat
+
 from ..ui.generated.workspacewindow import Ui_WorkspaceWindow
 from ..modules.ui_functions import UIFunctions
 from ..config.ui_settings import (WORKSPACE_TOOLBAR_SELECTED, WORKSPACE_TOOLBAR_NOT_SELECTED)
+from ..widgets.workspaceselectableitems import (
+    MentionItem,
+    MentionItemButton,
+)
 
 
 os.environ["QT_ENABLE_HIGHDPI_SCALING"] = "1"  # Enables per-screen DPI awareness
@@ -26,7 +32,7 @@ class WorkspaceWindow(QtWidgets.QMainWindow):
         self.ui.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
         UIFunctions.resetStyle(self, "btn_workspace")
         self.ui.btn_labNotebook.setStyleSheet(UIFunctions.selectMenu(self.ui.btn_labNotebook.styleSheet()))
-        self.ui.stackedWidget.setCurrentWidget(self.ui.pageNotebook)
+        self.ui.stackedBooks.setCurrentWidget(self.ui.pageNotebook)
 
         self.ui.labNotebookEditor.setAcceptRichText(True)
         self.ui.labNotebookEditor.setUndoRedoEnabled(True)
@@ -41,6 +47,10 @@ class WorkspaceWindow(QtWidgets.QMainWindow):
         self.current_result = -1
         self.default_font_family = "Arial"
         self.default_font_size = 12
+        self.users_card = False
+        self.samples_card = False
+        self.analyses_card = False
+        self.reductions_card = False
 
         self.ui.btn_labNotebook.clicked.connect(self.handle_book_change)
         self.ui.btn_labLog.clicked.connect(self.handle_book_change)
@@ -68,12 +78,17 @@ class WorkspaceWindow(QtWidgets.QMainWindow):
         self.ui.btn_searchNext.clicked.connect(self.next_result)
         self.ui.btn_searchPrevious.clicked.connect(self.previous_result)
         self.ui.label_search.hide()
+        self.ui.btn_usersCollapse.clicked.connect(self.toggle_mention_cards)
+        self.ui.btn_samplesCollapse.clicked.connect(self.toggle_mention_cards)
+        self.ui.btn_analysisCollapse.clicked.connect(self.toggle_mention_cards)
+        self.ui.btn_reductionsCollapse.clicked.connect(self.toggle_mention_cards)
 
         self.ui.labNotebookEditor.textChanged.connect(self.handle_empty_document)
         self.ui.labNotebookEditor.cursorPositionChanged.connect(self.refresh_toolbar_states)
         self.ui.labNotebookEditor.selectionChanged.connect(self.refresh_toolbar_states)
 
         self.setup_editor_defaults()
+        self.build_mentions()
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)
@@ -85,12 +100,10 @@ class WorkspaceWindow(QtWidgets.QMainWindow):
         sender = self.sender()
         if sender.objectName() == "btn_labNotebook":
             self.set_sidebar_button_style(sender)
-            self.ui.stackedWidget.setCurrentWidget(self.ui.pageNotebook)
-            self.editor = sender
+            self.ui.stackedBooks.setCurrentWidget(self.ui.pageNotebook)
         elif sender.objectName() == "btn_labLog":
             self.set_sidebar_button_style(sender)
-            self.ui.stackedWidget.setCurrentWidget(self.ui.pageLog)
-            self.editor = sender
+            self.ui.stackedBooks.setCurrentWidget(self.ui.pageLog)
 
         self.refresh_toolbar_states()
 
@@ -133,6 +146,119 @@ class WorkspaceWindow(QtWidgets.QMainWindow):
         self.ui.fontComboBox.setCurrentFont(font)
         self.ui.spinBox_fontSize.setValue(self.default_font_size)
         self.refresh_toolbar_states()
+
+    def build_mentions(self):
+        mention_config = {
+            "users": {
+                "getter": self.userService.getAllUsers,
+                "layout": self.ui.userLayout,
+                "accent": "#8BE9FD",
+                "label": "User",
+                "display": lambda u: f"{u.first_name} {u.surname}",
+            },
+            "samples": {
+                "getter": self.sampleService.getAllSamples,
+                "layout": self.ui.samplesLayout,
+                "accent": "#BD93F9",
+                "label": "Sample",
+                "display": lambda s: s.name,
+            },
+            "analyses": {
+                "getter": self.analysisService.getAllAnalyses,
+                "layout": self.ui.analysesLayout,
+                "accent": "#F1FA8C",
+                "label": "Analysis",
+                "display": lambda a: a.method,
+            },
+            "reductions": {
+                "getter": self.reductionService.getAllReductions,
+                "layout": self.ui.reductionsLayout,
+                "accent": "#FFB86C",
+                "label": "Reduction",
+                "display": lambda r: r.reduction_name,
+            },
+        }
+        for config in mention_config.values():
+            mentions = []
+            for item in config["getter"]():
+                text = config["display"](item)
+                mentions.append(
+                    MentionItem(
+                        item.id,
+                        text,
+                        "",
+                        f"@{config['label']}: {text}"
+                    )
+                )
+            self.set_mentions_to_frame(
+                config["layout"],
+                mentions,
+                config["accent"]
+            )
+
+    def set_mentions_to_frame(self, layout, mentions, accent):
+        while layout.count():
+            item = layout.takeAt(0)
+            if widget := item.widget():
+                widget.deleteLater()
+        for mention in mentions:
+            button = MentionItemButton(mention, accent)
+            button.clicked.connect(
+                lambda _checked=False, token=mention.token:
+                self.mention_entity_in_editor(token, accent)
+            )
+            layout.addWidget(button)
+        layout.addStretch()
+
+    def mention_entity_in_editor(self, token, accent):
+        # Need to save the previous style
+        self.editor.setFocus()
+        cursor = self.editor.textCursor()
+        mention_format = QTextCharFormat()
+        mention_format.setFontWeight(QtGui.QFont.Bold)
+        mention_format.setForeground(QtGui.QColor(accent))
+        mention_format.setBackground(QtGui.QColor('grey'))
+        cursor.insertText(f"{token}", mention_format)
+        self.editor.setTextCursor(cursor)
+        # Return to previous style
+
+    def toggle_mention_cards(self):
+        sender = self.sender()
+        config = {
+            "btn_usersCollapse": {
+                "widget": self.ui.bgUserBottom,
+                "button": self.ui.btn_usersCollapse,
+                "state_attr": "users_card",
+            },
+            "btn_samplesCollapse": {
+                "widget": self.ui.bgSamplesBottom,
+                "button": self.ui.btn_samplesCollapse,
+                "state_attr": "samples_card",
+            },
+            "btn_analysisCollapse": {
+                "widget": self.ui.bgAnalysisBottom,
+                "button": self.ui.btn_analysisCollapse,
+                "state_attr": "analyses_card",
+            },
+            "btn_reductionsCollapse": {
+                "widget": self.ui.bgReductionsBottom,
+                "button": self.ui.btn_reductionsCollapse,
+                "state_attr": "reductions_card",
+            },
+        }
+        data = config.get(sender.objectName())
+        if not data:
+            return
+        current_state = getattr(self, data["state_attr"])
+        data["widget"].setVisible(current_state)
+        data["button"].setIcon(
+            QtGui.QIcon(
+                ":/icons/icons/cil-arrow-up.png"
+                if current_state
+                else ":/icons/icons/cil-arrow-down.png"
+            )
+        )
+        setattr(self, data["state_attr"], not current_state)
 
     @staticmethod
     def update_toolbar_state(btn, state):
