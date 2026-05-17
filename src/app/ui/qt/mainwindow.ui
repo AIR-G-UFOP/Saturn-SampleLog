@@ -566,7 +566,7 @@ Button */
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
-                    <normaloff>:/icons/icons/cil-troubleshoot.png</normaloff>:/icons/icons/cil-troubleshoot.png</iconset>
+                    <normaloff>:/icons/icons/cil-analysis.png</normaloff>:/icons/icons/cil-analysis.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -592,7 +592,7 @@ Button */
                   </property>
                   <property name="icon">
                    <iconset resource="../resources/resources.qrc">
-                    <normaloff>:/icons/icons/cil-analysis.png</normaloff>:/icons/icons/cil-analysis.png</iconset>
+                    <normaloff>:/icons/icons/cil-reductions.png</normaloff>:/icons/icons/cil-reductions.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -666,7 +666,7 @@ Button */
                       </property>
                       <property name="icon">
                        <iconset resource="../resources/resources.qrc">
-                        <normaloff>:/icons/icons/cil-troubleshoot.png</normaloff>:/icons/icons/cil-troubleshoot.png</iconset>
+                        <normaloff>:/icons/icons/cil-analysis.png</normaloff>:/icons/icons/cil-analysis.png</iconset>
                       </property>
                      </widget>
                     </item>
@@ -686,7 +686,7 @@ Button */
                       </property>
                       <property name="icon">
                        <iconset resource="../resources/resources.qrc">
-                        <normaloff>:/icons/icons/cil-analysis.png</normaloff>:/icons/icons/cil-analysis.png</iconset>
+                        <normaloff>:/icons/icons/cil-reductions.png</normaloff>:/icons/icons/cil-reductions.png</iconset>
                       </property>
                      </widget>
                     </item>
@@ -710,6 +710,10 @@ Button */
                   </property>
                   <property name="text">
                    <string>Workspace</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../resources/resources.qrc">
+                    <normaloff>:/icons/icons/cil-notebook.png</normaloff>:/icons/icons/cil-notebook.png</iconset>
                   </property>
                  </widget>
                 </item>

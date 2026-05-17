@@ -32,7 +32,7 @@ class MentionItem:
 
 
 @dataclass
-class NotebookPage:
+class NotebookSession:
     id: str
     title: str
     summary: str
@@ -44,7 +44,7 @@ class NotebookRecord:
     id: str
     title: str
     subtitle: str
-    pages: List[NotebookPage]
+    sessions: List[NotebookSession]
 
 
 class ListItemButton(QPushButton):

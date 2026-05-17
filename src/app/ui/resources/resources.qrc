@@ -7,14 +7,40 @@
     <file>images/SATURN-vertical2.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>icons/cil-notebook.png</file>
+    <file>icons/cil-reductions.png</file>
+    <file>icons/cil-fill.png</file>
+    <file>icons/cil-alternating-color.png</file>
+    <file>icons/cil-filter.png</file>
+    <file>icons/cil-sort.png</file>
+    <file>icons/cil-wrap-text.png</file>
+    <file>icons/cil-add-row-above.png</file>
+    <file>icons/cil-add-row.png</file>
+    <file>icons/cil-add-column-right.png</file>
+    <file>icons/cil-add-column-left.png</file>
+    <file>icons/cil-align-top.png</file>
+    <file>icons/cil-merge.png</file>
+    <file>icons/cil-align-midle.png</file>
+    <file>icons/cil-align-bottom.png</file>
+    <file>icons/cil-border-all.png</file>
+    <file>icons/cil-border-bottom.png</file>
+    <file>icons/cil-border-clear.png</file>
+    <file>icons/cil-border-horizontal.png</file>
+    <file>icons/cil-border-inner.png</file>
+    <file>icons/cil-border-left.png</file>
+    <file>icons/cil-border-outer.png</file>
+    <file>icons/cil-border-right.png</file>
+    <file>icons/cil-border-style.png</file>
+    <file>icons/cil-border-top.png</file>
+    <file>icons/cil-border-vertical.png</file>
     <file>icons/cil-arrow-upward.png</file>
     <file>icons/cil-arrow-downward.png</file>
     <file>icons/cil-arrow-down.png</file>
     <file>icons/cil-arrow-up.png</file>
     <file>icons/cil-arrow-left.png</file>
     <file>icons/cil-arrow-right.png</file>
-    <file>icons/cil-strikethrough.png</file>
     <file>icons/cil-ident-increase.png</file>
+    <file>icons/cil-strikethrough.png</file>
     <file>icons/cil-ident-decrease.png</file>
     <file>icons/cil-list-number.png</file>
     <file>icons/cil-list-bullet.png</file>
@@ -24,9 +50,9 @@
     <file>icons/cil-align-justify.png</file>
     <file>icons/cil-highligt.png</file>
     <file>icons/cil-italic.png</file>
-    <file>icons/cil-undo.png</file>
-    <file>icons/cil-redo.png</file>
     <file>icons/cil-add-log.png</file>
+    <file>icons/cil-redo.png</file>
+    <file>icons/cil-undo.png</file>
     <file>icons/cil-bold.png</file>
     <file>icons/cil-font-colour.png</file>
     <file>icons/cil-font-size.png</file>

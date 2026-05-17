@@ -22,7 +22,7 @@ and DbReduction.
 
 
 from .base import Base
-from sqlalchemy import Column, Integer, String, Date, Boolean, ForeignKey, JSON, UniqueConstraint
+from sqlalchemy import Column, Integer, String, Date, Boolean, ForeignKey, JSON, UniqueConstraint, Text
 from sqlalchemy.orm import relationship
 
 
@@ -116,7 +116,7 @@ class DbSettings(Base):
     file_name_config = Column(JSON, nullable=False)
 
 
-class DBTasks(Base):
+class DbTasks(Base):
     __tablename__ = 'tasks'
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -141,4 +141,62 @@ class DBTasks(Base):
     )
 
 
+class DbNotebook(Base):
+    __tablename__ = 'notebooks'
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+    description = Column(String, nullable=False)
+    created_at = Column(Date, nullable=False)
+    modified_at = Column(Date, nullable=False)
+    order = Column(Integer, nullable=False)
 
+    sessions = relationship(
+        "DBNotebookSession",
+        back_populates="notebook",
+        cascade="all, delete-orphan",
+        order_by='DbNotebookSession.session_order'
+    )
+
+
+class DbNotebookSession(Base):
+    __tablename__ = 'sessions'
+    id = Column(Integer, primary_key=True)
+    notebook_id = Column(Integer, ForeignKey('notebooks.id'), nullable=False)
+    title = Column(String, nullable=False)
+    description = Column(String, nullable=False)
+    created_at = Column(Date, nullable=False)
+    modified_at = Column(Date, nullable=False)
+    content = Column(Text, nullable=True)
+    session_order = Column(Integer, nullable=False)
+
+    notebook = relationship("DbNotebook",
+                            back_populates="sessions")
+
+
+class DbLogbook(Base):
+    __tablename__ = 'logbooks'
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+    description = Column(String, nullable=False)
+    created_at = Column(Date, nullable=False)
+    modified_at = Column(Date, nullable=False)
+    order = Column(Integer, nullable=False)
+
+    tables = relationship("DbLogbookTable",
+                          back_populates="logbook",
+                          cascade="all, delete-orphan",
+                          order_by='DbLogbookTable.table_order')
+
+
+class DbLogbookTable(Base):
+    __tablename__ = 'tables'
+    id = Column(Integer, primary_key=True)
+    logbook_id = Column(Integer, ForeignKey('logbooks.id'), nullable=False)
+    title = Column(String, nullable=False)
+    description = Column(String, nullable=False)
+    created_at = Column(Date, nullable=False)
+    modified_at = Column(Date, nullable=False)
+    content = Column(JSON, nullable=True)
+    table_order = Column(Integer, nullable=False)
+
+    logbook = relationship("DbLogbookTable", back_populates="tables")

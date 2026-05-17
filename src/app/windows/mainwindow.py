@@ -18,7 +18,7 @@ QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, user_service, sample_service, analysis_service, reduction_service, settings_service,
-                 task_service):
+                 task_service, notebook_service, logbook_service):
         super(MainWindow, self).__init__()
 
         self.ui = Ui_MainWindow()
@@ -32,6 +32,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.reductionService = reduction_service
         self.settingsService = settings_service
         self.taskService = task_service
+        self.notebookService = notebook_service
+        self.logbookService = logbook_service
 
         self.ui.btn_newUser.clicked.connect(self.btn_clicked)
         self.ui.btn_newSample.clicked.connect(self.btn_clicked)
@@ -98,5 +100,5 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def open_workspace(self):
         self.workspace = WorkspaceWindow(self.userService, self.sampleService, self.analysisService,
-                                         self.reductionService,)
+                                         self.reductionService, self.notebookService, self.logbookService)
         self.workspace.show()

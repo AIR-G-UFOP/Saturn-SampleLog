@@ -2,7 +2,7 @@ import sys
 from datetime import date
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlalchemy.orm import selectinload
-from ..db.models import DBTasks
+from ..db.models import DbTasks
 from ..db.session import SessionLocal
 
 
@@ -15,7 +15,7 @@ class TaskService:
             task_id = task_info.get("id")
             task_type = task_info["task_type"]
             if task_id:
-                task = session.get(DBTasks, task_id)
+                task = session.get(DbTasks, task_id)
                 if not task:
                     print("Task not found")
                     return
@@ -50,7 +50,7 @@ class TaskService:
                     print("updated by relation")
                     return
 
-            new_task = DBTasks(**task_info)
+            new_task = DbTasks(**task_info)
             session.add(new_task)
             session.commit()
             print("created")
@@ -61,7 +61,7 @@ class TaskService:
     def deleteTask(self, task_id):
         session = SessionLocal()
         try:
-            task = session.get(DBTasks, task_id)
+            task = session.get(DbTasks, task_id)
             if not task:
                 print("Task not found")
                 return
@@ -78,19 +78,19 @@ class TaskService:
 
     @staticmethod
     def get_task(session, task_type, sample_id=None, analysis_id=None, reduction_id=None):
-        query = session.query(DBTasks).filter(DBTasks.task_type == task_type)
+        query = session.query(DbTasks).filter(DbTasks.task_type == task_type)
         if sample_id:
-            query = query.filter(DBTasks.sample_id == sample_id)
+            query = query.filter(DbTasks.sample_id == sample_id)
         elif analysis_id:
-            query = query.filter(DBTasks.analysis_id == analysis_id)
+            query = query.filter(DbTasks.analysis_id == analysis_id)
         elif reduction_id:
-            query = query.filter(DBTasks.reduction_id == reduction_id)
+            query = query.filter(DbTasks.reduction_id == reduction_id)
         return query.first()
 
     def getTasksByDate(self, date):
         session = SessionLocal()
         try:
-            query = session.query(DBTasks).filter(DBTasks.start_date == date).all()
+            query = session.query(DbTasks).filter(DbTasks.start_date == date).all()
             return query
         finally:
             session.close()
@@ -103,9 +103,9 @@ class TaskService:
                 end = date(year + 1, 1, 1)
             else:
                 end = date(year, month + 1, 1)
-            tasks = session.query(DBTasks).filter(
-                DBTasks.start_date < end,
-                DBTasks.end_date >= start
+            tasks = session.query(DbTasks).filter(
+                DbTasks.start_date < end,
+                DbTasks.end_date >= start
             ).all()
             return tasks
         finally:
@@ -114,7 +114,7 @@ class TaskService:
     def getTaskById(self, task_id):
         session = SessionLocal()
         try:
-            task = session.query(DBTasks).filter(DBTasks.id == task_id).first()
+            task = session.query(DbTasks).filter(DbTasks.id == task_id).first()
             return task
         finally:
             session.close()
@@ -122,7 +122,7 @@ class TaskService:
     def getAllTasks(self):
         session = SessionLocal()
         try:
-            tasks = session.query(DBTasks).all()
+            tasks = session.query(DbTasks).all()
             return tasks
         finally:
             session.close()

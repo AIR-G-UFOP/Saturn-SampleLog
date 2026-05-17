@@ -8,6 +8,8 @@ from src.app.services.analysis_service import AnalysisService
 from src.app.services.reduction_service import ReductionService
 from src.app.services.settings_service import SettingsService
 from src.app.services.task_service import TaskService
+from src.app.services.notebook_service import NotebookService
+from src.app.services.logbook_service import LogbookService
 import sys
 import traceback
 
@@ -25,9 +27,11 @@ def start_app():
     reduction_service = ReductionService()
     settings_service = SettingsService()
     task_service = TaskService()
+    notebook_service = NotebookService()
+    logbook_service = LogbookService()
     app = QApplication([])
     window = MainWindow(user_service, sample_service, analysis_service, reduction_service, settings_service,
-                        task_service)
+                        task_service, notebook_service, logbook_service)
     window.show()
     app.exec()
 
